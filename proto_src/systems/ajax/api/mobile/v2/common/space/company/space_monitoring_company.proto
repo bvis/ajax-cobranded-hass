@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.company;
+
+import "systems/ajax/api/mobile/v2/hubobject/model/company/company_info.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/standalone_device_permissions.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceMonitoringCompany {
+  systems.ajax.api.mobile.v2.hubobject.model.company.CompanyInfo company_info = 1;
+  MonitoringCompanyStatus status = 2;
+  optional int32 hub_user_index = 3;
+  repeated space.member.StandaloneDevicePermissions devices_permissions = 4;
+  AccountNumberRequiredStatus account_number_required_status = 6;
+
+  string space_member_id = 7 [deprecated = true];
+
+  optional CompanyBillingInfo company_billing_info = 8;
+
+  message CompanyBillingInfo {
+    HubBillingInfo billing_info = 1;
+
+    BillingStatus company_billing_status = 2;
+  }
+
+  message HubBillingInfo {
+    string hub_hex_id = 1;
+    string company_hex_id = 2;
+    double balance = 3;
+    double subscription_fee = 4;
+    Blocked blocked = 5;
+    string currency = 6;
+    string payment_date = 7;
+  }
+
+  enum Blocked {
+    BLOCKED_UNSPECIFIED = 0;
+    BLOCKED_FALSE = 1;
+    BLOCKED_TRUE = 2;
+  }
+
+  enum BillingStatus {
+    BILLING_STATUS_UNSPECIFIED = 0;
+    BILLING_STATUS_ENABLED = 1;
+    BILLING_STATUS_DISABLED = 2;
+  }
+
+  enum AccountNumberRequiredStatus {
+    ACCOUNT_NUMBER_REQUIRED_STATUS_UNSPECIFIED = 0;
+    ACCOUNT_NUMBER_REQUIRED_STATUS_REQUIRED = 1;
+    ACCOUNT_NUMBER_REQUIRED_STATUS_NOT_REQUIRED = 2;
+  }
+
+  enum MonitoringCompanyStatus {
+    MONITORING_COMPANY_STATUS_UNSPECIFIED = 0;
+    PENDING_APPROVAL = 1;
+    APPROVED = 2;
+    PENDING_DELETION = 3;
+  }
+}

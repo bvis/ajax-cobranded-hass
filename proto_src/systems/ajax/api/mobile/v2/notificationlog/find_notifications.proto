@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.notification;
+
+option java_package = "systems.ajax.api.mobile.v2.notificationlog";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/notification.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/filter.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/offline_notifications_data.proto";
+
+message FindNotificationsRequest {
+  ecosystem.v2.communicationsvc.mobile.commonmodels.notification.NotificationsFilter filter = 1;
+  int32 limit = 2;
+  optional Pagination pagination = 3;
+
+  message Pagination {
+    oneof case {
+      string forward_pagination_token = 1;
+      string backward_pagination_token = 2;
+    }
+  }
+}
+
+message FindNotificationsResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated ecosystem.v2.communicationsvc.mobile.commonmodels.notification.Notification notifications = 1;
+    optional string next_forward_pagination_token = 2;
+    optional string next_backward_pagination_token = 3;
+    repeated ecosystem.v2.communicationsvc.mobile.commonmodels.notification.OfflineNotificationsData offline_notifications_data = 10;
+  }
+
+  message Failure {
+    oneof errors {
+      common.response.DefaultError illegal_argument = 1;
+      common.response.DefaultError not_found = 2;
+      common.response.DefaultError internal_error = 3;
+    }
+  }
+}

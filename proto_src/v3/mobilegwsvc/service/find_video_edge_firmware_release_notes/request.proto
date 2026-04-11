@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_id.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindVideoEdgeFirmwareReleaseNotesRequest {
+
+  mobile.v2.common.video.videoedge.firmware.VideoEdgeFirmwareId firmware_id = 1;
+
+  /* Language code from list (ref: https://ajaxsystems.atlassian.net/wiki/spaces/DT/pages/3788898376/KPT+Common+types#%D0%AF%D0%B7%D1%8B%D0%BA%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0). */
+  string language_code = 2;
+}

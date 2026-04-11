@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.channel.cloudarchive;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchive {
+    CloudArchiveStatus status = 1;
+
+    // Indicates that cloud archive should be listed as one of the storage locations for this channel
+    bool storage_enabled = 2;
+
+    // Indicates that video stream settings cannot be modified for this channel due to activated cloud archive
+    bool video_stream_settings_locked = 3;
+
+    enum CloudArchiveStatus {
+        CLOUD_ARCHIVE_STATUS_UNSPECIFIED = 0;
+        CLOUD_ARCHIVE_STATUS_ACTIVATED = 1;
+        CLOUD_ARCHIVE_STATUS_NOT_ACTIVATED = 2;
+    }
+}

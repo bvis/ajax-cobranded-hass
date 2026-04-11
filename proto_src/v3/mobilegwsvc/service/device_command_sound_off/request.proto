@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_sound_off;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandSoundOffRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+  repeated MuteSourceAlarm mute_source_alarm = 4;
+
+  enum MuteSourceAlarm {
+    MUTE_SOURCE_ALARM_UNSPECIFIED = 0;
+    MUTE_SOURCE_ALARM_MUTE_OWN = 1;
+    MUTE_SOURCE_ALARM_MUTE_EXTERNAL = 2;
+  }
+}

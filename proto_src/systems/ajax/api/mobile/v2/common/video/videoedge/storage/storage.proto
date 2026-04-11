@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.storage;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Storage {
+  // [0, 374] value in Kelvin
+  uint32 temperature_threshold = 1;
+};

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_smart_lock;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_smart_lock";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SwitchSmartLockResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+      commonmodels.Error smart_lock_not_found = 4;
+      commonmodels.Error external_service_access_denied = 5;
+      commonmodels.Error smart_lock_offline = 6;
+    }
+  }
+}

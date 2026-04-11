@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message UniversalDevice {
+    CommonDevicePart common_part = 1000;
+
+    bool device_debug_enabled = 0x12;
+
+    repeated Setting settings = 0x31;
+    repeated Status statuses = 0x32;
+    repeated Alarm alarms = 0x33;
+
+    Subtype subtype = 0xC3;
+
+    enum Setting {
+        NO_SETTING_INFO = 0;
+        SETTING_1 = 1;
+        SETTING_2 = 2;
+        SETTING_3 = 3 ;
+        SETTING_4 = 4;
+        SETTING_5 = 5;
+        SETTING_6 = 6;
+        SETTING_7 = 7;
+        SETTING_8 = 8;
+        SETTING_9 = 9;
+        SETTING_10 = 10;
+        SETTING_11 = 11;
+        SETTING_12 = 12;
+        SETTING_13 = 13;
+        SETTING_14 = 14;
+        SETTING_15 = 15;
+        SETTING_16 = 16;
+        SETTING_17 = 17;
+        SETTING_18 = 18;
+        SETTING_19 = 19;
+        SETTING_20 = 20;
+        SETTING_21 = 21;
+        SETTING_22 = 22;
+        SETTING_23 = 23;
+        SETTING_24 = 24;
+        SETTING_25 = 25;
+        SETTING_26 = 26;
+        SETTING_27 = 27;
+        SETTING_28 = 28;
+        SETTING_29 = 29;
+        SETTING_30 = 30;
+        SETTING_31 = 31;
+        SETTING_32 = 32;
+    }
+
+    enum Status {
+        NO_STATUS_INFO = 0;
+        STATUS_1 = 1;
+        STATUS_2 = 2;
+        STATUS_3 = 3 ;
+        STATUS_4 = 4;
+        STATUS_5 = 5;
+        STATUS_6 = 6;
+        STATUS_7 = 7;
+        STATUS_8 = 8;
+        STATUS_9 = 9;
+        STATUS_10 = 10;
+        STATUS_11 = 11;
+        STATUS_12 = 12;
+        STATUS_13 = 13;
+        STATUS_14 = 14;
+        STATUS_15 = 15;
+        STATUS_16 = 16;
+        STATUS_17 = 17;
+        STATUS_18 = 18;
+        STATUS_19 = 19;
+        STATUS_20 = 20;
+        STATUS_21 = 21;
+        STATUS_22 = 22;
+        STATUS_23 = 23;
+        STATUS_24 = 24;
+        STATUS_25 = 25;
+        STATUS_26 = 26;
+        STATUS_27 = 27;
+        STATUS_28 = 28;
+        STATUS_29 = 29;
+        STATUS_30 = 30;
+        STATUS_31 = 31;
+        STATUS_32 = 32;
+    }
+
+    enum Alarm {
+        NO_ALARM_INFO = 0;
+        ALARM_1 = 1;
+        ALARM_2 = 2;
+        ALARM_3 = 3 ;
+        ALARM_4 = 4;
+        ALARM_5 = 5;
+        ALARM_6 = 6;
+        ALARM_7 = 7;
+        ALARM_8 = 8;
+        ALARM_9 = 9;
+        ALARM_10 = 10;
+        ALARM_11 = 11;
+        ALARM_12 = 12;
+        ALARM_13 = 13;
+        ALARM_14 = 14;
+        ALARM_15 = 15;
+        ALARM_16 = 16;
+        ALARM_17 = 17;
+        ALARM_18 = 18;
+        ALARM_19 = 19;
+        ALARM_20 = 20;
+        ALARM_21 = 21;
+        ALARM_22 = 22;
+        ALARM_23 = 23;
+        ALARM_24 = 24;
+        ALARM_25 = 25;
+        ALARM_26 = 26;
+        ALARM_27 = 27;
+        ALARM_28 = 28;
+        ALARM_29 = 29;
+        ALARM_30 = 30;
+        ALARM_31 = 31;
+        ALARM_32 = 32;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

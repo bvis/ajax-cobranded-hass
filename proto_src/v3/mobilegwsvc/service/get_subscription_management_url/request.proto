@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_subscription_management_url;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_subscription_management_url";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetSubscriptionManagementUrlRequest {
+  string service_group_id = 1;
+  repeated mobile.v2.common.accounting.FeatureTargetInfo feature_target_infos = 2;
+  optional string redirect_link = 3;
+}

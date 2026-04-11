@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.about;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/constraints.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message About {
+  Type type = 1;
+
+  Color color = 2;
+
+  repeated DeviceFeature device_features = 3;
+
+  Constraints constraints = 4;
+
+  // Identifies that this is a video edge that always has one and the only channel and that both the video edge and
+  // the channel should be treated as one entity for some use cases (e.g. renaming of the channel should also lead to
+  // renaming of the video edge).
+  bool mono_channel = 5;
+
+  string fully_qualified_id = 6;
+
+  enum Color {
+    COLOR_UNKNOWN = 0;
+    WHITE = 1;
+    BLACK = 2;
+    GREY = 3;
+    GRAPHITE = 4;
+  }
+
+  enum Type {
+    TYPE_UNKNOWN = 0;
+    NVR = 1;
+    TURRET = 2;
+    BULLET = 3;
+    MINIDOME = 4;
+    DOORBELL = 5;
+    INDOOR = 6;
+    NVR_H_AC = 7;
+    NVR_H_DC = 8;
+    NVR_H_2D_AC = 9;
+    reserved 10; // Reserved for NVR_H_2D_DC
+    NVR_H_2D_8P_AC = 11;
+    NVR_H_2D_16P_AC = 12;
+    NVR_H_2D_AI_2G_AC = 13;
+    reserved 14; // Reserved for NVR_H_2D_2G_AI_DC
+    NVR_H_2D_AI_8P_AC = 15;
+    NVR_H_2D_AI_16P_AC = 16;
+    TURRET_HL = 17;
+    TURRET_HL_VF = 18;
+    S_TURRET_HL_VF = 19;
+    BULLET_HL = 20;
+    BULLET_HL_VF = 21;
+    S_BULLET_HL_VF = 22;
+    MINIDOME_HL = 23;
+    MINIDOME_HL_VF = 24;
+    S_MINIDOME_HL_VF = 25;
+  }
+
+  enum DeviceFeature {
+    FEATURE_UNKNOWN = 0;
+    BLUETOOTH = 1;
+    JEWELLER = 2;
+    WIFI = 3;
+  }
+};

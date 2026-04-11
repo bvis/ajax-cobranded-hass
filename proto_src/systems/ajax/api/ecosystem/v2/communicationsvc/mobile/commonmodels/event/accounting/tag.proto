@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.accounting";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "Accounting";
+
+message FeatureTargetSuspendedByDealer {}
+message FeatureTargetRestoredByDealer {}
+message PaidServiceAssigned {}
+message PaidServiceDeactivated {}
+message PrepaidServiceDeactivated {}
+message SimCardCommissioningPeriodStarted {}
+message SimCardCommissioningPeriodEnded {}
+
+message AccountingEventTag {
+  oneof event_tag_case {
+    FeatureTargetSuspendedByDealer feature_target_suspended_by_dealer = 1;
+    FeatureTargetRestoredByDealer feature_target_restored_by_dealer = 2;
+    PaidServiceAssigned paid_service_assigned = 3;
+    PaidServiceDeactivated paid_service_deactivated = 4;
+    PrepaidServiceDeactivated prepaid_service_deactivated = 5;
+    SimCardCommissioningPeriodStarted sim_card_commissioning_period_started = 6;
+    SimCardCommissioningPeriodEnded sim_card_commissioning_period_ended = 7;
+  }
+}

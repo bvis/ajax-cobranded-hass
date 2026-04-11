@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_video_fragments_content;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_video_fragments_content";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamCloudArchiveVideoFragmentsContentRequest {
+
+  oneof type {
+    Init init = 1;
+    Get get = 2;
+  }
+
+  message Init {
+    // [required]
+    string space_id = 1;
+
+    // [required]
+    string video_edge_id = 2;
+
+    // [required]
+    string channel_id = 3;
+
+    // [required]
+    mobile.v2.common.video.StreamType stream_type = 4;
+  }
+
+  message Get {
+    // [optional]
+    string tag = 1;
+
+    // [required]
+    repeated Entry entries = 2;
+
+    message Entry {
+      oneof type {
+        uint64 fragment_id = 1;
+        FragmentPart fragment_part = 2;
+      }
+    }
+
+    message FragmentPart {
+      // [required]
+      uint64 fragment_id = 1;
+
+      // [required] - offset in microseconds
+      int32 offset = 2;
+    }
+  }
+}

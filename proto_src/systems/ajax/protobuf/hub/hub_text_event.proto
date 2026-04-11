@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message HubTextEvent {
+  repeated HubParameter parameter = 1;
+}
+
+message HubParameter {
+  string name = 1;
+  string value = 2;
+}

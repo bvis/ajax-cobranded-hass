@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security.group;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/followed_group_ids.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/group_auto_arm.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/group_auto_disarm.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/two_stage_arming_mode.proto";
+import "systems/ajax/api/mobile/v2/common/space/displayed_chime_status.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.security.group";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Group {
+  string id = 1;
+
+  string name = 2;
+
+  common.image.Images images = 3;
+
+  bool bulk_arm_involved = 4;
+
+  bool bulk_disarm_involved = 5;
+
+  TwoStageArmingMode two_stage_arming_mode = 6;
+
+  reserved 7; // legacy sorting_key
+  string sorting_key = 8;
+
+  DisplayedChimeStatus chime_status = 9;
+
+  FollowingGroupAutoArm following_group_auto_arm = 10;
+  FollowingGroupAutoDisarm following_group_auto_disarm = 11;
+  google.protobuf.Duration auto_arm_delay = 12;
+  FollowedGroupIds followed_group_ids = 13;
+}

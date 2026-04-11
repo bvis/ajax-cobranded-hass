@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+import "v1/common/notification-channel.proto";
+
+message NotificationSettings {
+  repeated NotificationChannel alarms = 1;
+  repeated NotificationChannel events = 2;
+  repeated NotificationChannel malfunctions = 3;
+  repeated NotificationChannel armings = 4;
+}

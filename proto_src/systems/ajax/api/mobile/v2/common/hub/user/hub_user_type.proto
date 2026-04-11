@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.user;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.user";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum HubUserType {
+  USER_TYPE_UNSPECIFIED = 0;
+  USER = 1;
+  PRO = 2;
+  COMPANY = 3;
+}

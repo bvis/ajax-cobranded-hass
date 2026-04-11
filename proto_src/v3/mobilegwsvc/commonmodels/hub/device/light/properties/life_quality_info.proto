@@ -1,0 +1,47 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message LifeQualityInfo {
+  optional double actual_temperature = 1;
+  optional double actual_humidity = 2;
+  optional int32 actual_co2 = 3;
+  repeated HardwareMalfunction hardware_malfunctions = 4;
+  repeated TemperatureStatus temperature_statuses = 5;
+  repeated HumidityStatus humidity_statuses = 6;
+  repeated Co2Status co2_statuses = 7;
+
+  enum HardwareMalfunction {
+    HARDWARE_MALFUNCTION_UNSPECIFIED = 0;
+    HARDWARE_MALFUNCTION_TEMPERATURE_SENSOR = 1;
+    HARDWARE_MALFUNCTION_HUMIDITY_SENSOR = 2;
+    HARDWARE_MALFUNCTION_CO2_SENSOR = 3;
+  }
+
+  enum TemperatureStatus {
+    TEMPERATURE_STATUS_UNSPECIFIED = 0;
+    TEMPERATURE_STATUS_OUT_OF_LOWER_THRESHOLD = 1;
+    TEMPERATURE_STATUS_OUT_OF_HIGHER_THRESHOLD = 2;
+    TEMPERATURE_STATUS_OUT_OF_PASSPORT_RANGE = 3;
+  }
+
+  enum HumidityStatus {
+    HUMIDITY_STATUS_UNSPECIFIED = 0;
+    HUMIDITY_STATUS_OUT_OF_LOWER_THRESHOLD = 1;
+    HUMIDITY_STATUS_OUT_OF_HIGHER_THRESHOLD = 2;
+    HUMIDITY_STATUS_OUT_OF_PASSPORT_RANGE = 3;
+  }
+
+  enum Co2Status {
+    CO2_STATUS_UNSPECIFIED = 0;
+    CO2_STATUS_OUT_OF_LOWER_THRESHOLD = 1;
+    CO2_STATUS_OUT_OF_HIGHER_THRESHOLD = 2;
+    CO2_STATUS_LIGHTLY_POLLUTED = 3;
+    CO2_STATUS_MODERATE_POLLUTED = 4;
+    CO2_STATUS_HEAVY_POLLUTED = 5;
+    CO2_STATUS_OUT_OF_PASSPORT_RANGE = 6;
+  }
+}

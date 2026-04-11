@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member_role.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message LiteSpaceMember {
+  string id = 1;
+
+  string name = 2;
+
+  string email = 3 [(hash_value) = true];
+
+  SpaceMemberRole role = 4;
+
+  optional common.image.Images images = 5;
+
+  bool has_privacy_permission = 6;
+
+  string sorting_key = 7;
+
+  string hex_id = 999;
+}

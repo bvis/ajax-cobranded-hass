@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/space/smartlock/find_all_available_to_add.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/add_by_external_id.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/find_all_by_space.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/remove.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/get_url.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/lock.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/unlock.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/update.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/stream_updates.proto";
+import "systems/ajax/api/mobile/v2/space/smartlock/update_permissions.proto";
+
+option swift_prefix = "";
+option java_generic_services = true;
+
+service SmartLockService {
+  rpc getUrl (GetUrlRequest) returns (GetUrlResponse);
+
+  rpc findAllAvailableToAdd (FindAllSmartLocksAvailableToAddRequest) returns (FindAllSmartLocksAvailableToAddResponse);
+
+  rpc addByExternalId (AddSmartLockByExternalIdRequest) returns (AddSmartLockByExternalIdResponse);
+
+  rpc findAllBySpace (FindAllSmartLocksBySpaceRequest) returns (FindAllSmartLocksBySpaceResponse);
+
+  rpc remove (RemoveSmartLockRequest) returns (RemoveSmartLockResponse);
+
+  rpc lock (LockSmartLockRequest) returns (LockSmartLockResponse);
+
+  rpc unlock (UnlockSmartLockRequest) returns (UnlockSmartLockResponse);
+
+  rpc update (UpdateSmartLockRequest) returns (UpdateSmartLockResponse);
+
+  rpc streamUpdates(StreamSmartLockUpdatesRequest) returns (stream StreamSmartLockUpdatesResponse) {}
+
+  rpc updatePermissions (UpdateSmartLockPermissionsRequest) returns (UpdateSmartLockPermissionsResponse) {}
+}

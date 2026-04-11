@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_feature_flags_info;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_feature_flags_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetFeatureFlagsInfoResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2; // in case of errors app should just fallback to the previous state (maximum safety mode)
+  }
+
+  message Success {
+    repeated FeatureInfo known_features = 1;
+
+    message FeatureInfo {
+      string feature_name = 1;
+      FeatureState feature_state = 2;
+    }
+
+    enum FeatureState {
+      FEATURE_STATE_UNSPECIFIED = 0;
+      FEATURE_STATE_DISABLED = 1;
+      FEATURE_STATE_ENABLED = 2;
+      // Can be extended in future
+    }
+  }
+
+  message Failure {}
+}

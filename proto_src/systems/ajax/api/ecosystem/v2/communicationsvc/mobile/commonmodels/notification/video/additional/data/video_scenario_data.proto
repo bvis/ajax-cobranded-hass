@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message VideoScenarioData {
+  repeated ChannelAlarmFrameMetadata channel_metadata = 1;
+
+  message ChannelAlarmFrameMetadata {
+    string video_edge_id = 1;
+    string channel_id = 2;
+    string channel_name = 3;
+    string room_name = 4;
+    int32 frames_ready = 5;
+    FramesStatus frames_status = 6;
+  }
+
+  enum FramesStatus {
+    FRAMES_STATUS_UNKNOWN = 0;
+    FRAMES_STATUS_IN_PROGRESS = 1;
+    FRAMES_STATUS_READY = 2;
+  }
+}

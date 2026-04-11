@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message ProgressAnnunciationThreshold {
+
+  message ProgressAnnunciationThresholdSettings{
+    optional Delay entry_delay = 1;
+    optional Delay exit_delay = 2;
+  }
+
+  Delay entry_delay = 1;
+  Delay exit_delay = 2;
+
+
+  enum Delay {
+    DELAY_UNSPECIFIED = 0;
+    DELAY_DISABLED = 1;
+    DELAY_5_SEC = 2;
+    DELAY_10_SEC = 3;
+    DELAY_15_SEC = 4;
+  }
+}

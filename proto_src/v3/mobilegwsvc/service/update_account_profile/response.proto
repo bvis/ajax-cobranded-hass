@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_account_profile;
+
+import "v3/mobilegwsvc/commonmodels/account/account.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.update_account_profile";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateAccountProfileResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    commonmodels.account.Account account = 1;
+  }
+
+  message Failure {
+    commonmodels.Error bad_request = 1;
+  }
+}

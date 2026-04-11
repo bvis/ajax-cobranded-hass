@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.group;
+
+import "google/protobuf/duration.proto";
+
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/followed_group_ids.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/group_auto_arm.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/group_auto_disarm.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/two_stage_arming_mode.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/image/image_id.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateGroupRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  string group_id = 2;
+
+  optional string group_name = 3;
+
+  bool bulk_arm_involved = 4;
+
+  bool bulk_disarm_involved = 5;
+
+  optional string image_id = 6 [deprecated = true];
+
+  // Should be sent when there is a hub in space
+  // When it is sent to space without a hub, bad_request is returned
+  optional common.space.security.group.TwoStageArmingMode two_stage_arming_mode = 7;
+
+  optional common.image.ImageIdValue image = 8;
+
+  optional common.space.security.group.FollowingGroupAutoArm following_group_auto_arm = 9;
+  optional common.space.security.group.FollowingGroupAutoDisarm following_group_auto_disarm = 10;
+  optional google.protobuf.Duration auto_arm_delay = 11;
+  optional common.space.security.group.FollowedGroupIds followed_group_ids = 12;
+};
+
+message UpdateGroupResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError permission_denied = 4;
+      common.response.DefaultError group_not_found = 5;
+      common.response.DefaultError hub_offline = 6;
+      common.response.HubBusyError hub_busy = 7;
+      common.response.DefaultError hub_error = 8;
+      common.response.DefaultError hub_wrong_state = 9;
+      common.response.SpaceLockedError space_locked = 10;
+      common.response.DefaultError followed_groups_conflict = 11;
+    }
+  }
+};

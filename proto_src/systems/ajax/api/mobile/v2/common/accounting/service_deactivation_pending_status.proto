@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum ServiceDeactivationPendingStatus {
+  SERVICE_DEACTIVATION_PENDING_STATUS_UNSPECIFIED = 0;
+  SERVICE_DEACTIVATION_PENDING_STATUS_PENDING = 1;
+  SERVICE_DEACTIVATION_PENDING_STATUS_NONE = 2;
+}

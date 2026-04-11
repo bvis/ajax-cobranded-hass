@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dev container
+        run: docker build -f Dockerfile.dev --build-arg PYTHON_VERSION=${{ matrix.python-version }} -t ajax-cobranded-dev .
+      - name: Run tests
+        run: docker run --rm ajax-cobranded-dev pytest tests/unit/ -v --cov=custom_components/ajax_cobranded --cov-fail-under=80 --cov-report=term-missing
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dev container
+        run: docker build -f Dockerfile.dev -t ajax-cobranded-dev .
+      - name: Run linter
+        run: docker run --rm ajax-cobranded-dev ruff check .
+
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dev container
+        run: docker build -f Dockerfile.dev -t ajax-cobranded-dev .
+      - name: Check formatting
+        run: docker run --rm ajax-cobranded-dev ruff format --check .
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dev container
+        run: docker build -f Dockerfile.dev -t ajax-cobranded-dev .
+      - name: Run type checker
+        run: docker run --rm ajax-cobranded-dev mypy custom_components/ajax_cobranded/ --ignore-missing-imports --exclude 'proto/'
+
+  dead-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build dev container
+        run: docker build -f Dockerfile.dev -t ajax-cobranded-dev .
+      - name: Run dead code analysis
+        run: docker run --rm ajax-cobranded-dev vulture custom_components/ajax_cobranded/ vulture_whitelist.py --exclude custom_components/ajax_cobranded/proto/
+
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: home-assistant/actions/hassfest@master
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hacs/action@main
+        with:
+          category: integration

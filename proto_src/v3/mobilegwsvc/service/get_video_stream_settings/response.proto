@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_stream_settings;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_capabilities.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_settings.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/setting_availability_mode.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_stream_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetVideoStreamSettingsResponse {
+
+    oneof response {
+        Success success = 1;
+        Failure failure = 2;
+    }
+
+    message Success {
+        mobile.v2.common.video.videoedge.mediadevice.VideoSettings.Stream main_settings = 1;
+
+        mobile.v2.common.video.videoedge.mediadevice.VideoSettings.Stream sub_settings = 2;
+
+        // Represents the visibility and edit-ability state of each setting
+        VideoStreamSettingsAvailability main_availability = 3;
+
+        VideoStreamSettingsAvailability sub_availability = 4;
+
+        // To show only available options or limits for each setting
+        mobile.v2.common.video.videoedge.mediadevice.VideoCapabilities.Stream main_limitations = 5;
+
+        mobile.v2.common.video.videoedge.mediadevice.VideoCapabilities.Stream sub_limitations = 6;
+
+        // To display the warning message in the UI
+        SettingsLimitationMode settings_limitation_mode = 7;
+    }
+
+    enum SettingsLimitationMode {
+        SETTINGS_LIMITATION_MODE_UNSPECIFIED = 0;
+
+        SETTINGS_LIMITATION_MODE_NOT_LIMITED = 1;
+
+        SETTINGS_LIMITATION_MODE_LIMITED_BY_EXTRA_SERVICES = 2;
+    }
+
+    message VideoStreamSettingsAvailability {
+        commonmodels.video.SettingAvailabilityMode resolution = 1;
+
+        commonmodels.video.SettingAvailabilityMode codec = 2;
+
+        commonmodels.video.SettingAvailabilityMode fps = 3;
+
+        commonmodels.video.SettingAvailabilityMode bitrate_type = 4;
+
+        commonmodels.video.SettingAvailabilityMode bitrate = 5;
+
+        commonmodels.video.SettingAvailabilityMode gop_size = 6;
+
+        commonmodels.video.SettingAvailabilityMode quality = 7;
+    }
+
+    message Failure {
+
+        oneof error {
+            commonmodels.Error bad_request = 1;
+            commonmodels.Error permission_denied = 2;
+            commonmodels.Error space_not_found = 3;
+            commonmodels.Error video_edge_not_found = 4;
+            commonmodels.Error channel_not_found = 5;
+            commonmodels.Error stream_settings_not_found = 6;
+        }
+    }
+}

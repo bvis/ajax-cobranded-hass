@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message LightIndication {
+
+  LightIndicationSettings light_indication_settings = 1;
+
+  repeated Capability capabilities = 2;
+
+  message LightIndicationSettings {
+    optional Indication light_indication = 1[(proto.meta.field_tag) = "light_indication"];
+    optional ExternalLedMode external_led_mode = 2[(proto.meta.field_tag) = "external_led_mode"];
+  }
+
+  enum Indication {
+    INDICATION_UNSPECIFIED = 0;
+    INDICATION_OFF = 1 [(proto.meta.enum_tag) = "INDICATION_OFF"];
+    INDICATION_ARMED = 2[(proto.meta.enum_tag) = "INDICATION_ARMED"];
+    INDICATION_ALWAYS = 3[(proto.meta.enum_tag) = "INDICATION_ALWAYS"];
+  }
+
+  enum ExternalLedMode {
+    EXTERNAL_LED_MODE_UNSPECIFIED = 0;
+    EXTERNAL_LED_MODE_BLINK = 1[(proto.meta.enum_tag) = "EXTERNAL_LED_MODE_BLINK"];
+    EXTERNAL_LED_MODE_SHINE_CONSTANTLY = 2[(proto.meta.enum_tag) = "EXTERNAL_LED_MODE_SHINE_CONSTANTLY"] ;
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_NEW_ARM_MODE_INDICATION = 1;
+    CAPABILITY_EXTERNAL_LED_INDICATION_TYPE = 2;
+  }
+}

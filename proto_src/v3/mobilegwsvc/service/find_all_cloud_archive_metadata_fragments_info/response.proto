@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_metadata_fragments_info;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/time_zone.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_metadata_fragments_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllCloudArchiveMetadataFragmentsInfoResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated MetadataFragmentInfo fragments_info = 1;
+
+    repeated commonmodels.video.TimeZone time_zone_map = 2;
+
+    message MetadataFragmentInfo {
+      uint64 fragment_id = 1;
+
+      google.protobuf.Timestamp timestamp = 2;
+
+      google.protobuf.Duration duration = 3;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+    }
+  }
+}

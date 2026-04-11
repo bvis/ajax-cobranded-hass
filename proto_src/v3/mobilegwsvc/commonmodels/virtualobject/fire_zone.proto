@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject;
+
+import "systems/ajax/api/mobile/v2/common/space/device/hub_device.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FireZone {
+  string id = 0x01;
+  string name = 0x02;
+  repeated systems.ajax.api.mobile.v2.common.space.device.HubDevice included_devices = 0x1000;
+}

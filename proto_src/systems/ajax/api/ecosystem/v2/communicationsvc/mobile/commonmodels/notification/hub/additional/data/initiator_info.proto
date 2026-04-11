@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/source_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message InitiatorInfo {
+  HubNotificationSourceType type = 1;
+  string hex_id = 2;
+  string name = 3 [(hash_value) = true];
+  optional string room_name = 4;
+  optional string room_id = 5;
+  optional DeviceColor device_color = 6;
+}

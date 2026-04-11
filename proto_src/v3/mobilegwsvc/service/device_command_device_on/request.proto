@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_device_on;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandDeviceOnRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType device_type = 3;
+  repeated Channel channels = 4;
+
+  enum Channel {
+    CHANNEL_UNSPECIFIED = 0;
+    CHANNEL_1 = 1;
+    CHANNEL_2 = 2;
+    CHANNEL_3 = 3;
+    CHANNEL_4 = 4;
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom";
+option java_multiple_files = true;
+
+message NewUserSession {
+  reserved 1;
+  int64 sessionId = 2;
+  string client_os = 3;
+  string device_model = 4;
+  string last_connection_ip = 5;
+}

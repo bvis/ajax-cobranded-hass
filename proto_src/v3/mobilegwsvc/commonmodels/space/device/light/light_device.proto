@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light;
+
+import "v3/mobilegwsvc/commonmodels/hub/device/light/light_hub_device.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/light/light_video_edge.proto";
+import "v3/mobilegwsvc/commonmodels/space/smartlock/light/light_smart_lock.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light";
+option java_multiple_files = true;
+
+message LightDevice {
+  oneof device {
+    hub.device.light.LightHubDevice hub_device = 1;
+    video.videoedge.light.LightVideoEdge video_edge = 2;
+    video.videoedge.light.LightVideoEdgeChannel video_edge_channel = 3;
+    smartlock.light.LightSmartLock smart_lock = 4;
+  }
+}

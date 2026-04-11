@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/sensitivity.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message SensitivityPart {
+  Sensitivity sensitivity = 1;
+  repeated Capability capabilities = 2;
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_INSERT_SENSITIVITY = 2;
+  }
+}

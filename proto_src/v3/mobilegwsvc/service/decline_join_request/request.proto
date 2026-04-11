@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.decline_join_request;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.decline_join_request";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeclineJoinByQrRequest {
+  string request_id = 1;
+  string space_id = 2;
+}

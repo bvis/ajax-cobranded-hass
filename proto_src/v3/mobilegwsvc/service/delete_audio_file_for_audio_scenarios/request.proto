@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_audio_file_for_audio_scenarios;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_audio_file_for_audio_scenarios";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeleteAudioFileForAudioScenariosRequest {
+  string hub_id = 1;
+  AudioSampleIdentifier audio_sample_identifier = 2;
+
+  message AudioSampleIdentifier {
+    uint32 slot_id = 1;
+    string file_id = 2;
+  }
+}

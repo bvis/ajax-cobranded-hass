@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.send_feedback_on_video_functionality;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.send_feedback_on_video_functionality";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SendFeedbackOnVideoFunctionalityRequest {
+  string video_edge_id = 1;
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 2;
+
+  string text = 3;
+
+  oneof feedback_details {
+    DetectionFeedbackDetails detection_feedback_details = 4;
+  }
+
+  enum DetectionResult {
+    DETECTION_RESULT_UNSPECIFIED = 0;
+    DETECTION_RESULT_MISSING = 1;
+    DETECTION_RESULT_VEHICLE = 2;
+    DETECTION_RESULT_ANIMAL = 3;
+    DETECTION_RESULT_HUMAN = 4;
+  }
+
+  enum DetectionFeedbackType {
+    DETECTION_FEEDBACK_TYPE_UNSPECIFIED = 0;
+    DETECTION_FEEDBACK_TYPE_POSITIVE = 1;
+    DETECTION_FEEDBACK_TYPE_NEGATIVE = 2;
+  }
+
+  message DetectionFeedbackDetails {
+    DetectionResult expected = 1;
+    DetectionResult actual = 2;
+    DetectionFeedbackType detection_feedback = 3;
+    // time range when object was detected
+    systems.ajax.api.mobile.v2.common.video.TimestampRange time_range = 4;
+    // please use channelId and video edge id from CloudArchiveSource (from source aliases)
+    // in case of cloud archive report
+    string channel_id = 5;
+    // timestamp when user reported an issue
+    google.protobuf.Timestamp timestamp = 6;
+    // CLOUD_ARCHIVE or VIDEO_EDGE
+    systems.ajax.api.mobile.v2.common.video.VideoSourceType video_source_type = 7;
+  }
+}

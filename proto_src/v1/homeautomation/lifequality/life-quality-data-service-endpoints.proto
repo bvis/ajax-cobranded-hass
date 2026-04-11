@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality";
+option java_generic_services = true;
+
+import "v1/homeautomation/lifequality/life-quality-data.proto";
+import "v1/homeautomation/lifequality/life-quality-remove-data.proto";
+import "v1/homeautomation/lifequality/find_first_timestamp.proto";
+
+service LifeQualityDataService {
+  rpc streamLifeQualityData (stream StreamLifeQualityDataRequest) returns (stream LifeQualityDataResponse);
+  rpc getLifeQualityData (LifeQualityDataRequest) returns (LifeQualityDataResponse);
+  rpc findFirstTimestampLifeQualityData (LifeQualityFindFirstTimestampRequest) returns (LifeQualityFindFirstTimestampResponse);
+  rpc removeLifeQualityData (LifeQualityRemoveDataRequest) returns (LifeQualityRemoveDataResponse);
+}

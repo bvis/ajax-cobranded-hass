@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels;
+
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum PatchType {
+  PATCH_TYPE_UNSPECIFIED = 0;
+  PATCH_TYPE_ADDED = 1;
+  PATCH_TYPE_REMOVED = 2;
+}
+

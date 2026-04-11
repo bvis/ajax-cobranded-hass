@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum NotificationFolder {
+  FOLDER_UNSPECIFIED = 0;
+  FOLDER_ALARM = 1;
+  FOLDER_MALFUNCTION = 2;
+  FOLDER_USER_AUTOMATION = 3;
+  FOLDER_HOME_AUTOMATION = 4;
+  FOLDER_SYSTEM = 5;
+  FOLDER_VIDEO = 6;
+}

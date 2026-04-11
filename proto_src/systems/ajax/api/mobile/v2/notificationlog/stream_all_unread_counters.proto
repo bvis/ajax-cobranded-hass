@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.notification;
+
+option java_package = "systems.ajax.api.mobile.v2.notificationlog";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+message StreamAllUnreadCountersRequest {
+  CountersOriginType counters_origin_type = 1;
+
+  enum CountersOriginType {
+    SPACE = 0;
+    HUB = 1;
+  }
+}
+
+message StreamAllUnreadCountersResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated OriginTotalCounter origin_counters = 1;
+
+    message OriginTotalCounter{
+      string originId = 1;
+      int32 total_counter = 2;
+    }
+  }
+
+  message Failure {
+    oneof errors {
+      common.response.DefaultError illegal_argument = 1;
+      common.response.DefaultError internal_error = 2;
+    }
+  }
+}

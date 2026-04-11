@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/notification_channel.proto";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option swift_prefix = "";
+
+message NotificationSettings {
+  NotificationChannels alarms = 1;
+  NotificationChannels events = 2;
+  NotificationChannels malfunctions = 3;
+  NotificationChannels armings = 4;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/hub/tag.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/transition.proto";
+
+message HubEventQualifier {
+  HubEventTag tag = 1;
+  event.EventTransition transition = 2;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_set_walk_test;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandSetWalkTestRequest {
+  string hub_id = 1;
+
+  oneof command {
+    Activate activate = 10;
+    Deactivate deactivate = 11;
+  }
+
+  message Activate {
+    uint32 timeout_minutes = 1;
+  }
+
+  message Deactivate {}
+}

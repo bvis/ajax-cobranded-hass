@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.system;
+
+option java_package = "systems.ajax.api.mobile.v2.common.video.videoedge.system";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SystemInfoFlag {
+  SYSTEM_INFO_FLAG_UNSPECIFIED = 0;
+  SYSTEM_INFO_FLAG_HAVE_RESOLVER = 1;
+
+  // Shows ability to publish motion events by video edge.
+  // If any of flags is set - video edge can apply motion settings
+  SYSTEM_INFO_FLAG_SUPPORTS_MOTION_EVENTS = 2;
+  SYSTEM_INFO_FLAG_SUPPORTS_PIR_MOTION_EVENTS = 3;
+  SYSTEM_INFO_FLAG_SUPPORTS_OBJECT_DETECTION_EVENTS = 4;
+  // --------------------------------------------------------------
+
+  SYSTEM_INFO_FLAG_SUPPORTS_RING_BUTTON_EVENTS = 5;
+
+  SYSTEM_INFO_FLAG_SUPPORTS_CLOUD_ARCHIVE_RECORDING = 6;
+
+  // Identifies that the video edge supports onvif configuration (e.g. ports, user auth).
+  SYSTEM_INFO_FLAG_HAVE_ONVIF_SNAPSHOT = 7;
+
+  // Identifies that the video edge supports rtsp configuration (e.g. ports).
+  SYSTEM_INFO_FLAG_HAVE_RTSP_SNAPSHOT = 8;
+
+  SYSTEM_INFO_FLAG_HAVE_FANS = 9;
+  SYSTEM_INFO_FLAG_HAVE_CRYPTO_SNAPSHOT = 10;
+  SYSTEM_INFO_FLAG_HAVE_LOCAL_USERS = 11;
+  SYSTEM_INFO_FLAG_HAVE_NO_LID = 12;
+  SYSTEM_INFO_FLAG_HAVE_ACCELEROMETER = 13;
+}

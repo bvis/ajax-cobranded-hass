@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.storage;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StorageDevice {
+  // @{ Immutable during device operation
+  string guid = 1;
+
+  string vendor = 2 [(disable_logging) = true];
+
+  string model = 3 [(disable_logging) = true];
+
+  string serial = 4 [(disable_logging) = true];
+
+  uint64 size_total = 5;
+  // @}
+
+  StorageDeviceStatus status = 6;
+
+  StorageDeviceInfo info = 7;
+
+  uint64 size_used = 8;
+
+  uint32 temperature = 9; // in Kelvin.
+
+  DiskWriteErrors disk_write_errors = 10;
+};
+
+message StorageDeviceStatus {
+  StorageDeviceState state = 1;
+
+  StorageError error = 2;
+};
+
+enum StorageDeviceState {
+  DS_NONE = 0;
+  DS_IDLE = 1;
+  DS_NEED_FORMAT = 2;
+  DS_FORMATTING = 3;
+  DS_READY = 4;
+};
+
+enum StorageError {
+  SE_OTHER = 0;
+  SE_OK = 1;
+  SE_FORMAT_FAILED = 2;
+  SE_REPAIR_FAILED = 3;
+  SE_MOUNT_FAILED = 4;
+  SE_UNMOUNT_FAILED = 5;
+  SE_WRITE_FAILED = 6;
+  SE_ARCHIVE_KEY_FINGERPRINT_MISMATCH = 7;
+  SE_UNSUPPORTED_ARCHIVE_VERSION = 8;
+};
+
+enum PartitionTableType {
+  PT_NONE = 0;
+  PT_DOS = 1;
+  PT_GPT = 2;
+};
+
+message StorageDeviceInfo {
+  PartitionTableType partition_table_type = 1;
+};
+
+// Information about disk write erorrs
+// Currently disks are automatically remounted to Read-only after write error
+// After that storage service will try to remount the disk to Read-write again
+message DiskWriteErrors {
+  // The total number of disk write errors
+  uint32 count = 1;
+
+  // Local timestamps of the 10 last disk write errors
+  repeated google.protobuf.Timestamp last_errors_timestamps = 2;
+}

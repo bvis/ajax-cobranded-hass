@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message FireZoneDeviceRepresentation {
+
+  int32 fire_zone_id_bound = 0x3F;
+}

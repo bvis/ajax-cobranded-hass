@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_monitoring_state.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_state.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_type.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_object_detection_duration.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_confirm_detection_with_pir_state.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message VideoNotificationSettings {
+  repeated NotificationStateEntry notification_settings_entries = 1;
+
+  // Responsible for filtering notifications and isn’t related to ARK monitoring_state setting.
+  commonmodels.video.videoedge.channel.notification.VideoNotificationMonitoringState monitoring_state = 2;
+
+  google.protobuf.Duration cooldown_period = 3;
+
+  repeated mobile.v2.common.video.videoedge.detector.DetectorType enabled_detector_types = 4 [deprecated = true];
+
+  // The minimum duration of the object detection event required to trigger a notification.
+  optional commonmodels.video.videoedge.channel.notification.VideoNotificationObjectDetectionDuration object_detection_duration = 5;
+
+  optional commonmodels.video.videoedge.channel.notification.VideoNotificationConfirmDetectionWithPirState confirm_detection_with_pir = 6;
+
+  // The enabled state of each detection type. By detection type means union of detector types and objectDetector objectClasses
+  repeated DetectionTypeEnabledState detection_type_enabled_states = 7;
+
+  message NotificationStateEntry {
+    commonmodels.video.videoedge.channel.notification.VideoNotificationType type = 1;
+
+    commonmodels.video.videoedge.channel.notification.VideoNotificationState state = 2;
+
+    mobile.v2.common.video.videoedge.detector.DetectorType detector_type = 3;
+  }
+
+  message DetectionTypeEnabledState {
+    commonmodels.video.videoedge.channel.notification.VideoNotificationType detection_type = 2;
+
+    bool enabled = 3;
+  }
+}

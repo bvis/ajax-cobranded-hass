@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.image;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/space/image/space_image_chunk.proto";
+import "systems/ajax/api/mobile/v2/space/image/upload_image_response.proto";
+
+service SpaceImageService {
+  rpc upload(stream SpaceImageChunk) returns (UploadSpaceImageResponse) {}
+};

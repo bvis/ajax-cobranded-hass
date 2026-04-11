@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/permissions_claim_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/access_request_subject.proto";
+
+message ProPermissionsClaimResponse {
+  AccessRequestSubject grantee = 1;
+  AccessRequestSubject initiator = 2;
+
+  PermissionsClaimType permissions_type = 3;
+
+  bool is_rejected = 4;
+}
+

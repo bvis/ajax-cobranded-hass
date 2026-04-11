@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+
+option java_multiple_files = true;
+
+message DeviceAppearance {
+
+  DeviceAppearanceType device_appearance_type = 1;
+
+  enum DeviceAppearanceType {
+    DEVICE_APPEARANCE_TYPE_UNSPECIFIED = 0;
+    DEVICE_APPEARANCE_TYPE_ORDINARY = 1;
+    DEVICE_APPEARANCE_TYPE_UK = 2;
+  }
+}

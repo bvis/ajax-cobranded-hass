@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+import "systems/ajax/api/mobile/v2/common/space/capability/space_capabilities.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/standalone_device.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member.proto";
+import "systems/ajax/api/mobile/v2/common/space/room/room.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/space_security.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_profile.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_installation_company.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_monitoring_company.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/privacy_override.proto";
+import "systems/ajax/api/mobile/v2/common/space/current_member.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/pending_member.proto";
+import "systems/ajax/api/mobile/v2/common/time/time_zone.proto";
+import "systems/ajax/api/mobile/v2/common/video/video_wall.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_address.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/service_deactivation_pending_status.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/extra_services_availability_status.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Space {
+  string id = 1;
+
+  // initiator-level
+
+  CurrentMember current_member = 43;
+
+  int32 total_notification_unread_counter = 66;
+
+  // space-level
+  // old apps: all members or only the current member,
+  // when space is oversized, should be provided
+  // new apps: Will be empty when the client's app version is higher than "X"
+  repeated member.SpaceMember members = 2 [deprecated = true];
+
+  security.SpaceSecurity security = 3;
+
+  repeated device.StandaloneDevice devices = 4;
+
+  SpaceProfile profile = 5;
+
+  repeated common.space.room.Room rooms = 6;
+  
+  bool is_oversized = 11;
+
+  repeated company.SpaceInstallationCompany installation_companies = 20;
+
+  repeated company.SpaceMonitoringCompany monitoring_companies = 21;
+
+  repeated company.PrivacyOverride privacy_overrides = 22;
+
+  repeated member.PendingMember pending_members = 31;
+
+  common.time.TimeZone time_zone = 50;
+
+  common.video.VideoWall video_wall = 51 [deprecated = true];
+
+  SpaceAddress address = 61;
+
+  common.accounting.ServiceDeactivationPendingStatus service_deactivation_pending_status = 62;
+
+  common.accounting.ExtraServicesAvailabilityStatus extra_services_availability_status = 65;
+
+  // During Beta testing and release of after-alarm video access feature
+  // we temporarily propagate server feature toggle to client apps via this flag,
+  // this will be removed in https://ajaxsystems.atlassian.net/browse/VID-13958
+  bool after_alarm_video_access_disabled = 100;
+
+  common.space.capability.SpaceCapabilities space_capabilities = 200;
+
+  // 52 is reserved for hide_video_privacy_configuration
+  // 64 is reserved for requesting_video_access_disabled
+  // 101 is reserved for export_archive_permission_disabled
+  reserved  52, 64, 101;
+};

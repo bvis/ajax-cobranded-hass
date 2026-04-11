@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AcceptLegalAgreementRequest {
+  // Since Legal Agreement logic unclear now, this API may change
+  string facility_id = 1;
+  string agreement_version = 2;
+}
+
+message AcceptLegalAgreementResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError facility_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError already_processed = 4;
+    }
+  }
+}

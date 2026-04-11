@@ -1,0 +1,749 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/hub.proto";
+import "systems/ajax/protobuf/hub/user.proto";
+import "systems/ajax/protobuf/hub/update.proto";
+import "systems/ajax/protobuf/hub/camera.proto";
+import "systems/ajax/protobuf/hub/device/hub_device.proto";
+import "systems/ajax/protobuf/hub/object_type.proto";
+import "systems/ajax/protobuf/hub/scenario.proto";
+import "systems/ajax/protobuf/gw/error.proto";
+import "google/protobuf/field_mask.proto";
+import "systems/ajax/protobuf/hub/device/device.proto";
+
+/*
+ * For all the commands HubCommand.Result will be returned as a response.
+ * HubCommand.Result.answer should be used as a default way to handle response if no otherwise specified.
+ */
+message HubCommand {
+    string hub_id = 1;
+
+    oneof test_oneof {
+        Arming arming = 10;
+        Panic panic = 11;
+        DropCache drop_cache = 12;
+        CancelSearch cancel_search = 13;
+        StartFirmwareUpdate start_firmware_update = 14;
+        UpdateGroupsMode update_groups_mode = 15;
+        ResetSimTrafficCounter reset_sim_traffic_counter = 16;
+        MuteFireDetectors mute_fire_detectors = 17;
+        ResetAlarmCondition reset_alarm_condition = 18;
+        DelayInterconnect delay_interconnect = 19;
+        UpdateCardState update_card_state = 20;
+
+        GroupArming group_arming = 100;
+
+        DropLogs drop_logs = 200;
+
+        ///////////////////////////////
+        // User commands
+        ///////////////////////////////
+        InviteUsers invite_users = 300;
+        RevokeUserInvite revoke_user_invite = 301;
+        ProfiHubAccessRequest profi_hub_access_request = 302;
+        DetachUser detach_user = 310;
+        ChangeUserRole change_user_role = 311;
+        ChangeUserPermissions change_user_permissions = 312;
+        RequestArmingReset request_arming_reset = 313;
+        EngineerAttendanceRequired engineer_attendance_required = 314;
+
+        ///////////////////////////////
+        // Room commands
+        ///////////////////////////////
+        CreateNewRoom create_new_room = 400;
+        DeleteRoom delete_room = 410;
+
+        ///////////////////////////////
+        // Group commands
+        ///////////////////////////////
+        CreateNewGroup create_new_group = 500;
+        DeleteGroup delete_group = 510;
+
+        ///////////////////////////////
+        // Camera commands
+        ///////////////////////////////
+        LinkCamera link_camera = 600;
+        UnlinkCamera unlink_camera = 610;
+        EditStreamData edit_stream_data = 620;
+
+        ///////////////////////////////
+        // Device commands
+        ///////////////////////////////
+        LinkDevice link_device = 700;
+        UnlinkDevice unlink_device = 710;
+        DeviceCommand device_command = 720;
+        ScanFibraDevices scan_fibra_devices = 730;
+        GetScannedFibraDevices get_scanned_fibra_devices = 740;
+
+        ///////////////////////////////
+        // Security company commands
+        ///////////////////////////////
+        CreateSecurityCompanyBinding create_security_company_binding = 800;
+        DeleteSecurityCompanyBinding delete_security_company_binding = 810;
+        CancelDeleteSecurityCompanyBinding cancel_delete_security_company_binding = 820;
+
+        ///////////////////////////////
+        // Network management commands
+        ///////////////////////////////
+        UpdateNetworkChannelState update_network_channel_state = 900;
+        UpdateEthernetSettings update_ethernet_settings = 910;
+        UpdateWifiSettings update_wifi_settings = 920;
+        UpdateGsmSimCardSettings update_gsm_sim_card_settings = 930;
+        UpdateGsmSimCardBalanceNumber update_gsm_sim_card_balance_number = 940;
+        GetGsmSimCardBalance get_gsm_sim_card_balance = 950;
+        ScanWifiNetworks scan_wifi_networks = 960;
+        JoinWifiNetwork join_wifi_network = 970;
+        JoinWifiNetworkAdvanced join_wifi_network_advanced = 980;
+        ForgetWifiNetwork forget_wifi_network = 990;
+
+        ApplyUpdate apply_update = 1000;
+
+        ///////////////////////////////
+        // Scenario management commands
+        ///////////////////////////////
+        CreateScenario create_scenario = 1100;
+        UpdateScenario update_scenario = 1101;
+        DeleteScenario delete_scenario = 1102;
+
+        ApplyUpdates apply_updates = 1103;
+
+        ///////////////////////////////
+        // Migration management commands
+        ///////////////////////////////
+        StartMigration start_migration = 1104;
+        StopMigration stop_migration = 1105;
+
+        ///////////////////////////////
+        // Access Card registration commands
+        ///////////////////////////////
+        AddAccessCard add_access_card = 1106;
+        DeleteAccessCard delete_access_card = 1107;
+        EraseAccessCard erase_access_card = 1108;
+        ExitCardMode exit_card_mode = 1109;
+
+        ///////////////////////////////
+        // Access Key registration commands
+        ///////////////////////////////
+        CancelAccessKeySearch cancel_access_key_search = 1110;
+        RegisterAccessKey register_access_key = 1111;
+        DeleteAccessKey delete_access_key = 1112;
+    }
+
+    message Arming {
+        Type type = 1;
+        bool ignore_problems = 2;
+
+        enum Type {
+            ARM = 0;
+            DISARM = 1;
+            NIGHT_MODE_ON = 2;
+            NIGHT_MODE_OFF = 3;
+        }
+    }
+
+    message Panic {
+        PanicLocation panic_location = 1;
+
+        message PanicLocation {
+            double latitude = 1;
+            double longitude = 2;
+            double accuracy = 3;
+            double speed = 4;
+            uint64 timestamp = 5;
+        }
+    }
+
+    message DropCache {
+    }
+
+    message CancelSearch {
+    }
+
+    message StartFirmwareUpdate {
+    }
+
+    message UpdateGroupsMode {
+        GroupsMode groups_mode = 1;
+
+        enum GroupsMode {
+            OFF = 0;
+            ON = 1;
+        }
+    }
+
+    message ResetSimTrafficCounter {
+        int32 sim_card_index = 1;
+    }
+
+    message MuteFireDetectors {
+        MuteType mute_type = 1;
+
+        enum MuteType {
+            ALL_FIRE_DETECTORS = 0;
+            ALL_FIRE_DETECTORS_EXCEPT_TRIGGERED = 1;
+        }
+    }
+
+    message ResetAlarmCondition {
+    }
+
+    message DelayInterconnect {
+    }
+
+    message UpdateCardState {
+        CardState card_state = 1;
+        string card_id = 2;
+
+        enum CardState {
+            OFF = 0;
+            ON = 1;
+        }
+    }
+
+    message GroupArming {
+        string group_id = 1;
+        Type type = 2;
+        bool ignore_problems = 3;
+
+        enum Type {
+            ARM = 0;
+            DISARM = 1;
+        }
+    }
+
+    message DropLogs {
+    }
+
+    message InviteUsers {
+        repeated string emails = 1;
+        Role role = 2;
+
+        enum Role {
+            USER = 0;
+            PRO = 1;
+        }
+    }
+
+    message RevokeUserInvite {
+        string email = 1;
+    }
+
+    message ProfiHubAccessRequest {
+        string user_id = 1;
+        string user_email = 2;
+        string user_name = 3;
+        repeated User.Permission permissions = 4;
+        int32 time_of_access_in_hours = 5;
+    }
+
+    message DetachUser {
+        string user_id = 1;
+    }
+
+    message CreateNewRoom {
+        string room_name = 1;
+    }
+
+    message DeleteRoom {
+        string room_id = 1;
+    }
+
+    message CreateNewGroup {
+        string group_name = 1;
+    }
+
+    message DeleteGroup {
+        string group_id = 1;
+    }
+
+    message LinkCamera {
+        string room_id = 1;
+        string camera_name = 2;
+        Camera.ServiceType service_type = 3;
+        string stream_data_url = 4;
+        bool dvr = 5;
+        string parent_camera_id = 6;
+    }
+
+    message UnlinkCamera {
+        string camera_id = 1;
+        string service_id = 2;
+    }
+
+    message EditStreamData {
+        string service_id = 1;
+        string camera_id = 2;
+        Camera.ServiceType service_type = 3;
+        oneof stream_variables {
+            string stream_data_url = 1012;
+            Camera.HikvisionOrSafireSettings hikvision_or_safire_settings = 1015;
+            Camera.DahuaOrUniviewSettings dahua_or_uniview_settings = 1016;
+        }
+    }
+
+    // If HubCommand.Result contains link_device_response_details then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message LinkDevice {
+        string room_id = 1;
+        string group_id = 2;
+        oneof device_id {
+            string device_qr_code = 3;
+            WireInputMultiTransmitterId wire_input_multi_transmitter_id = 5;
+        }
+
+        string device_name = 4;
+    }
+
+    message WireInputMultiTransmitterId {
+        string multi_transmitter_id = 1;
+        int32 wire_input_index = 2;
+    }
+
+    message UnlinkDevice {
+        string device_id = 1;
+    }
+
+    message ScanFibraDevices {
+        Action action = 1;
+        enum Action {
+            NO_ACTION_INFO = 0;
+            START = 1;
+            STOP = 2;
+        }
+    }
+
+    // If HubCommand.Result.answer == SUCCESS then check HubCommand.Result.scanned_fibra_devices_details
+    // to get a list of discovered fibra devices.
+    message GetScannedFibraDevices {
+    }
+
+    message CreateSecurityCompanyBinding {
+        string company_id = 1;
+    }
+
+    message DeleteSecurityCompanyBinding {
+        string company_id = 1;
+    }
+
+    message CancelDeleteSecurityCompanyBinding {
+        string company_id = 1;
+    }
+
+    // If HubCommand.Result contains network_settings_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message UpdateNetworkChannelState {
+        Channel channel = 1;
+        State state = 2;
+
+        enum Channel {
+            NO_CHANNEL_INFO = 0;
+            ETHERNET = 1;
+            GSM = 2;
+            WIFI = 3;
+        }
+
+        enum State {
+            NO_STATE_INFO = 0;
+            ON = 1;
+            OFF = 2;
+        }
+    }
+
+    // If HubCommand.Result contains network_settings_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message UpdateEthernetSettings {
+        bool dhcp = 1;
+        string ip = 2;
+        string mask = 3;
+        string gate = 4;
+        string dns = 5;
+    }
+
+    // If HubCommand.Result contains network_settings_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message UpdateWifiSettings {
+        bool dhcp = 1;
+        string ip = 2;
+        string mask = 3;
+        string gate = 4;
+        string dns = 5;
+    }
+
+    // If HubCommand.Result contains network_settings_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message UpdateGsmSimCardSettings {
+        string apn = 1;
+        string username = 2;
+        string password = 3;
+        int32 sim_card_index = 4;
+    }
+
+    message UpdateGsmSimCardBalanceNumber {
+        string balance_number = 1;
+        int32 sim_card_index = 2;
+    }
+
+    message GetGsmSimCardBalance {
+        int32 sim_card_index = 1;
+    }
+
+    // If HubCommand.Result.answer == SUCCESS then check HubCommand.Result.scan_wifi_networks_response_details
+    // to get a list of available wifi networks.
+    message ScanWifiNetworks {
+    }
+
+    // If HubCommand.Result contains wifi_network_join_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message JoinWifiNetwork {
+        string ssid = 1;
+        HubDevice.Wifi.SecurityProtocol security_protocol = 2;
+        string password = 3;
+    }
+
+    // If HubCommand.Result contains wifi_network_join_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message JoinWifiNetworkAdvanced {
+        string ssid = 1;
+        HubDevice.Wifi.SecurityProtocol security_protocol = 2;
+        string password = 3;
+        bool dhcp = 4;
+        int32 channel = 5;
+        string ip = 6;
+        string gate = 7;
+        string dns = 8;
+        string mask = 9;
+    }
+
+    // If HubCommand.Result contains network_settings_status then it should be handled.
+    // Otherwise HubCommand.Result.answer
+    message ForgetWifiNetwork {
+    }
+
+    message ApplyUpdate {
+        Update update = 1;
+    }
+
+    message ApplyUpdates {
+        repeated Update updates = 2;
+    }
+
+    enum Answer {
+        SUCCESS = 0x00;
+        DELIVERED = 0x01;
+        DELIVERED_COMMAND_PERFORMED = 0x02;
+        DELIVERED_COMMAND_NOT_PERFORMED = 0x03;
+        MODE_FINISHED = 0x04;
+        FAILED_INSUFFICIENT_ACCESS = 0x05;
+        FAILED_UNKNOWN_COMMAND = 0x06;
+        UNDELIVERED_RECEIVER_OFFLINE = 0x07;
+        UNDELIVERED_WRONG_RECEIVER = 0x08;
+        DELIVERED_WAS_ALREADY_PERFORMED = 0x09;
+        FAILED_WRONG_PARAMETERS = 0x0A;
+        FAILED_WRONG_MESSAGE_TYPE = 0x0B;
+        TRANSPORT_EXCEPTION = 0x0C;
+        SERVER_ERROR = 0x0E;
+        REQUEST_DELIVERED = 0x0D;
+        BUSY = 0x0F;
+        HUB_ERROR = 0x10;
+        WRONG_STATE = 0x11;
+        OBJECTS_LIMIT = 0x12;
+        PARAMS_APPLICATION_FAILURE = 0x13;
+        PARTITION_NOT_EMPTY = 0x14;
+        OBJECT_NOT_FOUND = 0x15;
+        HUB_BLOCKED_BY_SERVICE_PROVIDER = 0x16;
+        NO_DATA = 0x20;
+        ALARM_RESET_NEEDED = 0x21;
+    }
+
+    enum NetworkSettingsStatus {
+        NO_NETWORK_SETTINGS_STATUS_INFO = 0;
+        NETWORK_SET_OK = 1;
+        NETWORK_SET_ERROR = 2;
+    }
+
+    enum WifiNetworkJoinStatus {
+        NO_WIFI_NETWORK_JOIN_STATUS_INO = 0;
+        JOIN_SUCCESS = 1;
+        JOIN_ERROR = 2;
+    }
+
+    message Result {
+        oneof statuses {
+            Answer answer = 1;
+            NetworkSettingsStatus network_settings_status = 100;
+            WifiNetworkJoinStatus wifi_network_join_status = 101;
+        }
+
+        oneof details {
+            ArmingErrorDetails arming_error_details = 2;
+            InviteUsersResponseDetails invite_users_response_details = 3;
+            LinkDeviceResponseDetails link_device_response_details = 4;
+            GsmSimCardBalanceResponseDetails gsm_sim_card_balance_response_details = 5;
+            ScanWifiNetworksResponseDetails scan_wifi_networks_response_details = 6;
+            MigrationErrorDetails migration_error_details = 7;
+            CreateUnitResponseDetails create_unit_response_details = 8;
+            RegisterAccessKeyErrorDetails register_access_key_error_details = 9;
+            EngineerAttendanceRequiredErrorDetails engineer_attendance_required_error_details = 10;
+            ScannedFibraDevicesDetails scanned_fibra_devices_details = 11;
+        }
+
+        message ArmingErrorDetails {
+            repeated ArmPreventObject arm_prevent_objects = 1;
+
+            message ArmPreventObject {
+                string code = 1;
+                string source_id = 2;
+                ObjectType source_type = 3;
+                string source_name = 4;
+                string source_room = 5;
+                string source_room_id = 6;
+                string text = 7;
+                string hub_name = 8;
+            }
+        }
+
+        message MigrationErrorDetails {
+            repeated MigrationError errors = 1;
+
+            enum MigrationError {
+                UNKNOWN_ERROR = 0;
+                NO_RIGHTS_ON_TARGET = 1;
+                NO_RIGHTS_ON_DONOR = 2;
+                TARGET_ARMED = 3;
+                TARGET_OFFLINE = 4;
+                DONOR_ONLINE = 5;
+                TARGET_FW_LOWER_MINIMAL = 6;
+                DONOR_FW_LOWER_MINIMAL = 7;
+                TARGET_FW_LOWER_DONOR = 8;
+                TARGET_STATE_FETCH_FAILED = 9;
+                DONOR_STATE_FETCH_FAILED = 10;
+                DONOR_TARGET_INCOMPATIBLE_TYPES = 11;
+                TARGET_IS_ALREADY_IN_MIGRATION = 12;
+                DONOR_IS_ALREADY_IN_MIGRATION = 13;
+            }
+        }
+
+        message InviteUsersResponseDetails {
+            repeated InviteStatus invite_statuses = 1;
+
+            message InviteStatus {
+                string email = 1;
+                Status status = 2;
+
+                enum Status {
+                    NO_INVITE_STATUS_INFO = 0;
+                    USER_BOUND = 1;
+                    USER_INVITED = 2;
+                    INVALID_OR_NON_EXISTING_USER_EMAIL = 3;
+                    OBJECTS_LIMIT_EXCEEDED = 4;
+                    INVALID_OR_NON_EXISTING_PRO_EMAIL = 5;
+                    ALREADY_BOUND = 6;
+                }
+            }
+        }
+
+        message LinkDeviceResponseDetails {
+            Status status = 1;
+            string fail_device_type = 2;
+            int32 fail_reason = 3;
+
+            enum Status {
+                NO_STATUS_INFO = 0;
+                SUCCESS = 1;
+                SEARCH_TIMEOUT = 2;
+                REGISTRATION_FAILED = 3;
+                REGISTRATION_STEP = 4;
+            }
+        }
+
+        message GsmSimCardBalanceResponseDetails {
+            string balance = 1;
+        }
+
+        message ScanWifiNetworksResponseDetails {
+            repeated WifiNetwork available_networks = 1;
+
+            message WifiNetwork {
+                string ssid = 1;
+                HubDevice.Wifi.SecurityProtocol security_protocol = 2;
+                HubDevice.Wifi.SignalLevel signal_level = 3;
+            }
+        }
+
+        message CreateUnitResponseDetails {
+            oneof unit_id_oneof {
+                string room_id = 1;
+                string group_id = 2;
+            }
+        }
+
+        message RegisterAccessKeyErrorDetails {
+            FailReason fail_reason = 1;
+
+            enum FailReason {
+                NO_FAIL_REASON_INFO = 0;
+                KEY_ALREADY_IN_USE = 1;
+                NO_AVAILABLE_READERS = 2;
+                USER_NOT_FOUND = 3;
+            }
+        }
+
+        message EngineerAttendanceRequiredErrorDetails{
+            FailReason fail_reason = 1;
+
+            enum FailReason {
+                NO_FAIL_REASON_INFO = 0;
+                WRONG_OR_INACTIVE_REQUEST_ID = 1;
+            }
+        }
+
+        message ScannedFibraDevicesDetails {
+            repeated Device devices = 1;
+        }
+    }
+
+    message CreateScenario {
+        Scenario scenario = 1;
+        google.protobuf.FieldMask field_mask = 20;
+    }
+
+    message UpdateScenario {
+        Scenario scenario = 1;
+        google.protobuf.FieldMask field_mask = 20;
+    }
+
+    message DeleteScenario {
+        string id = 1;
+        google.protobuf.FieldMask field_mask = 20;
+    }
+
+    message StartMigration {
+        string donor_id = 1;
+    }
+
+    message StopMigration {}
+
+    message RequestArmingReset {}
+
+    message EngineerAttendanceRequired {}
+
+    message AddAccessCard {
+        string name = 1;
+        Color color = 2;
+        Type type = 3;
+        string user_id = 4;
+
+        enum Color {
+            WHITE = 0x00;
+            BLACK = 0x10;
+        }
+
+        enum Type {
+            CARD = 0x00;
+            TAG = 0x01;
+        }
+    }
+
+    message DeleteAccessCard {
+        string id = 1;
+        DeleteMode delete_mode = 2;
+
+        enum DeleteMode {
+            WITHOUT_CARD = 0;
+            WITH_CARD = 1;
+        }
+    }
+
+    message EraseAccessCard {
+    }
+
+    message ExitCardMode {
+    }
+
+    message CancelAccessKeySearch {
+    }
+
+    message RegisterAccessKey {
+        string key_name = 1;
+    }
+
+    message DeleteAccessKey {
+        string key_id = 1;
+    }
+}
+
+message DeviceCommand {
+    string device_id = 1;
+    Type type = 2;
+    ObjectType device_type = 3;
+
+    oneof additional_param {
+        ChimesGroupStatus chimes_group_status = 4;
+        ChimesStatus chimes_status = 5;
+    }
+
+    message ChimesGroupStatus {
+        map<string, bool> group_ids = 1;
+    }
+
+    message ChimesStatus {
+        bool enabled = 1;
+    }
+
+    enum Type {
+        NO_DEVICE_COMMAND_TYPE_INFO = 0;
+        CONNECTION_TEST_START = 1;
+        CONNECTION_TEST_STOP = 2;
+        DETECTION_TEST_START = 3;
+        DETECTION_TEST_STOP = 4;
+        MUTE = 5;
+        SWITCH_ON = 6;
+        SWITCH_OFF = 7;
+        SOUND_TEST_START = 8;
+        UNLOCK_DEVICE = 9;
+        FIRE_SENSOR_TEST = 10;
+        MOTION_OUTDOOR_DETECTION_TEST_START = 11;
+        MOTION_OUTDOOR_UPPER_MOTION_SENSOR_DETECTION_TEST_START = 12;
+        MOTION_OUTDOOR_LOWER_MOTION_SENSOR_DETECTION_TEST_START = 13;
+        MOTION_OUTDOOR_ANTIMASKING_MOTION_SENSOR_DETECTION_TEST_START = 14;
+        GROUP_MODE_OFF = 15;
+        GROUP_MODE_ON = 16;
+        GSM_TRAFFIC_RESET_SIM1 = 17;
+        GSM_TRAFFIC_RESET_SIM2 = 18;
+        DEVICE_BYPASS_OFF = 19;
+        DEVICE_BYPASS_WHOLE = 20;
+        DEVICE_BYPASS_TAMPER = 21;
+        MULTI_TRANSMITTER_POWER_RESET = 22;
+        MOTION_CAM_FIFTH_FREQUENCY_CONNECTION_TEST_START = 23;
+        MOTION_CAM_ZERO_OR_FIRST_FREQUENCY_CONNECTION_TEST_START = 24;
+        MOTION_CAM_DATA_CHANNEL_CONNECTION_TEST_START = 25;
+        CHIMES_MODE = 26;
+        MAKE_PHOTO = 27;
+        INDICATION_OFF = 28;
+        INDICATION_ON = 29;
+        BUS_POWER_OFF = 30;
+        BUS_POWER_ON = 31;
+        MAX_POWER_TEST_OFF = 32;
+        MAX_POWER_TEST_ON = 33;
+    }
+}
+message ChangeUserRole {
+    string user_id = 1;
+    UserRole user_role = 2;
+
+    enum UserRole {
+        USER = 0;
+        MASTER = 1;
+    }
+}
+
+message ChangeUserPermissions {
+    string user_id = 1;
+    repeated User.Permission user_permission = 2;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum AlertWithSiren {
+  ALERT_WITH_SIREN_UNSPECIFIED = 0;
+  ALERT_WITH_SIREN_DISABLED = 1;
+  ALERT_WITH_SIREN_ENABLED = 2;
+}

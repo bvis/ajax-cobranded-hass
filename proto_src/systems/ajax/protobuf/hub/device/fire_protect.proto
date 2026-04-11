@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message FireProtect {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    google.protobuf.BoolValue smoke_alarm_detected = 0x31;
+    google.protobuf.BoolValue temperature_alarm_detected = 0x32;
+    google.protobuf.BoolValue backup_battery_inserted = 0x33;
+    google.protobuf.BoolValue backup_battery_charge_ok = 0x34;
+    bool always_active = 0x35;
+    bool temperature_diff_detection_enabled = 0x36;
+    google.protobuf.BoolValue camera_malfunction = 0x37;
+    google.protobuf.BoolValue smoke_camera_dusty = 0x38;
+    bool high_temperature_alarms_enabled = 0x39;
+    google.protobuf.BoolValue high_temperature_diff_detected = 0x3C;
+    BuzzerState buzzer_state = 0x3E;
+
+    Subtype subtype = 0xC3;
+
+    enum BuzzerState {
+        OFF = 0x00;
+        ON = 0x01;
+    }
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        TEMPERATURE = 1;
+        TEMPERATURE_DIFF = 2;
+        SMOKE = 3;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.common;
+
+option swift_prefix = "Eco";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+message DeviceType {
+  oneof type {
+    HubDeviceType hub_device_type = 1;
+    VideoEdgeType video_edge_type = 2;
+    VideoChannelType video_channel_type = 3;
+    SmartLockType smart_lock_type = 4;
+  }
+}
+
+message HubDeviceType {
+  hubsvc.commonmodels.ObjectType object_type = 1;
+}
+
+message VideoEdgeType {
+  VideoDeviceFamily video_device_family = 1;
+
+  enum VideoDeviceFamily {
+    VIDEO_DEVICE_FAMILY_UNSPECIFIED = 0;
+    VIDEO_DEVICE_FAMILY_NVR = 1;
+    VIDEO_DEVICE_FAMILY_CAMERA = 2;
+    VIDEO_DEVICE_FAMILY_DOORBELL_OR_INDOOR_CAM = 3;
+  }
+}
+
+message VideoChannelType {}
+message SmartLockType {}
+

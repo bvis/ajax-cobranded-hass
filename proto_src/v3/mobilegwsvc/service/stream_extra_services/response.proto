@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_services;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/extra_service.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/extra_service_state.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/service_activation_availability_status.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamExtraServicesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof response {
+      ExtraServices snapshot = 1;
+      Update update = 2;
+    }
+  }
+
+  message Update {
+    string extra_service_id = 1;
+    string subscription_id = 2;
+
+    oneof payload {
+      ExtraServiceAdded extra_service_added = 10;
+      ExtraServiceStateUpdated extra_service_state_updated = 11;
+      ExtraServiceRemoved extra_service_removed = 12;
+      ExtraServiceReactivated extra_service_reactivated = 13;
+      ExtraServiceReplaced extra_service_replaced = 14;
+    }
+
+  }
+  message ExtraServiceAdded {
+    v3.mobilegwsvc.commonmodels.accounting.ExtraService new_extra_service = 1;
+  }
+
+  message ExtraServiceStateUpdated {
+    v3.mobilegwsvc.commonmodels.accounting.ExtraServiceState new_state = 1;
+  }
+
+  message ExtraServiceRemoved {}
+
+  message ExtraServiceReactivated {
+    v3.mobilegwsvc.commonmodels.accounting.ExtraService new_extra_service = 1;
+  }
+
+  message ExtraServiceReplaced {
+    v3.mobilegwsvc.commonmodels.accounting.ExtraService new_extra_service = 2;
+  }
+
+  message ExtraServices {
+    repeated v3.mobilegwsvc.commonmodels.accounting.ExtraService extra_services = 1;
+    v3.mobilegwsvc.commonmodels.accounting.ServiceActivationAvailabilityStatus service_activation_availability_status = 2;
+  }
+
+  message Failure {
+    string message = 100;
+    oneof error {
+      commonmodels.Error request_timeout = 1;
+      commonmodels.Error illegal_argument = 2;
+      commonmodels.Error extra_services_not_available = 3;
+    }
+  }
+}

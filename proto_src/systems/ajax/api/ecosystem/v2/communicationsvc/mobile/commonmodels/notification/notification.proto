@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/folder.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/importance.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/additional_data.proto";
+
+message Notification {
+  string id = 1;
+  string universal_token = 2; // universal deterministic ordering
+  optional NotificationSpace space = 3;
+  google.protobuf.Timestamp server_timestamp = 4;
+
+  NotificationFolder folder = 5;
+  NotificationImportance importance = 6;
+  NotificationContent content = 7;
+
+  bool read_by_user = 8;
+
+  repeated NotificationAdditionalData additional_data = 21;
+}

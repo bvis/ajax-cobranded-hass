@@ -1,0 +1,90 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+import "systems/ajax/protobuf/hub/device/common_fibra.proto";
+
+message DoorProtectPlusFibra {
+    CommonDevicePart common_part = 1000;
+    CommonFibraPart common_fibra_part = 1001;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    google.protobuf.BoolValue reed_closed = 0x31;
+    google.protobuf.BoolValue extra_contact_closed = 0x32;
+    bool always_active = 0x33;
+    bool extra_contact_aware = 0x34;
+    bool reed_contact_aware = 0x35;
+
+    bool shock_sensor_aware = 0x40;
+    int32 shock_sensor_sensitivity = 0x41;
+
+    bool ignore_simple_impact = 0x42;
+    bool accelerometer_aware = 0x43;
+    AccelerometerTiltDegrees accelerometer_tilt_degrees = 0x44;
+    AccelerometerTiltAlarmDelaySeconds accelerometer_tilt_alarm_delay_seconds = 0x45;
+
+    ExtraContactType extra_contact_type = 0x36;
+    google.protobuf.BoolValue roller_shutter_supported = 1010;
+
+    RollerShutterSettings roller_shutter_settings = 1020;
+    message RollerShutterSettings {
+        int32 count_period = 0x37;
+        int32 count_threshold = 0x38;
+        google.protobuf.BoolValue roller_shutter_online = 0x39;
+    }
+
+    repeated ChimeTrigger chime_triggers = 0x4E;
+    int32 chime_signal = 0x4F;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        REED = 1;
+        EXTRA_CONTACT = 2;
+        TILT = 3;
+        SHOCK = 4;
+        SHUTTER_ALARM = 5;
+        SHUTTER_ONLINE = 6;
+    }
+
+    enum ExtraContactType {
+        NO_EXTRA_CONTACT_TYPE_INFO = 0;
+        STANDARD = 1;
+        ROLLER_SHUTTER = 2;
+    }
+
+    enum AccelerometerTiltDegrees {
+        NO_ACCELEROMETER_TILT_DEGREES_INFO = 0;
+        DEG_5 = 1;
+        DEG_10 = 2;
+        DEG_15 = 3;
+        DEG_20 = 4;
+        DEG_25 = 5;
+    }
+    enum AccelerometerTiltAlarmDelaySeconds {
+        NO_ACCELEROMETER_TILT_ALARM_DELAY_SECONDS_INFO = 0;
+        SEC_1 = 1;
+        SEC_2 = 2;
+        SEC_5 = 3;
+        SEC_10 = 4;
+        SEC_30 = 5;
+        SEC_60 = 6;
+    }
+
+    enum ChimeTrigger {
+        NO_CHIME_TRIGGER_INFO = 0;
+        CHIME_REED = 1;
+        CHIME_EXTRA_CONTACT = 2;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

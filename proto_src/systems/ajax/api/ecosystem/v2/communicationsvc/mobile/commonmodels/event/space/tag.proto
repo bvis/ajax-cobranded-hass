@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.space;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.space";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message UnknownEvent {}
+message SpaceArmed {}
+message SpaceArmedWithMalfunctions {}
+message SpaceDisarmed {}
+message SpaceDuressDisarmed {}
+message SpaceNightModeOn {}
+message SpaceNightModeOnWithMalfunctions {}
+message SpaceNightModeOff {}
+message SpaceDuressNightModeOff {}
+message SpaceGroupArmed {}
+message SpaceGroupArmedWithMalfunctions {}
+message SpaceGroupDisarmed {}
+message SpaceGroupDuressDisarmed {}
+message SpacePanicButtonPressed {}
+message PermanentPermissionsRequestReceived {}
+message TemporaryPermissionsRequestReceived {}
+message RequestedPermanentPermissionsApproved {}
+message RequestedTemporaryPermissionsApproved {}
+message RequestedFullPermissionsRejected {}
+message TimezoneChanged {}
+message Added {}
+message Removed {}
+message Created {}
+message Deleted {}
+message NotifiedAboutRemoving {}
+message SpaceGroupAutoArmed {}
+message SpaceGroupAutoArmedWithMalfunctions {}
+message SpaceGroupAutoDisarmed {}
+message SpaceAutoArmed {}
+message SpaceAutoArmedWithMalfunctions {}
+message SpaceAutoDisarmed {}
+message JoinSpaceRequestReceived {}
+message JoinSpaceRequestDeclined {}
+
+// A synthetic event that does not appear as a real event anywhere in the system (neither in the notification log nor anywhere else)
+// This event is used as a marker in Space Scenarios to indicate that the scenario should be triggered when exit delay has completed on hub.
+message ExitDelayComplete {}
+
+message SpaceEventTag {
+  oneof event_tag_case {
+    SpaceArmed space_armed = 1;
+    SpaceDisarmed space_disarmed = 2;
+    SpaceNightModeOn space_night_mode_on = 3;
+    SpaceNightModeOff space_night_mode_off = 4;
+    SpaceGroupArmed space_group_armed = 5;
+    SpaceGroupDisarmed space_group_disarmed = 6;
+    PermanentPermissionsRequestReceived permanent_permissions_request_received = 7;
+    TemporaryPermissionsRequestReceived temporary_permissions_request_received = 8;
+    RequestedPermanentPermissionsApproved requested_permanent_permissions_approved = 9;
+    RequestedTemporaryPermissionsApproved requested_temporary_permissions_approved = 10;
+    RequestedFullPermissionsRejected requested_full_permissions_rejected = 11;
+    SpaceGroupArmedWithMalfunctions space_group_armed_with_malfunctions = 12;
+    SpaceArmedWithMalfunctions space_armed_with_malfunctions = 13;
+    SpaceNightModeOnWithMalfunctions space_night_mode_on_with_malfunctions = 14;
+    SpaceDuressDisarmed space_duress_disarmed = 15;
+    SpaceDuressNightModeOff space_duress_night_mode_off = 16;
+    SpaceGroupDuressDisarmed space_group_duress_disarmed = 17;
+    SpacePanicButtonPressed space_panic_button_pressed = 18;
+    TimezoneChanged timezone_changed = 21;
+    Added added = 24;
+    Removed removed = 25;
+    Created created = 26;
+    Deleted deleted = 27;
+    NotifiedAboutRemoving notified_about_removing = 28;
+    ExitDelayComplete exit_delay_complete = 29;
+    SpaceGroupAutoArmed space_group_auto_armed = 30;
+    SpaceGroupAutoArmedWithMalfunctions space_group_auto_armed_with_malfunctions = 31;
+    SpaceGroupAutoDisarmed space_group_auto_disarmed = 32;
+    SpaceAutoArmed space_auto_armed = 33;
+    SpaceAutoArmedWithMalfunctions space_auto_armed_with_malfunctions = 34;
+    SpaceAutoDisarmed space_auto_disarmed = 35;
+    JoinSpaceRequestReceived join_space_request_received = 36;
+    JoinSpaceRequestDeclined join_space_request_declined = 37;
+
+    UnknownEvent unknown_event = 9999;
+  }
+}

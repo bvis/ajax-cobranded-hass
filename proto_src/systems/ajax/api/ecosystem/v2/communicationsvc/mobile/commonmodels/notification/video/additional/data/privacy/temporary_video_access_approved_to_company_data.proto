@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy;
+
+import "google/protobuf/duration.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message TemporaryVideoAccessApprovedToCompanyData {
+    string company_id = 1;
+    string company_name = 2;
+    string company_email = 3;
+    string request_id = 4;
+    google.protobuf.Duration duration = 5;
+}

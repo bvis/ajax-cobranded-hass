@@ -1,0 +1,42 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message FireDeviceActionButton {
+
+  oneof button {
+    MuteButton mute_button = 1;
+    CriticalSmokeButton critical_smoke_button = 2;
+    CriticalCOButton critical_co_button = 3;
+    PostponeButton postpone_button = 4;
+  }
+
+  message MuteButton {
+    MuteCommand mute_command = 1;
+    repeated RequiredPermission required_permissions = 2;
+  }
+
+  message CriticalSmokeButton {}
+
+  message CriticalCOButton {}
+
+  message PostponeButton {
+    repeated RequiredPermission required_permission = 1;
+  }
+
+  enum MuteCommand {
+    MUTE_COMMAND_UNSPECIFIED = 0;
+    MUTE_COMMAND_OWN = 1;
+    MUTE_COMMAND_OWN_PLUS_EXTERNAL = 2;
+  }
+
+  enum RequiredPermission {
+    REQUIRED_PERMISSION_UNSPECIFIED = 0;
+    REQUIRED_PERMISSION_GROUPS = 1;
+    REQUIRED_PERMISSION_MUTE = 2;
+    REQUIRED_PERMISSION_HOME_AUTOMATION = 3;
+  }
+}

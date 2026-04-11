@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_notification_settings;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_monitoring_state.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_state.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_type.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_object_detection_duration.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_confirm_detection_with_pir_state.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_notification_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoNotificationSettingsRequest {
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2;
+
+  string channel_id = 3;
+
+  NotificationSettings notification_settings = 4;
+
+  message NotificationSettings {
+    repeated NotificationSettingsEntry notification_settings_entries = 1;
+
+    // Responsible for filtering notifications and isn’t related to ARK monitoring_state setting.
+    commonmodels.video.videoedge.channel.notification.VideoNotificationMonitoringState monitoring_state = 2;
+
+    google.protobuf.Duration cooldown_period = 3;
+
+    // [optional] The minimum duration of the object detection event required to trigger a notification.
+    commonmodels.video.videoedge.channel.notification.VideoNotificationObjectDetectionDuration object_detection_duration = 4;
+
+    // [optional]
+    commonmodels.video.videoedge.channel.notification.VideoNotificationConfirmDetectionWithPirState confirm_detection_with_pir = 5;
+
+    message NotificationSettingsEntry {
+      commonmodels.video.videoedge.channel.notification.VideoNotificationType type = 1;
+
+      commonmodels.video.videoedge.channel.notification.VideoNotificationState state = 2;
+    }
+  }
+}

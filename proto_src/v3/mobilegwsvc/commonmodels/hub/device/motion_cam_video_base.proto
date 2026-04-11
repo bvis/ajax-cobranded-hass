@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device";
+option java_multiple_files = true;
+
+message MotionCamVideoBase {
+  // Should not be extended, streamHubDevice implementation should be on hub-svc
+  option deprecated = true;
+  enum SirenTrigger {
+    SIREN_TRIGGER_UNSPECIFIED = 0;
+    SIREN_TRIGGER_MOTION = 1;
+  }
+
+  enum ChimeTrigger {
+    CHIME_TRIGGER_UNSPECIFIED = 0;
+    CHIME_TRIGGER_BUTTON = 1;
+  }
+}

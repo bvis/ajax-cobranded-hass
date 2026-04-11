@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates";
+option swift_prefix = "";
+
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_id.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/device_type.proto";
+
+message DeviceIdentifier {
+
+  commonmodels.space.device.light.LightDeviceId id = 1;
+
+  v2.commonmodels.device.common.DeviceType type = 2;
+}

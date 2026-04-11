@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.system;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_version.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/discovering/discovery_address.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/system/system_info_flag.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message SystemInfo {
+  optional bool lid_closed = 1;
+
+  google.protobuf.Duration uptime = 2;
+
+  uint32 average_cpu_consumption = 3;
+
+  uint32 ram_consumption = 4;
+
+  firmware.FirmwareVersion firmware_version = 5;
+
+  string product_type = 6 [(disable_logging) = true];
+
+  string platform_name = 7 [(disable_logging) = true];
+
+  string timezone_id = 8;
+
+  string uuid = 9;
+
+  // List of this video edge's addresses as they're advertised in its local network via
+  // protocols such as ONVIF, UPnP, etc.
+  // Can change over time due to e.g. network configuration or DHCP address renewal.
+  repeated mediadevice.discovering.DiscoveryAddress discovery_addresses = 10;
+
+  repeated SystemInfoFlag flags = 11;
+
+  repeated FanState fan_states = 12;
+
+  message FanState {
+    uint32 id = 1;
+    uint32 rpm = 2;
+  }
+};

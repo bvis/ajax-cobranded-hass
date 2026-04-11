@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_lightweight_company_templates;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/company/templates/lightweight_company_template.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_lightweight_company_templates";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllLightweightCompanyTemplatesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated v3.mobilegwsvc.commonmodels.company.templates.LightweightCompanyTemplate templates = 1;
+  }
+
+  message Failure {
+    oneof error {
+      mobilegwsvc.commonmodels.Error illegal_argument = 1;
+      mobilegwsvc.commonmodels.Error permission_denied = 2;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonMaskingPart {
+  Antimasking antimasking = 1[(proto.meta.field_tag) = "antimasking"];
+  IsMaskedStatus is_masked_status = 2;
+
+  message CommonMaskingPartSettings {
+    optional Antimasking antimasking = 1[(proto.meta.field_tag) = "antimasking"];
+  }
+
+  enum Antimasking {
+    ANTIMASKING_UNSPECIFIED = 0;
+    ANTIMASKING_DISABLED = 1[(proto.meta.enum_tag) = "ANTIMASKING_DISABLED"];
+    ANTIMASKING_ENABLED = 2[(proto.meta.enum_tag) = "ANTIMASKING_ENABLED"];
+  }
+
+  enum IsMaskedStatus {
+    IS_MASKED_STATUS_UNSPECIFIED = 0;
+    IS_MASKED_STATUS_OFF = 1;
+    IS_MASKED_STATUS_ON = 2;
+    IS_MASKED_STATUS_ALERT = 3;
+  }
+}

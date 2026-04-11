@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_brightness;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandBrightnessRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType device_type = 3;
+  int32 brightness_in_percentage = 4;
+  repeated Channel channels = 5;
+  BrightnessType brightness_type = 6;
+
+  enum BrightnessType {
+    BRIGHTNESS_TYPE_UNSPECIFIED = 0;
+    BRIGHTNESS_TYPE_RELATIVE = 1;
+    BRIGHTNESS_TYPE_ABSOLUTE = 2;
+  }
+
+  enum Channel {
+    CHANNEL_UNSPECIFIED = 0;
+    CHANNEL_1 = 1;
+    CHANNEL_2 = 2;
+    CHANNEL_3 = 3;
+    CHANNEL_4 = 4;
+  }
+}

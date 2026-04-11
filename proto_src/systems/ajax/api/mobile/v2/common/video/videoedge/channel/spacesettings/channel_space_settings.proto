@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.channel.spacesettings;
+
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_arming_mode.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ChannelSpaceSettings {
+  optional string room_id = 1;
+  optional string group_id = 2;
+  bool arm_in_night_mode = 3;
+  common.space.device.DeviceArmingMode device_arming_mode = 4;
+  repeated ecosystem.v2.commonmodels.device.common.CommonArmingPart.ArmingCapability arming_capabilities = 5;
+};

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_label.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_state.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_appearance.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light";
+option java_multiple_files = true;
+
+message LightDeviceProfile {
+  string id = 1;
+
+  string name = 2;
+
+  optional string room_id = 3;
+
+  optional string group_id = 4;
+
+  ecosystem.v2.hubsvc.commonmodels.device.common.DeviceColor device_color = 5;
+
+  ecosystem.v2.hubsvc.commonmodels.device.common.DeviceLabel device_label = 6;
+
+  uint32 malfunctions = 7;
+
+  repeated LightDeviceState states = 8;
+
+  repeated LightDeviceStatus statuses = 9;
+
+  string sorting_key = 10;
+
+  int32 device_index = 11;
+
+  bool bypassed = 12;
+
+  bool interaction_disabled = 13;
+
+  ecosystem.v2.hubsvc.commonmodels.device.common.DeviceAppearance device_appearance = 14;
+
+  string device_marketing_id = 15;
+}

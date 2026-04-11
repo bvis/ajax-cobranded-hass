@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_delay_interconnect;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandDelayInterconnectResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error unknown_command = 1; // 0636 (16_06)
+      commonmodels.HubWrongStateError hub_wrong_state = 2; // 16_11
+      commonmodels.Error hub_offline = 3;
+      commonmodels.Error permission_denied = 4;
+    }
+  }
+}

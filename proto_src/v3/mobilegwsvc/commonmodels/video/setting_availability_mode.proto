@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SettingAvailabilityMode {
+    SETTING_AVAILABILITY_MODE_UNSPECIFIED = 0;
+    SETTING_AVAILABILITY_MODE_AVAILABLE = 1;
+    SETTING_AVAILABILITY_MODE_UNAVAILABLE = 2;
+    SETTING_AVAILABILITY_MODE_LOCKED = 3;
+}

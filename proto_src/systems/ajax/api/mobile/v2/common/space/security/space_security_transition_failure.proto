@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+option deprecated = true;
+
+// deprecated and will be deleted in the next release
+message SpaceSecurityTransitionFailure {
+  oneof error {
+    // common
+    common.response.DefaultError timed_out = 1;
+    common.response.DefaultError cancelled = 2;
+
+    // hub
+    common.response.DefaultError hub_offline = 11;
+    common.response.DefaultError hub_busy = 12;
+    common.response.DefaultError hub_blocked_by_service_provider = 13;
+    common.response.DefaultError hub_alarm_reset_required = 14;
+    common.response.HubDetectedMalfunctionsError hub_detected_malfunctions = 15;
+  }
+}

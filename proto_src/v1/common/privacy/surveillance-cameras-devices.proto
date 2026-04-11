@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common.privacy;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.common.privacy";
+
+message SurveillanceCamerasDevices {
+  repeated string device_id = 1;
+}

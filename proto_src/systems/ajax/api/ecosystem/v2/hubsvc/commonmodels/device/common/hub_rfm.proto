@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum HubRfm {
+  HUB_RFM_UNSPECIFIED = 0;
+  HUB_RFM_EU = 1;
+  HUB_RFM_AU = 2;
+  HUB_RFM_MA = 3;
+  HUB_RFM_NA = 4;
+  HUB_RFM_IN = 5;
+  HUB_RFM_SA = 6;
+}

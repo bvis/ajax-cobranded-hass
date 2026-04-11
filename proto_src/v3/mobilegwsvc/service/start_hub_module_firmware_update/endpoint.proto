@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_hub_module_firmware_update;
+
+import "v3/mobilegwsvc/service/start_hub_module_firmware_update/request.proto";
+import "v3/mobilegwsvc/service/start_hub_module_firmware_update/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_hub_module_firmware_update";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StartHubModuleFirmwareUpdateService {
+  rpc execute(StartHubModuleFirmwareUpdateRequest) returns (StartHubModuleFirmwareUpdateResponse);
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.archive;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/archive/export_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/archive/set_archive_depth.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeArchiveService {
+  rpc export(ExportArchiveRequest) returns (ExportArchiveResponse);
+
+  rpc setArchiveDepth(SetArchiveDepthRequest) returns (SetArchiveDepthResponse);
+};

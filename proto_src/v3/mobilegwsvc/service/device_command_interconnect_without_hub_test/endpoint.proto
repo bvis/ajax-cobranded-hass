@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_interconnect_without_hub_test;
+
+import "v3/mobilegwsvc/service/device_command_interconnect_without_hub_test/request.proto";
+import "v3/mobilegwsvc/service/device_command_interconnect_without_hub_test/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+/*
+ * hts: IWH_TEST(0x23)
+ */
+service DeviceCommandInterconnectWithoutHubTestService {
+  rpc execute (DeviceCommandInterconnectWithoutHubTestRequest) returns (DeviceCommandInterconnectWithoutHubTestResponse);
+};

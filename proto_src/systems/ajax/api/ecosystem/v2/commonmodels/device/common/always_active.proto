@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+enum AlwaysActive {
+  ALWAYS_ACTIVE_UNSPECIFIED = 0;
+  ALWAYS_ACTIVE_DISABLED = 1[(proto.meta.enum_tag) = "ALWAYS_ACTIVE_DISABLED"];
+  ALWAYS_ACTIVE_ENABLED = 2[(proto.meta.enum_tag) = "ALWAYS_ACTIVE_ENABLED"];
+}

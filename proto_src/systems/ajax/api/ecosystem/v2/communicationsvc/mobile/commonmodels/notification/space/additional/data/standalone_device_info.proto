@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/hub_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/video_edge_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message StandaloneDeviceInfo {
+  oneof device {
+    HubInSpaceInfo hub_in_space_info = 1;
+    VideoEdgeInSpaceInfo video_edge_in_space_info = 2;
+  }
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_wire_input_to_hub;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_wire_input_to_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RegisterWireInputToHubRequest {
+  string hub_id = 1;
+  string room_id = 2;
+  optional string group_id = 3;
+  string wire_input_name = 4;
+  int32 wire_input_index = 5;
+  string parent_id = 6;
+  ParentType parent_type = 7;
+  optional string fire_zone_id = 8;
+  optional string device_location = 9;
+
+  message ParentType {
+    oneof type {// https://ajaxsystems.atlassian.net/wiki/spaces/Tech/pages/4078765197/MALEVICH-ADR-012-TransmitterFibra+with+WI#%3Anote%3A-Conclusion
+      ecosystem.v2.hubsvc.commonmodels.TransmitterFibraTwoChannels transmitter_fibra_two_channels = 1;
+      ecosystem.v2.hubsvc.commonmodels.TransmitterFibraFourChannelsTwoRelaysTwoLogical transmitter_fibra_four_channels_two_relays_two_logical = 2;
+
+      ecosystem.v2.hubsvc.commonmodels.MultiTransmitter multi_transmitter = 3;
+
+      ecosystem.v2.hubsvc.commonmodels.MultiTransmitterFibra multi_transmitter_fibra = 4;
+      ecosystem.v2.hubsvc.commonmodels.En54IoModuleBase en54_io_module_base = 5;
+      ecosystem.v2.hubsvc.commonmodels.En54IoModuleTwoInTwoOut en54_io_module_two_in_two_out = 6;
+    }
+  }
+}

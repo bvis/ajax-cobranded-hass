@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.video;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.video";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "Video";
+
+message ServerConnectionLoss {}
+message TamperOpened {}
+message VideoScenarioTriggered {}
+message ChannelDisconnected {}
+message StorageErrorDetected {}
+message StorageWriteErrorDetected {}
+message VideoExportPrepared {}
+message VideoExportFailed {}
+message FWUpdateStarted {}
+message FWUpdateFinished {}
+message FWUpdateFailed {}
+message StoragePoweredOffOverheated {}
+message ChannelAdded {}
+message ExternalPowerLoss {}
+message RingButtonPressed {}
+message PowerLow {}
+message BatteryDisconnected {}
+message HardFault {}
+message MotionDetected {}
+message HumanDetected {}
+message PetDetected {}
+message CarDetected {}
+message TemporaryVideoAccessRequestFromPro {}
+message TemporaryVideoAccessRequestFromCompany {}
+message TemporaryVideoAccessDeniedForPro {}
+message TemporaryVideoAccessApprovedToCompany {}
+message TemporaryVideoAccessApprovedToPro {}
+message TemporaryVideoAccessDeniedForCompany {}
+message DirectExportRequested {}
+message BatteryTemperatureOutOfRange {}
+message DeviceBackupCommunicationChannelAdded {}
+message DeviceBackupCommunicationLoss {}
+message OnvifAuthEnabled {}
+message DeviceMoved {}
+message DeviceHit {}
+
+message VideoEventTag {
+  reserved 30, 31, 32;
+
+  oneof event_tag_case {
+    ServerConnectionLoss server_connection_loss = 1;
+    TamperOpened tamper_opened = 2;
+    VideoScenarioTriggered video_scenario_triggered = 3;
+
+    // storage events
+    StorageErrorDetected storage_error_detected = 5;
+    StorageWriteErrorDetected storage_write_error_detected = 6;
+    StoragePoweredOffOverheated storage_powered_off_overheated = 7;
+
+    // archive export
+    VideoExportPrepared video_export_prepared = 20;
+    VideoExportFailed video_export_failed = 21;
+    DirectExportRequested direct_export_requested = 22;
+
+    // firmware update
+    FWUpdateStarted fw_update_started = 33;
+    FWUpdateFinished fw_update_finished = 34;
+    FWUpdateFailed fw_update_failed = 35;
+
+    // channel events
+    ChannelDisconnected channel_disconnected = 4;
+    ChannelAdded channel_added = 40;
+
+    // mcu events
+    ExternalPowerLoss external_power_loss = 50;
+    RingButtonPressed ring_button_pressed = 51;
+    PowerLow power_low = 52;
+    BatteryDisconnected battery_disconnected = 53;
+    HardFault hard_fault = 54;
+    BatteryTemperatureOutOfRange battery_temperature_out_of_range = 55;
+
+    // privacy events
+    TemporaryVideoAccessRequestFromPro temporary_video_access_request_from_pro = 60;
+    TemporaryVideoAccessRequestFromCompany temporary_video_access_request_from_company = 61;
+    TemporaryVideoAccessDeniedForPro temporary_video_access_denied_for_pro = 62;
+    TemporaryVideoAccessApprovedToCompany temporary_video_access_approved_to_company = 63;
+    TemporaryVideoAccessApprovedToPro temporary_video_access_approved_to_pro = 64;
+    TemporaryVideoAccessDeniedForCompany temporary_video_access_denied_for_company = 65;
+
+    // detect events
+    MotionDetected motion_detected = 70;
+    HumanDetected human_detected = 71;
+    PetDetected pet_detected = 72;
+    CarDetected car_detected = 73;
+
+    // Backup channel events
+    DeviceBackupCommunicationChannelAdded device_backup_communication_channel_added = 80;
+    DeviceBackupCommunicationLoss device_backup_communication_loss = 81;
+
+    // onvif
+    OnvifAuthEnabled onvif_auth_enabled = 82;
+
+    // Accelerometer events
+    DeviceMoved device_moved = 90;
+    DeviceHit device_hit = 91;
+  }
+}

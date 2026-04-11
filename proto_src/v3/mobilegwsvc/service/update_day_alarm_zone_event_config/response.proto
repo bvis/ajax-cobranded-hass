@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_day_alarm_zone_event_config;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_day_alarm_zone_event_config";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateDayAlarmZoneEventConfigResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error hub_offline = 3;
+      commonmodels.Error hub_error = 4;
+      commonmodels.HubBusyError hub_busy = 5;
+      commonmodels.Error hub_wrong_state = 6;
+    }
+  }
+}

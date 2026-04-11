@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+
+option java_multiple_files = true;
+
+message FastTamper {
+  option deprecated = true;
+
+  FastTamperStatus fast_tamper_status = 1;
+
+  repeated Capability capabilities = 2;
+
+  enum FastTamperStatus {
+    FAST_TAMPER_STATUS_UNSPECIFIED = 0;
+    FAST_TAMPER_STATUS_DISABLED = 1;
+    FAST_TAMPER_STATUS_ENABLED = 2;
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_FAST_TAMPER = 1;
+  }
+}

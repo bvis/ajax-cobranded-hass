@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum VideoNotificationType {
+  VIDEO_NOTIFICATION_TYPE_UNSPECIFIED = 0;
+  VIDEO_NOTIFICATION_TYPE_PIR_AND_FRAME_MOTION = 1 [deprecated = true];
+  VIDEO_NOTIFICATION_TYPE_HUMAN = 2;
+  VIDEO_NOTIFICATION_TYPE_PET = 3;
+  VIDEO_NOTIFICATION_TYPE_VEHICLE = 4;
+  VIDEO_NOTIFICATION_TYPE_PIR_MOTION = 5;
+  VIDEO_NOTIFICATION_TYPE_FRAME_MOTION = 6;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.user;
+
+import "systems/ajax/api/mobile/v2/common/user/type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UserId {
+    string hex_id = 1;
+
+    UserType type = 2;
+}

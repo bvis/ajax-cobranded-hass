@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_smart_lock;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_smart_lock";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SwitchSmartLockRequest {
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+  string smart_lock_id = 2;
+  Action action = 3;
+
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    ACTION_UNLOCK = 1;
+    ACTION_LOCK = 2;
+    ACTION_UNLATCH = 3;
+  }
+}

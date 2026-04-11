@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+
+message PrivacyAccessListStreamRequest {
+  string hub_id = 1;
+}

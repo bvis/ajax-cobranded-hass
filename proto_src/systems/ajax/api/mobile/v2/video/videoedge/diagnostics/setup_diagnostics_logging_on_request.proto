@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.diagnostics;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/diagnostics/diagnostics_settings.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetDiagnosticsLoggingOnRequest {
+  // [required]
+  string video_edge_id = 1;
+
+  // [required]
+  common.video.videoedge.diagnostics.LoggingSettings logging_settings = 2;
+
+  // [optional] - will become required once the client apps are adjusted accordingly
+  common.space.SpaceLocator space_locator = 3;
+}
+
+message SetDiagnosticsLoggingOnResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError video_edge_not_found = 4;
+      common.response.DefaultError video_edge_is_offline = 5;
+    }
+  }
+}

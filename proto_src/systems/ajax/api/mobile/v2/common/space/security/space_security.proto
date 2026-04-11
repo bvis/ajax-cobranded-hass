@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security;
+
+import "systems/ajax/api/mobile/v2/common/space/security/group/group.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/space_security_mode.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceSecurity {
+  repeated security.group.Group groups = 1;
+
+  SpaceSecurityMode mode = 2;
+}

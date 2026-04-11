@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.media;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/hub/surveillance_camera_stream_settings.proto";
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.hub.company.media";
+
+message GetStreamSettingsRequest {
+  string hub_hex_id = 1;
+  string camera_hex_id = 2;
+  string service_id = 3 [deprecated = true];
+}
+
+message GetStreamSettingsResponse {
+
+  oneof response {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    systems.ajax.api.mobile.v2.common.hub.SurveillanceCameraStreamSettings stream_settings = 1;
+  }
+
+  message Error {
+    oneof errors {
+      systems.ajax.api.mobile.v2.common.response.InternalError internal_error = 1;
+    }
+  }
+}
+

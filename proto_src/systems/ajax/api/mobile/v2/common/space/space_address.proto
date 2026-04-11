@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceAddress {
+  string location = 1;
+  string city = 2;
+  string region = 3;
+  string country = 4;
+  optional string postcode = 5;
+}

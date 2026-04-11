@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_audio_sample_on_hub;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_audio_sample_on_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllAudioSampleOnHubRequest {
+  string hub_id = 1;
+}

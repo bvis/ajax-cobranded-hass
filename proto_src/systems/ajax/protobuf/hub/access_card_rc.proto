@@ -1,0 +1,20 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message AccessCardRc {
+  Rc rc = 1000;
+
+  enum Rc {
+    ADDED = 0;
+    ALREADY_ADDED = 1;
+    CARD_FULL = 2;
+    TIMEOUT = 3;
+    INVALID_CARD = 4;
+    USER_TIMEOUT = 5;
+    NO_ANSWER = 6;
+  }
+}

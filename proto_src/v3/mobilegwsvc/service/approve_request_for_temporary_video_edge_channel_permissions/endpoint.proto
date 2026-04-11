@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_request_for_temporary_video_edge_channel_permissions;
+
+import "v3/mobilegwsvc/service/approve_request_for_temporary_video_edge_channel_permissions/request.proto";
+import "v3/mobilegwsvc/service/approve_request_for_temporary_video_edge_channel_permissions/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_request_for_temporary_video_edge_channel_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ApproveRequestForTemporaryVideoEdgeChannelPermissionsService{
+  rpc execute(ApproveRequestForTemporaryVideoEdgeChannelPermissionsRequest)returns (ApproveRequestForTemporaryVideoEdgeChannelPermissionsResponse);
+};

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/permission_claim_type.proto";
+
+message CompanyPermissionsClaim {
+  string request_id = 1;
+  string company_mail = 2;
+
+  PermissionsClaimType permissions_type = 3;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/source_image_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/source_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/source_info.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message AccountingNotificationSource {
+  AccountingNotificationSourceType type = 1;
+  string id = 2;
+  string name = 3 [(hash_value) = true];
+  AccountingNotificationSourceInfo source_info = 4;
+  optional SourceImageInfo image_info = 10;
+}

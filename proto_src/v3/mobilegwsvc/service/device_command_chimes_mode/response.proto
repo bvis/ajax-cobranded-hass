@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_chimes_mode;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandChimesModeResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error command_not_performed = 1; // 16_03
+      commonmodels.Error permission_denied = 2; // 16_0635 + 16_0A
+      commonmodels.HubWrongStateError hub_wrong_state = 3; // 16_11
+      commonmodels.Error hub_offline = 4;
+      commonmodels.Error alarm_reset_needed = 5; // 16_21
+      commonmodels.Error unknown_command = 6; // 16_0636
+      commonmodels.HubBusyError hub_busy = 7; // 16_0F
+    }
+  }
+}

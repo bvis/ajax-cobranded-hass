@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/fragment_info.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/tz_entry.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveGetVideoFragmentsInfoRequest {
+  // [required]
+  string video_edge_guid = 1;
+
+  // [required]
+  string channel_guid = 2;
+
+  common.video.StreamType stream_type = 3;
+
+  common.video.TimestampRange ts_range = 4;
+
+  string space_id = 5;
+}
+
+message CloudArchiveGetVideoFragmentsInfoResponse {
+  repeated CloudArchiveFragmentInfo fragments = 1;
+
+  repeated CloudArchiveTzEntry tz_map = 2;
+}

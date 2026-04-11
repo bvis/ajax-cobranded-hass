@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum FeatureTarget {
+  FEATURE_TARGET_NO_INFO = 0;
+  FEATURE_TARGET_HUB = 1;
+  FEATURE_TARGET_VIDEO_EDGE_CHANNEL = 2;
+  FEATURE_TARGET_VIDEO_EDGE = 3;
+}

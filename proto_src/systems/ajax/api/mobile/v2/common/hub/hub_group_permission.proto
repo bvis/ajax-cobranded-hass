@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message HubGroupPermission {
+  string group_id = 1;
+  Permissions permissions = 2;
+
+  enum Permission {
+    NO_PERMISSION_INFO = 0;
+    ARM = 1;
+    DISARM = 2;
+  }
+
+  message Permissions {
+    repeated Permission permissions = 1;
+  }
+}
+
+message HubGroupPermissions {
+  repeated HubGroupPermission hubGroupPermissions = 1;
+}

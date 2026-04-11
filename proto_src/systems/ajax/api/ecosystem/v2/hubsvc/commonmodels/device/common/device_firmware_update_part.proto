@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/firmware/device_firmware_update.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message DeviceFirmwareUpdatePart {
+  firmware.DeviceFirmwareUpdate device_firmware_update = 1;
+
+  repeated Capability capabilities = 2;
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_DFU = 1;
+  }
+}

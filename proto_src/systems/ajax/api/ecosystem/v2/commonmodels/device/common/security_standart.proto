@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum SecurityStandard {
+  SECURITY_STANDARD_UNSPECIFIED = 0;
+  SECURITY_STANDARD_EU = 1;
+  SECURITY_STANDARD_PD = 2;
+  SECURITY_STANDARD_SIACP = 3;
+  SECURITY_STANDARD_VDS = 4;
+}

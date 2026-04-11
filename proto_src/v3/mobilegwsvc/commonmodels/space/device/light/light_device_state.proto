@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light";
+option java_multiple_files = true;
+
+enum LightDeviceState {
+  LIGHT_DEVICE_STATE_UNSPECIFIED = 0;
+  LIGHT_DEVICE_STATE_LOCKED = 1;
+  LIGHT_DEVICE_STATE_SUSPENDED = 2;
+  LIGHT_DEVICE_STATE_ADDING_FAILED = 3;
+  LIGHT_DEVICE_STATE_TRANSFERRING_FAILED = 4;
+  LIGHT_DEVICE_STATE_ADDING = 5;
+  LIGHT_DEVICE_STATE_TRANSFERRING = 6;
+  LIGHT_DEVICE_STATE_BATTERY_SAVING = 7;
+  LIGHT_DEVICE_STATE_NOT_MIGRATED = 8;
+  LIGHT_DEVICE_STATE_OFFLINE = 9;
+  LIGHT_DEVICE_STATE_UPDATING = 10;
+  LIGHT_DEVICE_STATE_WALK_TEST = 11;
+}

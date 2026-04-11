@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.responsible_person;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.responsible_person";
+option java_multiple_files = true;
+
+import "v1/responsible_person/responsible-person.proto";
+
+message UpdateResponsiblePersonResponse {
+  ResponsiblePerson responsible_person = 1;
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message MotionDetectionPart {
+  Sensitivity sensitivity = 1[(proto.meta.field_tag) = "motion_sensitivity"];
+  repeated Sensitivity sensitivity_capabilities = 2;
+  AlwaysActive always_active = 3[(proto.meta.field_tag) = "motion_always_active"];
+
+  message MotionDetectionPartSettings {
+    optional AlwaysActive motion_always_active = 1[(proto.meta.field_tag) = "motion_always_active"];
+    optional Sensitivity sensitivity = 2[(proto.meta.field_tag) = "motion_sensitivity"];
+  }
+
+  enum AlwaysActive {
+    ALWAYS_ACTIVE_UNSPECIFIED = 0;
+    ALWAYS_ACTIVE_DISABLED = 1[(proto.meta.enum_tag) = "MOTION_ALWAYS_ACTIVE_DISABLED"];
+    ALWAYS_ACTIVE_ENABLED = 2[(proto.meta.enum_tag) = "MOTION_ALWAYS_ACTIVE_ENABLED"];
+  }
+
+  enum Sensitivity {
+    SENSITIVITY_UNSPECIFIED = 0;
+    SENSITIVITY_LOW = 1[(proto.meta.enum_tag) = "MOTION_SENSITIVITY_LOW"];
+    SENSITIVITY_NORMAL = 2[(proto.meta.enum_tag) = "MOTION_SENSITIVITY_NORMAL"];
+    SENSITIVITY_HIGH = 3[(proto.meta.enum_tag) = "MOTION_SENSITIVITY_HIGH"];
+    // 4, 5, 6 will be added if new values will be added to HTS.
+    // Now in HTS these bytes are reserved
+    SENSITIVITY_VERY_HIGH = 7[(proto.meta.enum_tag) = "MOTION_SENSITIVITY_VERY_HIGH"];
+  }
+}

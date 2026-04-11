@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_chimes_mode;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandChimesModeRequest {
+  string hub_id = 1;
+
+  oneof additional_param {
+    ChimesStatus chimes_status = 2;
+    GroupsStatuses groups_statuses = 3;
+  }
+
+  enum ChimesStatus {
+    CHIMES_STATUS_UNSPECIFIED = 0;
+    CHIMES_STATUS_DISABLE = 1;
+    CHIMES_STATUS_ENABLE = 2;
+  }
+
+  message GroupsStatuses {
+    repeated GroupStatus groups_statuses = 1;
+
+    message GroupStatus {
+      string group_id = 1;
+      GroupChimesStatus group_chimes_status = 2;
+    }
+
+    enum GroupChimesStatus {
+      GROUP_CHIMES_STATUS_UNSPECIFIED = 0;
+      GROUP_CHIMES_STATUS_DISABLE = 1;
+      GROUP_CHIMES_STATUS_ENABLE = 2;
+    }
+  }
+}

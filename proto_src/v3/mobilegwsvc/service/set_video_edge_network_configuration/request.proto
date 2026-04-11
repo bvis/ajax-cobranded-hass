@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_network_configuration;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_network_configuration";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeNetworkConfigurationRequest {
+
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  string network_interface_id = 3;
+
+  IpConfigurationV4 ip_configuration_v4 = 4;
+
+  repeated api.mobile.v2.common.video.IpAddress dns = 5;
+
+  message IpConfigurationV4 {
+    oneof type {
+      DhcpConfigurationV4 dhcp = 1;
+      StaticConfigurationV4 static = 2;
+    }
+
+    message DhcpConfigurationV4 {}
+
+    message StaticConfigurationV4 {
+      api.mobile.v2.common.video.IpAddressV4 address = 1;
+      api.mobile.v2.common.video.IpAddressV4 netmask = 2;
+      api.mobile.v2.common.video.IpAddressV4 gateway = 3;
+    }
+  }
+}

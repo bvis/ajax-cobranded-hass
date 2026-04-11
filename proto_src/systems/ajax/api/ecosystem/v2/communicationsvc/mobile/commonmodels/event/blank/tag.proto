@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.blank;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.blank";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "Blank";
+
+message PaidServicesActivationRequired {}
+
+message BlankEventTag {
+  oneof event_tag_case {
+    PaidServicesActivationRequired paid_services_activation_required = 1;
+  }
+}

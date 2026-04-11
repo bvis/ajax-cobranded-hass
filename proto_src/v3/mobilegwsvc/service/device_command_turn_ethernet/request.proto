@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandTurnEthernetRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType device_type = 3;
+  State state = 4;
+
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_OFF = 1;
+    STATE_ON = 2;
+  }
+}

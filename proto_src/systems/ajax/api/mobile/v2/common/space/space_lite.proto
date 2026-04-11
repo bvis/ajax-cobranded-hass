@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+import "systems/ajax/api/mobile/v2/common/connection_status.proto";
+import "systems/ajax/api/mobile/v2/common/hub/battery_save_mode.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/displayed_space_security_state.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_profile.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message LiteSpace {
+  string id = 1;
+
+  common.space.SpaceProfile profile = 2;
+
+  common.space.security.DisplayedSpaceSecurityState security_state = 3;
+
+  uint64 new_notifications_count = 5;
+
+  uint64 malfunctions_count = 6;
+
+  reserved 7; // legacy sorting key
+
+  string sorting_key = 8;
+
+  string pagination_token = 9;
+
+  ConnectionStatus hub_connection_status = 998;
+
+  hub.BatterySaveModeStatus bsm_status = 1000;
+
+  optional string hub_id = 999;
+};

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_services_available_for_reseller_on_target;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_services_available_for_reseller_on_target";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindServicesAvailableForResellerOnTargetRequest {
+  string feature_target_id = 1;
+  systems.ajax.api.mobile.v2.common.accounting.FeatureTarget feature_target = 2;
+  string reseller_id = 3;
+}

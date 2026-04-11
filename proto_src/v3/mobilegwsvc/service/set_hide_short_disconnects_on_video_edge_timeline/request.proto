@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_hide_short_disconnects_on_video_edge_timeline;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/app_settings.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_hide_short_disconnects_on_video_edge_timeline";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetHideShortDisconnectsOnVideoEdgeTimelineRequest {
+
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  mobile.v2.common.video.videoedge.spacesettings.HideShortDisconnectsOnTimeline hide_short_disconnects_on_timeline = 3;
+}

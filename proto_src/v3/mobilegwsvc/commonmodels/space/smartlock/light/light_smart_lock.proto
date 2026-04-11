@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.smartlock.light;
+
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_profile.proto";
+
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.smartlock.light";
+option java_multiple_files = true;
+
+message LightSmartLock {
+  space.device.light.LightDeviceProfile profile = 1;
+
+  repeated SmartLockSpreadProperty spread_properties = 2;
+
+  message SmartLockSpreadProperty {
+    oneof spread_property {
+      LockControlSpreadProperty lock_control_spread_property = 1;
+    }
+  }
+
+  message LockControlSpreadProperty {
+    reserved 1;
+    LockState state = 2;
+    optional UnlatchInfo unlatch_info = 3;
+  }
+
+  message UnlatchInfo{
+    UnlatchState state = 1;
+  }
+
+  enum UnlatchState {
+    UNLATCH_STATE_UNSPECIFIED = 0;
+    UNLATCH_STATE_LATCHED = 1;
+    UNLATCH_STATE_PENDING_UNLATCHED = 2;
+    UNLATCH_STATE_UNLATCHED = 3;
+  }
+
+  enum LockState {
+    LOCK_STATE_UNSPECIFIED = 0;
+    LOCK_STATE_LOCKED = 1;
+    LOCK_STATE_PENDING_LOCKED = 2;
+    LOCK_STATE_UNLOCKED = 3;
+    LOCK_STATE_PENDING_UNLOCKED = 4;
+  }
+}

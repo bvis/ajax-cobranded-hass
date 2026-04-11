@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonSoundCompliancePatternPart {
+
+  SoundCompliancePattern chosen_sound_compliance_pattern = 1 [(proto.meta.field_tag) = "compliance_pattern"];
+  repeated SoundCompliancePattern sound_compliance_patterns_capabilities = 2;
+
+  message CommonSoundCompliancePatternPartSettings {
+    optional SoundCompliancePattern compliance_pattern = 1 [(proto.meta.field_tag) = "compliance_pattern"];
+  }
+
+  enum SoundCompliancePattern {
+    SOUND_COMPLIANCE_PATTERN_UNSPECIFIED = 0;
+    SOUND_COMPLIANCE_PATTERN_ORDINARY = 1 [(proto.meta.enum_tag) = "SOUND_COMPLIANCE_PATTERN_ORDINARY"];
+    SOUND_COMPLIANCE_PATTERN_NFA2P = 2 [(proto.meta.enum_tag) = "SOUND_COMPLIANCE_PATTERN_NFA2P"];
+  }
+}

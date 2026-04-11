@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/hub/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/device_label.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/hub_box_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/hub_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/source.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/source_image_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message TroubledDevices {
+  repeated TroubledDevice troubled_devices = 1;
+  optional HubInfo hub_info = 2;
+
+  repeated TroubledFollowedGroup troubled_followed_groups = 3;
+
+  message TroubledDevice {
+    HubNotificationSource device = 1;
+    event.hub.HubEventQualifier troubled_alarm = 2;
+  }
+
+  message TroubledFollowedGroup {
+    string id = 1;
+    string name = 2;
+    optional SourceImageInfo image_info = 3;
+  }
+
+  message HubInfo {
+    string hex_id = 1;
+    string name = 2;
+    DeviceColor color = 3;
+    HubType type = 4;
+    optional HubBoxType box_type = 5;
+    optional DeviceLabel label = 6;
+  }
+}

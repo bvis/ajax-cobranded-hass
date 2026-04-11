@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.webrtc;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SessionDescription {
+  string type = 1;
+
+  string sdp = 2 [(disable_logging) = true];
+};

@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.smartlock;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_chimes.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/patch_type.proto";
+import "google/protobuf/duration.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.smartlock";
+option java_multiple_files = true;
+
+message SmartLockPart {
+  DoorStatus door_status = 1 [(proto.meta.field_tag) = "door_status"];
+  LockStatus lock_status = 2 [(proto.meta.field_tag) = "lock_status"];
+  HardwareError hardware_error = 4 [(proto.meta.field_tag) = "hardware_error"];
+  google.protobuf.Duration door_open_too_long_alarm_delay = 5 [(proto.meta.field_tag) = "door_open_too_long_alarm_delay_seconds"];
+  Autolock autolock = 6;
+  DoorOpenDeviceChimes door_open_device_chimes = 8;
+
+  enum DoorStatus {
+    DOOR_STATUS_UNSPECIFIED = 0;
+    DOOR_STATUS_CLOSED = 1 [(proto.meta.enum_tag) = "DOOR_STATUS_CLOSED"];
+    DOOR_STATUS_OPEN = 2 [(proto.meta.enum_tag) = "DOOR_STATUS_OPEN"];
+  }
+
+  enum LockStatus {
+    LOCK_STATUS_UNSPECIFIED = 0;
+    LOCK_STATUS_LOCKED = 1 [(proto.meta.enum_tag) = "LOCK_STATUS_LOCKED"];
+    LOCK_STATUS_UNLOCKED = 2 [(proto.meta.enum_tag) = "LOCK_STATUS_UNLOCKED"];
+  }
+
+  enum HardwareError {
+    HARDWARE_ERROR_UNSPECIFIED = 0;
+    HARDWARE_ERROR_NOT_DETECTED = 1 [(proto.meta.enum_tag) = "HARDWARE_ERROR_NOT_DETECTED"];
+    HARDWARE_ERROR_DETECTED = 2 [(proto.meta.enum_tag) = "HARDWARE_ERROR_DETECTED"];
+  }
+
+  message Autolock {
+    AutolockType autolock_type = 1 [(proto.meta.field_tag) = "autolock_type"];
+    google.protobuf.Duration autolock_timeout = 2 [(proto.meta.field_tag) = "autolock_timeout_seconds"];
+
+    enum AutolockType {
+      AUTOLOCK_TYPE_UNSPECIFIED = 0;
+      AUTOLOCK_TYPE_AFTER_TIME_ELAPSED = 1 [(proto.meta.enum_tag) = "AUTOLOCK_TYPE_AFTER_TIME_ELAPSED"];
+      AUTOLOCK_TYPE_INSTANT_OR_TIME_ELAPSED = 2 [(proto.meta.enum_tag) = "AUTOLOCK_TYPE_INSTANT_OR_TIME_ELAPSED"];
+      AUTOLOCK_TYPE_DISABLED = 3 [(proto.meta.enum_tag) = "AUTOLOCK_TYPE_DISABLED"];
+    }
+  }
+
+  message DoorOpenDeviceChimes {
+    repeated DoorOpenChimesTrigger chimes_triggers = 1 [(proto.meta.field_tag) = "door_open_chime_triggers"];
+    common.DeviceChimes.Sound chimes_sound = 2 [(proto.meta.field_tag) = "door_open_chime_signal"];
+
+    enum DoorOpenChimesTrigger {
+      DOOR_OPEN_CHIMES_TRIGGER_UNSPECIFIED = 0;
+      DOOR_OPEN_CHIMES_TRIGGER_REED = 1 [(proto.meta.enum_tag) = "DOOR_OPEN_CHIME_TRIGGER_REED"];
+    }
+  }
+
+  message SmartLockPartSettings {
+    optional google.protobuf.Duration door_open_too_long_alarm_delay = 1 [
+      (proto.meta.field_tag) = "door_open_too_long_alarm_delay_seconds"
+    ];
+    optional AutolockSettings autolock = 2;
+    optional DoorOpenDeviceChimesSettings door_open_device_chimes = 3;
+
+    message AutolockSettings {
+      optional Autolock.AutolockType autolock_type = 1 [(proto.meta.field_tag) = "autolock_type"];
+      optional google.protobuf.Duration autolock_timeout = 2 [(proto.meta.field_tag) = "autolock_timeout_seconds"];
+    }
+
+    message DoorOpenDeviceChimesSettings {
+      repeated ChimesTriggerPatch chimes_triggers = 1 [(proto.meta.field_tag) = "door_open_chime_triggers"];
+      optional common.DeviceChimes.Sound chimes_sound = 2 [(proto.meta.field_tag) = "door_open_chime_signal"];
+
+      message ChimesTriggerPatch {
+        PatchType patch_type = 1;
+        DoorOpenDeviceChimes.DoorOpenChimesTrigger chimes_trigger = 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum CompanyNotificationSourceType {
+  COMPANY_SOURCE_TYPE_UNSPECIFIED = 0;
+  INSTALLATION_COMPANY = 1;
+  MONITORING_COMPANY = 2;
+  SPACE_MEMBER = 3;
+}
+

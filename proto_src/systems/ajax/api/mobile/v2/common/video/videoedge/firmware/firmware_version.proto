@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.firmware;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FirmwareVersion {
+  // [required]
+  uint32 major = 1;
+
+  // [required]
+  uint32 minor = 2;
+
+  // [optional]
+  string extra = 3;
+};

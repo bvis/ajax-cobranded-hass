@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_day_alarm_zone;
+
+import "google/protobuf/duration.proto";
+import "v3/mobilegwsvc/commonmodels/virtualobject/selected_device.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_day_alarm_zone";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateDayAlarmZoneRequest {
+  string hub_id = 1;
+  string id = 2;
+  optional string name = 3;
+  optional OpenDoorAlarm open_door_alarm = 4; // 0x05
+  optional NotifyAboutDeactivation notify_about_deactivation = 5; // 0x07 [0]
+  repeated commonmodels.virtualobject.SelectedDevice intrusion_devices = 6;
+  repeated commonmodels.virtualobject.SelectedDevice security_devices = 7;
+  repeated commonmodels.virtualobject.SelectedDevice siren_devices = 8;
+
+  oneof deactivation_type {
+    TriggersCount triggers_count = 9;
+    Timer timer = 10;
+  }
+
+  message Timer {
+    google.protobuf.Duration bypass_duration = 1; // 0x04 [5-255]
+  }
+
+  message TriggersCount {
+    uint32 bypass_trigger_count = 1; // 0x06 [1-10]
+  }
+
+  enum OpenDoorAlarm {
+    OPEN_DOOR_ALARM_UNSPECIFIED = 0;
+    OPEN_DOOR_ALARM_OFF = 1; // default
+    OPEN_DOOR_ALARM_ON = 2;
+  }
+
+  enum NotifyAboutDeactivation {
+    NOTIFY_ABOUT_DEACTIVATION_UNSPECIFIED = 0;
+    NOTIFY_ABOUT_DEACTIVATION_FALSE = 1; // default
+    NOTIFY_ABOUT_DEACTIVATION_TRUE = 2;
+  }
+}

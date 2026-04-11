@@ -1,0 +1,24 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "google/protobuf/timestamp.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message ActionTimer {
+
+  oneof timer {
+    Ticking ticking = 1;
+    Pending pending = 2;
+  }
+
+  message Ticking {
+    google.protobuf.Timestamp end_timestamp = 1;
+  }
+
+  message Pending {
+    int32 period_seconds = 1;
+  }
+}

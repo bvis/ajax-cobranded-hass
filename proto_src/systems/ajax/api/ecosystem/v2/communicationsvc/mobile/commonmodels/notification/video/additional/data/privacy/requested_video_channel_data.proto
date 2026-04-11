@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy;
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message RequestedVideoChannelData {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+
+  string channel_name = 3;
+};

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.resend_confirmation_codes;
+
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+import "v3/mobilegwsvc/commonmodels/type/phone_validation_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.resend_confirmation_codes";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ResendConfirmationCodesRequest {
+
+  commonmodels.type.UserRole user_role = 1;
+
+  string email = 2 [(hash_value) = true];
+
+  string phone_number = 3 [(hash_value) = true];
+
+  commonmodels.type.PhoneValidationType phone_validation_type = 4;
+}

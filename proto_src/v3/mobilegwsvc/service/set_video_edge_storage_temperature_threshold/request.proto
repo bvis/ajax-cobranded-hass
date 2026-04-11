@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_storage_temperature_threshold;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_storage_temperature_threshold";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeStorageTemperatureThresholdRequest {
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2;
+
+  // [0, 374] value in Kelvin
+  uint32 temperature_threshold = 3;
+}

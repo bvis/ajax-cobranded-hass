@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+message ImageChunk {
+  oneof test_oneof {
+    DataChunk data_chunk = 1;
+    LastChunk last_chunk = 2;
+  }
+
+  message DataChunk {
+    bytes bytes = 1;
+  }
+
+  message LastChunk {
+    string file_name = 1;
+    map<string, string> metadata = 2;
+  }
+}

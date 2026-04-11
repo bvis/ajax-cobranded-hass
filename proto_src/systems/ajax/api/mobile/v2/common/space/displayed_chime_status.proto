@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum DisplayedChimeStatus{
+  DISPLAYED_CHIME_STATUS_UNSPECIFIED = 0;
+  DISPLAYED_CHIME_STATUS_ENABLED = 1;
+  DISPLAYED_CHIME_STATUS_CAN_BE_ENABLED = 2;
+  DISPLAYED_CHIME_STATUS_MALFUNCTION = 3;
+  DISPLAYED_CHIME_STATUS_DISABLED = 4;
+}

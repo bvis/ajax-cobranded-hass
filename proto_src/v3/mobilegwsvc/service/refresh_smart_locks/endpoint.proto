@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.refresh_smart_locks;
+
+import "v3/mobilegwsvc/service/refresh_smart_locks/request.proto";
+import "v3/mobilegwsvc/service/refresh_smart_locks/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.refresh_smart_locks";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service RefreshSmartLocksService {
+  rpc execute(RefreshSmartLocksRequest) returns (RefreshSmartLocksResponse);
+};

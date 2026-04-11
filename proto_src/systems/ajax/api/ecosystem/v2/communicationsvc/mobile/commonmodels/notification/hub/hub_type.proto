@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum HubType {
+  HUB_TYPE_UNSPECIFIED = 0;
+  HUB_TYPE_HUB = 1;
+  HUB_TYPE_HUB_PLUS = 2;
+  HUB_TYPE_YAVIR = 3;
+  HUB_TYPE_YAVIR_PLUS = 4;
+  HUB_TYPE_HUB_2 = 5;
+  HUB_TYPE_HUB_2_PLUS = 6;
+  HUB_TYPE_HUB_3 = 7;
+  HUB_TYPE_HUB_FIBRA = 8;
+  HUB_TYPE_HUB_LITE = 9;
+  HUB_TYPE_HUB_2_4G = 10;
+  HUB_TYPE_HUB_HYBRID_4G = 11;
+  HUB_TYPE_HUB_4G = 12;
+  HUB_TYPE_HUB_VOID_4G = 13;
+  HUB_TYPE_HUB1_DEPRECATED = 14;
+  HUB_TYPE_HUB_2_PROSEGUR = 15;
+  HUB_TYPE_HUB_FIRE = 16;
+  HUB_TYPE_HUB_2_LTE_RTK = 17;
+  HUB_TYPE_HUB_MEGA = 18;
+  HUB_TYPE_HUB_SUPERIOR = 19;
+  HUB_TYPE_HUB_HYBRID_2 = 20;
+}
+

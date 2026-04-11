@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_access_in_space;
+
+import "systems/ajax/api/mobile/v2/common/video/privacy/channel_permission.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/channel_reference.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_access_in_space";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// At least one request for permissions must be specified
+message RequestAccessInSpaceRequest {
+  string space_id = 1;
+
+  // [optional]
+  RequestedSpacePermissions space_permissions = 2;
+
+  // [optional]
+  RequestedVideoPermissions video_permissions = 3;
+
+  message RequestedSpacePermissions {
+    oneof permissions_type {
+      RequestedPermanentSpacePermissions permanent = 1;
+      RequestedTemporarySpacePermissions temporary = 2;
+    }
+
+    message RequestedPermanentSpacePermissions {}
+
+    message RequestedTemporarySpacePermissions {
+      TemporaryPermissionsDuration duration = 1;
+    }
+  }
+
+  message RequestedVideoPermissions {
+    repeated commonmodels.video.videoedge.channel.ChannelReference channels = 1;
+
+    repeated mobile.v2.common.video.privacy.ChannelPermission permissions = 2;
+
+    TemporaryPermissionsDuration duration = 3;
+  }
+
+  enum TemporaryPermissionsDuration {
+    TEMPORARY_PERMISSIONS_DURATION_UNSPECIFIED = 0;
+    TEMPORARY_PERMISSIONS_DURATION_1_HOUR = 1;
+    TEMPORARY_PERMISSIONS_DURATION_2_HOURS = 2;
+    TEMPORARY_PERMISSIONS_DURATION_4_HOURS = 3;
+    TEMPORARY_PERMISSIONS_DURATION_8_HOURS = 4;
+  }
+};

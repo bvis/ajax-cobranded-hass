@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_sign_on_url;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_sign_on_url";
+option swift_prefix = "";
+
+message GetSignOnUrlResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string sign_on_url = 1;
+  }
+
+  message Failure  {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error sso_config_not_found = 2;
+      commonmodels.Error unauthenticated = 3;
+      commonmodels.Error account_not_confirmed = 4;
+      commonmodels.Error account_locked = 5;
+    }
+  }
+}

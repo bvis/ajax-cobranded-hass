@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_services_available_for_reseller_on_target;
+
+import "v3/mobilegwsvc/commonmodels/accounting/service.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_services_available_for_reseller_on_target";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindServicesAvailableForResellerOnTargetResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated commonmodels.accounting.Service services = 1;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+}

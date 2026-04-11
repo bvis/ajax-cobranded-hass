@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.installers.model;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.installers.model";
+
+import "v1/common/permission.proto";
+
+message Permissions {
+  repeated common.Permission permissions = 1;
+}

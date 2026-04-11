@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonWingsPart {
+
+  DataChannelDeviceSignalLevel device_signal_level = 1[(proto.meta.field_tag) = "data_device_signal_level"];
+  DataChannelConnectionStatus connection_status = 2[(proto.meta.field_tag) = "data_connection_status"];
+  repeated Capabilities capabilities = 3;
+
+  enum DataChannelConnectionStatus {
+    CONNECTION_STATUS_UNSPECIFIED = 0;
+    DATA_CHANNEL_CONNECTION_STATUS_NOT_OK = 1[(proto.meta.enum_tag) = "DATA_CHANNEL_OK_NOT_OK"];
+    DATA_CHANNEL_CONNECTION_STATUS_OK = 2[(proto.meta.enum_tag) = "DATA_CHANNEL_OK_OK"];
+  }
+
+  enum DataChannelDeviceSignalLevel {
+    DEVICE_SIGNAL_LEVEL_UNSPECIFIED = 0;
+    DEVICE_SIGNAL_LEVEL_NO_SIGNAL = 1[(proto.meta.enum_tag) = "DATA_CHANNEL_SIGNAL_QUALITY_NO_SIGNAL"];
+    DEVICE_SIGNAL_LEVEL_WEAK = 2[(proto.meta.enum_tag) = "DATA_CHANNEL_SIGNAL_QUALITY_LOW"];
+    DEVICE_SIGNAL_LEVEL_NORMAL = 3[(proto.meta.enum_tag) = "DATA_CHANNEL_SIGNAL_QUALITY_MEDIUM"];
+    DEVICE_SIGNAL_LEVEL_STRONG = 4[(proto.meta.enum_tag) = "DATA_CHANNEL_SIGNAL_QUALITY_HIGH"];
+    DEVICE_SIGNAL_LEVEL_DISCONNECTED = 5;
+  }
+
+  enum Capabilities {
+    CAPABILITIES_UNSPECIFIED = 0;
+    CAPABILITIES_WINGS = 1;
+  }
+}

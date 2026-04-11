@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "systems/ajax/protobuf/hub/object_type.proto";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message ConfigMigrationState {
+    DataTransferState data_transfer_state = 0x01;
+    MigrationFrameDevicesState migration_frame_devices_state = 0x02;
+    MigrationButtonDevicesState migration_button_devices_state = 0x03;
+    MigrationResult migration_result = 0x04;
+    ObjectType object_type = 1000;
+    string id = 1001;
+
+    enum DataTransferState {
+        DATA_TRANSFER_UNKNOWN_STATE = 0;
+        DATA_TRANSFER_IN_PROGRESS = 0x02;
+        DATA_TRANSFER_FINISHED = 0x03;
+    }
+
+    enum MigrationFrameDevicesState {
+        MIGRATION_FRAME_DEVICES_UNKNOWN_STATE = 0;
+        MIGRATION_FRAME_DEVICES_NOT_AVAILABLE = 1;
+        MIGRATION_FRAME_DEVICES_WAITING_FOR_START = 2;
+        MIGRATION_FRAME_DEVICES_IN_PROGRESS = 3;
+        MIGRATION_FRAME_DEVICES_FINISHED = 4;
+    }
+
+    enum MigrationButtonDevicesState {
+        MIGRATION_BUTTON_DEVICES_UNKNOWN_STATE = 0;
+        MIGRATION_BUTTON_DEVICES_NOT_AVAILABLE = 1;
+        MIGRATION_BUTTON_DEVICES_WAITING_FOR_START = 2;
+        MIGRATION_BUTTON_DEVICES_IN_PROGRESS = 3;
+        MIGRATION_BUTTON_DEVICES_FINISHED = 4;
+    }
+
+    enum MigrationResult {
+        MIGRATION_RESULT_IN_PROGRESS = 0;
+        MIGRATION_RESULT_SERVER_TIMED_OUT = 2;
+        MIGRATION_RESULT_FINISHED_OK = 3;
+        MIGRATION_RESULT_MIGRATION_FAILED = 4;
+    }
+}

@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message StreetSirenDoubleDeck {
+    CommonDevicePart common_part = 1000;
+
+    int32 alarm_duration = 0x31;
+    bool beep_on_arm_disarm = 0x32;
+    repeated BeepOnArmDisarm beep_on_arm_disarm_v2 = 0x320;
+    ArmedLightIndication blink_while_armed = 0x33;
+    bool alert_if_moved = 0x34;
+    SirenVolumeLevel siren_volume_level = 0x35;
+    google.protobuf.BoolValue externally_powered = 0x36;
+    BuzzerState buzzer_state = 0x37;
+    bool beep_on_delay = 0x38;
+    repeated BeepOnDelay beep_on_delay_v2 = 0x380;
+    BeepVolumeLevel beep_volume_level = 0x3A;
+    string associated_group_id = 0x3B;
+    bool chimes_enabled = 0x3D;
+    bool post_alarm_indication_enabled = 0x3E;
+
+    Subtype subtype = 0xC3;
+
+    enum ArmedLightIndication {
+        NO_ARMED_LIGHT_INDICATION_INFO = 0;
+        OFF_ARMED_LIGHT_INDICATION = 1;
+        BLINK_ARMED_LIGHT_INDICATION = 2;
+        CONSTANT_ON_ARMED_LIGHT_INDICATION = 3;
+    }
+
+    enum BuzzerState {
+        NOT_BUZZER_STATE_INFO = 0;
+        OFF_BUZZER_STATE = 1;
+        ON_BUZZER_STATE = 2;
+        WAIT_START_BUZZER_STATE = 3;
+        WAIT_STOP_BUZZER_STATE = 4;
+    }
+
+    enum SirenVolumeLevel {
+        NO_SIREN_VOLUME_LEVEL_INFO = 0;
+        VERY_LOUD_SIREN_VOLUME_LEVEL = 1;
+        LOUD_SIREN_VOLUME_LEVEL = 18;
+        QUIET_SIREN_VOLUME_LEVEL = 29;
+        DISABLED_SIREN_VOLUME_LEVEL = 32;
+    }
+
+    enum BeepVolumeLevel {
+        NO_BEEP_VOLUME_LEVEL_INFO = 0;
+        VERY_LOUD_BEEP_VOLUME_LEVEL = 1;
+        LOUD_BEEP_VOLUME_LEVEL = 18;
+        QUIET_BEEP_VOLUME_LEVEL = 29;
+    }
+
+    enum BeepOnArmDisarm {
+        NO_BEEP_ON_ARM_DISARM_INFO = 0;
+        BEEP_ON_ARM = 1;
+        BEEP_ON_DISARM = 2;
+        BEEP_ON_NIGHT_ARM = 3;
+        BEEP_ON_NIGHT_DISARM = 4;
+    }
+
+    enum BeepOnDelay {
+        NO_BEEP_ON_DELAY_INFO = 0;
+        BEEP_ON_ARM_DELAY = 1;
+        BEEP_ON_DISARM_DELAY = 2;
+        BEEP_ON_NIGHT_ARM_DELAY = 3;
+        BEEP_ON_NIGHT_DISARM_DELAY = 4;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

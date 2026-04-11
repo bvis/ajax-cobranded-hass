@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_specific_detection_settings;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/detection/detector_locator.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_specific_detection_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetVideoEdgeSpecificDetectionSettingsRequest {
+
+  // [required]
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  // [required]
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  // [required]
+  mobile.v2.common.video.videoedge.channel.detection.DetectorLocator detector_locator = 3;
+}

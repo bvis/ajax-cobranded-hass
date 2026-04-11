@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled;
+
+import "v3/mobilegwsvc/service/set_video_edge_detectors_enabled/request.proto";
+import "v3/mobilegwsvc/service/set_video_edge_detectors_enabled/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled";
+option java_multiple_files = true;
+option swift_prefix = "";
+option deprecated = true; // Deprecated: Use SetVideoEdgeDetectorsEnabledByNotificationTypesService instead.
+
+// Implementation has been removed as well because it wasn't exposed by clients.
+service SetVideoEdgeDetectorsEnabledService {
+  rpc execute(SetVideoEdgeDetectorsEnabledRequest) returns (SetVideoEdgeDetectorsEnabledResponse);
+};

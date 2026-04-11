@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "v1/common/address.proto";
+import "v1/common/email-address.proto";
+import "v1/common/phone-number.proto";
+import "google/protobuf/timestamp.proto";
+import "v1/facility/facility-monitoring-status.proto";
+
+message Facility {
+  string id = 1;
+  optional string hub_id = 2;
+  optional string hub_name = 3;
+  string company_id = 4;
+  GeneralInfo facility_general_info = 5;
+  Status status = 6;
+
+  ConnectionStatus connection_status = 8;
+  uint64 version = 9;
+  optional bool hub_locked_by_company = 10;
+  google.protobuf.Timestamp sleep_until = 11;
+  PrivacyOverrideStatus privacy_override_status = 12;
+  MonitoringStatus monitoring_status = 13;
+  string space_id = 14;
+
+  message GeneralInfo {
+    string name = 1;
+    string registration_number = 2;
+    common.Address address = 3;
+    repeated common.PhoneNumber phone_numbers = 4;
+    repeated common.EmailAddress email_addresses = 5;
+  }
+
+  enum ConnectionStatus {
+    OFFLINE = 0;
+    ONLINE = 1;
+  }
+
+  enum Status {
+    MONITORING_APPROVED = 0;
+    MONITORING_REQUESTED = 1;
+    IN_SLEEP_MODE = 2;
+    NO_MONITORING = 3;
+  }
+
+  // Note
+  message Note {
+    string id = 1;
+    string facility_id = 2;
+    string text = 3; // updatable
+    uint64 version = 4;
+    uint32 index = 5;
+  }
+
+  enum PrivacyOverrideStatus {
+    PRIVACY_OVERRIDE_STATUS_UNSPECIFIED = 0;
+    PRIVACY_OVERRIDE_STATUS_DISABLED = 1;
+    PRIVACY_OVERRIDE_STATUS_ENABLED = 2;
+  }
+}

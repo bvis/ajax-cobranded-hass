@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.smartlock;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/smartlock/source_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message SmartLockNotificationSource {
+  SmartLockNotificationSourceType type = 1;
+  string id = 2;
+  optional string name = 3 [(hash_value) = true];
+
+  optional string room_hex_id = 4;
+  optional string room_name = 5;
+}

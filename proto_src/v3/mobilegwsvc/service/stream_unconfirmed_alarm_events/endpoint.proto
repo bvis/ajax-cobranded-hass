@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_unconfirmed_alarm_events;
+
+import "v3/mobilegwsvc/service/stream_unconfirmed_alarm_events/request.proto";
+import "v3/mobilegwsvc/service/stream_unconfirmed_alarm_events/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_unconfirmed_alarm_events";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamUnconfirmedAlarmEventsService {
+  rpc execute(StreamUnconfirmedAlarmEventsRequest) returns (stream StreamUnconfirmedAlarmEventsResponse);
+}

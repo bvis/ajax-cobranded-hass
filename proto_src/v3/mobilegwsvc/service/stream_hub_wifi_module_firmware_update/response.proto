@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_hub_wifi_module_firmware_update;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/hub/firmware/firmware_update.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_hub_wifi_module_firmware_update";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamHubWifiModuleUpdateResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof update {
+      UpToDate up_to_date = 1;
+      NotAvailable not_available = 2;
+      AvailableFirmwareUpdate available_firmware_update = 3;
+    }
+  }
+
+  message UpToDate {}
+
+  message NotAvailable {}
+
+  message AvailableFirmwareUpdate {
+    commonmodels.hub.firmware.FirmwareUpdate firmware_update = 1;
+  }
+
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.Error hub_not_found = 2;
+    }
+  }
+}

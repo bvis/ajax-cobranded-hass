@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.time;
+option java_package = "systems.ajax.api.mobile.v2.common.time";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/type/datetime.proto";
+
+message TimeZone {
+  google.type.TimeZone time_zone = 1;
+}

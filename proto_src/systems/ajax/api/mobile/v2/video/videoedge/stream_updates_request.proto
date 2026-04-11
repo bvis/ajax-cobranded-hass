@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge;
+
+import "google/protobuf/field_mask.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/backupchannel/backup_channel_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/diagnostics/diagnostics_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/leds/leds.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/mcu.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network_interface.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/video_edge_space_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/system/system_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/onvif/onvif_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/video_edge.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamVideoEdgeUpdatesRequest {
+  common.space.SpaceLocator space_locator = 1;
+};
+
+message StreamVideoEdgeUpdatesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof update {
+      InitialState initial_state = 1;
+      Installed installed = 2;
+      Uninstalled uninstalled = 3;
+      CompletelyChanged completely_changed = 4;
+      PartiallyChanged partially_changed = 5;
+    }
+
+    message InitialState {
+      repeated common.video.videoedge.VideoEdge video_edges = 1;
+    };
+
+    message Installed {
+      common.video.videoedge.VideoEdge video_edge = 1;
+    };
+
+    message Uninstalled {
+      string video_edge_id = 1 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+    };
+
+    message CompletelyChanged {
+      common.video.videoedge.VideoEdge video_edge = 1;
+    };
+
+    message PartiallyChanged {
+      string video_edge_id = 100 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+      oneof change_union {
+        common.video.videoedge.mediadevice.MediaDevice device = 1;
+        common.video.videoedge.channel.Channel channel = 2;
+        common.video.videoedge.archive.Archive archive = 3 [(disable_logging) = true];
+        common.video.videoedge.detector.Detector detector = 4;
+        common.video.videoedge.network.Network network = 5;
+        common.video.videoedge.diagnostics.DiagnosticsSettings diagnostics_settings = 6 [(disable_logging) = true];
+        common.video.videoedge.system.SystemInfo system_info = 7;
+        common.video.videoedge.ConnectionState connection_state = 8;
+        common.video.videoedge.network.NetworkInterface network_interface = 9;
+        common.video.videoedge.storage.StorageDevice storage_device = 10;
+        common.video.videoedge.firmware.Firmware firmware = 11;
+        common.video.videoedge.leds.Leds leds = 12;
+        string name = 13;
+        common.video.videoedge.storage.Storage storage = 14;
+        common.video.videoedge.mcu.Mcu mcu = 15;
+        common.video.videoedge.onvif.OnvifInfo onvif_info = 16;
+        common.video.videoedge.spacesettings.VideoEdgeSpaceSettings space_settings = 101;
+        common.video.videoedge.backupchannel.BackupChannelInfo backup_channel_info = 200;
+      }
+
+      google.protobuf.FieldMask mask = 1000;
+
+      Type type = 1001;
+
+      enum Type {
+        NONE = 0;
+        UPDATE = 1;
+        ADD = 2;
+        REMOVE = 3;
+      }
+    };
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+    }
+  }
+};

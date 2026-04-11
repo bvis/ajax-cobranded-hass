@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.company.installation;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/company_info.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_permission.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject.model.company.installation";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message InstallationCompany {
+  CompanyInfo company_info = 1;
+  systems.ajax.api.mobile.v2.common.hub.HubPermissions permissions = 2;
+  google.protobuf.Timestamp permissions_expired_at = 3;
+  int32 hub_user_index = 4;
+}

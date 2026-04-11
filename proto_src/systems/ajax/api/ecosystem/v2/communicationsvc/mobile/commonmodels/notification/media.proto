@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/video/hub_video_scenario_media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/video/video_archive_export_completed_media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/media/archive/archive_export_completed_media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/media/channel/video_frames_media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/media/scenario/video_scenario_media.proto";
+
+message NotificationMedia {
+  string notification_id = 1;
+
+  oneof content {
+    notification.hub.media.HubNotificationMedia hub_notification_media = 101;
+    notification.video.media.archive.ArchiveExportCompletedMedia archive_export_media = 102;
+    notification.video.media.scenario.VideoScenarioMedia video_scenario_media = 103;
+    notification.hub.media.video.VideoArchiveExportCompletedMedia video_archive_export_completed_media = 104 [deprecated = true];
+    notification.hub.media.video.HubVideoScenarioMedia hub_video_scenario_media = 105 [deprecated = true];
+    notification.video.media.channel.VideoFramesMedia video_frames_media = 106;
+  }
+}

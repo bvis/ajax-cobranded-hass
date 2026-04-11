@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_pir_motion_led_indication;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_pir_motion_led_indication";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgePirMotionLedIndicationRequest {
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  bool pir_motion_led_indication_enabled = 3;
+}

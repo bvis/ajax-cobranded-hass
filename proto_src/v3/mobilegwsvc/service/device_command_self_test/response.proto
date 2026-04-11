@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_self_test;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandSelfTestResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error unknown_command = 1; // 0636
+      commonmodels.Error command_not_performed = 2; // 03
+      commonmodels.HubWrongStateError hub_wrong_state = 3; // 11
+      commonmodels.HubBusyError hub_busy = 4; // 0F
+      commonmodels.Error hub_offline = 5; // 07
+      commonmodels.Error permission_denied = 6;
+    }
+  }
+}

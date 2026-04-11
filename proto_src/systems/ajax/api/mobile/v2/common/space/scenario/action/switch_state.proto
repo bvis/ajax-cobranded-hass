@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario.action;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SwitchStateAction {
+  repeated Target targets = 1;
+  ActionType action_type = 2;
+
+  message Target {
+    oneof kind {
+      HubDevice hub_device = 1;
+      SmartLock smart_lock = 2;
+    }
+
+    message HubDevice {
+      string id = 1;
+      string hub_id = 2;
+      ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+      repeated Channel channels = 4;
+
+      enum Channel {
+        CHANNEL_UNSPECIFIED = 0;
+        CHANNEL_1 = 1;
+        CHANNEL_2 = 2;
+        CHANNEL_3 = 3;
+        CHANNEL_4 = 4;
+      }
+    }
+
+    message SmartLock {
+      string id = 1;
+    }
+  }
+
+  enum ActionType {
+    ACTION_TYPE_UNSPECIFIED = 0;
+    ACTION_TYPE_SWITCH_OFF = 1;
+    ACTION_TYPE_SWITCH_ON = 2;
+    ACTION_TYPE_SWITCH_STATE = 3;
+    ACTION_TYPE_UNLATCH = 4;
+  }
+}

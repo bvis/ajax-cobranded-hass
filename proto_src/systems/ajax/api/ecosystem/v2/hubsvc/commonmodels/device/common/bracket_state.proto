@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message BracketStatePart {
+  BracketState bracket_state = 1[(proto.meta.field_tag) = "bracket_state"];
+  repeated Capability capabilities = 2;
+
+  enum BracketState {
+    BRACKET_STATE_UNSPECIFIED = 0;
+    BRACKET_STATE_LOCKED = 1[(proto.meta.enum_tag) = "BRACKET_STATE_LOCKED"];
+    BRACKET_STATE_UNLOCKED = 2[(proto.meta.enum_tag) = "BRACKET_STATE_UNLOCKED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_BRACKET_STATE_SUPPORTED = 1;
+  }
+}

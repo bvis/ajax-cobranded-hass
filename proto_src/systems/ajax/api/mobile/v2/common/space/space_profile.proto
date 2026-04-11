@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceProfile {
+  string name = 1;
+  mobile.v2.common.image.Images images = 2  [(hash_value) = true];
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.device.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.device.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum DeviceTransmitionPowerMode {
+  DEVICE_TRANSMITION_POWER_MODE_UNSPECIFIED = 0;
+  DEVICE_TRANSMITION_POWER_MODE_AUTO = 1;
+  DEVICE_TRANSMITION_POWER_MODE_FIX = 2;
+  DEVICE_TRANSMITION_POWER_MODE_RESERVED = 3;
+  DEVICE_TRANSMITION_POWER_MODE_MAX = 4;
+}

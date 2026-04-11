@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_detection_test_finish;
+
+import "v3/mobilegwsvc/service/device_command_detection_test_finish/request.proto";
+import "v3/mobilegwsvc/service/device_command_detection_test_finish/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// HTS DTEST_FINISH 0x04
+service DeviceCommandDetectionTestFinishService {
+  rpc execute (DeviceCommandDetectionTestFinishRequest) returns (DeviceCommandDetectionTestFinishResponse);
+};

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates";
+option swift_prefix = "";
+
+message DeviceSettingsLocator {
+  oneof locator {
+    string template_id = 1;
+    string preset_id = 2;
+  }
+};

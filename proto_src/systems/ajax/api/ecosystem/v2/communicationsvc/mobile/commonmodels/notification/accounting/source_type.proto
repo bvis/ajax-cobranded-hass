@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum AccountingNotificationSourceType {
+  ACCOUNTING_NOTIFICATION_SOURCE_TYPE_UNSPECIFIED = 0;
+  HUB = 1;
+  VIDEO_EDGE = 2;
+}

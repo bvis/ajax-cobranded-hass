@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.scan_video_edge_wifi;
+
+import "v3/mobilegwsvc/service/scan_video_edge_wifi/request.proto";
+import "v3/mobilegwsvc/service/scan_video_edge_wifi/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.scan_video_edge_wifi";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// Expected behavior for displaying the list of available wifi networks:
+// 1. The app initiates the stream and receives an instant scan result with a list of available wifi networks.
+// 2. The app may display the currently enabled network by looking at the "enabled" field in the network interface.
+// 3. The app continuously receives scan updates. Note: in the case of network interface snapshot the app is supposed
+//    to completely replace it by id, this will let us cover cases with partial updates in the future if necessary.
+//
+// Expected behavior for changing the enabled network:
+// 1. The user initiates the change via the corresponding unary API.
+// 2. Once the change has succeeded or failed, the app is supposed to re-open the stream to get an up-to-date state.
+//
+// Expected behavior for re-starting the scan:
+// 1. Simply re-open the stream whenever the user wants to scan again.
+service ScanVideoEdgeWifiService {
+  rpc execute(ScanVideoEdgeWifiRequest) returns (stream ScanVideoEdgeWifiResponse);
+}

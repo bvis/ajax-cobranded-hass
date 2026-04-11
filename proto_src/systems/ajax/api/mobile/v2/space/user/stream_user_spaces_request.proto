@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.user;
+
+import "systems/ajax/api/mobile/v2/common/connection_status.proto";
+import "systems/ajax/api/mobile/v2/common/hub/battery_save_mode.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/displayed_space_security_state.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_profile.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_lite.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamUserSpacesRequest {}
+
+message StreamUserSpacesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof update {
+      InitialState initial_state = 1;
+      LiteSpaceEvent lite_space_event = 2;
+    }
+  }
+
+  message InitialState {
+    repeated common.space.LiteSpace spaces = 1;
+  }
+
+  message LiteSpaceEvent {
+    string space_id = 99;
+    oneof event {
+      LiteSpaceCreated lite_space_created = 1;
+      LiteSpaceUpdated lite_space_updated = 2;
+      LiteSpaceRemoved lite_space_removed = 3;
+    }
+  }
+
+  message LiteSpaceCreated {
+    common.space.LiteSpace lite_space = 1;
+  }
+
+  message LiteSpaceUpdated {
+    string id = 1;
+    optional string sorting_key = 100;
+    oneof update {
+      common.space.SpaceProfile profile = 2;
+      common.space.security.DisplayedSpaceSecurityState security_state = 3;
+      string hub_id = 4; // in case hub was removed, empty string is expected
+      uint64 new_notifications_count = 5;
+      uint64 malfunctions_count = 6;
+      common.ConnectionStatus hub_connection_status = 7; // in case bsm_status is on battery save mode, hub_connection_status is expected to be CONNECTION_STATUS_OFFLINE
+      common.hub.BatterySaveModeStatus bsm_status = 8;
+    }
+  }
+
+  message LiteSpaceRemoved {
+    string id = 1;
+  }
+
+  message Failure {}
+};

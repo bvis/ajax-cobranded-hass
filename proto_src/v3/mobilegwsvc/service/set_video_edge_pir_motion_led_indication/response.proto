@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_pir_motion_led_indication;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_pir_motion_led_indication";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgePirMotionLedIndicationResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error video_edge_not_found = 3;
+      commonmodels.Error space_armed = 4;
+      commonmodels.Error video_edge_is_offline = 5;
+      commonmodels.Error command_not_supported = 6;
+    }
+  }
+}

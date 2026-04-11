@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.media.channel;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.media.channel";
+option java_multiple_files = true;
+
+message VideoFramesMedia {
+
+  repeated VideoFrameMedia frames = 1;
+
+  message VideoFrameMedia {
+    string url = 1 [(hash_value) = true];
+
+    google.protobuf.Timestamp timestamp = 2;
+  }
+}

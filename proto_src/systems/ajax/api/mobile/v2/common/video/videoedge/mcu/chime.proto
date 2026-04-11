@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mcu;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+
+message Chime {
+  oneof mode_union {
+    OffMode off = 1;
+    MechanicalMode mechanical = 2;
+    DigitalMode digital = 3;
+    SirenMode siren = 4;
+  }
+
+  message OffMode {
+  }
+
+  message MechanicalMode {
+    google.protobuf.Duration duration = 1;
+  }
+
+  message DigitalMode {
+    google.protobuf.Duration duration = 1;
+  }
+
+  message SirenMode {
+  }
+}

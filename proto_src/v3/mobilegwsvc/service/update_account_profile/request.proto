@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_account_profile;
+
+import "systems/ajax/api/mobile/v2/common/image/image_id.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.update_account_profile";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateAccountProfileRequest {
+
+  optional string first_name = 1 [(hash_value) = true];
+  optional string last_name = 2 [(hash_value) = true];
+  optional string locale = 3;
+  optional mobile.v2.common.image.ImageIdValue image = 5;
+}

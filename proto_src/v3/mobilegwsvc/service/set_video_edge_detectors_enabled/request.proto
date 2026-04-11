@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+/*
+ Facade request for multiple systems.ajax.api.mobile.v2.video.videoedge.detector.SetDetectorEnabledRequest.
+ Does not require to mention all the detectors, only the ones that need to be updated.
+ */
+message SetVideoEdgeDetectorsEnabledRequest {
+
+  string space_id = 1;
+
+  string video_edge_id = 2;
+
+  repeated DetectorEnabled detectors = 3;
+
+  message DetectorEnabled {
+    string detector_id = 1;
+    bool enabled = 2;
+  }
+}

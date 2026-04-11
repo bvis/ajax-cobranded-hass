@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/backupchannel/backup_channel_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/diagnostics/diagnostics_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/leds/leds.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/mcu.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network_interface.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/video_edge_space_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/system/system_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/onvif/onvif_info.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "Video";
+
+message VideoEdge {
+  string guid = 1 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  reserved 2; // deprecated video edge state field
+
+  reserved 3; // deprecated video edge location field
+
+  string name = 4;
+
+  ConnectionState connection_state = 5;
+
+  archive.Archive archive = 6 [(disable_logging) = true];
+
+  repeated mediadevice.MediaDevice devices = 7;
+
+  repeated channel.Channel channels = 8;
+
+  repeated detector.Detector detectors = 9;
+
+  network.Network network = 10;
+
+  diagnostics.DiagnosticsSettings diagnostics_settings = 11 [(disable_logging) = true];
+
+  system.SystemInfo system_info = 12;
+
+  repeated network.NetworkInterface network_interfaces = 13;
+
+  repeated storage.StorageDevice storage_devices = 14;
+
+  firmware.Firmware firmware = 15;
+
+  about.About about = 16;
+
+  leds.Leds leds = 17;
+
+  storage.Storage storage = 18;
+
+  mcu.Mcu mcu = 19;
+
+  // may not be set if the device does not support ONVIF authentication
+  onvif.OnvifInfo onvif_info = 20;
+
+  spacesettings.VideoEdgeSpaceSettings space_settings = 100;
+
+  backupchannel.BackupChannelInfo backup_channel_info = 200;
+};
+
+enum ConnectionState {
+  NONE = 0;
+  OFFLINE = 1;
+  ONLINE = 2;
+};

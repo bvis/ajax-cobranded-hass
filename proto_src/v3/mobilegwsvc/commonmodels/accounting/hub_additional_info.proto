@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_box_type.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_color.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_label.proto";
+
+message HubAdditionalInfo {
+  ecosystem.v2.hubsvc.commonmodels.ObjectType type = 1;
+  mobile.v2.common.space.device.DeviceColor hub_color = 2;
+  mobile.v2.common.space.device.DeviceLabel hub_label = 3;
+  mobile.v2.common.hub.HubBoxType box_type = 4;
+}

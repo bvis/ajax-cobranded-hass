@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_button_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_battery.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/alarm_verification.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message DoubleButton {
+  common.CommonButtonPart common_button_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery_without_charging = 2;
+
+  common.AlarmVerification alarm_verification = 3;
+
+  repeated SirenTrigger siren_triggers = 0x2E;
+
+  enum SirenTrigger {
+    SIREN_TRIGGER_UNSPECIFIED = 0;
+    SIREN_TRIGGER_SECURITY_BUTTON = 1;
+  }
+}

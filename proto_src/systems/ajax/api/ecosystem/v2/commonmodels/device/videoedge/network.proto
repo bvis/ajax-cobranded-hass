@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge;
+
+option swift_prefix = "Video";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge";
+option java_multiple_files = true;
+
+
+message IpAddress {
+  oneof address {
+    IpAddressV4 v4 = 1;
+    IpAddressV6 v6 = 2;
+  }
+};
+
+message IpAddressV4 {
+  fixed32 data = 1; // In network byte order.
+};
+
+message IpAddressV6 {
+  bytes data = 1; // 128-bit integer, in network byte order.
+  uint64 scope_id = 2;
+};
+
+
+message NetworkConfiguration {
+  NetworkConfigurationIPv4 v4 = 1;
+
+  NetworkConfigurationIPv6 v6 = 2;
+
+  repeated IpAddress name_servers = 3;
+};
+
+message NetworkConfigurationIPv4 {
+  Method method = 1;
+  IpAddressV4 address = 2;
+  IpAddressV4 netmask = 3;
+  IpAddressV4 gateway = 4;
+
+};
+
+message NetworkConfigurationIPv6 {
+  Method method = 1;
+  IpAddressV6 address = 2;
+  uint32 prefix_length = 3;
+  IpAddressV6 gateway = 4;
+};
+
+enum Method {
+  METHOD_UNSPECIFIED = 0;
+  METHOD_OFF = 1;
+  METHOD_DHCP = 2;
+  METHOD_MANUAL = 3;
+};

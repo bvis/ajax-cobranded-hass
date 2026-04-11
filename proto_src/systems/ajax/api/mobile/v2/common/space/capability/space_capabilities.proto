@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.capability;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.capability";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceCapabilities {
+  repeated SpaceSecurityCapability space_security_capabilities = 1;
+  repeated VideoChannelSettingCapability video_channel_setting_capabilities = 2;
+  repeated SpaceMemberCapability space_member_capabilities = 3;
+}
+
+enum SpaceSecurityCapability {
+  SPACE_SECURITY_CAPABILITY_UNSPECIFIED = 0;
+  SPACE_SECURITY_CAPABILITY_FOLLOWING_GROUPS = 1;
+}
+
+enum VideoChannelSettingCapability {
+  VIDEO_CHANNEL_SETTING_CAPABILITY_UNSPECIFIED = 0;
+  VIDEO_CHANNEL_SETTING_CAPABILITY_NEW_DESIGN_DISABLED = 1;
+}
+
+enum SpaceMemberCapability {
+  SPACE_MEMBER_CAPABILITY_UNSPECIFIED = 0;
+  SPACE_MEMBER_CAPABILITY_PRIVACY_OFFICER_PRESENT = 1;
+}

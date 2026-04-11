@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.firmware;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/firmware/check_for_firmware_update_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/firmware/update_firmware_to_recommended_version_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeFirmwareService {
+
+  rpc checkForUpdate(CheckForFirmwareUpdateRequest) returns (CheckForFirmwareUpdateResponse);
+
+  rpc updateToRecommendedVersion(UpdateFirmwareToRecommendedVersionRequest) returns (UpdateFirmwareToRecommendedVersionResponse);
+};

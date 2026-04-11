@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_device_from_hub;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_device_from_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeleteDeviceFromHubRequest {
+  string hub_id = 1;
+  string device_id = 2;
+}

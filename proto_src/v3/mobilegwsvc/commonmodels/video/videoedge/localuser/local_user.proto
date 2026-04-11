@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.localuser;
+
+import "v3/mobilegwsvc/commonmodels/video/videoedge/localuser/local_user_permissions.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.localuser";
+option java_multiple_files = true;
+
+message LocalUser {
+  // [required]
+  string name = 1;
+
+  // [required]
+  LocalUserPermissions permissions = 2;
+}

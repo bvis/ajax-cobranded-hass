@@ -1,0 +1,154 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.installers;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/empty.proto";
+
+import "v1/installers/installers-search-request.proto";
+import "v1/installers/installers-search-response.proto";
+import "v1/installers/installers-invite-hub-user-request.proto";
+import "v1/installers/installers-invite-company-request.proto";
+import "v1/installers/update-installation-company-permissions-request.proto";
+import "v1/installers/installers-update-company-permissions-response.proto";
+import "v1/installers/installers-delete-company-request.proto";
+import "v1/installers/claim-hub-permissions-request.proto";
+import "v1/installers/reject-company-permission-claim-request.proto";
+import "v1/installers/approve-company-permission-claim-request.proto";
+import "v1/installers/cancel-installation-company-permissions-request.proto";
+
+service InstallersService {
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+*/
+  rpc searchInstallers (InstallersSearchRequest) returns (InstallersSearchResponse);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* ALREADY_EXISTS = "systems.ajax.mobilegw.error.alreadyExists.user"
+* OUT_OF_RANGE = "systems.ajax.mobilegw.error.outOfRange"
+*/
+  rpc inviteHubUser (InstallersInviteHubUserRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.company"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hubUsersLimitExceeded"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hubIsAlreadyOnInstallation"
+*/
+  rpc inviteCompany (InstallersInviteCompanyRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+*/
+  rpc updateCompanyPermissions (UpdateInstallationCompanyPermissionsRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+*/
+  rpc cancelCompanyPermissions (CancelPermissionsInstallationCompanyRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+*/
+  rpc deleteCompany (InstallersDeleteCompanyRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.hub"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.company"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+*/
+  rpc claimHubPermissions(ClaimHubPermissionsRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.claimPermissions"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+*/
+  rpc approveCompanyPermissionsClaim(ApproveCompanyPermissionsClaimRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.claimPermissions"
+* INVALID_ERROR = "systems.ajax.mobilegw.error.invalidArgumentError"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+*/
+  rpc rejectCompanyPermissionsClaim(RejectCompanyPermissionsClaimRequest) returns (google.protobuf.Empty);
+}

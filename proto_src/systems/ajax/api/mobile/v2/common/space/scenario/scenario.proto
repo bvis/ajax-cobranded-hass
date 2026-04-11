@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario;
+
+import "systems/ajax/api/mobile/v2/common/space/scenario/trigger/trigger.proto";
+import "systems/ajax/api/mobile/v2/common/space/scenario/action/action.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Scenario {
+  string id = 1;
+  string name = 2;
+  bool enabled = 3;
+  repeated Case cases = 4;
+
+  message Case {
+    trigger.Trigger trigger = 1;
+    action.Action action = 2;
+  }
+}

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message BypassPart {
+  repeated BypassMode bypass_mode = 1;
+  repeated Capability capabilities = 2;
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_BYPASS = 1;
+    CAPABILITY_TAMPER_BYPASS = 2;
+    CAPABILITY_ONE_TIME_BYPASS = 3;
+  }
+
+  enum BypassMode {
+    BYPASS_MODE_UNSPECIFIED = 0;
+    BYPASS_MODE_DISABLED = 1;
+    BYPASS_MODE_ENABLED_ENGINEER_BYPASS = 2;
+    BYPASS_MODE_ENABLED_TAMPER_BYPASS = 3;
+    BYPASS_MODE_AUTO_BYPASS_BY_COUNT = 4;
+    BYPASS_MODE_AUTO_BYPASS_BY_ACTIVE = 5;
+    BYPASS_MODE_ONETIME_FULL_ENABLED = 6;
+    BYPASS_MODE_ONETIME_TAMPER_ENABLED = 7;
+  }
+}

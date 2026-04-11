@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_rex_pairing_devices;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_rex_pairing_devices";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetRexPairingDevicesRequest {
+  string hub_id = 1;
+  string rex_id = 2;
+  v2.hubsvc.commonmodels.ObjectType rex_type = 3;
+}

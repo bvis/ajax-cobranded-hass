@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message HubIndex {
+    string id = 1;
+    string name = 2;
+}

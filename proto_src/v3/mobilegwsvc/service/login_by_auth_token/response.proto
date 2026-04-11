@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_auth_token;
+
+import "v3/mobilegwsvc/commonmodels/account/lite_account.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.login_by_auth_token";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message LoginByAuthTokenResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    bytes session_token = 1;
+    commonmodels.account.LiteAccount lite_account = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error account_locked = 2;
+    }
+  }
+}

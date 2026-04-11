@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.archive;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ExportArchiveRequest {
+  string video_edge_id = 1;
+
+  // please use channelId and video edge id from CloudArchiveSource (from source aliases)
+  // in case of cloud archive export
+  string channel_id = 2;
+
+  repeated common.video.TimestampRange export_ranges = 3;
+
+  common.video.StreamType stream_type = 4;
+
+  bool with_audio = 5;
+
+  bool with_figures = 6;
+
+  // CLOUD_ARCHIVE or VIDEO_EDGE
+  systems.ajax.api.mobile.v2.common.video.VideoSourceType video_source_type = 7;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+}
+
+message ExportArchiveResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string export_id = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError video_edge_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError channel_not_found = 4;
+      common.response.DefaultError too_many_parallel_exports = 5;
+      common.response.DefaultError archive_out_of_requested_time_range = 6;
+      common.response.DefaultError video_edge_is_offline = 7;
+      common.response.DefaultError cloud_archive_not_found = 8;
+      ExportsLimitExceededError exports_limit_exceeded = 9;
+    }
+
+    message ExportsLimitExceededError {
+      // next export will be available after timeout
+      google.protobuf.Duration timeout = 1;
+    }
+  }
+}

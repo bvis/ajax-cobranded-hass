@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+import "google/protobuf/wrappers.proto";
+
+message PhoneNumber {
+  string number = 1;
+  google.protobuf.StringValue country_code = 2;
+  google.protobuf.StringValue description = 3;
+}

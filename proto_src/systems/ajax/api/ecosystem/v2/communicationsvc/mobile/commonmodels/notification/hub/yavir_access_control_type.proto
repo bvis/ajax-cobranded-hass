@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum YavirAccessControlType {
+  YAVIR_ACCESS_CONTROL_TYPE_UNSPECIFIED = 0;
+  YAVIR_ACCESS_CONTROL_TYPE_KEYPAD = 1;
+  YAVIR_ACCESS_CONTROL_TYPE_READER = 2;
+}

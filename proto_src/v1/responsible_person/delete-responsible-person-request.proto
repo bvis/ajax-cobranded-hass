@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.responsible_person;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.responsible_person";
+option java_multiple_files = true;
+
+message DeleteResponsiblePersonRequest {
+  string facility_id = 1;
+  string facility_responsible_person_id = 2;
+}

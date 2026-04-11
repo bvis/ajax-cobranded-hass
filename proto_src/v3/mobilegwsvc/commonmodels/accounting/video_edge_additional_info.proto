@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+
+message VideoEdgeAdditionalInfo {
+  mobile.v2.common.video.videoedge.about.About.Color color = 1;
+  mobile.v2.common.video.videoedge.about.About.Type type = 2;
+}

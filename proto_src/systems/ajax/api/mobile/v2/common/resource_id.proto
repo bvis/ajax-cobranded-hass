@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ResourceId {
+  oneof resource_id_type {
+    FirmwareId firmware_id = 1;
+  }
+  message FirmwareId {
+    int32 device_object_type = 1;
+    int32 device_object_subtype = 2;
+    string device_hardware_version = 3;
+    int32 firmware_band_type = 4;
+    string firmware_version = 5;
+  }
+}

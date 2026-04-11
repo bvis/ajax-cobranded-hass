@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonSirenTamperPart {
+  AlertIfLidIsOpen alert_if_lid_is_open = 1[(proto.meta.field_tag) = "alert_if_lid_is_open"];
+
+  message CommonSirenTamperPartSettings {
+    optional AlertIfLidIsOpen alert_if_lid_is_open = 1[(proto.meta.field_tag) = "alert_if_lid_is_open"];
+  }
+
+  enum AlertIfLidIsOpen {
+    ALERT_IF_LID_IS_OPEN_UNSPECIFIED = 0;
+    ALERT_IF_LID_IS_OPEN_DISABLED = 1[(proto.meta.enum_tag) = "ALERT_IF_LID_IS_OPEN_DISABLED"];
+    ALERT_IF_LID_IS_OPEN_ENABLED = 2[(proto.meta.enum_tag) = "ALERT_IF_LID_IS_OPEN_ENABLED"];
+  }
+}

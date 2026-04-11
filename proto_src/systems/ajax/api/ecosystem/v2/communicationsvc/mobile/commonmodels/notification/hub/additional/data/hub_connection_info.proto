@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+
+message HubConnectionInfo {
+  google.protobuf.Timestamp original_timestamp = 1;
+  HubConnectionStatus hub_connection_status = 2;
+  optional string parent_notification_id = 3;
+
+  enum HubConnectionStatus {
+    HUB_CONNECTION_STATUS_UNSPECIFIED = 0;
+    ONLINE = 1;
+    OFFLINE = 2;
+  }
+}

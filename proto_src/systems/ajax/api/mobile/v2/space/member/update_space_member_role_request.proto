@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateMemberRoleRequest {
+  string space_id = 1;
+
+  string member_id = 2;
+
+  UserRole role = 3;
+
+  enum UserRole {
+    USER_ROLE_UNSPECIFIED = 0;
+    USER_ROLE_USER = 1;
+    USER_ROLE_ADMIN = 2;
+  }
+};
+
+
+message UpdateMemberRoleResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.SpaceLockedError space_locked = 4;
+    }
+  }
+};

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/smartlock/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/content.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/blank/content.proto";
+
+message NotificationContent {
+  oneof content {
+    hub.HubNotificationContent hub_notification_content = 1;
+    space.SpaceNotificationContent space_notification_content = 2;
+    video.VideoNotificationContent video_notification_content = 3;
+    smartlock.SmartLockNotificationContent smart_lock_notification_content = 4;
+    company.CompanyNotificationContent company_notification_content = 5;
+    accounting.AccountingNotificationContent accounting_notification_content = 6;
+    blank.BlankNotificationContent blank_notification_content = 7;
+  }
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options";
+option swift_prefix = "";
+
+message GetScenarioTriggerOptionsRequest {
+  string space_id = 1;
+  optional string selected_device_id = 2;
+  TriggerOptionsType trigger_options_type = 3;
+
+  enum TriggerOptionsType {
+    TRIGGER_OPTIONS_TYPE_UNSPECIFIED = 0;
+    TRIGGER_OPTIONS_TYPE_TEMPERATURE = 1;
+    TRIGGER_OPTIONS_TYPE_ALARMING_DEVICE = 2;
+    TRIGGER_OPTIONS_TYPE_CROSS_ZONE = 3;
+    TRIGGER_OPTIONS_TYPE_SMART_LOCK = 4;
+  }
+}

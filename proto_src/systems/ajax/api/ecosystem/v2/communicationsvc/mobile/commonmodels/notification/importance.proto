@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum NotificationImportance {
+  IMPORTANCE_UNSPECIFIED = 0;
+  IMPORTANCE_DEFAULT = 1;
+  IMPORTANCE_POSITIVE = 2;
+  IMPORTANCE_WARNING = 3;
+  IMPORTANCE_ATTENTION = 4;
+}

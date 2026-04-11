@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.security;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DisarmSpaceFromNightModeRequest {
+  common.space.SpaceLocator space_locator = 1;
+}
+
+message DisarmSpaceFromNightModeResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError another_transition_is_in_progress = 4;
+      common.response.DefaultError already_in_the_requested_security_state = 5;
+      common.response.DefaultError illegal_space_security_mode = 6;
+      common.response.DefaultError hub_offline = 7;
+      common.response.HubBusyError hub_busy = 8;
+      common.response.SpaceLockedError space_locked = 9;
+      common.response.DefaultError hub_not_allowed_to_perform_command = 10;
+    }
+  }
+}

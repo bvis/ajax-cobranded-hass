@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.user;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.user";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "CommonHubUser";
+
+import "systems/ajax/api/mobile/v2/common/hub/user/hub_user_type.proto";
+
+message HubUser {
+  string id = 1;
+  HubUserType role = 2;
+}

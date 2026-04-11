@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reset_schedule_hub_wake_up_from_bsm;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reset_schedule_hub_wake_up_from_bsm";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ResetScheduleHubWakeUpFromBsmRequest {
+
+  string hub_id = 1;
+}

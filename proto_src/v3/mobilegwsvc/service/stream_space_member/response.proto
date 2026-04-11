@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_space_member;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_space_member";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamSpaceMemberResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof type {
+      Snapshot snapshot = 1;
+      Update update = 2;
+    }
+
+    message Snapshot {
+      mobile.v2.common.space.member.SpaceMember space_member = 1;
+    }
+
+    message Update {
+      mobile.v2.common.space.member.SpaceMember space_member = 1;
+
+      UpdateType update_type = 2;
+
+      enum UpdateType {
+        UPDATE_TYPE_UNSPECIFIED = 0;
+        UPDATE_TYPE_ADD = 1;
+        UPDATE_TYPE_UPDATE = 2;
+        UPDATE_TYPE_REMOVE = 3;
+      }
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+    }
+  }
+};

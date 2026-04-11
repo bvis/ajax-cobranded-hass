@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_qr_session;
+
+import "v3/mobilegwsvc/service/stream_qr_session/request.proto";
+import "v3/mobilegwsvc/service/stream_qr_session/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.stream_qr_session";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamQrSessionService {
+  rpc execute(StreamQrSessionRequest) returns (stream StreamQrSessionResponse);
+}

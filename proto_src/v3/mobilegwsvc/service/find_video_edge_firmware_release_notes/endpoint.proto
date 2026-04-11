@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes;
+
+import "v3/mobilegwsvc/service/find_video_edge_firmware_release_notes/request.proto";
+import "v3/mobilegwsvc/service/find_video_edge_firmware_release_notes/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FindVideoEdgeFirmwareReleaseNotesService {
+  rpc execute(FindVideoEdgeFirmwareReleaseNotesRequest) returns (FindVideoEdgeFirmwareReleaseNotesResponse);
+}

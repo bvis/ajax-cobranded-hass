@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message ExternalPower {
+  ExternalPowerMode external_power_mode = 1 [(proto.meta.field_tag) = "externally_powered"];
+
+  enum ExternalPowerMode {
+    EXTERNAL_POWER_MODE_UNSPECIFIED = 0;
+    EXTERNAL_POWER_MODE_CONNECTED = 1[(proto.meta.enum_tag) = "EXTERNAL_POWER_MODE_CONNECTED"];
+    EXTERNAL_POWER_MODE_DISCONNECTED = 2[(proto.meta.enum_tag) = "EXTERNAL_POWER_MODE_DISCONNECTED"];
+  }
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/facility/facility-search-request.proto";
+
+service FacilityService {
+
+  rpc searchFacilities (FacilitySearchRequest) returns (FacilitySearchResponse);
+}

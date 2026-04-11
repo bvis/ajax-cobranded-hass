@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_detection_zone_test;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/sensor/detection_zone_test_sensor.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_detection_zone_test";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamDetectionZoneTestResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof response {
+      Snapshot snapshot = 1;
+      Update update = 2;
+      TriggerEvent trigger_event = 3;
+    }
+  }
+
+  message Snapshot {
+    repeated DeviceStatus statuses = 1;
+  }
+
+  message Update {
+    repeated DeviceStatus statuses = 1;
+  }
+
+  message TriggerEvent {
+    string device_id = 1;
+    MessageInfo message_info = 2;
+  }
+
+  message DeviceStatus {
+    string device_id = 1;
+    DeviceTestStatus device_test_status = 2;
+    // enriched only in snapshot
+    repeated v3.mobilegwsvc.commonmodels.sensor.DeviceSensor device_sensors = 3;
+
+    enum DeviceTestStatus {
+      DEVICE_TEST_STATUS_UNSPECIFIED = 0;
+      DEVICE_TEST_STATUS_INACTIVE = 1;
+      DEVICE_TEST_STATUS_AWAITING_START = 2;
+      DEVICE_TEST_STATUS_IN_PROGRESS = 3;
+      DEVICE_TEST_STATUS_AWAITING_FINISH = 4;
+    }
+  }
+
+  message MessageInfo {
+    string device_name = 1;
+    optional string room_name = 2;
+    TriggerType trigger_type = 3;
+
+    enum TriggerType {
+      TRIGGER_TYPE_UNSPECIFIED = 0;
+      TRIGGER_TYPE_DEVICE = 1;
+      TRIGGER_TYPE_LEFT_SIDE = 2;
+      TRIGGER_TYPE_RIGHT_SIDE = 3;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+    }
+  }
+}

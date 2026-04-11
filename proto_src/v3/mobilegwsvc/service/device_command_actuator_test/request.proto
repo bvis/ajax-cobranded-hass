@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_actuator_test;
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandActuatorTestRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType device_type = 3;
+  ActuatorTestOption actuator_test_option = 4;
+
+  message ActuatorTestOption {
+    ActuatorTestFormatType actuator_test_format_type = 1;
+    repeated ActuatorTestEndpoints actuator_test_endpoints = 2;
+    ActuatorTestAction actuator_test_action = 3;
+  }
+
+  enum ActuatorTestFormatType {
+    ACTUATOR_TEST_FORMAT_TYPE_UNSPECIFIED = 0;
+    ACTUATOR_TEST_FORMAT_TYPE_ACTUATOR_ENDPOINTS = 1;
+  }
+
+  enum ActuatorTestEndpoints {
+    ACTUATOR_TEST_ENDPOINTS_UNSPECIFIED = 0;
+    ACTUATOR_TEST_ENDPOINTS_SOUNDER = 1;
+    ACTUATOR_TEST_ENDPOINTS_VAD = 2;
+  }
+
+  message ActuatorTestAction {
+    oneof command_type {
+      ActuatorTestStart actuator_test_start = 1;
+      ActuatorTestStop actuator_test_stop = 2;
+    }
+  }
+
+  message ActuatorTestStart {
+    optional int32 seconds_for_test = 1; // if we dont pass this value, it will be 600 seconds by default
+  }
+
+  message ActuatorTestStop {
+  }
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_event_settings.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SmartLockInSpaceUpdate {
+  optional SmartLockUpdate details = 1;
+
+  optional SmartLockEventSettings event_settings = 2;
+
+  optional string room_id = 3;
+}

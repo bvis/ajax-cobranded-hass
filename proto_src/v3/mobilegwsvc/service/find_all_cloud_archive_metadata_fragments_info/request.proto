@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_metadata_fragments_info;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_metadata_fragments_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllCloudArchiveMetadataFragmentsInfoRequest {
+  // [required]
+  string space_id = 1;
+
+  // [required]
+  string video_edge_id = 2;
+
+  // [required]
+  string channel_id = 3;
+
+  // see available metadata types https://github.com/ajax-systems/video-proto/blob/master/v1/metadata/metadata.proto
+  // [required]
+  string metadata_type = 4;
+
+  // [required]
+  systems.ajax.api.mobile.v2.common.video.TimestampRange timestamp_range = 5;
+}

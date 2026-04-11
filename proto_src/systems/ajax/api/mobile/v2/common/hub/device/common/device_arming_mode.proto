@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.device.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.device.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum DeviceArmingMode {
+  DEVICE_ARMING_MODE_UNSPECIFIED = 0;
+  DEVICE_ARMING_MODE_NORMAL = 1;
+  DEVICE_ARMING_MODE_ENTRY_EXIT = 2;
+  DEVICE_ARMING_MODE_FOLLOWER = 3;
+}

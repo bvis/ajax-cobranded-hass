@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_target_options;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_target_options";
+option swift_prefix = "";
+
+message GetScenarioTargetOptionsRequest {
+  string space_id = 1;
+  TargetOptionsType target_options_type = 2;
+
+  enum TargetOptionsType {
+    TARGET_OPTIONS_TYPE_UNSPECIFIED = 0;
+    TARGET_OPTIONS_TYPE_SCHEDULE_ACCESS = 1;
+    TARGET_OPTIONS_TYPE_PHOD = 2;
+    TARGET_OPTIONS_TYPE_SWITCHING_STATE = 3;
+    TARGET_OPTIONS_TYPE_VIDEO_EDGE = 4;
+    TARGET_OPTIONS_TYPE_SMART_LOCK = 5;
+  }
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamVideoPlayerRequest {
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+}

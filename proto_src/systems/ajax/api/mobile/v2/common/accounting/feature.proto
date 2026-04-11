@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/category.proto";
+
+message Feature {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  FeatureTarget feature_target = 4;
+  string name_lokalise_key = 5;
+  string description_lokalise_key = 6;
+  Category category = 7;
+  string service_lokalise_id = 8;
+}
+
+enum FeatureState {
+  FEATURE_STATE_NO_INFO = 0;
+  FEATURE_STATE_ACTIVE = 1;
+  FEATURE_STATE_INACTIVE = 2;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.company.installation;
+
+import "systems/ajax/api/mobile/v2/space/company/installation/invite_installation_company_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/installation/join_space_by_company_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/installation/update_installation_company_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/installation/cancel-installation-company-permissions-request.proto";
+import "systems/ajax/api/mobile/v2/space/company/installation/remove_installation_company_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceInstallationCompanyService {
+  rpc invite(InviteInstallationCompanyRequest) returns (InviteInstallationCompanyResponse);
+  rpc updatePermissions(UpdateInstallationCompanyPermissionsRequest) returns (UpdateInstallationCompanyPermissionsResponse);
+  rpc cancelPermissions(CancelInstallationCompanyPermissionsRequest) returns (CancelInstallationCompanyPermissionsResponse);
+  rpc remove(RemoveInstallationCompanyRequest) returns (RemoveInstallationCompanyResponse);
+  rpc join(JoinSpaceByCompanyRequest) returns (JoinSpaceByCompanyResponse);
+};

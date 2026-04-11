@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.sensor;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.sensor";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceSensor {
+  oneof param {
+    Outdoor outdoor = 20;
+    Curtain curtain = 21;
+    DualCurtain dual_curtain = 22;
+    ButtonS button_s = 23;
+    CurtainOutdoor curtain_outdoor = 24;
+    MotionProtectG3 motion_protect_g3 = 25;
+    MotionCamSPhodAm motion_cam_s_phod_am = 26;
+    DoubleButtonG3 double_button_g3 = 27;
+    MotionCamG3 motion_cam_g3 = 28;
+    CurtainOutdoorMini curtain_outdoor_mini = 29;
+  }
+}
+
+enum Outdoor {
+  OUTDOOR_UNSPECIFIED = 0;
+  OUTDOOR_MOVING_SENSOR = 1;
+  OUTDOOR_UPPER_PIR = 2;
+  OUTDOOR_LOWER_PIR = 3;
+  OUTDOOR_MASKING_SENSOR = 4;
+}
+
+enum Curtain {
+  CURTAIN_UNSPECIFIED = 0;
+  CURTAIN_MOVING_SENSOR = 1;
+  CURTAIN_MASKING_SENSORS = 4;
+}
+
+enum DualCurtain {
+  DUAL_CURTAIN_UNSPECIFIED = 0;
+  DUAL_CURTAIN_ALL_PIR_SENSORS = 1;
+  DUAL_CURTAIN_UPPER_PIR_SENSORS = 2;
+  DUAL_CURTAIN_LOWER_PIR_SENSORS = 3;
+  DUAL_CURTAIN_MASKING_SENSORS = 4;
+}
+
+enum ButtonS {
+  BUTTON_S_UNSPECIFIED = 0;
+  BUTTON_S_BUTTON_TEST = 1;
+}
+
+enum CurtainOutdoor {
+  CURTAIN_OUTDOOR_UNSPECIFIED = 0;
+  CURTAIN_OUTDOOR_MOVING_SENSOR = 1;
+  CURTAIN_OUTDOOR_MASKING_SENSOR = 4;
+}
+
+enum CurtainOutdoorMini {
+  CURTAIN_OUTDOOR_MINI_UNSPECIFIED = 0;
+  CURTAIN_OUTDOOR_MINI_MOVING_SENSOR = 1;
+  CURTAIN_OUTDOOR_MINI_MASKING_SENSOR = 4;
+}
+
+enum MotionProtectG3 {
+  MOTION_PROTECT_G3_UNSPECIFIED = 0;
+  MOTION_PROTECT_G3_MOVING_SENSOR = 1;
+  MOTION_PROTECT_G3_MASKING_SENSOR = 4;
+}
+
+enum MotionCamSPhodAm {
+  MOTION_CAM_S_PHOD_AM_UNSPECIFIED = 0;
+  MOTION_CAM_S_PHOD_AM_MOVING_SENSOR = 1;
+  MOTION_CAM_S_PHOD_AM_MASKING_SENSOR = 4;
+}
+
+enum DoubleButtonG3 {
+  DOUBLE_BUTTON_G3_UNSPECIFIED = 0;
+  DOUBLE_BUTTON_G3_BUTTON_TEST = 1;
+}
+
+enum MotionCamG3 {
+  MOTION_CAM_G3_UNSPECIFIED = 0;
+  MOTION_CAM_G3_MOVING_SENSOR = 1;
+  MOTION_CAM_G3_MASKING_SENSOR = 4;
+}

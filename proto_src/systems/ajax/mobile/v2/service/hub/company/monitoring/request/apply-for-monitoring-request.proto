@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.monitoring.request;
+
+option java_package = "systems.ajax.mobile.v2.service.hub.company.monitoring.request";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message ApplyForMonitoringRequest {
+  string hub_hex_id = 1;
+  string company_hex_id = 2;
+}

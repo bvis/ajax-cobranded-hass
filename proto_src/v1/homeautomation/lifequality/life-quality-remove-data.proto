@@ -1,0 +1,43 @@
+syntax = "proto3";
+import "google/type/datetime.proto";
+
+package systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality;
+
+option swift_prefix = "";
+option java_multiple_files = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality";
+
+message LifeQualityRemoveDataRequest {
+  string hub_hex_id = 1;
+  string device_hex_id = 2;
+}
+
+message LifeQualityRemoveDataResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {}
+
+  message Failure {
+    string message = 100;
+    oneof error {
+      NotFoundError not_found_error = 1;
+      AuthenticationError authentication_error = 2;
+      TimeoutError timeout_error = 3;
+      InternalError internal_error = 4;
+    }
+    message NotFoundError {
+    }
+
+    message InternalError {
+    }
+
+    message AuthenticationError {
+    }
+
+    message TimeoutError {
+    }
+  }
+}

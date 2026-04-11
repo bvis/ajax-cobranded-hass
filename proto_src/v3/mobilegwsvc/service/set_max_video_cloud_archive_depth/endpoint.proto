@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_max_video_cloud_archive_depth;
+
+import "v3/mobilegwsvc/service/set_max_video_cloud_archive_depth/request.proto";
+import "v3/mobilegwsvc/service/set_max_video_cloud_archive_depth/response.proto";
+
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_max_video_cloud_archive_depth";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SetMaxVideoCloudArchiveDepthService {
+
+  rpc execute(SetMaxVideoCloudArchiveDepthRequest) returns (SetMaxVideoCloudArchiveDepthResponse);
+}

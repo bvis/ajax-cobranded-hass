@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Company";
+
+import "google/protobuf/duration.proto";
+
+message PermissionsClaimType {
+  oneof permissions_type {
+    Permanent permanent = 1;
+    Temporary temporary = 2;
+    Rejected rejected = 3;
+  }
+
+  message Permanent {}
+  message Rejected {}
+
+  message Temporary {
+    google.protobuf.Duration duration = 1;
+  }
+}

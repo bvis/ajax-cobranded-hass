@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.firmware;
+
+import "systems/ajax/api/mobile/v2/firmware/get_firmware_metadata_request.proto";
+import "systems/ajax/api/mobile/v2/firmware/start_device_firmware_update_request.proto";
+import "systems/ajax/api/mobile/v2/firmware/start_system_firmware_update_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service HubFirmwareService {
+  rpc getFirmwareMetadata(GetFirmwareMetadataRequest) returns (GetFirmwareMetadataResponse) {}
+  rpc startDeviceFirmwareUpdate(StartDeviceFirmwareUpdateRequest) returns (StartDeviceFirmwareUpdateResponse) {}
+  rpc startSystemFirmwareUpdate(StartSystemFirmwareUpdateRequest) returns (StartSystemFirmwareUpdateResponse) {}
+};

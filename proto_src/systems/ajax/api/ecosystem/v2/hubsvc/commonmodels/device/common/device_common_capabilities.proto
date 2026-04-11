@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum DeviceCommonCapability {
+  DEVICE_COMMON_CAPABILITY_UNSPECIFIED = 0;
+  DEVICE_COMMON_CAPABILITY_GRADE_3 = 1;
+  DEVICE_COMMON_CAPABILITY_POWER_MANAGEMENT = 9;
+  DEVICE_COMMON_CAPABILITY_ATTENUATION_TEST = 10;
+  DEVICE_COMMON_CAPABILITY_BRACKET_STATE_SUPPORTED = 11;
+  DEVICE_COMMON_CAPABILITY_SELF_TEST = 12;
+  DEVICE_COMMON_CAPABILITY_MASK_CALIBRATION = 13;
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.webrtc;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message IceCandidateFilters {
+  TypeFilter type_filter = 1;
+
+  ProtocolFilter protocol_filter = 2;
+
+  bool force_tcp_for_turn = 3;
+
+  message TypeFilter {
+    bool host = 1;
+
+    bool reflexive = 2;
+
+    bool relay = 3;
+  };
+
+  message ProtocolFilter {
+    bool tcp = 1;
+
+    bool udp = 2;
+  };
+};

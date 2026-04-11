@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_ethernet_settings;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_ethernet_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message HubCommandEthernetSettingsRequest {
+  string hub_id = 1;
+  bool dhcp = 2;
+  string ip = 3;
+  string mask = 4;
+  string gate = 5;
+  string dns = 6;
+}

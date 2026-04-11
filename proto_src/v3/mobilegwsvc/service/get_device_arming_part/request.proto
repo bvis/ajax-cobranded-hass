@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part;
+
+import "systems/ajax/api/mobile/v2/common/space/device/video_edge_channel.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetDeviceArmingPartRequest {
+  string space_id = 1;
+
+  oneof device_locator {
+    mobile.v2.common.space.device.VideoEdgeChannel video_edge_channel = 11;
+  }
+}

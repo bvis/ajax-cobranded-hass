@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_fire_zone_test;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message HubCommandFireZoneTestRequest {
+  string hub_id = 1;
+  string fire_zone_id = 2;
+
+  oneof fire_zone_test_subcommand {
+    StartFireZoneTest start_fire_zone_test = 3;
+    AddFireZoneToTest add_fire_zone_to_test = 4;
+    RemoveFireZoneFromTest remove_fire_zone_from_test = 5;
+  }
+
+  message StartFireZoneTest {
+    TypeOfOutputActivate type_of_output_activate = 1;
+    repeated OutputDevice output_devices = 2;
+
+    enum TypeOfOutputActivate {
+      TYPE_OF_OUTPUT_ACTIVATE_UNSPECIFIED = 0;
+      TYPE_OF_OUTPUT_ACTIVATE_DO_NOT_ACTIVATE_OUTPUTS = 1;
+      TYPE_OF_OUTPUT_ACTIVATE_ACTIVATE_ONLY_IN_TESTED_ZONES = 2;
+      TYPE_OF_OUTPUT_ACTIVATE_ACTIVATE_IN_ALL_ZONES = 3;
+    }
+
+    enum OutputDevice {
+      OUTPUT_DEVICE_UNSPECIFIED = 0;
+      OUTPUT_DEVICE_SOUNDERS = 1;
+      OUTPUT_DEVICE_VADS = 2;
+      OUTPUT_DEVICE_RELAYS = 3;
+    }
+  }
+
+  message AddFireZoneToTest {}
+
+  message RemoveFireZoneFromTest {}
+}

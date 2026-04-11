@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetDeviceArmingPartResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    v2.commonmodels.device.common.CommonArmingPart common_arming_part = 1;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error device_not_found = 3;
+    }
+  }
+}

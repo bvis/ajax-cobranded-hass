@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.account;
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.account";
+option java_multiple_files = true;
+
+message Account {
+  string user_hex_id = 1;
+  string first_name = 2 [(hash_value) = true];
+  string last_name = 3 [(hash_value) = true];
+  string locale = 4;
+  string email = 5 [(hash_value) = true];
+  string phone = 6 [(hash_value) = true];
+  api.mobile.v2.common.image.Images images = 7;
+  uint32 end_user_agreement_version = 8;
+  uint32 privacy_policy_version = 9;
+  optional uint32 privacy_notice_version = 10;
+}

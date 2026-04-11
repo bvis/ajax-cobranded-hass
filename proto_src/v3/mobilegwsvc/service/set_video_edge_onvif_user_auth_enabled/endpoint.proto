@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_onvif_user_auth_enabled;
+
+import "v3/mobilegwsvc/service/set_video_edge_onvif_user_auth_enabled/request.proto";
+import "v3/mobilegwsvc/service/set_video_edge_onvif_user_auth_enabled/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_onvif_user_auth_enabled";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SetVideoEdgeOnvifUserAuthEnabledService {
+  rpc execute(SetVideoEdgeOnvifUserAuthEnabledRequest) returns (SetVideoEdgeOnvifUserAuthEnabledResponse);
+};

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CancelTemporaryVideoEdgeChannelPermissionsResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {}
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+      commonmodels.Error assignee_not_found = 4;
+      commonmodels.Error space_armed = 5;
+    }
+  }
+};

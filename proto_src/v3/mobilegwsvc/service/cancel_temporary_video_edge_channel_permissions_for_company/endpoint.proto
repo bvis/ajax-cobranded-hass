@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions_for_company;
+
+import "v3/mobilegwsvc/service/cancel_temporary_video_edge_channel_permissions_for_company/request.proto";
+import "v3/mobilegwsvc/service/cancel_temporary_video_edge_channel_permissions_for_company/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions_for_company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CancelTemporaryVideoEdgeChannelPermissionsForCompanyService{
+  rpc execute(CancelTemporaryVideoEdgeChannelPermissionsForCompanyRequest) returns (CancelTemporaryVideoEdgeChannelPermissionsForCompanyResponse);
+};

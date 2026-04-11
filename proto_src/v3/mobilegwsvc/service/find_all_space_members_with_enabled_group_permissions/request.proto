@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_members_with_enabled_group_permissions;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_members_with_enabled_group_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllSpaceMembersWithEnabledGroupPermissionsRequest {
+  string space_id = 1;
+  string group_id = 2;
+}

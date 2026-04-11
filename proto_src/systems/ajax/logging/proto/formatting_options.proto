@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.logging.proto";
+option java_multiple_files = true;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  bool disable_logging = 1101;
+  bool hash_value = 1103;
+}

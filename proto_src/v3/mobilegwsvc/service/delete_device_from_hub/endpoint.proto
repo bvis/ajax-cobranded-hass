@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_device_from_hub;
+
+import "v3/mobilegwsvc/service/delete_device_from_hub/request.proto";
+import "v3/mobilegwsvc/service/delete_device_from_hub/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_device_from_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeleteDeviceFromHubService {
+  rpc execute(DeleteDeviceFromHubRequest) returns (DeleteDeviceFromHubResponse);
+}

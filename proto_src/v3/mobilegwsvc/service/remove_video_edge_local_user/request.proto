@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.remove_video_edge_local_user;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.remove_video_edge_local_user";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RemoveVideoEdgeLocalUserRequest {
+  // [required]
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  // [required]
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  // [required]
+  string name = 3;
+}

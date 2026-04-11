@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message DownloadFirmwareUpdate {
+  repeated Restriction restrictions = 1;
+  bool is_progress = 2;
+  string fw_version = 3;
+
+  enum Restriction {
+    RESTRICTION_UNSPECIFIED = 0;
+    RESTRICTION_ARMED = 1;
+    RESTRICTION_EN_54_ALARM = 2;
+    RESTRICTION_WALK_TEST_IN_PROGRESS = 3;
+  }
+}

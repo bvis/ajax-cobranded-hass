@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InstallVideoEdgeRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  // [required] only if the QR code is not specified, will be removed once the apps migrate to QR codes
+  string video_edge_id = 2 [deprecated = true];
+
+  string video_edge_name = 3;
+
+  string room_id = 4;
+
+  optional string default_channel_group_id = 5;
+
+  // [optional] will become required once the apps migrate to QR codes
+  string video_edge_qr_code = 6;
+};
+
+message InstallVideoEdgeResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string video_edge_id = 1;
+    repeated string channel_ids = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError video_edge_is_already_installed = 4;
+      common.response.DefaultError video_edge_not_found = 5;
+      common.response.DefaultError space_armed = 6;
+      common.response.DefaultError room_not_found = 7;
+      common.response.SpaceLockedError space_locked = 8;
+      common.response.DefaultError group_not_found = 9;
+      common.response.DefaultError video_edge_is_offline = 10;
+      common.response.DefaultError role_access_required = 11;
+    }
+  }
+};

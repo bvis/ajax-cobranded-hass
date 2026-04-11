@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "v3/mobilegwsvc/commonmodels/accounting/service_group.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AvailablePrePaymentServiceGroup {
+  ServiceGroup service_group = 1;
+  repeated commonmodels.accounting.EnrichedTargetInfo feature_target_infos = 2;
+}

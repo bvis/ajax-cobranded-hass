@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/video_edge.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel";
+option swift_prefix = "";
+
+message ChannelSourceSettings {
+  oneof source {
+    NvrSourceSettings nvr_source_settings = 1;
+  }
+}
+
+message NvrSourceSettings {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+
+  string video_edge_name = 3;
+
+  mobile.v2.common.video.videoedge.ConnectionState video_edge_connection_state = 4;
+
+  mobile.v2.common.video.videoedge.archive.RecordMode record_mode = 5;
+
+  mobile.v2.common.video.videoedge.archive.RecordPolicy record_policy = 6;
+
+  repeated StorageDevice storage_devices = 7;
+
+  repeated mobile.v2.common.video.videoedge.channel.ChannelState channel_states = 8;
+
+  message StorageDevice {
+
+  }
+}

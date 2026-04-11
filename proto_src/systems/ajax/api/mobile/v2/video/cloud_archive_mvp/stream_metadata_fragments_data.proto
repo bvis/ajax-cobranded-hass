@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/fragment_error.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveStreamMetadataFragmentsDataRequest {
+  // [required]
+  string video_edge_guid = 1;
+
+  // [required]
+  string channel_guid = 2;
+
+  // [required]
+  string metadata_type = 3;
+
+  string space_id = 4;
+
+  // default = false
+  bool enable_presigned_urls_for_fragment_data = 100;
+}
+
+message CloudArchiveStreamMetadataFragmentsDataResponse {
+  // [optional]
+  string tag = 1;
+
+  oneof response_union {
+    string session_id = 100;
+
+    CloudArchiveMetadataFragmentData fragment_data = 101;
+  }
+
+  message CloudArchiveMetadataFragmentData {
+    uint64 fragment_id = 1;
+
+    FragmentError error = 2;
+
+    // Serialized 'Frames'.
+    bytes data = 3;
+
+    // url for fragment data (only when enable_presigned_urls_for_fragment_data=true)
+    string data_url = 4 [(disable_logging) = true];
+
+    message Frames {
+      repeated Frame entries = 1;
+    }
+
+    message Frame {
+      uint64 ts = 1;
+
+      bytes data = 2;
+    }
+  };
+}

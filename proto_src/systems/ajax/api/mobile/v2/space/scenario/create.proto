@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.scenario;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/scenario/scenario.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message CreateScenarioRequest {
+  string space_id = 1;
+  reserved 2; // space_member_id resolved from auth
+  string name = 3;
+  bool enabled = 4;
+  repeated common.space.scenario.Scenario.Case cases = 5;
+}
+
+message CreateScenarioResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    common.space.scenario.Scenario scenario = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_not_found = 3;
+      common.response.DefaultError space_armed = 4;
+      common.response.SpaceLockedError space_locked = 5;
+      common.response.DefaultError duplicated_name = 6;
+    }
+  }
+}

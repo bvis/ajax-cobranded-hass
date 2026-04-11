@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.company;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.company";
+
+import "v1/common/role.proto";
+
+message Employee {
+  message ComplexRole {
+    repeated common.Role roles = 1;
+  }
+
+  message EmployeeInfo {
+    string employee_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    company.Employee.ComplexRole role = 4;
+    string photo_id = 5;
+    string cluster_company_id = 6;
+  }
+}

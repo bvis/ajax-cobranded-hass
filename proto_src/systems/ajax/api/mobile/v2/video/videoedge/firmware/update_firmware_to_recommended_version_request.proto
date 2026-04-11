@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.firmware;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_version.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateFirmwareToRecommendedVersionRequest {
+  string video_edge_id = 1;
+
+  common.video.videoedge.firmware.FirmwareVersion acknowledged_firmware_version = 2;
+
+  // [optional] - will become required once the client apps are adjusted accordingly
+  common.space.SpaceLocator space_locator = 3;
+};
+
+message UpdateFirmwareToRecommendedVersionResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError video_edge_not_found = 4;
+      common.response.DefaultError firmware_update_already_in_progress = 5;
+      common.response.DefaultError no_available_firmware_update = 6;
+      common.response.DefaultError acknowledged_firmware_version_mismatch = 7;
+      common.response.DefaultError video_edge_is_offline = 8;
+    }
+  }
+};

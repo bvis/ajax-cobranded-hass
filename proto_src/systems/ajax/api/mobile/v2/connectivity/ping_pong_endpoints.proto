@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.connectivity;
+
+import "systems/ajax/api/mobile/v2/connectivity/ping_pong_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service PingPongService {
+    /*
+     *  Bi-directional stream for sending Ping messages to the server:
+     *    - requires security headers and works only for authenticated user
+     *    - responds with Pong for every Ping message
+     *    - Pong message contains a timestamp for corresponding Ping message. It allows to calculate the time of message roundtrip
+     *
+     *  General usecases:
+     *    - sending messages every N seconds (10s for example) and check that every Ping gets its Pong in reasonable amount of time
+     *    - mesure latency to show channel performance/quality (for the future)
+     */
+  rpc pingPong(stream PingPongRequest) returns (stream PingPongResponse);
+}

@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_device_to_hub;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_device_to_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RegisterDeviceToHubResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof type {
+      DeviceAdded device_added = 1;
+      WaitingForAction waiting_for_action = 2;
+      SearchStarted search_started = 3;
+      CancelRegistration cancel_registration = 4;
+    }
+
+    message WaitingForAction {
+      ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 1;
+    }
+
+    message DeviceAdded {}
+
+    message SearchStarted {}
+
+    message CancelRegistration {}
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error hub_request_already_performed = 2;
+      commonmodels.HubWrongStateError hub_wrong_state = 3;
+      commonmodels.Error permission_denied = 4;
+      commonmodels.HubBusyError hub_busy = 5;
+      commonmodels.Error hub_offline = 6;
+      commonmodels.Error device_search_timeout = 7;
+
+      UnknownDeviceError unknown_device = 8;
+      commonmodels.Error hub_type_not_supported = 9;
+      HubFirmwareNotSupportedError hub_firmware_not_supported = 10;
+      commonmodels.Error s_line_insufficient_access = 11;
+      commonmodels.Error s_line_unsupported_role = 12;
+      commonmodels.Error device_registration_restricted = 13;
+
+      commonmodels.Error switch_load_failed = 14; // TBD
+      commonmodels.Error objects_limit_exceeded = 16;
+    }
+  }
+
+  message UnknownDeviceError {
+    optional AvailableFwUpdate available_fw_update = 1;
+
+    message AvailableFwUpdate {
+      string firmware_version = 1;
+      int32 firmware_version_raw = 2;
+    }
+  }
+
+  message HubFirmwareNotSupportedError {
+    optional AvailableFwUpdate available_fw_update = 1;
+
+    message AvailableFwUpdate {
+      string firmware_version = 1;
+      int32 firmware_version_raw = 2;
+    }
+  }
+}

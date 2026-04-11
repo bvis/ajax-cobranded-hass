@@ -1,0 +1,47 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Inicio de sesion Ajax Security",
+                "description": "Introduce las credenciales de tu cuenta Ajax Security.",
+                "data": { "email": "Correo electronico", "password": "Contrasena", "app_label": "Etiqueta de app (nombre de la app co-branded)" }
+            },
+            "2fa": {
+                "title": "Autenticacion de dos factores",
+                "description": "Introduce el codigo de 6 digitos de tu app de autenticacion.",
+                "data": { "totp_code": "Codigo TOTP" }
+            },
+            "select_spaces": {
+                "title": "Seleccionar espacios",
+                "description": "Elige que espacios (hubs) anadir.",
+                "data": { "spaces": "Espacios" }
+            }
+        },
+        "error": {
+            "invalid_auth": "Correo o contrasena incorrectos.",
+            "invalid_totp": "Codigo TOTP incorrecto. Intentalo de nuevo.",
+            "cannot_connect": "No se puede conectar a los servidores de Ajax.",
+            "unknown": "Ha ocurrido un error inesperado."
+        },
+        "abort": {
+            "already_configured": "Esta cuenta ya esta configurada.",
+            "account_locked": "Cuenta bloqueada. Intentalo mas tarde.",
+            "reauth_successful": "Reautenticacion exitosa."
+        }
+    },
+    "entity": {
+        "sensor": {
+            "signal_level": {
+                "name": "Nivel de senal"
+            }
+        },
+        "switch": {
+            "channel_1": {
+                "name": "Canal 1"
+            },
+            "channel_2": {
+                "name": "Canal 2"
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.room;
+
+import "systems/ajax/api/mobile/v2/space/room/assign_device_to_room_request.proto";
+import "systems/ajax/api/mobile/v2/space/room/create_room_request.proto";
+import "systems/ajax/api/mobile/v2/space/room/delete_room_request.proto";
+import "systems/ajax/api/mobile/v2/space/room/update_room_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceRoomService {
+  rpc create(CreateRoomRequest) returns (CreateRoomResponse);
+
+  rpc update(UpdateRoomRequest) returns (UpdateRoomResponse);
+
+  rpc delete(DeleteRoomRequest) returns (DeleteRoomResponse);
+
+  rpc assignDeviceToRoom(AssignDeviceToRoomRequest) returns (AssignDeviceToRoomResponse);
+};

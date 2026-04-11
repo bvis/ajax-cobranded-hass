@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reboot_video_edge;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reboot_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RebootVideoEdgeRequest {
+  string video_edge_id = 1;
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 2;
+}

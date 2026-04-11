@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/home_siren_fibra.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/home_siren.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/street_siren.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/door_protect.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/double_button.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/en54_fire_base.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/motion_protect.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/motion_protect_curtain_outdoor.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/smart_lock.proto";
+
+option swift_prefix = "Hub";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message HubDevice {
+  oneof device {
+    DoorProtect door_protect = 1;
+    DoorProtectS door_protect_s = 2;
+    DoubleButton double_button = 3;
+    En54A en54_a = 4;
+    En54Va en54_va = 5;
+    En54V en54_v = 6;
+    En54HVa en54_h_va = 7;
+    En54HsVa en54_hs_va = 8;
+    En54H en54_h = 9;
+    En54S en54_s = 10;
+    En54SV en54_s_v = 11;
+    En54SA en54_s_a = 12;
+    En54HV en54_h_v = 13;
+    En54Ha en54_h_a = 14;
+    MotionProtect motion_protect = 15;
+    MotionProtectS motion_protect_s = 16;
+    HomeSirenFibra home_siren_fibra = 17;
+    HomeSiren home_siren = 18;
+    StreetSiren street_siren = 19;
+    StreetSirenPlusG3 street_siren_plus_g3 = 20;
+    MotionProtectCurtainOutdoorMini motion_protect_curtain_outdoor_mini = 21;
+    HomeSirenG3 home_siren_g3 = 22;
+    HomeSirenS home_siren_s = 23;
+    MotionProtectG3 motion_protect_g3 = 24;
+    MotionProtectPlusG3 motion_protect_plus_g3 = 25;
+    SmartLockYale smart_lock_yale = 26;
+  }
+}

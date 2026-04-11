@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/resource_status.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/visibility.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message HubAudioResource {
+  optional string initiator_name = 1 [(hash_value) = true];
+  repeated Audio resources = 2;
+
+  hub.media.MediaVisibility visibility = 3;
+
+  message Audio {
+    hub.media.ResourceStatus status = 1;
+  }
+}
+

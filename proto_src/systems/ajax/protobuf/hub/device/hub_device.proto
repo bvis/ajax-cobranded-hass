@@ -1,0 +1,565 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/image_urls.proto";
+import "systems/ajax/protobuf/hub/name.proto";
+import "systems/ajax/protobuf/common/decimal.proto";
+
+message HubDevice {
+    string id = 0x0A;
+
+    Name name = 1000;
+
+    NoiseLevel noise_level = 1010;
+    message NoiseLevel {
+        google.protobuf.BoolValue high = 0x3E;
+        google.protobuf.Int32Value avg_value_channel1 = 0x34;
+        google.protobuf.Int32Value avg_value_channel2 = 0x4F;
+        google.protobuf.Int32Value avg_value_data_channel = 0xAA;
+    }
+
+    google.protobuf.BoolValue connection_status = 0x07;
+
+    State state = 0x08;
+    StateWithGroups state_with_groups = 0x89;
+
+    DebugLogState debug_log_state = 0x51;
+    bool panic_siren_on_panic_button = 0x66;
+
+    Limits limits = 1030;
+    message Limits {
+        google.protobuf.Int32Value users = 0x76;
+        google.protobuf.Int32Value sensors = 0x77;
+        google.protobuf.Int32Value rooms = 0x78;
+        google.protobuf.Int32Value cameras = 0x79;
+        google.protobuf.Int32Value groups = 0x86;
+    }
+
+    bool groups_enabled = 0x7E;
+
+    Firmware firmware = 1040;
+    message Firmware {
+        string version = 0x37;
+        google.protobuf.BoolValue new_version_available = 0x4D;
+        bool auto_update_enabled = 0x68;
+        string latest_available_version = 0x69;
+        string rr = 1041;
+    }
+
+    Ethernet ethernet = 1050;
+    message Ethernet {
+        bool dhcp = 0x10;
+        string ip = 0x23;
+        string mask = 0x24;
+        string gate = 0x25;
+        string dns = 0x26;
+        bool enabled = 0x4A;
+    }
+
+    ArmPreventionMode arm_prevention_mode = 0x70;
+    google.protobuf.BoolValue tampered = 0x06;
+    bool panic_siren_on_any_tamper = 0x65;
+
+    Battery battery = 1060;
+    message Battery {
+        google.protobuf.Int32Value charge_level_percentage = 0x01;
+        BatteryState state = 0x02;
+    }
+
+    HardwareVersions hardware_versions = 1070;
+    message HardwareVersions {
+        int32 modem = 0x55;
+        int32 wifi = 0x56;
+        int32 ethernet = 0x57;
+        int32 flash = 0x58;
+        int32 cpu = 0x59;
+        int32 pcb = 0x5A;
+        int32 rfm = 0x5B;
+        int32 zwave = 0x5C;
+    }
+
+    Warnings warnings = 1080;
+    message Warnings {
+        google.protobuf.Int32Value hub = 0x6A;
+        google.protobuf.Int32Value all_devices = 0x6C;
+    }
+
+    FireAlarm fire_alarm = 1090;
+    message FireAlarm {
+        bool trigger_on_all_sensors = 0x67;
+        bool double_impulses = 0x6B;
+    }
+
+    Wifi wifi = 1100;
+    message Wifi {
+        SecurityProtocol security_protocol = 0x11;
+        SignalLevel signal_level = 0x12;
+        string ssid = 0x27;
+        string password = 0x28;
+        int32 channel = 0x29;
+        string ip = 0x2A;
+        string mask = 0x2B;
+        string gate = 0x2C;
+        string dns = 0x2D;
+        bool dhcp = 0x2E;
+        bool enabled = 0x4B;
+
+        enum SecurityProtocol {
+            NO_SECURITY_PROTOCOL_INFO = 0;
+            NONE = 1;
+            WEP = 2;
+            WPA = 3;
+            WPA2 = 4;
+            WPA_WPA2 = 5;
+        }
+
+        enum SignalLevel {
+            NO_SIGNAL_LEVEL_INFO = 0;
+            NO_SIGNAL = 1;
+            WEAK = 2;
+            NORMAL = 3;
+            STRONG = 4;
+        }
+    }
+
+    Gsm gsm = 1110;
+    message Gsm {
+        bool disable_icmp_before_connecting = 0x7B;
+        bool gprs_enabled = 0x4C;
+        bool virtual_operator_allowed = 0x84;
+        bool roaming_enabled = 0x73;
+        SimCardState sim_card_state = 0x5F;
+        NetworkStatus network_status = 0x7A;
+        SignalLevel signal_level = 0x04;
+        int32 active_sim_card = 0x85;
+
+        SimCard1 sim_card1 = 1000;
+        message SimCard1 {
+            string number = 0x87;
+            string apn = 0x20;
+            string username = 0x21;
+            string password = 0x22;
+            string balance_number = 0x53;
+            google.protobuf.Int32Value traffic_tx_kb = 0x8B;
+            google.protobuf.Int32Value traffic_rx_kb = 0x8C;
+            google.protobuf.Int32Value last_traffic_reset_timestamp = 0x90;
+        }
+
+        SimCard2 sim_card2 = 1010;
+        message SimCard2 {
+            string number = 0x88;
+            string apn = 0x7F;
+            string username = 0x81;
+            string password = 0x82;
+            string balance_number = 0x83;
+            google.protobuf.Int32Value traffic_tx_kb = 0x8D;
+            google.protobuf.Int32Value traffic_rx_kb = 0x8E;
+            google.protobuf.Int32Value last_traffic_reset_timestamp = 0x91;
+        }
+
+        enum SimCardState {
+            NO_SIM_CARD_STATE_INFO = 0;
+            OK = 1;
+            MISSING = 2;
+            MALFUNCTION = 3;
+            LOCKED = 4;
+            UNKNOWN = 5;
+        }
+
+        enum SignalLevel {
+            NO_SIGNAL_LEVEL_INFO = 0;
+            NO_SIGNAL = 1;
+            WEAK = 2;
+            NORMAL = 3;
+            STRONG = 4;
+        }
+
+        enum NetworkStatus {
+            NO_NETWORK_STATUS_INFO = 0;
+            GSM = 1;
+            _2G = 2;
+            _3G = 3;
+            _4G = 4;
+        }
+    }
+
+    Cms cms = 1120;
+    message Cms {
+        string address = 0x60;
+        int32 port = 0x61;
+        string address_reserve = 0x7C;
+        int32 port_reserve = 0x7D;
+        repeated ActiveChannel active_channels = 0x72;
+        int32 ping_period_seconds = 0x74;
+        bool gprs_enabled = 0x63;
+        bool ethernet_enabled = 0x62;
+        bool wifi_enabled = 0x64;
+        Protocol protocol = 0x8F;
+        ConnectionMode connection_mode = 0x92;
+        string sia_account_number = 0x93;
+        string sia_encryption_key = 0x9F;
+        SiaEncryptionType sia_encryption_type = 0xA0;
+        bool send_panic_button_location = 0xB8;
+
+        enum ActiveChannel {
+            NO_ACTIVE_CHANNEL_INFO = 0;
+            ETHERNET = 1;
+            WIFI = 2;
+            GSM = 3;
+        }
+
+        enum Protocol {
+            NO_CMS_PROTOCOL_INFO = 0;
+            CID = 1;
+            SIA = 2;
+        }
+
+        enum ConnectionMode {
+            NO_CMS_CONNECTION_MODE_INFO = 0;
+            ALWAYS_UP = 1;
+            ON_DEMAND = 2;
+        }
+
+        enum SiaEncryptionType {
+            NO_SIA_ENCRYPTION_TYPE_INFO = 0;
+            OFF = 1;
+            AES128 = 2;
+            AES256 = 3;
+        }
+    }
+
+    Color color = 0x49;
+
+    string image_id = 0x52;
+    int32 image_num = 0x0F;
+    ImageUrls image_urls = 1130;
+
+    repeated ActiveChannel active_channels = 0x48;
+    int32 ping_period_seconds = 0x3F;
+    int32 offline_alarm_seconds = 0x47;
+    int32 led_brightness_level = 0x6D;
+    Subtype subtype = 0x75;
+
+    Jeweller jeweller = 1140;
+    message Jeweller {
+        int32 lost_heartbeats_threshold = 0x39;
+        int32 detector_ping_interval_seconds = 0x38;
+    }
+
+    google.protobuf.BoolValue externally_powered = 0x03;
+    google.protobuf.BoolValue connection_test_in_progress = 0x3B;
+    repeated Malfunction malfunctions = 0x14;
+    google.protobuf.BoolValue blocked_by_service_provider = 0x96;
+    bool connection_lost_as_malfunction = 0xAB;
+    bool alarm_as_malfunction_when_arming = 0xB2;
+    int32 auto_bypass_timer_minutes = 0xBF;
+    int32 auto_bypass_counter = 0xC0;
+
+    Address hub_address = 1150;
+    message Address {
+        string country_code = 0x97;
+        string loc_state = 0x98;
+        string locality = 0x99;
+        string address = 0x9A;
+        string comment = 0x9B;
+        Decimal latitude = 0x9C;
+        Decimal longitude = 0x9D;
+    }
+
+    string time_zone = 0xB5;
+
+    AlarmVerification alarm_verification = 1160;
+    message AlarmVerification {
+        bool verification_enabled = 0xB3;
+        int32 verification_timeout = 0xB4;
+    }
+
+    repeated AlarmType restore_required = 0xBB;
+    repeated AlarmType alarm_happened = 0xBC;
+
+    repeated ArmPreventionCondition arm_preventions_to_check = 0xC1;
+    ReportAlarmRestore report_alarm_restore = 0xC2;
+    ReportPanicAlarmRestore report_panic_alarm_restore = 0xCF;
+    int32 tamper_alarm_confirmation = 0xC3;
+    int32 confirmed_alarm_on_delayed_devices = 0xC4;
+    int32 alarm_confirmation_hu_devices_pd6662 = 0xC5;
+    int32 verification_timeout_hu = 0xC6;
+
+    Interconnection interconnection = 1165;
+    message Interconnection {
+        int32 interconnect_delay_timeout = 0xD0;
+        int32 interconnect_delay_expiration_unix_time = 0xD1;
+        InterconnectState interconnect_state = 0xD2;
+        repeated InterconnectMode interconnect_modes = 0xD7;
+    }
+
+    repeated PostAlarmIndicationRule postAlarmIndicationRule = 0xD4;
+    int32 lost_fibra_counter = 0xD6;
+    repeated ChimesStatus chimes_status = 0xD8;
+    repeated ActiveChannel channel_connectivity_notification_active = 0xD9;
+    int32 channel_offline_alarm_delay_seconds = 0xDA;
+    repeated PhotoOnDemandMode photo_on_demand_mode = 0xDB;
+    DefaultCameraPermission default_camera_permission = 0xDD;
+    DefaultPhotoOnDemandPermission default_photo_on_demand_permission = 0xDE;
+    DefaultUserCameraPermission default_user_camera_permission = 0xDF;
+    DefaultUserPhotoOnDemandPermission default_user_photo_on_demand_permission = 0xE0;
+    MaxPowerTestState max_power_test_state = 0xE1;
+    repeated BusState bus_status = 0xE2;
+    ScanStatus scan_status = 0xE3;
+    repeated PrivacyOfficerOption privacy_officer_options = 0xE4;
+
+    GeoFence geofence = 1166;
+    message GeoFence {
+        int32 radius_meters = 0x41;
+        GeoFenceCoordinates coordinates = 0x42;
+
+        message GeoFenceCoordinates {
+            Decimal latitude = 1;
+            Decimal longitude = 2;
+        }
+    }
+
+    enum DebugLogState {
+        NO_DEBUG_LOG_STATE_INFO = 0;
+        NO_LOGS = 1;
+        ETHERNET_ONLY = 2;
+        WIFI_ONLY = 3;
+        ETHERNET_OR_WIFI = 4;
+    }
+
+    enum State {
+        NO_STATE_INFO = 0;
+
+        DISARMED = 1;
+        ARMED = 2;
+        NIGHT_MODE = 3;
+    }
+
+    enum StateWithGroups {
+        NO_STATE_WITH_GROUPS_INFO = 0;
+
+        ARMED_NIGHT_MODE_ON = 1;
+        ARMED_NIGHT_MODE_OFF = 2;
+        DISARMED_NIGHT_MODE_ON = 3;
+        DISARMED_NIGHT_MODE_OFF = 4;
+        PARTIALLY_ARMED_NIGHT_MODE_ON = 5;
+        PARTIALLY_ARMED_NIGHT_MODE_OFF = 6;
+    }
+
+    enum ArmPreventionMode {
+        NO_ARM_PREVENTION_MODE_INFO = 0;
+        IGNORE_WARNINGS = 1;
+        ALERT_USER = 2;
+        PREVENT_ARMING = 3;
+    }
+
+    enum Color {
+        NO_COLOR_INFO = 0;
+        WHITE = 1;
+        BLACK = 2;
+        WHITE_LABEL_WHITE = 3;
+        WHITE_LABEL_BLACK = 4;
+    }
+
+    enum BatteryState {
+        NO_BATTERY_STATE_INFO = 0;
+        DISCHARGED = 1;
+        CHARGED = 2;
+        MALFUNCTION = 3;
+        CHARGING = 4;
+    }
+
+    enum ActiveChannel {
+        NO_ACTIVE_CHANNEL_INFO = 0;
+        ETHERNET = 1;
+        WIFI = 2;
+        GSM = 3;
+    }
+
+    /*
+     * Int32 BitMask values
+     */
+    enum Malfunction {
+        NO_MALFUNCTION_INFO = 0;
+        CABLE_BREAK_ISSUE = 1;
+        VOLTAGE_INSTABILITY = 2;
+        SIREN_VOLUME_TEST_REQUIRED = 3;
+        CO_SENSOR_MALFUNCTION = 4;
+        CO_SENSOR_LEVEL_EXCEEDED = 5;
+        SMOKE_DETECTOR_CAMERA_MALFUNCTION = 6;
+        MICROWAVE_SENSOR_CALIBRATION_ERROR = 7;
+        ACCELEROMETER_MALFUNCTION = 8;
+        BAD_INPUT_RESISTANCE = 9;
+        MODEM_MALFUNCTION = 27;
+        WIFI_CONNECTION_FAIL = 28;
+        BATTERY_MALFUNCTION = 29;
+        BATTERY_CHARGE_ERROR = 30;
+        SOFTWARE_MALFUNCTION = 31;
+        FLASH_MALFUNCTION = 32;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE_INFO = 0x00;
+        HUB = 0x01;
+        HUB_PLUS = 0x02;
+        YAVIR = 0x03;
+        YAVIR_PLUS = 0x04;
+        HUB_2 = 0x05;
+        HUB_2_PLUS = 0x06;
+        HUB_3 = 0x07;
+        HUB_FIBRA = 0x08;
+        HUB_2_4G = 0x0a;
+    }
+
+    enum TwoStageArmingStatus {
+        NO_TWO_STORAGE_ARMING_STATUS = 0;
+        NONE = 1;
+        APP_EXIT_TIMER_IN_PROGRESS = 2;
+        SECOND_STAGE_TIMER_IN_PROGRESS = 3;
+        ARMING_INCOMPLETE = 4;
+        FINAL_DOOR_BOUNCE_TIMER_IN_PROGRESS = 5;
+    }
+
+    TwoStageArmingStatus two_stage_arming_progress_status = 0xCD;
+    TwoStageArming two_stage_arming = 1170;
+
+    message TwoStageArming {
+        bool two_stage_arming_state = 0xC7;
+        ApplicationTriggeredArming application_triggered_arming = 1180;
+        DeviceTriggeredArming device_triggered_arming = 1190;
+        int32 exit_timer_expiration_unix_time = 0xCE;
+        int32 remote_notification_delay = 0xCB;
+        bool disarming_by_keypad = 0xD3;
+    }
+
+    message ApplicationTriggeredArming {
+        int32 app_exit_timer = 0xC8;
+    }
+
+    message DeviceTriggeredArming {
+        int32 second_stage_exit_timer = 0xC9;
+        int32 final_door_bounce_timer = 0xCA;
+    }
+
+    enum PostAlarmIndicationRule {
+        NO_ALARM_INDICATION_RULE = 0;
+        UNCONFIRMED_ALARM = 1;
+        CONFIRMED_ALARM = 2;
+        TEMPER_ALARM = 3;
+    }
+
+    enum ReportAlarmRestore {
+        NO_REPORT_ALARM_RESTORE_INFO = 0;
+        ON_RECOVERY = 1;
+        ON_DISARM = 2;
+    }
+
+    enum ReportPanicAlarmRestore {
+        NO_REPORT_PANIC_ALARM_RESTORE_INFO = 0;
+        OFF = 1;
+        ON = 2;
+    }
+
+    enum AlarmType {
+        NO_ALARM_TYPE_INFO = 0;
+        CONFIRMED_ALARMS = 1;
+        CONFIRMED_HU_ALARMS = 2;
+        UNCONFIRMED_ALARMS = 3;
+        UNCONFIRMED_HU_ALARMS = 4;
+        TAMPER_ACTIVATION = 5;
+    }
+
+    enum InterconnectState {
+        NO_INTERCONNECT_STATE = 0;
+        DISABLED = 1;
+        DELAYED = 2;
+        MUTED_BY_USER = 3;
+        STARTED = 4;
+    }
+
+    enum ArmPreventionCondition {
+        NO_ARM_PREVENTION_CONDITION = 0;
+        LOW_BATTERY_CHARGE = 1;
+        NO_EXTERNAL_POWER = 2;
+        TAMPERED = 3;
+        HIGH_NOISE_LEVEL = 4;
+        NO_SERVER_CONNECTION = 5;
+        NO_CMS_CONNECTION = 6;
+    }
+
+    enum InterconnectMode {
+        NO_INTERCONNECT_MODE_INFO = 0;
+        MULTI_APARTMENT = 1;
+    }
+
+    enum ChimesStatus {
+        NO_CHIMES_STATUS_INFO = 0;
+        CHIMES_ENABLED = 1;
+        SIRENS_READY = 2;
+        TRIGGERS_READY = 3;
+    }
+
+    enum DefaultCameraPermission {
+        NO_DEFAULT_CAMERA_PERMISSION_INFO = 0;
+        CAMERA_PERMISSION_DISABLED = 1;
+        CAMERA_PERMISSION_ENABLED = 2;
+    }
+
+    enum DefaultPhotoOnDemandPermission {
+        NO_DEFAULT_PHOTO_ON_DEMAND_PERMISSION_INFO = 0;
+        PHOTO_ON_DEMAND_PERMISSION_DISABLED = 1;
+        PHOTO_ON_DEMAND_PERMISSION_ENABLED = 2;
+        PHOTO_ON_DEMAND_PERMISSION_ENABLED_ON_ARM = 3;
+    }
+
+    enum DefaultUserCameraPermission {
+        NO_DEFAULT_USER_CAMERA_PERMISSION_INFO = 0;
+        USER_CAMERA_PERMISSION_DISABLED = 1;
+        USER_CAMERA_PERMISSION_ENABLED = 2;
+    }
+
+    enum DefaultUserPhotoOnDemandPermission {
+        NO_DEFAULT_USER_PHOTO_ON_DEMAND_PERMISSION_INFO = 0;
+        USER_PHOTO_ON_DEMAND_PERMISSION_DISABLED = 1;
+        USER_PHOTO_ON_DEMAND_PERMISSION_ENABLED = 2;
+        USER_PHOTO_ON_DEMAND_PERMISSION_ENABLED_ON_ARM = 3;
+    }
+
+    enum PhotoOnDemandMode {
+        NO_PHOTO_ON_DEMAND_MODE_INFO = 0;
+        PHOTO_ON_DEMAND_USER = 1;
+        PHOTO_ON_DEMAND_SCENARIO = 2;
+    }
+
+    enum PrivacyOfficerOption {
+        NO_PRIVACY_OFFICER_OPTION_INFO = 0;
+        ACCESS_TO_SLOW_POD_ALLOWED = 1;
+        ACCESS_TO_CAMERA_PRIVACY_SETTINGS_ALLOWED = 2;
+    }
+
+    enum MaxPowerTestState {
+        NO_MAX_POWER_TEST_STATE_INFO = 0;
+        TEST_NOT_STARTED = 1;
+        TEST_IN_PROGRESS = 2;
+        TEST_FINISHED_SUCCESSFULLY = 3;
+        TEST_FINISHED_WITH_SC = 4;
+    }
+
+    enum BusState {
+        NO_BUS_STATE = 0;
+        POWERED_ON = 1;
+        SHORT_CIRCUIT_PRESENT = 2;
+    }
+
+    enum ScanStatus {
+        NO_SCAN_STATUS_INFO = 0;
+        SCAN_NOT_STARTED = 1;
+        SCAN_STARTED = 2;
+        DEVICES_FOUND = 3;
+    }
+}

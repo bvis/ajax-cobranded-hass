@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_walk_test;
+
+import "google/protobuf/timestamp.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/walk_test_sensor.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_walk_test";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamWalkTestResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+  message Success {
+
+    oneof success {
+      Snapshot snapshot = 1;
+      Update update = 2;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+    }
+  }
+
+  message Snapshot {
+    WalkTestState walk_test_state = 1;
+    repeated WalkTestDevice devices = 2;
+    repeated WalkTestEvent events = 3;
+  }
+
+  message Update {
+    oneof update_case {
+      WalkTestState walk_test_state = 1;
+      WalkTestEvents walk_test_events = 2;
+    }
+  }
+
+  enum WalkTestState {
+    WALK_TEST_STATE_UNSPECIFIED = 0;
+    WALK_TEST_STATE_LAUNCH = 1;
+    WALK_TEST_STATE_PROCESS = 2;
+    WALK_TEST_STATE_STOPPED = 3;
+  }
+
+  message WalkTestDevice {
+    string hex_id = 1;
+    v2.hubsvc.commonmodels.ObjectType type = 2;
+    repeated v2.hubsvc.commonmodels.device.WalkTestSensor sensors = 3;
+  }
+
+  message WalkTestEvents {
+    repeated WalkTestEvent events = 1;
+  }
+
+  message WalkTestEvent {
+    google.protobuf.Timestamp timestamp = 1;
+    string device_hex_id = 2;
+    v2.hubsvc.commonmodels.ObjectType device_type = 3;
+    v2.hubsvc.commonmodels.device.WalkTestSensor sensor = 4;
+  }
+}

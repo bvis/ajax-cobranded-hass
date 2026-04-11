@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+
+message ExtraServiceState {
+  oneof state {
+    Active active = 1;
+    Suspended suspended = 2;
+    Deactivated deactivated = 3;
+  }
+
+  message Active {
+    oneof time {
+      google.protobuf.Timestamp renews_on = 1;
+      google.protobuf.Timestamp expires_on = 2;
+    }
+  }
+
+  message Suspended {
+    google.protobuf.Timestamp paused_on = 1;
+  }
+
+  message Deactivated {
+    google.protobuf.Timestamp expired_on = 1;
+  }
+}

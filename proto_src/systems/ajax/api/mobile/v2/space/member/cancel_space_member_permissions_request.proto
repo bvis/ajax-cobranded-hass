@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CancelSpaceMemberPermissionsRequest{
+
+  common.space.SpaceLocator space_locator = 1;
+
+  string space_member_id = 2;
+};
+
+message CancelSpaceMemberPermissionsResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.SpaceLockedError space_locked = 4;
+    }
+  }
+};

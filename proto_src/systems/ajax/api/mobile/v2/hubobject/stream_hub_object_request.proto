@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject;
+
+import "systems/ajax/api/mobile/v2/hubobject/model/hub_object.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message StreamHubObjectRequest {
+  string hex_id = 1;
+}
+
+message StreamHubObject {
+  oneof item {
+    systems.ajax.api.mobile.v2.hubobject.model.HubObject snapshot = 1;
+    systems.ajax.api.mobile.v2.hubobject.model.HubObject create = 2;
+    systems.ajax.api.mobile.v2.hubobject.model.HubObject update = 3;
+    systems.ajax.api.mobile.v2.hubobject.model.HubObject delete = 4;
+  }
+}

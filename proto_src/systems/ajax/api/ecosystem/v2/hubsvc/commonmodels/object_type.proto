@@ -1,0 +1,480 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels;
+
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels";
+option java_multiple_files = true;
+option swift_prefix = "CommonHub";
+
+// source is taken from systems.ajax.hub-svc:internal-api-core-hub-svc -> systems/ajax/api/internal/v2/hubsvc/commonmodels/hub/object_type.proto
+message DoorProtect {}
+message DoorProtectS {}
+message MotionProtect {}
+message MotionProtectS {}
+message FireProtect {}
+message FireProtectTwoBase{}
+message FireProtectTwo {}
+message FireProtectTwoPlus {}
+message FireProtectTwoPlusSb {}
+message FireProtectTwoSb {}
+message FireProtectTwoHRB {}
+message FireProtectTwoHSB {}
+message FireProtectTwoCRB {}
+message FireProtectTwoCSB {}
+message FireProtectTwoHCRB {}
+message FireProtectTwoHCSB {}
+message GlassProtect {}
+message GlassProtectS {}
+message LeakProtect {}
+message MotionProtectCurtain {}
+message RangeExtender {}
+message CombiProtect {}
+message CombiProtectS {}
+message FireProtectPlus {}
+message Keyboard {}
+message SpaceControl {}
+message Button {}
+message ButtonS {}
+message MotionCam {}
+message MotionCamPhod {}
+message MotionProtectPlus {}
+message MotionProtectSPlus {}
+message MotionProtectG3 {}
+message MotionProtectPlusG3 {}
+message DoorProtectPlus {}
+message DoorProtectSPlus {}
+message UniversalDevice {}
+message Transmitter {}
+message Relay {}
+message MotionProtectOutdoor {}
+message StreetSiren {}
+message HomeSiren {}
+message HomeSirenG3 {}
+message StoveguardSensor {}
+message StoveguardSwitch {}
+message MotionCamOutdoor {}
+message MotionCamOutdoorPhod {}
+message MotionCamOutdoorTwoFourPhod {}
+message KeypadPlus {}
+message KeypadSPlus {}
+message KeypadPlusG3 {}
+message DualCurtainOutdoor {}
+message StreetSirenDoubleDeck {}
+message StreetSirenSDoubleDeck {}
+message MultiTransmitter {}
+message WireInputMt {}
+message Socket {}
+message WallSwitch {}
+message Hub {}
+message HubPlus {}
+message HubYavir {}
+message HubYavirPlus {}
+message HubTwo {}
+message HubTwoPlus {}
+message HubThree {}
+message HubFibra {}
+message HubLite {}
+message HubTwo4G {}
+message HubTwoLteRtk {}
+message HubHybrid4G {}
+message Hub4G {}
+message HubFire {}
+message User {}
+message Group {}
+message Room {}
+message Camera {}
+message WireInput {}
+message WireSiren {}
+message YavirAccessControl {}
+message AccessKey {}
+message Scenario {}
+message CompanyBinding {}
+message Schedule {}
+message ConfigMigration {}
+message AccessCard {}
+message InstallationCompany {}
+message AccessCode {}
+message VideoEdge {}
+message DoubleButton {}
+message DoubleButtonG3 {}
+message KeypadCombi {}
+message LightSwitch {}
+message LightSwitchOneGang {} // hts subtype=0x01
+message LightSwitchTwoGang {} // hts subtype=0x02
+message LightSwitch2Way {} // hts subtype=0x03
+message LightSwitchTwoChannelTwoWay {} // hts subtype=0x04
+message LightSwitchCrossover {} // hts subtype=0x05
+message LightSwitchDimmer {} // hts subtype=0x06
+message LightSwitchOneGangNa {} // hts subtype=0x07
+message LightSwitchThreeWayNa {} // hts subtype=0x08
+message LightSwitchFourWayNa {} // hts subtype=0x09
+message VhfBridge {}
+message RangeExtender2 {}
+message RangeExtender2Fire {} // hts subtype=0x01
+message LifeQuality {}
+message LifeQualityPlus {}
+message SocketBase {}
+message SocketG {} // hts subtype=0x01
+message SocketTypeGPlus {} // hts subtype=0x02
+message SocketOutletTypeF {} // hts subtype=0x03
+message SocketOutletTypeE {} // hts subtype=0x04
+message SocketB {} // hts subtype=0x05
+message Threshold {}
+message DoorProtectFibra {}
+message MotionProtectFibra {}
+message GlassProtectFibra {}
+message CombiProtectFibra {}
+message KeyboardFibra {}
+message MotionCamFibra {}
+message MotionCamFibraBase {}
+message MotionCamPhodFibra {}
+message MotionProtectPlusFibra {}
+message MotionProtectG3Fibra {}    // business name Motion Protect Plus G3 Fibra  https://ajaxsystems.atlassian.net/browse/FIBRASTR-13725
+message MotionProtectG3FibraNew {} // business name Motion Protect G3 Fibra https://ajaxsystems.atlassian.net/browse/FIBRASTR-14712
+message DoorProtectPlusFibra {}
+message StreetSirenFibra {}
+message StreetSirenDoubleDeckFibra {}
+message HomeSirenFibra {}
+message MultiTransmitterFibra {}
+message WaterStopBase {}
+message WaterStop {}
+message LineFibraBase {}
+message LineSplitFibra {}
+message LineProtectFibra {}
+message KeypadTouchscreen {}
+message KeypadTouchscreenG3 {}
+message RelayFibraBase {}
+message FourChannelsRelayFibra {}
+message Bus {}
+message LineSupplyFibraBase {}
+message OneChannelLineSupplyFibra {}
+message TwoChannelsLineSupplyFibra {}
+message KeypadBeep {}
+message FireProtectTwoCRbUl {}
+message FireProtectTwoHRbUl {}
+message FireProtectTwoHscRbUl {}
+message FireProtectTwoHscSbUl {}
+message FireProtectTwoHsRbUl {}
+message FireProtectTwoHsSbUl {}
+message FireProtectTwoHsAc {}
+message FireProtectTwoHscAc {}
+message FireProtectTwoCAc {}
+message FireProtectTwoHAc {}
+message FireProtectTwoHcAc {}
+message FireProtectTwoHsAcUl {}
+message FireProtectTwoHscAcUl {}
+message SecurityManagement {}
+message Keyarm {}
+message TransmitterFibraBase {}
+message TransmitterFibraTwoChannels {}
+message WireInputRs {}
+message AccessRRUCode {}
+message SwitchBase {}
+message SwitchBaseAlarm {}
+message SwitchBaseMcpFire {}
+message SwitchBaseMcpFireLocal {}
+message KeypadBase {}
+message HomeSirenS {}
+message MotionCamSPhod {}
+message MotionCamSPhodAm {}
+message MotionCamSuperiorPhod {}
+message MotionCamG3 {}
+message DoorProtectPlusG3Fibra {}
+message KeypadTouchscreenFibra {}
+message VoiceBase {}
+message VoiceModule {}
+message Speakerphone {}
+message HubVoid4G {}
+message MotionProtectCurtainBase {}
+message MotionProtectCurtainOutdoorBase {}
+message MotionProtectCurtainOutdoorPlus {}
+message MotionProtectCurtainOutdoorMini {}
+message SwitchBaseMcpScenarioGreen {}
+message SwitchBaseMcpScenarioWhite {}
+message SwitchBaseMcpScenarioYellow {}
+message DoorProtectG3 {}
+message CrossZone {}
+message MotionCamVideoBase {}
+message MotionCamVideoDoorbell {}
+message MotionCamVideoIndoor {}
+message MotionCamHd {}
+message KeypadOutdoorBase {}
+message KeypadOutdoor {}
+message KeypadOutdoorFibra {}
+message SipBase {}
+message SipServer {}
+message SipOperator {}
+message StreetSirenS {}
+message StreetSirenPlusG3 {}
+message SeismoProtectG3Fibra {}
+message SeismoProtectFibraBase {}
+message StreetSirenPlusFibra {}
+message TransmitterFibraFourChannels {}
+message TransmitterFibraFourChannelsInputOutput {}
+message TransmitterFibraFourChannelsOneRelay {}
+message TransmitterFibraFourChannelsTwoRelays {}
+message TransmitterFibraFourChannelsTwoRelaysTwoLogical {}
+message En54FireBase {}
+message En54A {}
+message En54Va {}
+message FireZone {}
+message En54FireZone {}
+message En54V {}
+message En54HVa {}
+message En54H {}
+message En54HV {}
+message En54HA {}
+message En54HsVa {}
+message En54S {}
+message En54SA {}
+message En54SV {}
+message SpaceControlS {}
+message En54IoModuleBase {}
+message En54IoModuleTwoInTwoOut {}
+message FireWireInputBase {}
+message En54WireInput {}
+message HubMega {}
+message ScheduledAccess {}
+message HubSuperior {}
+message HubHybrid2 {}
+message DayAlarmZone {}
+message SmartLock {}
+message SmartLockYale {}
+
+message ObjectType {
+  oneof type {
+    DoorProtect door_protect = 1;
+    MotionProtect motion_protect = 2;
+    FireProtect fire_protect = 3;
+    DoorProtectPlus door_protect_plus = 4;
+    DoorProtectFibra door_protect_fibra = 5;
+    DoorProtectPlusFibra door_protect_plus_fibra = 6;
+    GlassProtect glass_protect = 7;
+    GlassProtectFibra glass_protect_fibra = 8;
+    MotionProtectCurtain motion_protect_curtain = 9;
+    CombiProtect combi_protect = 10;
+    MotionCamPhod motion_cam_phod = 11;
+    MotionProtectPlus motion_protect_plus = 12;
+    MotionProtectOutdoor motion_protect_outdoor = 13;
+    MotionCamOutdoorPhod motion_cam_outdoor_phod = 14;
+    MotionProtectFibra motion_protect_fibra = 15;
+    CombiProtectFibra combi_protect_fibra = 16;
+    MotionCamFibra motion_cam_fibra = 17;
+    MotionProtectPlusFibra motion_protect_plus_fibra = 18;
+    FireProtectPlus fire_protect_plus = 19;
+    LifeQualityPlus life_quality_plus = 20;
+    Hub hub = 21;
+    LeakProtect leak_protect = 22;
+    RangeExtender range_extender = 23;
+    Keyboard keyboard = 24;
+    SpaceControl space_control = 25;
+    UniversalDevice universal_device = 26;
+    Transmitter transmitter = 27;
+    Socket socket = 28;
+    WallSwitch wall_switch = 29;
+    Relay relay = 30;
+    StreetSiren street_siren = 31;
+    HomeSiren home_siren = 32;
+    StoveguardSensor stoveguard_sensor = 33;
+    StoveguardSwitch stoveguard_switch = 34;
+    WireInput wire_input = 35;
+    WireSiren wire_siren = 36;
+    YavirAccessControl yavir_access_control = 37;
+    AccessKey access_key = 38;
+    AccessCode access_code = 39;
+    KeypadPlus keypad_plus = 41;
+    DualCurtainOutdoor dual_curtain_outdoor = 42;
+    StreetSirenDoubleDeck street_siren_double_deck = 43;
+    MultiTransmitter multi_transmitter = 44;
+    WireInputMt wire_input_mt = 45;
+    DoubleButton double_button = 46;
+    KeypadCombi keypad_combi = 47;
+    AccessCard access_card = 48;
+    LightSwitch2Way light_switch_2_way = 52;
+    VhfBridge vhf_bridge = 53;
+    RangeExtender2 range_extender_2 = 54;
+    User user = 56;
+    Group group = 57;
+    Room room = 58;
+    Camera camera = 59;
+    Scenario scenario = 60;
+    Threshold threshold = 61;
+    CompanyBinding company_binding = 62;
+    Schedule schedule = 63;
+    VideoEdge video_edge = 64;
+    SocketG socket_g = 71;
+    KeyboardFibra keyboard_fibra = 73;
+    StreetSirenFibra street_siren_fibra = 74;
+    HomeSirenFibra home_siren_fibra = 75;
+    MultiTransmitterFibra multi_transmitter_fibra = 76;
+    ConfigMigration config_migration = 79;
+    Button button = 80;
+    InstallationCompany installation_company = 81;
+    MotionCam motion_cam = 82;
+    MotionCamOutdoor motion_cam_outdoor = 83;
+    LightSwitch light_switch = 84;
+    LightSwitchOneGang light_switch_one_gang = 85;
+    LightSwitchTwoGang light_switch_two_gang = 86;
+    SocketBase socket_base = 87;
+    SocketTypeGPlus socket_type_g_plus = 88;
+    LifeQuality life_quality = 89;
+    FireProtectTwoBase fire_protect_two_base = 90;
+    FireProtectTwo fire_protect_two = 91;
+    FireProtectTwoPlus fire_protect_two_plus = 92;
+    FireProtectTwoPlusSb fire_protect_two_plus_sb = 93;
+    FireProtectTwoSb fire_protect_two_sb = 94;
+    FireProtectTwoHCRB fire_protect_two_hcrb = 95;
+    FireProtectTwoHCSB fire_protect_two_hcsb = 96;
+    FireProtectTwoHRB fire_protect_two_hrb = 97;
+    FireProtectTwoHSB fire_protect_two_hsb = 98;
+    FireProtectTwoCRB fire_protect_two_crb = 99;
+    FireProtectTwoCSB fire_protect_two_csb = 100;
+    StreetSirenDoubleDeckFibra street_siren_double_deck_fibra = 101;
+    MotionCamFibraBase motion_cam_fibra_base = 102;
+    WaterStopBase water_stop_base = 103;
+    WaterStop water_stop = 104;
+    MotionCamPhodFibra motion_cam_phod_fibra = 105;
+    HubPlus hub_plus = 106;
+    HubYavir hub_yavir = 107;
+    HubYavirPlus hub_yavir_plus = 108;
+    HubTwo hub_two = 109;
+    HubTwoPlus hub_two_plus = 110;
+    HubThree hub_three = 111;
+    HubFibra hub_fibra = 112;
+    HubLite hub_lite = 113;
+    HubTwo4G hub_two_4g = 114;
+    HubHybrid4G hub_hybrid_4g = 115;
+    LineFibraBase line_fibra_base = 116;
+    LineSplitFibra line_split_fibra = 117;
+    LineProtectFibra line_protect_fibra = 120;
+    SocketOutletTypeF socket_outlet_type_f = 121;
+    SocketOutletTypeE socket_outlet_type_e = 122;
+    KeypadTouchscreen keypad_touchscreen = 123;
+    RelayFibraBase relay_fibra_base = 124;
+    FourChannelsRelayFibra four_channels_relay_fibra = 125;
+    Bus bus = 126;
+    DoorProtectS door_protect_s = 127;
+    DoorProtectSPlus door_protect_s_plus = 128;
+    GlassProtectS glass_protect_s = 129;
+    CombiProtectS combi_protect_s = 130;
+    ButtonS button_s = 131;
+    KeypadSPlus keypad_s_plus = 132;
+    MotionProtectS motion_protect_s = 133;
+    MotionProtectSPlus motion_protect_s_plus = 134;
+    StreetSirenSDoubleDeck street_siren_s_double_deck = 137;
+    LineSupplyFibraBase line_supply_fibra_base = 138;
+    OneChannelLineSupplyFibra one_channel_line_supply_fibra = 139;
+    KeypadBeep keypad_beep = 140;
+    FireProtectTwoCRbUl fire_protect_two_c_rb_ul = 141;
+    FireProtectTwoHRbUl fire_protect_two_h_rb_ul = 142;
+    FireProtectTwoHscRbUl fire_protect_two_hsc_rb_ul = 143;
+    FireProtectTwoHscSbUl fire_protect_two_hsc_sb_ul = 144;
+    FireProtectTwoHsRbUl fire_protect_two_hs_rb_ul = 145;
+    FireProtectTwoHsSbUl fire_protect_two_hs_sb_ul = 146;
+    SecurityManagement security_management = 147;
+    Keyarm keyarm = 148;
+    TransmitterFibraBase transmitter_fibra_base = 149;
+    TransmitterFibraTwoChannels transmitter_fibra_two_channels = 150;
+    WireInputRs wire_input_rs = 151;
+    AccessRRUCode access_rru_code = 152;
+    SwitchBase switch_base = 153;
+    SwitchBaseAlarm switch_base_alarm = 154;
+    SwitchBaseMcpFire switch_base_mcp_fire = 155;
+    SwitchBaseMcpFireLocal switch_base_mcp_fire_local = 156;
+    FireProtectTwoHsAc fire_protect_two_hs_ac = 157;
+    FireProtectTwoHscAc fire_protect_two_hsc_ac = 158;
+    FireProtectTwoCAc fire_protect_two_c_ac = 159;
+    FireProtectTwoHAc fire_protect_two_h_ac = 160;
+    FireProtectTwoHcAc fire_protect_two_hc_ac = 161;
+    FireProtectTwoHsAcUl fire_protect_two_hs_ac_ul = 162;
+    FireProtectTwoHscAcUl fire_protect_two_hsc_ac_ul = 163;
+    KeypadBase keypad_base = 164;
+    SocketB socket_b = 165;
+    TwoChannelsLineSupplyFibra two_channels_line_supply_fibra = 166;
+    HomeSirenS home_siren_s = 167;
+    MotionCamSPhod motion_cam_s_phod = 168;
+    DoorProtectPlusG3Fibra door_protect_plus_g3_fibra = 169;
+    KeypadTouchscreenFibra keypad_touchscreen_fibra = 170;
+    Hub4G hub_4g = 171;
+    LightSwitchTwoChannelTwoWay light_switch_two_channel_two_way = 172;
+    LightSwitchCrossover light_switch_crossover = 173;
+    MotionCamOutdoorTwoFourPhod motion_cam_outdoor_two_four_phod = 174;
+    VoiceBase voice_base = 175;
+    VoiceModule voice_module = 176;
+    Speakerphone speakerphone = 177;
+    HubVoid4G hub_void_4g = 178;
+    MotionProtectCurtainBase motion_protect_curtain_base = 179;
+    MotionProtectCurtainOutdoorBase motion_protect_curtain_outdoor_base = 180;
+    MotionProtectCurtainOutdoorPlus motion_protect_curtain_outdoor_plus = 181;
+    SwitchBaseMcpScenarioGreen switch_base_mcp_scenario_green = 182;
+    SwitchBaseMcpScenarioWhite switch_base_mcp_scenario_white = 183;
+    SwitchBaseMcpScenarioYellow switch_base_mcp_scenario_yellow = 184;
+    LightSwitchDimmer light_switch_dimmer = 185;
+    DoorProtectG3 door_protect_g3 = 186;
+    CrossZone cross_zone = 187;
+    MotionProtectG3Fibra motion_protect_g3_fibra = 188;         // business name Motion Protect Plus G3 Fibra  https://ajaxsystems.atlassian.net/browse/FIBRASTR-13725
+    MotionCamVideoBase motion_cam_video_base = 189;
+    MotionCamVideoDoorbell motion_cam_video_doorbell = 190;
+    LightSwitchOneGangNa light_switch_one_gang_na = 191;
+    LightSwitchThreeWayNa light_switch_three_way_na = 192;
+    LightSwitchFourWayNa light_switch_four_way_na = 193;
+    MotionCamHd motion_cam_hd = 194;
+    KeypadOutdoorBase keypad_outdoor_base = 195;
+    KeypadOutdoor keypad_outdoor = 196;
+    KeypadOutdoorFibra keypad_outdoor_fibra = 197;
+    SipBase sip_base = 198;
+    SipOperator sip_operator = 199;
+    SipServer sip_server = 200;
+    StreetSirenS street_siren_s = 201;
+    SeismoProtectFibraBase seismo_protect_fibra_base = 202;
+    SeismoProtectG3Fibra seismo_protect_g3_fibra = 203;
+    StreetSirenPlusFibra street_siren_plus_fibra = 204;
+    TransmitterFibraFourChannels transmitter_fibra_four_channels = 205;
+    TransmitterFibraFourChannelsInputOutput transmitter_fibra_four_channels_input_output = 206;
+    TransmitterFibraFourChannelsOneRelay transmitter_fibra_four_channels_one_relay = 207;
+    TransmitterFibraFourChannelsTwoRelays transmitter_fibra_four_channels_two_relays = 208;
+    TransmitterFibraFourChannelsTwoRelaysTwoLogical transmitter_fibra_four_channels_two_relays_two_logical = 209;
+    HubFire hub_fire = 210;
+    En54FireBase en54_fire_base = 211;
+    En54A en54_a = 212;
+    En54Va en54_va = 213;
+    FireZone fire_zone = 214;
+    En54V en54_v = 215;
+    En54HVa en54_h_va = 216;
+    En54H en54_h = 217;
+    En54HV en54_h_v = 218;
+    En54HA en54_h_a = 219;
+    En54HsVa en54_hs_va = 220;
+    En54S en54_s = 221;
+    En54SA en54_s_a = 222;
+    En54SV en54_s_v = 223;
+    SpaceControlS space_control_s = 224;
+    MotionCamSPhodAm motion_cam_s_phod_am = 225;
+    HubTwoLteRtk hub_two_lte_rtk = 226;
+    MotionCamSuperiorPhod motion_cam_superior_phod = 227;
+    MotionCamVideoIndoor motion_cam_video_indoor = 228;
+    En54IoModuleBase en54_io_module_base = 229;
+    En54IoModuleTwoInTwoOut en54_io_module_two_in_two_out = 230;
+    FireWireInputBase fire_wire_input_base = 231;
+    En54WireInput en54_wire_input = 232;
+    MotionProtectG3FibraNew motion_protect_g3_fibra_new = 233;          // business name Motion Protect G3 Fibra https://ajaxsystems.atlassian.net/browse/FIBRASTR-14712
+    HubMega hub_mega = 234;
+    En54FireZone en54_fire_zone = 235;
+    ScheduledAccess scheduled_access = 236;
+    DoubleButtonG3 double_button_g3 = 237;
+    MotionProtectCurtainOutdoorMini motion_protect_curtain_outdoor_mini = 238;
+    HubSuperior hub_superior = 239;
+    StreetSirenPlusG3 street_siren_plus_g3 = 240;
+    HomeSirenG3 home_siren_g3 = 241;
+    MotionCamG3 motion_cam_g3 = 242;
+    KeypadPlusG3 keypad_plus_g3 = 243;
+    MotionProtectG3 motion_protect_g3 = 244;
+    MotionProtectPlusG3 motion_protect_plus_g3 = 245;
+    HubHybrid2 hub_hybrid_2 = 246;
+    DayAlarmZone day_alarm_zone = 247;
+    SmartLock smart_lock = 248;
+    SmartLockYale smart_lock_yale = 249;
+    KeypadTouchscreenG3 keypad_touchscreen_g3 = 250;
+    RangeExtender2Fire range_extender_2_fire = 251;
+  }
+}

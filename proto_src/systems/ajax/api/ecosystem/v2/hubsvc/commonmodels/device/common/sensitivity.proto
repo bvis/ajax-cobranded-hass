@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum Sensitivity {
+  SENSITIVITY_UNSPECIFIED = 0;
+  SENSITIVITY_LOW = 1;
+  SENSITIVITY_NORMAL = 2;
+  SENSITIVITY_HIGH = 3;
+  // 4, 5, 6 will be added if new values will be added to HTS.
+  // Now in HTS these bytes are reserved
+  SENSITIVITY_VERY_HIGH = 7;
+}

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_notification_preferences.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateSpaceMemberPushPreferencesRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  string member_id = 2;
+
+  // Ignored when push_preferences_patches is not empty
+  PushPreferencesPatch push_preferences_patch = 3 [deprecated = true];
+
+  repeated PushPreferencesPatch push_preferences_patches = 4;
+
+  common.space.member.DisplayMemberPushPreferencesV2 push_preferences_patch_v2 = 5;
+
+  message PushPreferencesPatch {
+    common.space.member.DisplayMemberPushPreference push_preference = 1;
+    bool enabled = 2;
+  }
+}
+
+message UpdateSpaceMemberPushPreferencesResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+    }
+  }
+};

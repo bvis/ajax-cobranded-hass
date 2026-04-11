@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2;
+
+import "google/protobuf/timestamp.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamFireZoneResponseV2 {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    Snapshot snapshot = 1;
+    Updates updates = 2;
+
+    message Snapshot {
+      repeated FireZoneSnapshot fire_zones = 1;
+
+      message FireZoneSnapshot {
+        string fire_zone_id_hex = 2;
+
+        FireZoneState fire_zone_state = 3;
+        FireAlarmState fire_alarm_state = 4;
+        TestState test_state = 5;
+        DisablementState disablement_state = 6;
+        FaultState fault_state = 7;
+      }
+    }
+
+    message Updates {
+      repeated Update updates = 1;
+    }
+
+    message Update {
+      string fire_zone_id_hex = 1;
+
+      oneof update {
+        FireZoneState fire_zone_state = 2;
+        FireAlarmState fire_alarm_state = 3;
+        TestState test_state = 4;
+        DisablementState disablement_state = 5;
+        FaultState fault_state = 6;
+      }
+    }
+
+    message FireZoneState {
+      string name = 1;
+      int32 device_count = 2;
+    }
+
+    message FireAlarmState {
+      State state = 1;
+      FireAlarmDetails fire_alarm_details = 2;
+
+      message FireAlarmDetails {
+        google.protobuf.Timestamp start_timestamp = 1;
+        AlarmReason alarm_reason = 2;
+        string room_id_hex = 3;
+        string alarm_started_device_id_hex = 4;
+        string alarm_started_device_location = 5;
+      }
+
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_NOT_IN_ALARM = 1;
+        STATE_IN_ALARM = 2;
+      }
+
+      enum AlarmReason {
+        ALARM_REASON_UNSPECIFIED = 0;
+        ALARM_REASON_SMOKE = 1;
+        ALARM_REASON_TEMP = 2;
+        ALARM_REASON_TEMP_DIFF = 3;
+        ALARM_REASON_WIRE_INPUT = 4;
+        ALARM_REASON_MCP = 5;
+      }
+    }
+
+    message TestState {
+      State state = 1;
+      uint32 tests_count = 2;
+
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_NOT_IN_TEST = 1;
+        STATE_IN_TEST = 2;
+      }
+    }
+
+    message DisablementState {
+      State disablement_zone_state = 1;
+      repeated DisablementPartState disablement_parts_state = 2;
+      uint32 disablement_count = 3;
+
+      message DisablementPartState {
+        DisablementPart disablement_part = 1;
+        State state = 2;
+      }
+
+      enum DisablementPart {
+        DISABLEMENT_PART_UNSPECIFIED = 0;
+        DISABLEMENT_PART_SMOKE = 1;
+        DISABLEMENT_PART_TEMP = 2;
+        DISABLEMENT_PART_SOUNDER = 3;
+        DISABLEMENT_PART_VAD = 4;
+        DISABLEMENT_PART_INPUT = 5;
+        DISABLEMENT_PART_OUTPUT = 6;
+        DISABLEMENT_PART_MCP = 7;
+      }
+
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_NOT_PRESENT = 1;
+        STATE_ENABLED = 2;
+        STATE_PARTIAL_DISABLEMENT = 3;
+        STATE_FULL_DISABLEMENT = 4;
+      }
+    }
+
+    message FaultState {
+      State state = 1;
+      uint32 faults_count = 2;
+
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_NOT_IN_FAULT = 1;
+        STATE_IN_FAULT = 2;
+      }
+    }
+  }
+
+  message Failure {
+    string message = 100;
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error hub_not_found = 2;
+      commonmodels.Error illegal_argument = 3;
+      commonmodels.Error request_timeout = 4;
+    }
+  }
+}

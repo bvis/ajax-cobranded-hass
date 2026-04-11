@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message GroupAssociation {
+
+  message GroupsAssociated{
+
+    oneof case {
+      string group_associated = 1;
+      All all = 2;
+    }
+
+    message All {}
+  }
+
+  GroupsAssociated group_associated = 1[(proto.meta.field_tag) = "group_associated"];
+  repeated Capability capabilities = 2;
+
+  message GroupAssociationSettings {
+
+    optional GroupsAssociated group_associated = 1[(proto.meta.field_tag) = "group_associated"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_GROUP_ASSOCIATED = 1;
+  }
+}

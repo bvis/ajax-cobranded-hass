@@ -1,0 +1,192 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_temperature.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_fire_zone.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_tamper_status.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonEn54Part {
+  DeviceTemperature device_temperature = 1;
+
+  FireZoneDeviceRepresentation fire_zone = 2;
+
+  DeviceTamperStatus device_tamper_status = 0x04;
+
+  repeated DescriptionMalfunction description_malfunctions = 0x32;
+
+  repeated DisablementState disablement_state = 0x33;
+
+  enum DescriptionMalfunction {
+    DESCRIPTION_MALFUNCTION_BIT_MASK_UNSPECIFIED = 0;
+    DESCRIPTION_MALFUNCTION_BIT_MASK_CAMERA_DUSTY = 1;
+    DESCRIPTION_MALFUNCTION_BIT_MASK_SMOKE_FAULT = 2;
+    DESCRIPTION_MALFUNCTION_BIT_MASK_TEMP_FAULT = 3;
+    DESCRIPTION_MALFUNCTION_BIT_MASK_SOUNDER_FAULT = 4;
+    DESCRIPTION_MALFUNCTION_BIT_MASK_VAD_FAULT = 5;
+  }
+
+  enum DisablementState {
+    DISABLEMENT_STATE_UNSPECIFIED = 0;
+    DISABLEMENT_STATE_SMOKE_DETECTOR = 1;
+    DISABLEMENT_STATE_HEAT_TEMP_DETECTOR = 2;
+    reserved 3;
+    DISABLEMENT_STATE_SOUNDER = 4;
+    DISABLEMENT_STATE_VAD = 5;
+  }
+}
+
+message CommonEn54SounderPart {
+  AlarmStatusSounder alarm_status_sounder = 0x34;
+
+  SounderVolume sounder_volume = 0x41;
+
+  message AlarmStatusSounder {
+    SounderAlarmState sounder_alarm_state = 1;
+    int32 sounder_pattern = 2;
+    SounderSyncState sounder_sync_state = 3;
+    SounderSilenceState sounder_silence_state = 4;
+
+    enum SounderAlarmState {
+      SOUNDER_ALARM_STATE_UNSPECIFIED = 0;
+      SOUNDER_ALARM_STATE_INACTIVE = 1;
+      SOUNDER_ALARM_STATE_ACTIVE = 2;
+    }
+
+    enum SounderSyncState {
+      SOUNDER_SYNC_STATE_UNSPECIFIED = 0;
+      SOUNDER_SYNC_STATE_OUT_OF_SYNC = 1;
+      SOUNDER_SYNC_STATE_SYNCHRONIZED = 2;
+    }
+
+    enum SounderSilenceState {
+      SOUNDER_SILENCE_STATE_UNSPECIFIED = 0;
+      SOUNDER_SILENCE_STATE_NOT_ACTIVE = 1;
+      SOUNDER_SILENCE_STATE_ACTIVE = 2;
+    }
+  }
+
+  enum SounderVolume {
+    SOUNDER_VOLUME_UNSPECIFIED = 0;
+    SOUNDER_VOLUME_LOW = 1;
+    SOUNDER_VOLUME_MEDIUM = 2;
+    SOUNDER_VOLUME_HIGH = 3;
+  }
+}
+
+message CommonEn54VadPart {
+  AlarmStatusVad alarm_status_vad = 0x43;
+
+  message AlarmStatusVad {
+    VadAlarmState vad_alarm_state = 1;
+    int32 vad_patterns = 2;
+    VadSyncState vad_sync_state = 3;
+    VadSilenceState vad_silence_state = 4;
+
+    enum VadAlarmState {
+      VAD_ALARM_STATE_UNSPECIFIED = 0;
+      VAD_ALARM_STATE_INACTIVE = 1;
+      VAD_ALARM_STATE_ACTIVE = 2;
+    }
+
+    enum VadSyncState {
+      VAD_SYNC_STATE_UNSPECIFIED = 0;
+      VAD_SYNC_STATE_OUT_OF_SYNC = 1;
+      VAD_SYNC_STATE_SYNCHRONIZED = 2;
+    }
+
+    enum VadSilenceState {
+      VAD_SILENCE_STATE_UNSPECIFIED = 0;
+      VAD_SILENCE_STATE_NOT_ACTIVE = 1;
+      VAD_SILENCE_STATE_ACTIVE = 2;
+    }
+  }
+}
+
+message CommonEn54HeatPart {
+  TempAlarm temp_alarm = 0x35;
+
+  TempHighDiffAlarm temp_high_diff_alarm = 0x36;
+
+  reserved 0x44;
+
+  HeatSensorMode heat_sensor_mode = 0x5F;
+
+  int32 heat_sensor_fixed_temp = 0x45;
+
+  enum TempAlarm {
+    TEMP_ALARM_UNSPECIFIED = 0;
+    TEMP_ALARM_NOT_DETECTED = 1;
+    TEMP_ALARM_DETECTED = 2;
+  }
+
+  enum TempHighDiffAlarm {
+    TEMP_HIGH_DIFF_ALARM_UNSPECIFIED = 0;
+    TEMP_HIGH_DIFF_ALARM_NOT_DETECTED = 1;
+    TEMP_HIGH_DIFF_ALARM_DETECTED = 2;
+  }
+
+  enum HeatSensorMode {
+    HEAT_SENSOR_MODE_UNSPECIFIED = 0;
+    HEAT_SENSOR_MODE_A1R = 1;
+    HEAT_SENSOR_MODE_A1 = 2;
+    HEAT_SENSOR_MODE_A1S = 3;
+    HEAT_SENSOR_MODE_B = 4;
+    HEAT_SENSOR_MODE_BR = 5;
+    HEAT_SENSOR_MODE_BS = 6;
+    HEAT_SENSOR_MODE_C = 7;
+    HEAT_SENSOR_MODE_CR = 8;
+    HEAT_SENSOR_MODE_CS = 9;
+    HEAT_SENSOR_MODE_FIXED_TEMP = 10;
+  }
+}
+
+message CommonEn54SmokePart {
+  SmokeAlarm smoke_alarm = 0x3A;
+
+  SteamAlarm steam_alarm = 0x3B;
+
+  SteamDetectorStatus steam_detector_status = 0x3D;
+
+  enum SmokeAlarm {
+    SMOKE_ALARM_UNSPECIFIED = 0;
+    SMOKE_ALARM_NOT_DETECTED = 1;
+    SMOKE_ALARM_DETECTED = 2;
+  }
+
+  enum SteamAlarm {
+    STEAM_ALARM_UNSPECIFIED = 0;
+    STEAM_ALARM_NOT_DETECTED = 1;
+    STEAM_ALARM_DETECTED = 2;
+  }
+
+  enum SteamDetectorStatus {
+    STEAM_DETECTOR_STATUS_UNSPECIFIED = 0;
+    STEAM_DETECTOR_STATUS_DISABLED = 1;
+    STEAM_DETECTOR_STATUS_ENABLED = 2;
+  }
+}
+
+message CommonEn54AnnunciationTestPart {
+  AnnunciationTestState annunciation_test_state = 0x47;
+
+  repeated AnnunciationTestEndPoint annunciation_test_endpoints = 0x48;
+
+  enum AnnunciationTestState {
+    ANNUNCIATION_TEST_STATE_UNSPECIFIED = 0;
+    ANNUNCIATION_TEST_STATE_INACTIVE = 1;
+    ANNUNCIATION_TEST_STATE_STARTING = 2;
+    ANNUNCIATION_TEST_STATE_ACTIVE = 3;
+    ANNUNCIATION_TEST_STATE_FINISHING = 4;
+  }
+
+  enum AnnunciationTestEndPoint {
+    ANNUNCIATION_TEST_END_POINT_UNSPECIFIED = 0;
+    ANNUNCIATION_TEST_END_POINT_SOUNDER_TEST = 1;
+    ANNUNCIATION_TEST_END_POINT_VAD_TEST = 2;
+  }
+}

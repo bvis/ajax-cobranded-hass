@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.spacesettings;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AppSettings {
+  // It may be empty when the edge is a mono-channel, as this setting is only relevant for NVRs.
+  HideShortDisconnectsOnTimeline hide_short_disconnects_on_timeline = 1;
+}
+
+enum HideShortDisconnectsOnTimeline {
+  HIDE_SHORT_DISCONNECTS_ON_TIMELINE_UNSPECIFIED = 0;
+  HIDE_SHORT_DISCONNECTS_ON_TIMELINE_ENABLED = 1;
+  HIDE_SHORT_DISCONNECTS_ON_TIMELINE_DISABLED = 2;
+}

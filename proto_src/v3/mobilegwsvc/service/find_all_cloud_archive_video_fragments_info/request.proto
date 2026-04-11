@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_video_fragments_info;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_cloud_archive_video_fragments_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllCloudArchiveVideoFragmentsInfoRequest {
+  // [required]
+  string space_id = 1;
+
+  // [required]
+  string video_edge_id = 2;
+
+  // [required]
+  string channel_id = 3;
+
+  // [required]
+  mobile.v2.common.video.StreamType stream_type = 4;
+
+  // [required]
+  systems.ajax.api.mobile.v2.common.video.TimestampRange timestamp_range = 5;
+}

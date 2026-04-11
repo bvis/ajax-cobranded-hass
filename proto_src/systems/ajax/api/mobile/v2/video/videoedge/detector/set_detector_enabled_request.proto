@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.detector;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/detection/detection_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/detection/detector_locator.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetDetectorEnabledRequest {
+
+  // [required]
+  string video_edge_id = 1 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  // Use `detector_locator` instead
+  string detector_id = 2 [deprecated = true];
+
+  // [required]
+  bool enabled = 3;
+
+  // [optional] - will become required once the client apps are adjusted accordingly
+  common.space.SpaceLocator space_locator = 4;
+
+  common.video.videoedge.channel.detection.DetectorLocator detector_locator = 5;
+}
+
+message SetDetectorEnabledResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    common.video.videoedge.channel.detection.DetectionSettings settings = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError video_edge_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError space_armed = 4;
+      common.response.DefaultError detector_not_found = 5;
+      common.response.DefaultError video_edge_is_offline = 6;
+    }
+  }
+}

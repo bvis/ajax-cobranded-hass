@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject;
+
+import "google/protobuf/duration.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DayAlarmZone {
+  string id = 1;
+  string name = 2;
+  OpenDoorAlarm open_door_alarm = 3; // 0x05
+  NotifyAboutDeactivation notify_about_deactivation = 4; // 0x07 [0]
+  uint32 devices_count = 5; // is not hts field
+
+  oneof deactivation_type {
+      TriggersCount triggers_count = 6;
+      Timer timer = 7;
+  }
+
+  message Timer {
+    google.protobuf.Duration bypass_duration = 1; // 0x04 [5-255]
+  }
+
+  message TriggersCount {
+    uint32 bypass_trigger_count = 1; // 0x06 [1-10]
+  }
+
+  enum OpenDoorAlarm {
+    OPEN_DOOR_ALARM_UNSPECIFIED = 0;
+    OPEN_DOOR_ALARM_OFF = 1; // default
+    OPEN_DOOR_ALARM_ON = 2;
+  }
+
+  enum NotifyAboutDeactivation {
+    NOTIFY_ABOUT_DEACTIVATION_UNSPECIFIED = 0;
+    NOTIFY_ABOUT_DEACTIVATION_FALSE = 1; // default
+    NOTIFY_ABOUT_DEACTIVATION_TRUE = 2;
+  }
+}

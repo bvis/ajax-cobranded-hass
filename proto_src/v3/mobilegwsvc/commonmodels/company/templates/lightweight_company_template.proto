@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates";
+
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/commonmodels/company/templates/company_template_type.proto";
+option swift_prefix = "";
+
+message LightweightCompanyTemplate {
+  string id = 1;
+  string company_id = 2 [(log_marker) = LOG_MARKER_COMPANY_ID];
+  string name = 3;
+  optional string description = 4;
+  CompanyTemplateType type = 5;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveTzEntry {
+  uint64 ts = 1;
+
+  int64 tz_offset = 2;
+};

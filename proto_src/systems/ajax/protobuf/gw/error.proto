@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.misc";
+option java_multiple_files = true;
+
+message GwError {
+    oneof test_oneof {
+        NotFoundError not_found_error = 1;
+        AuthenticationError authentication_error = 2;
+        TimeoutError timeout_error = 3;
+
+        MasterKeyError master_key_error = 4;
+        HubAlreadyInUseError hub_already_in_use_error = 5;
+        HubAlreadyInUseByAnotherCompanyError hub_already_in_use_by_another_company_error = 6;
+        RequestWasAlreadySentError request_was_already_sent_error = 7;
+        HubNotFoundByMasterKeyError hub_not_found_by_master_key_error = 8;
+        PermissionDeniedError permission_denied_error = 9;
+
+        InternalError internal_error = 100;
+    }
+
+    message NotFoundError {
+        string message = 1;
+    }
+
+    message InternalError {
+        string message = 1;
+    }
+
+    message AuthenticationError {
+        string message = 1;
+    }
+
+    message TimeoutError {
+        string message = 1;
+    }
+
+    message MasterKeyError {
+        string message = 1;
+    }
+
+    message HubAlreadyInUseError {
+        string message = 1;
+    }
+
+    message HubAlreadyInUseByAnotherCompanyError {
+        string message = 1;
+    }
+
+    message RequestWasAlreadySentError {
+        string message = 1;
+    }
+
+    message HubNotFoundByMasterKeyError {
+        string message = 1;
+    }
+
+    message PermissionDeniedError {
+        string message = 1;
+    }
+
+}

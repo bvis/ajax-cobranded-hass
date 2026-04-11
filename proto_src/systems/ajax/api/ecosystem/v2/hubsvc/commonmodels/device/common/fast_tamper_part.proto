@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_sensor_settings.proto";
+
+option java_multiple_files = true;
+
+message FastTamperPart {
+  FastTamperSettings fast_tamper_settings = 1;
+
+  repeated Capability capabilities = 2;
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_FAST_TAMPER = 1;
+  }
+}

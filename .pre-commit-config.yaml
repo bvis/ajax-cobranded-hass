@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check
+        name: Full check (lint + typecheck + test)
+        entry: make check
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

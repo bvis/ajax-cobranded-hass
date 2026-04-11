@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.company;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/api/mobile/v2/common/strings.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/phod_devices_rights_feasibility.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject.model.company";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message CompanyInfo {
+  string hex_id = 1;
+  google.protobuf.StringValue name = 2;
+  systems.ajax.api.mobile.v2.common.image.Images logo = 3;
+  systems.ajax.api.mobile.v2.common.Strings emails = 4;
+  PhoneNumbers phones = 5;
+  google.protobuf.StringValue web_page_url = 6;
+  systems.ajax.api.mobile.v2.common.Strings available_in = 7;
+  PhodDevicesRightsFeasibility phod_devices_company_rights_feasibility = 8;
+  CobrandedStatus cobranded_status = 9;
+
+  message PhoneNumber {
+    google.protobuf.StringValue number = 1;
+    google.protobuf.StringValue phone_description = 2;
+  }
+
+  message PhoneNumbers {
+    repeated PhoneNumber phoneNumbers = 1;
+  }
+
+  enum CobrandedStatus  {
+    COBRANDED_STATUS_UNSPECIFIED = 0;
+    COBRANDED_STATUS_ON = 1;
+    COBRANDED_STATUS_OFF = 2;
+  }
+}

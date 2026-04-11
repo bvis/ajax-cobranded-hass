@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_brightness;
+
+import "v3/mobilegwsvc/service/device_command_brightness/request.proto";
+import "v3/mobilegwsvc/service/device_command_brightness/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandBrightnessService {
+  rpc execute (DeviceCommandBrightnessRequest) returns (DeviceCommandBrightnessResponse);
+};

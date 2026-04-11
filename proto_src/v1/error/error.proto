@@ -1,0 +1,23 @@
+syntax = "proto3";
+package systems.ajax.mobilegw.grpc.v1.error;
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.error";
+option java_multiple_files = true;
+
+message ErrorResponse {
+  string message = 1;
+  repeated Error errors = 2;
+
+  message Error {
+    string resource = 1;
+    string property_name_path = 2;
+    string property_index_path = 3;
+    string message_template = 4;
+    map<string, string> message_parameters = 5;
+    string message = 6;
+  }
+}
+
+message ErrorId {
+  string id = 1;
+}

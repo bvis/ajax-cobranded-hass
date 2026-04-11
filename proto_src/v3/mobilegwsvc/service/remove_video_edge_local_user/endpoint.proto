@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.remove_video_edge_local_user;
+
+import "v3/mobilegwsvc/service/remove_video_edge_local_user/request.proto";
+import "v3/mobilegwsvc/service/remove_video_edge_local_user/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.remove_video_edge_local_user";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service RemoveVideoEdgeLocalUserService {
+  rpc execute(RemoveVideoEdgeLocalUserRequest) returns (RemoveVideoEdgeLocalUserResponse);
+};

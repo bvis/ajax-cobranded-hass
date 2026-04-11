@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player";
+option swift_prefix = "";
+
+message PlayerDetector {
+  string id = 1;
+
+  string channel_id = 2;
+
+  mobile.v2.common.video.videoedge.detector.DetectorType detector_type = 3;
+
+  bool enabled = 4;
+}

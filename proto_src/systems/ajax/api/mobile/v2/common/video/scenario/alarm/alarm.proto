@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.scenario.alarm;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/hub/qualifier.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Alarm {
+  oneof alarm_type {
+    ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub.HubEventQualifier hub_alarm = 1;
+  }
+}

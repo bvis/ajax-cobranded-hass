@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_permanent_video_edge_channel_permissions;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/privacy/channel_permission_policy.proto";
+import "v3/mobilegwsvc/commonmodels/video/privacy/channel_permission_update.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_permanent_video_edge_channel_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+/**
+- A request cannot have multiple updates for the same ChannelPermission:
+ok: [Update(VIEW_ARCHIVE, ADD), Update(SOUND, REMOVE)]
+wrong: [Update(SOUND, ADD), Update(SOUND, REMOVE)]
+- Leave updates as empty if want to update permission policy only.
+- Removing VIEW_LIVE_STREAM permission removes all other permissions
+- A request cannot have no updates and no permission policy at the same time
+- If any update has an unrecognized/unset permission or permission state,
+such update will be skipped (no error is returned)
+ */
+message UpdatePermanentVideoEdgeChannelPermissionsRequest {
+  mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  // Space member ID of the user whose permissions we want to update
+  string assignee_id = 2;
+
+  string video_edge_id = 3;
+
+  string channel_id = 4;
+
+  repeated commonmodels.video.privacy.ChannelPermissionUpdate updates = 5;
+
+  mobile.v2.common.video.privacy.ChannelPermissionPolicy policy = 6;
+}

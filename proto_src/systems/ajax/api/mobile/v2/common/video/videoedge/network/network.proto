@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.network;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+
+message Network {
+  google.protobuf.Duration server_ping_interval = 1;
+
+  google.protobuf.Duration connection_failure_alarm_delay = 2;
+
+  NetworkTechnology ethernet = 3;
+
+  NetworkTechnology wifi = 4;
+
+  NetworkConfigurationStatus configuration_status = 100;
+};
+
+message NetworkTechnology {
+  bool supported = 1;
+};
+
+message NetworkConfigurationStatus {
+  string request_id = 1;
+
+  State state = 2;
+
+  enum State {
+    NONE = 0;
+    OK = 1;
+    FAILED = 2;
+  }
+};

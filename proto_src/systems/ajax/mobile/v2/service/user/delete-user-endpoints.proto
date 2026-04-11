@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.user;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.user";
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/user/user-delete-account-response.proto";
+import "systems/ajax/api/mobile/v2/common/user/user-delete-verification-request.proto";
+import "systems/ajax/api/mobile/v2/common/user/user-delete-verification-response.proto";
+import "systems/ajax/api/mobile/v2/common/user/user-delete-account-request.proto";
+
+service DeleteUserService {
+  rpc deleteUser(systems.ajax.api.mobile.v2.common.user.UserDeleteAccountRequest) returns (systems.ajax.api.mobile.v2.common.user.UserDeleteAccountResponse);
+  rpc sendVerification (systems.ajax.api.mobile.v2.common.user.UserDeleteVerificationRequest) returns (systems.ajax.api.mobile.v2.common.user.UserDeleteVerificationResponse);
+}
+

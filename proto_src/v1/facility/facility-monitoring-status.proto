@@ -1,0 +1,15 @@
+syntax = "proto3";
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_multiple_files = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+
+enum MonitoringStatus {
+  MONITORING_STATUS_UNSPECIFIED = 0;
+  MONITORING_STATUS_ON_MONITORING = 1;
+  MONITORING_STATUS_ON_MULTIPLE_MONITORING = 2;
+  MONITORING_STATUS_REQUEST_FROM_INSTALLER = 3;
+  MONITORING_STATUS_NO_MONITORING = 4;
+  MONITORING_STATUS_IN_SLEEP_MODE = 5;
+}

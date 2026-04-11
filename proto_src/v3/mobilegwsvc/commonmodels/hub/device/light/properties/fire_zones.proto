@@ -1,0 +1,10 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message FireZones {
+  int32 quantity = 1;
+}

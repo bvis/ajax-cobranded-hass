@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.accounting;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.accounting";
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_on_target.proto";
+
+message GetSimCardFeatureStateRequest {
+  string hub_id = 2;
+}
+
+message GetSimCardFeatureStateResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    systems.ajax.api.mobile.v2.common.accounting.FeatureOnTarget feature = 1;
+  }
+
+  message Failure {
+    string message = 100;
+  }
+}
+

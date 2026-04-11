@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_member_sms_preferences;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_notification_preferences.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_member_sms_preferences";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateSpaceMemberSmsPreferencesRequest {
+  string hub_id = 1;
+
+  string member_id = 2;
+
+  repeated SmsPreferencesPatch sms_preferences_patches = 3;
+
+  message SmsPreferencesPatch {
+    mobile.v2.common.space.member.DisplayMemberSmsPreference sms_preference = 1;
+    bool enabled = 2;
+  }
+}

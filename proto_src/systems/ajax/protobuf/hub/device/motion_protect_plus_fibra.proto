@@ -1,0 +1,31 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+import "systems/ajax/protobuf/hub/device/common_fibra.proto";
+
+message MotionProtectPlusFibra {
+    CommonDevicePart common_part = 1000;
+    CommonFibraPart common_fibra_part = 1001;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    int32 sensitivity = 0x32;
+    bool always_active = 0x33;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        MOTION = 1;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

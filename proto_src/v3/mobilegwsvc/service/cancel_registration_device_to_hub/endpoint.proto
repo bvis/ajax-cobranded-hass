@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_registration_device_to_hub;
+
+import "v3/mobilegwsvc/service/cancel_registration_device_to_hub/request.proto";
+import "v3/mobilegwsvc/service/cancel_registration_device_to_hub/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_registration_device_to_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CancelRegistrationDeviceToHubService {
+  rpc execute(CancelRegistrationDeviceToHubRequest) returns (CancelRegistrationDeviceToHubResponse);
+}

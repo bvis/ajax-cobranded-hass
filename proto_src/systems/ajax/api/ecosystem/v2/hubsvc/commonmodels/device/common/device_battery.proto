@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message DeviceBattery {
+  optional int32 battery_charge_level_percentage = 0x05[(proto.meta.field_tag) = "battery_charge_level_percentage"];
+
+  BatteryStatus battery_status = 0x2C[(proto.meta.field_tag) = "battery_ok"];
+
+  optional int32 battery_charge_volt = 0x99[(proto.meta.field_tag) = "battery_charge_volt"];
+}
+
+message DeviceBatteryWithoutCharging {
+  optional int32 battery_charge_level_percentage = 0x05[(proto.meta.field_tag) = "battery_charge_level_percentage"];
+
+  BatteryStatus battery_status = 0x2C[(proto.meta.field_tag) = "battery_ok"];
+}
+
+enum BatteryStatus {
+  BATTERY_STATUS_UNSPECIFIED = 0;
+  BATTERY_STATUS_NOT_OK = 1[(proto.meta.enum_tag) = "BATTERY_STATUS_NOT_OK"];
+  BATTERY_STATUS_OK = 2[(proto.meta.enum_tag) = "BATTERY_STATUS_OK"];
+}

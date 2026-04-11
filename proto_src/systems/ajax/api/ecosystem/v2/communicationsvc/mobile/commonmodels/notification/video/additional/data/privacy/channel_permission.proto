@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy;
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "NotificationLog";
+
+enum ChannelPermission {
+  CHANNEL_PERMISSION_NONE = 0;
+  VIEW_LIVE_STREAM = 1;
+  VIEW_ARCHIVE = 2;
+  PTZ = 3;
+  SOUND = 4;
+  EXPORT_ARCHIVE = 5;
+}

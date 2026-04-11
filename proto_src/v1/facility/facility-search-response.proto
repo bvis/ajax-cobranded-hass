@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+import "v1/facility/facility.proto";
+
+message FacilitySearchResponse {
+  repeated Facility facilities = 1;
+  uint64 offset = 2;
+  uint64 counter = 3;
+}

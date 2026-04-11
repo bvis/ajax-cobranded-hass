@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hub;
+
+import "systems/ajax/api/mobile/v2/hub/add_hub_by_qr_request.proto";
+import "systems/ajax/api/mobile/v2/hub/remove_hub_request.proto";
+import "systems/ajax/api/mobile/v2/hub/transfer_hub_settings_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceHubService {
+
+  rpc addHubByQr(AddHubByQrRequest) returns (AddHubByQrResponse);
+
+  rpc transferHubSettings(TransferHubSettingsRequest) returns (TransferHubSettingsResponse);
+
+  rpc removeHub(RemoveHubRequest) returns (RemoveHubResponse);
+};

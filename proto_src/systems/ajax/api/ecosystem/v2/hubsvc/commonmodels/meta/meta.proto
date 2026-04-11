@@ -1,0 +1,13 @@
+syntax = "proto2";
+import "google/protobuf/descriptor.proto";
+
+package proto.meta;
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.meta";
+
+extend google.protobuf.FieldOptions {
+  optional string field_tag = 99913;
+}
+
+extend google.protobuf.EnumValueOptions{
+  optional string enum_tag = 99101;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_fire_zone_disablement;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_fire_zone_disablement";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FireZoneCommandDisablementRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  repeated DisablementEntry en54_disablement_endpoints = 3;
+
+  message DisablementEntry {
+    En54DisablementEndpoint en54_disablement_endpoint = 1;
+    En54FireZoneDisablementState en54_fire_zone_disablement_state = 2;
+  }
+
+  enum En54FireZoneDisablementState {
+    EN54_FIRE_ZONE_DISABLEMENT_STATE_UNSPECIFIED = 0;
+    EN54_FIRE_ZONE_DISABLEMENT_STATE_NOT_CHANGED = 1;
+    EN54_FIRE_ZONE_DISABLEMENT_STATE_ENABLE = 2;
+    EN54_FIRE_ZONE_DISABLEMENT_STATE_DISABLE = 3;
+  }
+
+  enum En54DisablementEndpoint {
+    reserved 3; // rapid rise disablement
+
+    EN54_DISABLEMENT_ENDPOINT_UNSPECIFIED = 0;
+    EN54_DISABLEMENT_ENDPOINT_SMOKE = 1;
+    EN54_DISABLEMENT_ENDPOINT_TEMPERATURE = 2;
+    EN54_DISABLEMENT_ENDPOINT_SOUNDER = 4;
+    EN54_DISABLEMENT_ENDPOINT_VAD = 5;
+    EN54_DISABLEMENT_ENDPOINT_INPUTS = 6;
+    EN54_DISABLEMENT_ENDPOINT_MCP = 7;
+    EN54_DISABLEMENT_ENDPOINT_OUTPUTS = 8; // args for fire zone
+  }
+}

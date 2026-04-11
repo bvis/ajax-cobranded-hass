@@ -1,0 +1,53 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message DualCurtainOutdoor {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+
+    bool left_motion_allowed = 0x31;
+    bool right_motion_allowed = 0x32;
+
+    int32 left_motion_sensitivity = 0x33;
+    int32 right_motion_sensitivity = 0x34;
+
+    bool left_motion_always_active = 0x35;
+    bool right_motion_always_active = 0x36;
+
+    bool left_motion_detected = 0x37;
+    bool right_motion_detected = 0x38;
+
+    bool left_motion_antimasking = 0x39;
+    bool right_motion_antimasking = 0x3A;
+
+    google.protobuf.BoolValue left_motion_masked = 0x3B;
+    google.protobuf.BoolValue right_motion_masked = 0x3C;
+
+    int32 left_fade_antimasking = 0x3F;
+    int32 right_fade_antimasking = 0x40;
+
+    bool logging_enabled = 0x47;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        LEFT_MOTION = 1;
+        RIGHT_MOTION = 2;
+        LEFT_ANTIMASKING = 3;
+        RIGHT_ANTIMASKING = 4;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

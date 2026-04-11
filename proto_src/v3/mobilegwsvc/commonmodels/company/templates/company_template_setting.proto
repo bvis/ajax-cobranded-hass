@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates;
+
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/common_parts.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/device_type.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates";
+option swift_prefix = "";
+
+message CompanyTemplateSetting {
+
+  v2.commonmodels.device.common.DeviceType type = 1000;
+
+  oneof setting {
+    CompanyConnectionDetails company_connection_details = 1;
+    Mode company_connection_type = 2;
+    v2.commonmodels.device.videoedge.VideoConnectionTypePart video_connection_type = 3;
+    v2.commonmodels.device.videoedge.VideoArchivePart video_archive = 4;
+    v2.commonmodels.device.videoedge.VideoLocalUsersPart local_users = 5;
+    v2.commonmodels.device.videoedge.TimeZonePart time_zone = 6;
+    v2.commonmodels.device.videoedge.LogoLedBrightnessPart led_brightness = 7;
+    v2.commonmodels.device.videoedge.FanSettingsPart fan_settings = 8;
+    v2.commonmodels.device.videoedge.CloudConnectionPart cloud_connection = 9;
+    v2.commonmodels.device.videoedge.OnvifConnectionPart onvif_connection = 10;
+  }
+
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    MODE_GENERIC = 1;
+    MODE_PEER_TO_PEER = 2;
+    MODE_AJAX_SIP = 3;
+  }
+
+  message CompanyConnectionDetails {
+    string company_name = 1;
+    string company_number = 2;
+    string address = 3;
+    int32 port = 4;
+    optional string stun_address = 5;
+    optional int32 stun_port = 6;
+    Mode connection_type = 7 [deprecated = true];
+
+    enum Mode {
+      option deprecated = true;
+      MODE_UNSPECIFIED = 0;
+      MODE_GENERIC = 1;
+      MODE_PEER_TO_PEER = 2;
+      MODE_AJAX_SIP = 3;
+    }
+  }
+}

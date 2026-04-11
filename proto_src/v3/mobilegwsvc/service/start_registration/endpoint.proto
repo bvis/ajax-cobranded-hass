@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_registration;
+
+import "v3/mobilegwsvc/service/start_registration/request.proto";
+import "v3/mobilegwsvc/service/start_registration/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.start_registration";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StartRegistrationService {
+  rpc execute (StartRegistrationRequest) returns (StartRegistrationResponse);
+};

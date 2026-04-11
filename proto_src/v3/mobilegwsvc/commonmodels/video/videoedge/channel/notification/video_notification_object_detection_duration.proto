@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum VideoNotificationObjectDetectionDuration {
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_UNSPECIFIED = 0;
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_INSTANT = 1;
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_TWO_SECONDS = 2;
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_THREE_SECONDS = 3;
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_FOUR_SECONDS = 4;
+  VIDEO_NOTIFICATION_OBJECT_DETECTION_DURATION_FIVE_SECONDS = 5;
+}

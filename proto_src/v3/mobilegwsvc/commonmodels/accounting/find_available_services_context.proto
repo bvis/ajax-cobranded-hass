@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "v3/mobilegwsvc/commonmodels/accounting/reseller.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+
+message FindAvailableServicesContext {
+  // for now the case where selected_reseller is present but there is no selected_feature_target_info is not possible
+  optional commonmodels.accounting.EnrichedTargetInfo selected_feature_target_info = 1;
+  optional commonmodels.accounting.Reseller selected_reseller = 2;
+}
+

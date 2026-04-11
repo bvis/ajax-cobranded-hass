@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.response;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/troubled_devices.proto";
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.response";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Success {}
+
+message DefaultError {}
+
+message IllegalArgumentsError {
+  string message = 1;
+}
+
+message IllegalStateError {
+  string message = 1;
+}
+
+message InternalError {
+  string message = 1;
+}
+
+message UserIsOwnerOfCompanyError {
+  string message = 1;
+}
+
+message UserIsEmployeeOfCompanyError {
+  string message = 1;
+}
+
+message CompanyOnHubNotFoundError {
+  string message = 1;
+}
+
+message PermissionDeniedError {
+  string message = 1;
+}
+
+message DeadlineExceededError {
+  string message = 1;
+}
+
+message SpaceLockedError {}
+
+message LimitExceededError {
+  int32 limit = 1;
+}
+
+message HubDetectedMalfunctionsError {
+  ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data.TroubledDevices troubled_devices = 1;
+}
+
+message HubBusyError {
+  reserved 1 to 20; // legacy single cause
+  repeated Cause causes = 21;
+
+  message Cause {
+    oneof cause {
+      DefaultError hub_scan = 1;
+      DefaultError hub_pwr_test = 2;
+      DefaultError dev_busy = 3;
+      DefaultError dfu_in_progress = 4;
+      DefaultError radiotest = 5;
+      DefaultError dev_zone_test = 6;
+      DefaultError card_process = 7;
+      DefaultError armed = 8;
+      DefaultError exit_timer = 9;
+      DefaultError route = 10;
+      DefaultError dev_offline = 11;
+      DefaultError ext_power = 12;
+      DefaultError dev_always_active = 13;
+      DefaultError not_supported = 14;
+      DefaultError buses_problem = 15;
+      DefaultError iwh_objects_limit_error = 16;
+      DefaultError iwh_test_in_progress = 17;
+      DefaultError ring_problem = 18;
+      DefaultError ring_unregistered = 19;
+      DefaultError ring_disconnected = 20;
+      DefaultError active_call = 21;
+      DefaultError fp_bukhoor_forbidden_time = 22;
+      DefaultError fp_fire_alarm = 23;
+      DefaultError dev_bypassed = 24;
+      DefaultError wrong_power_supply_settings = 25;
+      DefaultError in_lines_short_circuit = 26;
+      DefaultError out_lines_short_circuit = 27;
+      DefaultError wifi_func_not_work = 28;
+      DefaultError dev_power_overload = 29;
+      DefaultError battery_low = 30;
+      DefaultError extra_comm_chan_required = 31;
+      DefaultError jamming_detected = 32;
+    }
+  }
+}
+
+message AddDeviceError {
+
+  oneof cause {
+    AddHubDeviceError failed_add_hub = 1;
+  }
+
+  message AddHubDeviceError {
+    oneof error {
+      common.response.DefaultError hub_in_use = 1;
+      common.response.DefaultError hub_not_found = 2;
+      common.response.DefaultError hub_offline = 3;
+      common.response.DefaultError hub_not_empty = 4;
+      common.response.DefaultError hub_error = 5;
+      common.response.DefaultError hub_wrong_state = 6;
+      common.response.DefaultError hub_busy = 7;
+      common.response.DefaultError hub_firmware_version_not_support_migration = 8;
+      common.response.DefaultError hub_claim_error = 9;
+      common.response.DefaultError hub_qr_code_invalid = 10;
+      common.response.DefaultError member_not_support_add_fibra_and_hybrid_hub = 11;
+      common.response.DefaultError member_not_authorized_add_hub = 12;
+      common.response.DefaultError member_not_authorized_add_fibra_and_hybrid_hub = 13;
+      common.response.DefaultError hub_in_use_in_space_with_no_admin = 14;
+
+      //company context errors
+      DefaultError hub_locked_to_another_company = 101;
+    }
+  }
+}

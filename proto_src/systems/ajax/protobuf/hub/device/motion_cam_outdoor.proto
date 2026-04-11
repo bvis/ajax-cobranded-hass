@@ -1,0 +1,65 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message MotionCamOutdoor {
+  CommonDevicePart common_part = 1000;
+
+  repeated SirenTrigger siren_triggers = 0x2E;
+  int32 sensitivity = 0x32;
+  bool always_active = 0x33;
+
+  ImageResolution image_resolution = 0x35;
+  int32 photos_per_alarm = 0x36;
+  int32 alarm_with_photos_limit_per_arming_session = 0x37;
+  bool data_channel_ping_enabled = 0x3E;
+  google.protobuf.BoolValue data_channel_ok = 0x42;
+  SignalQuality data_channel_signal_quality = 0x4B;
+  bool antimasking = 0x4F;
+  google.protobuf.BoolValue is_masked = 0x52;
+  bool logging_enabled = 0x54;
+
+  int32 photos_on_demand = 0x58;
+  CamshotAvailabilityMode camshot_availability_mode = 0x5A;
+  bool camshot_available_to_anyone = 0x5B;
+
+  Subtype subtype = 0xC3;
+
+  enum SirenTrigger {
+    NO_SIREN_TRIGGER_INFO = 0;
+    MOTION = 1;
+    ANTIMASKING = 2;
+  }
+
+  enum ImageResolution {
+    NO_IMAGE_RESOLUTION_INFO = 0;
+    PX_320_X_176 = 1;
+    PX_640_X_352 = 2;
+  }
+
+  enum SignalQuality {
+    NO_SIGNAL_QUALITY_INFO = 0;
+    VERY_LOW = 1;
+    LOW = 2;
+    MEDIUM = 3;
+    HIGH = 4;
+  }
+
+  enum CamshotAvailabilityMode {
+    NO_CAMSHOT_AVAILABILITY_MODE = 0;
+    NEVER = 1;
+    ALWAYS = 2;
+    ARMED_ONLY = 3;
+  }
+
+  enum Subtype {
+    NO_SUBTYPE = 0;
+  }
+}

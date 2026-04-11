@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.onvif;
+
+import "v3/mobilegwsvc/commonmodels/video/videoedge/onvif/onvif_user.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.onvif";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message OnvifSettings {
+  bool user_auth_enabled = 1;
+
+  repeated OnvifUser users = 2;
+
+  int32 http_port = 3;
+
+  uint32 max_users_number = 20;
+}

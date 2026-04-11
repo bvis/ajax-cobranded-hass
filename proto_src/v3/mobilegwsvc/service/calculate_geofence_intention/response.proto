@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.calculate_geofence_intention;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.calculate_geofence_intention";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CalculateGeofenceIntentionResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    string space_name = 1;
+    string space_id = 2;
+  }
+
+  message Failure {
+  }
+}

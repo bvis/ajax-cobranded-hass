@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_rex_pairing_devices;
+
+import "v3/mobilegwsvc/service/get_rex_pairing_devices/request.proto";
+import "v3/mobilegwsvc/service/get_rex_pairing_devices/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_rex_pairing_devices";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetRexPairingDevicesService {
+  rpc execute(GetRexPairingDevicesRequest) returns (GetRexPairingDevicesResponse);
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_line_crossing_rule;
+
+import "v3/mobilegwsvc/service/update_video_edge_line_crossing_rule/request.proto";
+import "v3/mobilegwsvc/service/update_video_edge_line_crossing_rule/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_line_crossing_rule";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UpdateVideoEdgeLineCrossingRuleService {
+
+  rpc execute (UpdateVideoEdgeLineCrossingRuleRequest) returns (UpdateVideoEdgeLineCrossingRuleResponse);
+};

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.video;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "NotificationLog";
+
+enum VideoCodec {
+  VC_UNKNOWN = 0;
+  H264 = 1;
+  H265 = 2;
+  MJPEG = 3;
+};
+
+message TimestampRange {
+  google.protobuf.Timestamp min_value = 1;
+
+  google.protobuf.Timestamp max_value = 2;
+};

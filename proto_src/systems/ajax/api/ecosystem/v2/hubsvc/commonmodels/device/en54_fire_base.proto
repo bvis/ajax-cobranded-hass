@@ -1,0 +1,159 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_jeweller_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_battery.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_en54_part.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message En54A {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging  device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 4;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 5;
+}
+
+message En54Va {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54VadPart common_en54_vad_part = 4;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 5;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 6;
+}
+
+message En54V {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54VadPart common_en54_vad_part = 4;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 5;
+}
+
+message En54HVa {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54HeatPart common_en54_heat_part = 4;
+
+  common.CommonEn54VadPart common_en54_vad_part = 5;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 6;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 7;
+}
+
+message En54HsVa {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54HeatPart common_en54_heat_part = 4;
+
+  common.CommonEn54SmokePart common_en54_smoke_part = 5;
+
+  common.CommonEn54VadPart common_en54_vad_part = 6;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 7;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 8;
+}
+
+message En54H {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54HeatPart common_en54_heat_part = 4;
+}
+
+message En54S {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54SmokePart common_en54_smoke_part = 4;
+}
+
+message En54SV {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54SmokePart common_en54_smoke_part = 4;
+
+  common.CommonEn54VadPart common_en54_vad_part = 5;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 6;
+}
+
+message En54SA {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54SmokePart common_en54_smoke_part = 4;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 5;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 6;
+}
+
+message En54HV {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54HeatPart common_en54_heat_part = 4;
+
+  common.CommonEn54VadPart common_en54_vad_part = 5;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 6;
+}
+
+message En54Ha {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.DeviceBatteryWithoutCharging device_battery = 2;
+
+  common.CommonEn54Part common_en54_part = 3;
+
+  common.CommonEn54HeatPart common_en54_heat_part = 4;
+
+  common.CommonEn54SounderPart common_en54_sounder_part = 5;
+
+  common.CommonEn54AnnunciationTestPart common_en54_annunciation_test_part = 6;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.scenario;
+
+import "google/protobuf/duration.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AlarmSourcesCondition {
+  oneof condition {
+    AnySource any = 1;
+    AllSources all = 2;
+  }
+
+  message AnySource {}
+
+  message AllSources {
+    google.protobuf.Duration max_actuating_time = 1;
+  }
+}

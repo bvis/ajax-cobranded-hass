@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reset_schedule_hub_wake_up_from_bsm;
+
+import "v3/mobilegwsvc/service/reset_schedule_hub_wake_up_from_bsm/request.proto";
+import "v3/mobilegwsvc/service/reset_schedule_hub_wake_up_from_bsm/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reset_schedule_hub_wake_up_from_bsm";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ResetScheduleHubWakeUpFromBsmService {
+
+  rpc execute(ResetScheduleHubWakeUpFromBsmRequest) returns (ResetScheduleHubWakeUpFromBsmResponse);
+}

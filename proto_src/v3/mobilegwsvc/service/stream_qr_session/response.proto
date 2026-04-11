@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_qr_session;
+
+import "v3/mobilegwsvc/commonmodels/account/lite_account.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.stream_qr_session";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamQrSessionResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof success {
+      Initial initial = 1;
+      LoginResponse login_response = 2;
+    }
+  }
+
+  message Initial {
+    bytes qr_session_key = 1;
+  }
+
+  message LoginResponse {
+    bytes session_token = 1;
+    commonmodels.account.LiteAccount lite_account = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+}

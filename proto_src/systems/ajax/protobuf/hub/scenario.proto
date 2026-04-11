@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/object_type.proto";
+import "systems/ajax/protobuf/hub/name.proto";
+
+message Scenario {
+    string id = 0x01;
+    Name name = 1000;
+    bool enabled = 0x04;
+    SourceType source_type = 0x05;
+    SourceCondition source_condition = 0x06;
+    TargetAction target_action = 0x07;
+    int32 time_before_action = 0x08;
+    repeated TargetCondition target_condition = 0x0A;
+
+    repeated AlarmSource alarm_sources = 1010;
+    message AlarmSource {
+        int32 source_event_number = 0x01;
+        ObjectType source_object_type = 0x03;
+        string source_id = 0x04;
+    }
+
+    repeated Target targets = 1020;
+    message Target {
+        ObjectType target_object_type = 0x03;
+        string target_id = 0x04;
+    }
+
+    repeated Schedule schedules = 1030;
+    message Schedule {
+        string id = 0x01;
+        bool enabled = 0x02;
+        repeated WeekDays week_days = 0x03;
+        int32 hours = 0x04;
+        int32 minutes = 0x05;
+        int32 last_run_utc = 0x06;
+        int64 scenario_bits = 0x07;
+
+        enum WeekDays {
+            NO_WEEK_DAYS_INFO = 0x00;
+            SUNDAY = 0x01;
+            MONDAY = 0x02;
+            TUESDAY = 0x04;
+            WEDNESDAY = 0x08;
+            THURSDAY = 0x10;
+            FRIDAY = 0x20;
+            SATURDAY = 0x40;
+        }
+    }
+
+    enum SourceType {
+        NO_SOURCE_TYPE = 0;
+        INSTRUCTION_FIRE_LEAK = 1;
+        SCHEDULE = 2;
+        BUTTON = 3;
+    }
+
+    enum SourceCondition {
+        NO_SOURCE_CONDITION = 0;
+        OR = 1;
+        AND = 2;
+    }
+
+    enum TargetAction {
+        NO_TARGET_ACTION = 0;
+        OFF = 1;
+        ON = 2;
+        CHANGE_STAGE = 3;
+        DISARM = 4;
+        ARM = 5;
+        DISARM_NIGHT_MODE = 6;
+        ARM_NIGHT_MODE = 7;
+        MAKE_PHOTO = 8;
+    }
+
+    enum TargetCondition {
+        NO_TARGET_CONDITION_INFO = 0;
+        ON_DEVICE_ARM = 1;
+        ON_DEVICE_DISARM = 2;
+    }
+}

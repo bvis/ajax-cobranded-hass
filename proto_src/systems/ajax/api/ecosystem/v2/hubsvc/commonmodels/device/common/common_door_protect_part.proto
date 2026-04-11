@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_chimes.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/deprecated_device_chimes.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_tamper_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_temperature.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_sensor_settings.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_siren_triggers.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonDoorProtectPart {
+  v2.commonmodels.device.common.CommonArmingPart common_arming_part = 1;
+
+  DeviceTemperature device_temperature = 2;
+
+  common.SirenTriggers siren_triggers = 3;
+
+  DeviceTamperStatus device_tamper_status = 0x04[(proto.meta.field_tag) = "tampered"];
+
+  DeviceChimes device_chimes = 5;
+
+  ReedStatus reed_status = 0x31;
+
+  ReedSensorSettings reed_sensor = 0x35;
+
+  ExtraContactStatus extra_contact_status = 0x32;
+
+  ExtraContactSensorSettings extra_contact_sensor = 0x34;
+
+  repeated Capability capabilities = 1000;
+
+  enum ReedStatus {
+    REED_STATUS_UNSPECIFIED = 0;
+    REED_STATUS_OPENED = 1;
+    REED_STATUS_CLOSED = 2;
+    REED_STATUS_DISABLED = 3;
+  }
+
+  enum ExtraContactStatus {
+    EXTRA_CONTACT_STATUS_UNSPECIFIED = 0;
+    EXTRA_CONTACT_STATUS_OPENED = 1;
+    EXTRA_CONTACT_STATUS_CLOSED = 2;
+    EXTRA_CONTACT_STATUS_DISABLED = 3;
+    EXTRA_CONTACT_STATUS_CONNECTED = 4;
+    EXTRA_CONTACT_STATUS_ALERT = 5;
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_PRIMARY_DETECTOR = 1;
+    CAPABILITY_SIREN_ALARM = 2;
+    CAPABILITY_ROLLER_SHUTTER = 3;
+  }
+
+  /**
+  DEPRECATED
+   */
+
+  enum AlwaysActive {
+    ALWAYS_ACTIVE_UNSPECIFIED = 0;
+    ALWAYS_ACTIVE_DISABLED = 1;
+    ALWAYS_ACTIVE_ENABLED = 2;
+  };
+
+  // use always_active from common_arming_part
+  AlwaysActive always_active = 0x33 [deprecated = true];
+
+  DeprecatedDeviceChimes deprecated_device_chimes = 0x4F [deprecated = true];
+}

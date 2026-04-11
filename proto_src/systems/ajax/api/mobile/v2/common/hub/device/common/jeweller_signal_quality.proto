@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.device.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.device.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum JewellerSignalQuality {
+  JEWELLER_SIGNAL_QUALITY_UNSPECIFIED = 0;
+  JEWELLER_SIGNAL_QUALITY_NO = 1;
+  JEWELLER_SIGNAL_QUALITY_WEAK = 2;
+  JEWELLER_SIGNAL_QUALITY_NORMAL = 3;
+  JEWELLER_SIGNAL_QUALITY_STRONG = 4;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_stest_start;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandSoundTestStartResponse{
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error hub_offline = 1; // 16_07
+      commonmodels.HubWrongStateError hub_wrong_state = 2; // 16_11
+      commonmodels.Error command_not_performed = 3; // 16_03
+      commonmodels.Error delivered_was_already_performed = 4; // 16_09
+      commonmodels.Error permission_denied = 5; // 16_0635 + 16_0A
+      commonmodels.Error object_not_found = 6; // 16_15
+      commonmodels.HubBusyError hub_busy = 7; // 0F
+    }
+  }
+}

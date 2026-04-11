@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_subscription_management_url;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_subscription_management_url";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetSubscriptionManagementUrlResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string subscription_management_url = 1;
+    string request_id = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.Error available_service_not_found = 2;
+    }
+  }
+}

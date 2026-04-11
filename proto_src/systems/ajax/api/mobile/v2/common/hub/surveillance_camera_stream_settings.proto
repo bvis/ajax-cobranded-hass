@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+import "google/protobuf/timestamp.proto";
+
+message SurveillanceCameraStreamSettings {
+  ServiceType service_type = 1;
+  int32 crc = 2;
+  oneof stream_variables {
+    string stream_data_url = 10;
+    HikvisionOrSafireSettings hikvision_or_safire_settings = 11;
+    DahuaOrUniviewSettings dahua_or_uniview_settings = 12;
+  }
+
+  enum ServiceType {
+    NO_SERVICE_TYPE_INFO = 0;
+    RTSP_STREAM = 1;
+    XMEYE = 2;
+    HIKVISION = 3;
+    DAHUA = 4;
+    SAFIRE = 5;
+    UNIVIEW = 6;
+    IVIDEON = 7;
+  }
+
+  message HikvisionOrSafireSettings {
+    string area_domain = 1;
+    string auth_domain = 2;
+    string auth_id = 3;
+    google.protobuf.Timestamp expire_date = 4;
+    int32 no = 5;
+    string refresh_token = 6;
+    string serial = 7;
+    string token = 8;
+    string verification_code = 9;
+  }
+
+  message DahuaOrUniviewSettings {
+    string login = 1;
+    string password = 2;
+    string serial = 3;
+    int32 no = 4;
+  }
+}

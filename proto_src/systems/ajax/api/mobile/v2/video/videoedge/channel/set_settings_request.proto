@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.channel;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetChannelSettingsRequest {
+  // [required]
+  string video_edge_id = 1;
+
+  // [required]
+  string channel_id = 2;
+
+  // [required]
+  string name = 3;
+
+  // [required]
+  string room_id = 4;
+
+  optional string group_id = 5;
+
+  // [required]
+  bool arm_in_night_mode = 6;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+}
+
+message SetChannelSettingsResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError video_edge_not_found = 3;
+      common.response.DefaultError channel_not_found = 4;
+      common.response.DefaultError space_armed = 5;
+      common.response.DefaultError room_not_found = 6;
+      common.response.DefaultError group_not_found = 7;
+      common.response.DefaultError hub_synchronization_error = 8;
+      common.response.DefaultError video_edge_is_offline = 9;
+    }
+  }
+}

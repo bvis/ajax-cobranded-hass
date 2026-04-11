@@ -1,4 +1,4 @@
-# Ajax Protegim Home Assistant Integration — Design Spec
+# Ajax Security Home Assistant Integration — Design Spec
 
 ## Overview
 
@@ -37,9 +37,9 @@ Protocol: gRPC + Protobuf (proto3)
 ### Project Structure
 
 ```
-ajax-protegim-hass/
+ajax-cobranded-hass/
 ├── custom_components/
-│   └── ajax_protegim/
+│   └── ajax_cobranded/
 │       ├── __init__.py              # HA integration setup
 │       ├── manifest.json            # HACS/HA metadata
 │       ├── config_flow.py           # Configuration UI (email/password/2FA)
@@ -321,8 +321,8 @@ Base image `python:3.12-slim` with multi-version support (`ARG PYTHON_VERSION`).
 | `make test-e2e` | `pytest tests/e2e/` (requires env vars) |
 | `make lint` | `ruff check .` |
 | `make format` | `ruff format .` |
-| `make typecheck` | `mypy custom_components/ajax_protegim/` |
-| `make dead-code` | `vulture custom_components/ajax_protegim/` |
+| `make typecheck` | `mypy custom_components/ajax_cobranded/` |
+| `make dead-code` | `vulture custom_components/ajax_cobranded/` |
 | `make proto` | `scripts/compile_protos.sh` — compiles proto_src/ → proto/ |
 | `make cli` | Interactive script to test connection against real system |
 | `make build` | Validates everything passes before release |

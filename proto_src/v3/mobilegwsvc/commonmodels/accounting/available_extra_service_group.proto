@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "v3/mobilegwsvc/commonmodels/accounting/available_extra_service.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AvailableExtraServiceGroup {
+  string id = 1;
+  string name = 2;
+  string lokalise_id = 3;
+  repeated AvailableExtraServicesGroupItem item = 4;
+  int32 order = 5;
+
+  message AvailableExtraServicesGroupItem {
+    int32 order = 1;
+    commonmodels.accounting.AvailableExtraService service = 2;
+  }
+}

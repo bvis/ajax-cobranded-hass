@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message UnreadEventsUpdate {
+  string hub_id = 1;
+  int32 event_count = 2;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.confirm_restore_password;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.confirm_restore_password";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ConfirmRestorePasswordResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {}
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error account_locked = 2;
+      commonmodels.Error invalid_confirmation_token = 3;
+    }
+  }
+}

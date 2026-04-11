@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/service.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/extra_service_state.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/service_switch_availability_status.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/subscription_owner.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/subscription_action.proto";
+
+message ExtraService {
+  string id = 1;
+  commonmodels.accounting.Service service = 2;
+  commonmodels.accounting.ExtraServiceState extra_service_state = 3;
+  repeated commonmodels.accounting.EnrichedTargetInfo enriched_target_info = 4;
+  mobile.v2.common.accounting.AccountingCompany accounting_company = 5 [deprecated = true];
+  string sorting_key = 6;
+  string subscription_id = 7;
+  commonmodels.accounting.ServiceSwitchAvailabilityStatus service_switch_availability_status = 8;
+  commonmodels.accounting.SubscriptionOwner subscription_owner = 9;
+  repeated commonmodels.accounting.SubscriptionAction available_subscription_actions = 10;
+}

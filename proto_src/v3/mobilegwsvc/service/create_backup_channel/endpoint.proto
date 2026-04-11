@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel;
+
+import "v3/mobilegwsvc/service/create_backup_channel/request.proto";
+import "v3/mobilegwsvc/service/create_backup_channel/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CreateBackupChannelService {
+  rpc execute(CreateBackupChannelRequest) returns (CreateBackupChannelResponse);
+};

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_hub_device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/update.proto";
+
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_hub_device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateHubDeviceRequest {
+  string hub_id = 1;
+
+  string device_id = 2;
+
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+
+  repeated ecosystem.v2.hubsvc.commonmodels.device.Update update = 4;
+}
+

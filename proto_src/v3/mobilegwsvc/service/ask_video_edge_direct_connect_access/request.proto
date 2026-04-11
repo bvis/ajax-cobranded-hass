@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.ask_video_edge_direct_connect_access;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.ask_video_edge_direct_connect_access";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AskVideoEdgeDirectConnectAccessRequest {
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  oneof identity {
+    string video_edge_certificate = 2 [(disable_logging) = true];
+    string video_edge_id = 7 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+  }
+
+  string nonce = 3;
+
+  api.mobile.v2.common.video.CryptoCipherAlgorithm crypto_cipher_algorithm = 4;
+
+  api.mobile.v2.common.video.CryptoHashAlgorithm crypto_hash_algorithm = 5;
+
+  AccessProtocol access_protocol = 6;
+
+  message AccessProtocol {
+    oneof access {
+      Bluetooth bluetooth = 1;
+      WiFi wi_fi = 2;
+    }
+  }
+
+  message Bluetooth {}
+
+  message WiFi {}
+}

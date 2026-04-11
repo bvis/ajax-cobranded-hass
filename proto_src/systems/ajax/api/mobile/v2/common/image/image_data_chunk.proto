@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.image;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message ImageDataChunk {
+  bytes data = 1 [(disable_logging) = true];
+}

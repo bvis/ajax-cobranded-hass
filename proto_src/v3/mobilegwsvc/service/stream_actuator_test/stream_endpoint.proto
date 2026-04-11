@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_actuator_test;
+
+import "v3/mobilegwsvc/service/stream_actuator_test/stream_request.proto";
+import "v3/mobilegwsvc/service/stream_actuator_test/stream_response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamCommandActuatorTestStatusService {
+  rpc execute(StreamActuatorTestStatusRequest) returns (stream StreamActuatorTestStatusResponse);
+}

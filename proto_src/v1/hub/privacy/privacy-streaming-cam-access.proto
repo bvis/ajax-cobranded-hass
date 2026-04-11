@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+
+message PrivacyStreamingCamAccess {
+  string user_id = 1;
+  string device_id = 2;
+  AccessType access_type = 3;
+
+  enum AccessType {
+    DISABLED = 0;
+    ALWAYS = 1;
+  }
+}

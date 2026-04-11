@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_photo_on_demand_mode;
+
+import "v3/mobilegwsvc/service/device_command_photo_on_demand_mode/request.proto";
+import "v3/mobilegwsvc/service/device_command_photo_on_demand_mode/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandPhotoOnDemandModeService {
+  rpc execute (DeviceCommandPhotoOnDemandModeRequest) returns (DeviceCommandPhotoOnDemandModeResponse);
+}

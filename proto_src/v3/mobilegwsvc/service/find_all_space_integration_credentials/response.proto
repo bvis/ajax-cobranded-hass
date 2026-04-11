@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_integration_credentials;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/space/integration/credentials/credentials_info.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllSpaceIntegrationCredentialsResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated commonmodels.space.integration.credentials.CredentialsInfo credentials = 1;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+}

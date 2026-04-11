@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.user;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.mobile.v2.common.user";
+option java_multiple_files = true;
+
+message UserDeleteVerificationRequest {
+  string phone_token = 1;
+  string email_token = 2;
+}

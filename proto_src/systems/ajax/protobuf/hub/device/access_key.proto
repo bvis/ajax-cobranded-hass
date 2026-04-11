@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message AccessKey {
+    string id = 0x01;
+    Name name = 1000;
+    string access_key_id = 0x03;
+    string associated_group_id = 0x04;
+    string associated_user_id = 0x05;
+    int32 cms_device_index = 0x06;
+}

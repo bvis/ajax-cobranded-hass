@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.upsert_push_token;
+
+import "v3/mobilegwsvc/service/upsert_push_token/request.proto";
+import "v3/mobilegwsvc/service/upsert_push_token/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UpsertPushTokenService {
+  rpc execute (UpsertPushTokenRequest) returns (UpsertPushTokenResponse);
+};

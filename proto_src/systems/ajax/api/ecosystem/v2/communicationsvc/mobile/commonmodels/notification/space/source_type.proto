@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SpaceNotificationSourceType {
+  SPACE_SOURCE_TYPE_UNSPECIFIED = 0;
+  SPACE = 1;
+  SPACE_MEMBER = 2;
+  GROUP = 3;
+  ROOM = 6;
+  STANDALONE_DEVICE = 7;
+  COMPANY = 8;
+  SPACE_SCENARIO = 9;
+}

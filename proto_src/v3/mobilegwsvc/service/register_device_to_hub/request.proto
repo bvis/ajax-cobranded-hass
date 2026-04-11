@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_device_to_hub;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_device_to_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RegisterDeviceToHubRequest {
+  string hub_id = 1;
+  string room_id = 2;
+  optional string group_id = 3;
+  string device_name = 4;
+  string device_qr_code = 5;
+  optional string fire_zone_id = 6;
+  optional string device_location = 7;
+  optional string lock_master_code = 8;
+}

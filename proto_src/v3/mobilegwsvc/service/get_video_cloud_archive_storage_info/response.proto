@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_cloud_archive_storage_info;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/cloudarchive/cloud_archive.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/duration_option.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_cloud_archive_storage_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetVideoCloudArchiveStorageInfoResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    mobile.v2.common.video.videoedge.channel.cloudarchive.CloudArchive.CloudArchiveStatus cloud_archive_status = 1;
+
+    bool cloud_archive_settings_available = 2;
+
+    google.protobuf.Duration archive_depth = 3;
+
+    commonmodels.video.DurationOption max_archive_depth = 4;
+
+    repeated commonmodels.video.DurationOption available_max_cloud_archive_depth_options = 5;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+      commonmodels.Error video_edge_not_found = 4;
+    }
+  }
+}

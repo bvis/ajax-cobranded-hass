@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_scheduled_service_subscription_deactivation;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_scheduled_service_subscription_deactivation";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CancelScheduledServiceSubscriptionDeactivationRequest {
+  string subscription_id = 1;
+}

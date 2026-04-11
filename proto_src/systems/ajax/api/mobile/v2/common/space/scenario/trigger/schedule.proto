@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario.trigger;
+
+import "google/type/dayofweek.proto";
+import "google/type/timeofday.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ScheduleTrigger {
+  google.type.TimeOfDay time = 1;
+  repeated google.type.DayOfWeek days = 2;
+}

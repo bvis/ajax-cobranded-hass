@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_door_protect_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_jeweller_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_battery.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/fast_tamper.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/fast_tamper_part.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message DoorProtect {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.CommonDoorProtectPart common_door_protect_part = 2;
+
+  common.DeviceBattery device_battery = 3;
+
+  /**
+  DEPRECATED
+  */
+
+  // use common.SirenTriggers
+  repeated DeprecatedSirenTrigger deprecated_siren_triggers = 0x2E [deprecated = true];
+
+  // use common.DeviceChimes
+  repeated DeprecatedChimeTrigger deprecated_chime_triggers = 0x4E [deprecated = true];
+
+  enum DeprecatedSirenTrigger {
+    DEPRECATED_SIREN_TRIGGER_UNSPECIFIED = 0;
+    DEPRECATED_SIREN_TRIGGER_REED = 1;
+    DEPRECATED_SIREN_TRIGGER_EXTRA_CONTACT = 2;
+  }
+
+  enum DeprecatedChimeTrigger {
+    DEPRECATED_CHIME_TRIGGER_UNSPECIFIED = 0;
+    DEPRECATED_CHIME_TRIGGER_REED = 1;
+    DEPRECATED_CHIME_TRIGGER_EXTRA_CONTACT = 2;
+  }
+}
+
+message DoorProtectS {
+  common.CommonJewellerPart common_jeweller_part = 1;
+
+  common.CommonDoorProtectPart common_door_protect_part = 2;
+
+  common.DeviceBattery device_battery = 3;
+
+  common.FastTamperPart fast_tamper_part = 4;
+
+  /**
+  DEPRECATED
+  */
+
+  // use common.SirenTriggers
+  repeated DeprecatedSirenTrigger deprecated_siren_triggers = 0x2E [deprecated = true];
+
+  // use common.DeviceChimes
+  repeated DeprecatedChimeTrigger deprecated_chime_triggers = 0x4E [deprecated = true];
+
+  // use common.FastTamperPart
+  common.FastTamper fast_tamper = 0x73 [deprecated = true];
+
+  enum DeprecatedSirenTrigger {
+    DEPRECATED_SIREN_TRIGGER_UNSPECIFIED = 0;
+    DEPRECATED_SIREN_TRIGGER_REED = 1;
+    DEPRECATED_SIREN_TRIGGER_EXTRA_CONTACT = 2;
+  }
+
+  enum DeprecatedChimeTrigger {
+    DEPRECATED_CHIME_TRIGGER_UNSPECIFIED = 0;
+    DEPRECATED_CHIME_TRIGGER_REED = 1;
+    DEPRECATED_CHIME_TRIGGER_EXTRA_CONTACT = 2;
+  }
+}

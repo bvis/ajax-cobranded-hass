@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.media;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.hub.company.media";
+option swift_prefix = "";
+
+import "systems/ajax/mobile/v2/service/hub/company/media/caputre_photo.proto";
+
+
+service PhotoOnDemandService {
+
+  rpc capturePhoto (CapturePhotoOnDemandRequest) returns (CapturePhotoOnDemandResponse);
+
+}

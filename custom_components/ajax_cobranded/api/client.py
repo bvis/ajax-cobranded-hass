@@ -1,0 +1,215 @@
+"""Core gRPC client for Ajax Systems API."""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import random
+import sys
+import time
+from pathlib import Path
+from typing import TYPE_CHECKING, Any
+
+import grpc
+
+from custom_components.ajax_cobranded.api.session import (
+    AjaxSession,
+    AuthenticationError,
+    TwoFactorRequiredError,
+)
+from custom_components.ajax_cobranded.const import (
+    APPLICATION_LABEL,
+    GRPC_HOST,
+    GRPC_PORT,
+    GRPC_TIMEOUT,
+    MAX_RETRIES,
+    RATE_LIMIT_REQUESTS,
+    RATE_LIMIT_WINDOW,
+)
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+_LOGGER = logging.getLogger(__name__)
+
+_TRANSIENT_CODES = {
+    grpc.StatusCode.UNAVAILABLE,
+    grpc.StatusCode.DEADLINE_EXCEEDED,
+    grpc.StatusCode.INTERNAL,
+}
+
+
+class AjaxGrpcClient:
+    """High-level gRPC client for the Ajax mobile gateway."""
+
+    def __init__(
+        self,
+        email: str,
+        password: str | None = None,
+        device_id: str | None = None,
+        app_label: str = APPLICATION_LABEL,
+        host: str = GRPC_HOST,
+        port: int = GRPC_PORT,
+        password_hash: str | None = None,
+    ) -> None:
+        self._host = host
+        self._port = port
+        self._session = AjaxSession(device_id=device_id, app_label=app_label)
+        if password_hash is not None:
+            self._session.set_credentials_hashed(email, password_hash)
+        elif password is not None:
+            self._session.set_credentials(email, password)
+        else:
+            raise ValueError("Either password or password_hash must be provided")
+        self._channel: grpc.aio.Channel | None = None
+        self._rate_limit_timestamps: list[float] = []
+        self._refresh_task: asyncio.Task[None] | None = None
+
+    @property
+    def session(self) -> AjaxSession:
+        return self._session
+
+    @property
+    def is_connected(self) -> bool:
+        return self._channel is not None and self._session.is_authenticated
+
+    async def connect(self) -> None:
+        target = f"{self._host}:{self._port}"
+        credentials = grpc.ssl_channel_credentials()
+        self._channel = grpc.aio.secure_channel(target, credentials)
+        _LOGGER.debug("gRPC channel opened to %s", target)
+
+    async def close(self) -> None:
+        if self._refresh_task and not self._refresh_task.done():
+            self._refresh_task.cancel()
+            self._refresh_task = None
+        if self._channel:
+            await self._channel.close()
+            self._channel = None
+        self._session.clear_session()
+        _LOGGER.debug("gRPC channel closed")
+
+    def _get_channel(self) -> grpc.aio.Channel:
+        if self._channel is None:
+            raise ConnectionError("gRPC channel not connected. Call connect() first.")
+        return self._channel
+
+    async def _check_rate_limit(self) -> None:
+        now = time.monotonic()
+        self._rate_limit_timestamps = [
+            t for t in self._rate_limit_timestamps if now - t < RATE_LIMIT_WINDOW
+        ]
+        if len(self._rate_limit_timestamps) >= RATE_LIMIT_REQUESTS:
+            wait = RATE_LIMIT_WINDOW - (now - self._rate_limit_timestamps[0])
+            _LOGGER.warning("Rate limit reached, waiting %.1fs", wait)
+            await asyncio.sleep(wait)
+        self._rate_limit_timestamps.append(time.monotonic())
+
+    async def _retry(
+        self,
+        coro_fn: Callable[[], Awaitable[Any]],
+        max_retries: int = MAX_RETRIES,
+        base_delay: float = 1.0,
+    ) -> Any:  # noqa: ANN401
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            try:
+                return await coro_fn()
+            except grpc.aio.AioRpcError as e:
+                if e.code() not in _TRANSIENT_CODES:
+                    raise
+                last_error = e
+            except (ConnectionError, OSError) as e:
+                last_error = e
+
+            if attempt < max_retries - 1:
+                delay = base_delay * (2**attempt) * (0.8 + 0.4 * random.random())
+                _LOGGER.debug(
+                    "Retry %d/%d after %.1fs: %s", attempt + 1, max_retries, delay, last_error
+                )
+                await asyncio.sleep(delay)
+
+        raise last_error  # type: ignore[misc]
+
+    async def call_unary(
+        self,
+        method_path: str,
+        request: Any,  # noqa: ANN401
+        response_type: Any,  # noqa: ANN401
+        timeout: float = GRPC_TIMEOUT,
+    ) -> Any:  # noqa: ANN401
+        await self._check_rate_limit()
+        channel = self._get_channel()
+        metadata = self._session.get_call_metadata()
+
+        async def _do_call() -> Any:  # noqa: ANN401
+            method = channel.unary_unary(
+                method_path,
+                request_serializer=request.SerializeToString,
+                response_deserializer=response_type.FromString,
+            )
+            return await method(request, metadata=metadata, timeout=timeout)
+
+        return await self._retry(_do_call)
+
+    async def login(self) -> None:
+        """Authenticate with Ajax servers via gRPC."""
+        proto_path = str(Path(__file__).parent.parent / "proto")
+        if proto_path not in sys.path:
+            sys.path.append(proto_path)
+
+        from v3.mobilegwsvc.commonmodels.type import user_role_pb2  # noqa: PLC0415
+        from v3.mobilegwsvc.service.login_by_password import (  # noqa: PLC0415
+            endpoint_pb2_grpc,
+            request_pb2,
+        )
+
+        channel = self._get_channel()
+        stub = endpoint_pb2_grpc.LoginByPasswordServiceStub(channel)
+        params = self._session.get_login_params()
+
+        request = request_pb2.LoginByPasswordRequest(
+            email=params["email"],
+            password_sha256_hash=params["password_sha256_hash"],
+            user_role=user_role_pb2.USER_ROLE_USER,
+        )
+
+        metadata = self._session.get_device_info_metadata()
+
+        response = await stub.execute(request, metadata=metadata, timeout=GRPC_TIMEOUT)
+
+        if response.HasField("success"):
+            token_hex = response.success.session_token.hex()
+            user_hex_id = response.success.lite_account.user_hex_id
+            self._session.set_session(token_hex, user_hex_id)
+            _LOGGER.debug("Logged in as %s", user_hex_id)
+        elif response.HasField("failure"):
+            error_type = response.failure.WhichOneof("error")
+            if error_type == "two_fa_required":
+                raise TwoFactorRequiredError(response.failure.two_fa_required.request_id)
+            elif error_type == "invalid_credentials":
+                raise AuthenticationError("Invalid email or password")
+            elif error_type == "account_locked":
+                raise AuthenticationError("Account is locked")
+            elif error_type == "account_not_confirmed":
+                raise AuthenticationError("Account not confirmed")
+            else:
+                raise AuthenticationError(f"Login failed: {error_type}")
+
+    async def call_server_stream(
+        self,
+        method_path: str,
+        request: Any,  # noqa: ANN401
+        response_type: Any,  # noqa: ANN401
+        timeout: float | None = None,
+    ) -> Any:  # noqa: ANN401
+        await self._check_rate_limit()
+        channel = self._get_channel()
+        metadata = self._session.get_call_metadata()
+
+        method = channel.unary_stream(
+            method_path,
+            request_serializer=request.SerializeToString,
+            response_deserializer=response_type.FromString,
+        )
+        return method(request, metadata=metadata, timeout=timeout)

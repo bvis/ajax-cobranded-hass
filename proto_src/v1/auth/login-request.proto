@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.auth;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.auth";
+option java_multiple_files = true;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message LoginRequest {
+  string login = 1 [(hash_value) = true];
+  string password = 2 [(hash_value) = true];
+
+  // @since 1.1
+  string machine_id = 3;
+}

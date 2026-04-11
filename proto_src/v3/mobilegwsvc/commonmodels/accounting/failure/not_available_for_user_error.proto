@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting.failure;
+
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting.failure";
+option java_multiple_files = true;
+
+message NotAvailableForUserError {
+  commonmodels.type.UserRole user_role = 1;
+}

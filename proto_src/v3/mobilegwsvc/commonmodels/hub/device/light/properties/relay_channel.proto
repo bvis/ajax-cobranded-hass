@@ -1,0 +1,45 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/action_timer.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+// will be reused for Jeweller Relay, MultiRelayFibra, FourChannelsTwoRelaysTwoLogical
+message RelayChannel {
+  int32 channel_id = 1;
+  optional string channel_name = 2;
+  OutputMode output_mode = 3;
+  OperatingMode operating_mode = 4;
+  repeated Malfunction malfunctions = 5;
+  bool is_channel_enabled = 6;
+  bool is_channel_on = 7;
+  optional ActionTimer shutoff_timer = 8;
+  bool is_transitioning = 9;
+
+  enum OutputMode {
+    OUTPUT_MODE_UNSPECIFIED = 0;
+    OUTPUT_MODE_BLOCKING_ELEMENT = 1;
+    OUTPUT_MODE_ELECTRIC_LOCK = 2;
+    OUTPUT_MODE_RELAY = 3;
+  }
+
+  enum OperatingMode {
+    OPERATING_MODE_UNSPECIFIED = 0;
+    OPERATING_MODE_IMPULSE = 1;
+    OPERATING_MODE_BISTABLE = 2;
+  }
+
+  enum Malfunction {
+    MALFUNCTION_UNSPECIFIED = 0;
+    MALFUNCTION_EXTREME_TEMPERATURE = 1;
+    MALFUNCTION_HARDWARE_ERROR = 2;
+    MALFUNCTION_LOW_VOLTAGE = 3;
+    MALFUNCTION_HIGH_VOLTAGE = 4;
+    MALFUNCTION_CURRENT_SHORT_CIRCUIT = 5;
+    MALFUNCTION_HIGH_CURRENT_PROTECTION = 6;
+    MALFUNCTION_CONTACT_HANG = 7;
+  }
+}

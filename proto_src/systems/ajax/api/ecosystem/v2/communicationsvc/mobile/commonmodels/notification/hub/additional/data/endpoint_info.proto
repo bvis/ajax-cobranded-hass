@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message EndpointInfo {
+  Endpoint target = 1;
+  string name = 2;
+
+  enum Endpoint {
+    ENDPOINT_UNSPECIFIED = 0;
+    LIGHT_SWITCH_BUTTON_1 = 1;
+    LIGHT_SWITCH_BUTTON_2 = 2;
+    FOUR_CHANNELS_RELAY_FIBRA_CHANNEL_1 = 3;
+    FOUR_CHANNELS_RELAY_FIBRA_CHANNEL_2 = 4;
+    FOUR_CHANNELS_RELAY_FIBRA_CHANNEL_3 = 5;
+    FOUR_CHANNELS_RELAY_FIBRA_CHANNEL_4 = 6;
+    TRANSMITTER_FIBRA_FOUR_CHANNELS_CHANNEL_1 = 7;
+    TRANSMITTER_FIBRA_FOUR_CHANNELS_CHANNEL_2 = 8;
+    TRANSMITTER_FIBRA_FOUR_CHANNELS_CHANNEL_3 = 9;
+    TRANSMITTER_FIBRA_FOUR_CHANNELS_CHANNEL_4 = 10;
+    EN54_IO_MODULE_OUTPUT_1 = 11;
+    EN54_IO_MODULE_OUTPUT_2 = 12;
+  }
+}
+

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package systems.ajax.protobuf.auth;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.auth";
+option java_multiple_files = true;
+
+message LoginRequest {
+    string login = 1;
+    string password = 2;
+    UserRole user_role = 3;
+}
+
+message LoginResponse {
+    string user_id = 1;
+    UserRole user_role = 2;
+    string email = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string phone_number = 6;
+}
+
+enum UserRole {
+    USER = 0;
+    PRO = 1;
+    COMPANY = 2;
+}

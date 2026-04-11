@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.time;
+
+option java_package = "systems.ajax.api.mobile.v2.common.time";
+option java_multiple_files = true;
+// swift prefix because we already have systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.DurationOption
+option swift_prefix = "Common";
+
+message DurationOption {
+  TimeUnit time_unit = 1;
+  int32 amount_in_time_unit = 2;
+  int32 amount_in_seconds = 3;
+
+  enum TimeUnit {
+    TIME_UNIT_UNSPECIFIED = 0;
+    TIME_UNIT_SECONDS = 1;
+    TIME_UNIT_MINUTES = 2;
+    TIME_UNIT_HOURS = 3;
+  }
+}

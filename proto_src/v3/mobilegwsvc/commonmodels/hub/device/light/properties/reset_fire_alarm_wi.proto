@@ -1,0 +1,12 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message ResetFireAlarmWi {
+  reserved 1;
+  reserved 2;
+  repeated string wire_input_ids = 3;
+}

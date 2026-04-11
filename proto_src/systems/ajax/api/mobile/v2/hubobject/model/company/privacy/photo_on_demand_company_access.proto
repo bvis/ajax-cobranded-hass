@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.company.privacy;
+
+import "systems/ajax/api/mobile/v2/common/hub/photo_on_demand_company_rights.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject.model.company.privacy";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message PhotoOnDemandCompanyAccess{
+  string company_id = 1;
+  common.hub.PhotoOnDemandCompanyRights rights = 2;
+}

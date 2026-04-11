@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "SpaceDeviceLabel";
+
+enum DeviceLabel {
+  DEVICE_LABEL_UNSPECIFIED = 0;
+  DEVICE_LABEL_AJAX = 1;
+  DEVICE_LABEL_WHITE_LABEL = 2;
+}

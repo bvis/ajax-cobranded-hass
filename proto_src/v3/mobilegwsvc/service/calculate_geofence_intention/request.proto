@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.calculate_geofence_intention;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.calculate_geofence_intention";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CalculateGeofenceIntentionRequest {
+  string hub_id = 1;
+  DesiredState desired_state = 2;
+
+  enum DesiredState{
+    DESIRED_STATE_UNSPECIFIED = 0;
+    DESIRED_STATE_ARMED = 1;
+    DESIRED_STATE_DISARMED = 2;
+  }
+}

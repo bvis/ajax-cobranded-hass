@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.monitoring;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_package = "systems.ajax.mobile.v2.service.hub.company.monitoring";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message ApplyForMonitoringWithAccountNumberRequest {
+  string hub_hex_id = 1;
+  string company_hex_id = 2;
+  string account_number = 3;
+}
+
+message ApplyForMonitoringWithAccountNumberResponse {
+  oneof response {
+    systems.ajax.api.mobile.v2.common.response.Success success = 1;
+    Failure error = 2;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof errors {
+      systems.ajax.api.mobile.v2.common.response.DefaultError request_timeout = 1;
+      systems.ajax.api.mobile.v2.common.response.DefaultError cannot_apply_on_locked_hub = 2;
+      systems.ajax.api.mobile.v2.common.response.DefaultError hub_users_limit_exceeded = 3;
+      systems.ajax.api.mobile.v2.common.response.DefaultError permission_denied = 4;
+      systems.ajax.api.mobile.v2.common.response.DefaultError account_number_invalid = 5;
+    }
+  }
+}

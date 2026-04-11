@@ -1,0 +1,66 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Ajax Security Login",
+                "description": "Enter your Ajax Security account credentials.",
+                "data": {
+                    "email": "Email",
+                    "password": "Password",
+                    "app_label": "App label (co-branded app name)"
+                }
+            },
+            "2fa": {
+                "title": "Two-Factor Authentication",
+                "description": "Enter the 6-digit code from your authenticator app.",
+                "data": {
+                    "totp_code": "TOTP Code"
+                }
+            },
+            "select_spaces": {
+                "title": "Select Spaces",
+                "description": "Choose which spaces (hubs) to add.",
+                "data": {
+                    "spaces": "Spaces"
+                }
+            }
+        },
+        "error": {
+            "invalid_auth": "Invalid email or password.",
+            "invalid_totp": "Invalid TOTP code. Please try again.",
+            "cannot_connect": "Cannot connect to Ajax servers.",
+            "unknown": "An unexpected error occurred."
+        },
+        "abort": {
+            "already_configured": "This account is already configured.",
+            "account_locked": "Account is locked. Please try again later.",
+            "reauth_successful": "Re-authentication successful."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ajax Security Options",
+                "data": {
+                    "poll_interval": "Fallback poll interval (seconds)",
+                    "use_pin_code": "Require PIN code for arm/disarm"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "signal_level": {
+                "name": "Signal level"
+            }
+        },
+        "switch": {
+            "channel_1": {
+                "name": "Channel 1"
+            },
+            "channel_2": {
+                "name": "Channel 2"
+            }
+        }
+    }
+}

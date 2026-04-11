@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common.privacy;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.common.privacy";
+
+import "google/protobuf/timestamp.proto";
+import "v1/common/privacy/surveillance-cameras-devices.proto";
+
+message EmployeeSurveillanceCamerasAccess {
+  oneof current_availability_mode {
+    NotAllowed not_allowed = 20;
+    Allowed allowed = 21;
+  }
+
+  message NotAllowed {}
+  message Allowed {
+    SurveillanceCamerasDevices devices = 1;
+  }
+}

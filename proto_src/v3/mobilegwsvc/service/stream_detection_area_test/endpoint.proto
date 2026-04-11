@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_detection_area_test;
+
+import "v3/mobilegwsvc/service/stream_detection_area_test/request.proto";
+import "v3/mobilegwsvc/service/stream_detection_area_test/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_detection_area_test";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamDetectionAreaTestService {
+  rpc execute(StreamDetectionAreaTestRequest) returns (stream StreamDetectionAreaTestResponse);
+};

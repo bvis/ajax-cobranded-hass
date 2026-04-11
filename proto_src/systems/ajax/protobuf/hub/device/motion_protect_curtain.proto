@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message MotionProtectCurtain {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    int32 sensitivity = 0x32;
+    bool always_active = 0x33;
+
+    bool pet_immunity = 0x40;
+    bool antimasking = 0x41;
+    google.protobuf.BoolValue masked = 0x42;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        MOTION = 1;
+        ANTIMASKING = 2;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

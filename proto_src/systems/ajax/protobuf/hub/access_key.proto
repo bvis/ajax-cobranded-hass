@@ -1,0 +1,10 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message AccessKeyUpdate {
+  string keyId = 1000;
+}

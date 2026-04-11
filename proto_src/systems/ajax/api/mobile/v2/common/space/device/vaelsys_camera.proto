@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message VaelsysCamera {
+  string id = 1;
+  string vaelsys_camera_id = 2;
+  string name = 3;
+}

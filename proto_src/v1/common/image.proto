@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+message Image {
+  string resolution = 1;
+  string url = 2;
+}

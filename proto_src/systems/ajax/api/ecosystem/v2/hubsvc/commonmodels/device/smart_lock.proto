@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_jeweller_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/smartlock/smart_lock_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/smartlock/smart_lock_yale_part.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message SmartLockYale {
+  common.CommonJewellerPart common_jeweller_part = 1;
+  smartlock.SmartLockPart smart_lock_part = 2;
+  smartlock.SmartLockYalePart smart_lock_yale_part = 3;
+}

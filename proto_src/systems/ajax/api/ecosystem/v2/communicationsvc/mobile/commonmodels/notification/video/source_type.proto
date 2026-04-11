@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum VideoNotificationSourceType {
+  VIDEO_SOURCE_TYPE_UNSPECIFIED = 0;
+  VIDEO_EDGE = 1;
+  VIDEO_SCENARIO = 2;
+  SPACE_MEMBER = 3;
+  COMPANY = 4;
+}

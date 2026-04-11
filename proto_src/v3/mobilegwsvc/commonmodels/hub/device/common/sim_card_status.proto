@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.common";
+option java_multiple_files = true;
+
+enum SimCardStatus {
+  SIM_CARD_STATUS_UNSPECIFIED = 0;
+  SIM_CARD_STATUS_OK = 1;
+  SIM_CARD_STATUS_MISSING = 2;
+  SIM_CARD_STATUS_MALFUNCTION = 3;
+  SIM_CARD_STATUS_LOCKED = 4;
+  SIM_CARD_STATUS_UNKNOWN = 5;
+}

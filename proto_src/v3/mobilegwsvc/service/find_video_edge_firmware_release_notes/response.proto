@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/release_notes.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_video_edge_firmware_release_notes";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindVideoEdgeFirmwareReleaseNotesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    /* In case when selected locale not found, there are english release notes by default.
+     * Field is unset when selected locale not found and no default release notes. */
+    systems.ajax.api.mobile.v2.common.video.videoedge.firmware.ReleaseNotes release_notes = 1;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error firmware_not_found = 2 [deprecated = true];
+    }
+  }
+}

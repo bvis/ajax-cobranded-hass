@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.company.installation;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "v1/facility/facility.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message JoinSpaceByCompanyRequest {
+  oneof qr_code {
+    string hub_qr = 1;
+  }
+};
+
+message JoinSpaceByCompanyResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    systems.ajax.mobilegw.grpc.v1.facility.Facility facility = 1;
+  }
+
+  message Failure {
+    oneof cause {
+      HubError hub_error = 1;
+    }
+
+    message HubError {
+      oneof error {
+        common.response.DefaultError bad_request = 1;
+        common.response.DefaultError space_not_found = 2;
+        common.response.DefaultError hub_not_found = 3;
+        common.response.DefaultError hub_qr_code_invalid = 4;
+        common.response.DefaultError hub_claim_error = 5;
+        common.response.DefaultError space_armed = 6;
+        common.response.DefaultError hub_claim_forbidden_by_company_error = 7;
+        common.response.DefaultError hub_offline = 8;
+      }
+    }
+  }
+};

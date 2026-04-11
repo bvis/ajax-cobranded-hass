@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message DisplayGroups {
+  repeated Group groups = 1;
+
+  message Group {
+    string group_hex_id = 1;
+    string group_name = 2;
+  }
+}

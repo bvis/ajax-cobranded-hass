@@ -1,0 +1,12 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message AccessCardReaderState {
+  string id = 1000;
+  int32 timeout_seconds = 1001;
+  bool reader_active = 1002;
+}

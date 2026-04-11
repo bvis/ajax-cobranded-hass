@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/category.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ServiceGroup {
+  string id = 1;
+  string name = 2;
+  string lokalise_id = 3;
+  string description = 4;
+  int32 order = 5;
+  int32 max_target_count_to_assign = 6;
+  systems.ajax.api.mobile.v2.common.accounting.Category category = 7;
+  systems.ajax.api.mobile.v2.common.accounting.FeatureTarget feature_target = 8;
+}

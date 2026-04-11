@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates;
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.company.templates";
+option swift_prefix = "";
+
+enum CompanyTemplateType {
+    COMPANY_TEMPLATE_TYPE_UNSPECIFIED = 0;
+    COMPANY_TEMPLATE_TYPE_TELEPHONY_SETTINGS = 1;
+    COMPANY_TEMPLATE_TYPE_VIDEO_EDGE = 2;
+}

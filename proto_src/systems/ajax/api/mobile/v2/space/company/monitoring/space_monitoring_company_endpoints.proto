@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.company.monitoring;
+
+import "systems/ajax/api/mobile/v2/space/company/monitoring/apply_for_monitoring_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/monitoring/cancel_monitoring_declination_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/monitoring/decline_monitoring_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/monitoring/find_monitoring_companies_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/monitoring/get_monitoring_company_request.proto";
+import "systems/ajax/api/mobile/v2/space/company/monitoring/search_monitoring_companies_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceMonitoringCompanyService {
+  rpc applyForMonitoring(ApplyForMonitoringRequest) returns (ApplyForMonitoringResponse);
+
+  rpc cancelMonitoringDeclination(CancelMonitoringDeclinationRequest) returns (CancelMonitoringDeclinationResponse);
+
+  rpc declineMonitoring(DeclineMonitoringRequest) returns (DeclineMonitoringResponse);
+  
+  rpc findMonitoringCompanies(FindMonitoringCompaniesRequest) returns (FindMonitoringCompaniesResponse);
+
+  rpc getMonitoringCompany(GetMonitoringCompanyRequest) returns (GetMonitoringCompanyResponse);
+
+  rpc searchMonitoringCompanies(SearchMonitoringCompaniesRequest) returns (SearchMonitoringCompaniesResponse);
+};

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message AlarmRestriction {
+
+  AlarmRestrictionMode alarm_restriction_mode = 1[(proto.meta.field_tag) = "alarm_restriction_mode"];
+  repeated Capability capabilities = 2;
+
+  message AlarmRestrictionSettings {
+    optional AlarmRestrictionMode alarm_restriction_mode = 1[(proto.meta.field_tag) = "alarm_restriction_mode"];
+  }
+
+  enum AlarmRestrictionMode {
+    ALARM_RESTRICTION_MODE_UNSPECIFIED = 0;
+    ALARM_RESTRICTION_MODE_ALWAYS = 1[(proto.meta.enum_tag) = "ALARM_RESTRICTION_MODE_ALWAYS"];
+    ALARM_RESTRICTION_MODE_IF_ARMED = 2[(proto.meta.enum_tag) = "ALARM_RESTRICTION_MODE_IF_ARMED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_ALARM_RESTRICTION_MODE = 1;
+  }
+}

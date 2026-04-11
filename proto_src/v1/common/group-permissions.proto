@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+message GroupPermissions {
+  string group_id = 1;
+  repeated Permission permissions = 2;
+
+  enum Permission {
+    NO_PERMISSION_INFO = 0;
+    ARM = 1;
+    DISARM = 2;
+  }
+}

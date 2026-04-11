@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.add_video_edge_local_user;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.add_video_edge_local_user";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AddVideoEdgeLocalUserResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_not_found = 2;
+      commonmodels.Error space_armed = 3;
+      commonmodels.Error permission_denied = 4;
+      commonmodels.Error video_edge_is_offline = 5;
+      commonmodels.Error command_not_supported = 6;
+      commonmodels.Error local_user_already_exists = 7;
+      commonmodels.Error local_user_limit_exceeded = 8;
+    }
+  }
+};

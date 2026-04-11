@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_services_available_for_switch;
+
+import "v3/mobilegwsvc/service/get_services_available_for_switch/request.proto";
+import "v3/mobilegwsvc/service/get_services_available_for_switch/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_services_available_for_switch";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetServicesAvailableForSwitchService {
+  rpc execute (GetServicesAvailableForSwitchRequest) returns (GetServicesAvailableForSwitchResponse);
+};

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light";
+option java_multiple_files = true;
+
+message LightDeviceId {
+  oneof id {
+    HubLightDeviceId  hub_light_device_id = 1;
+    VideoEdgeId video_edge_id = 2;
+    VideoEdgeChannelReference video_edge_channel_reference = 3;
+    SmartLockId smart_lock_id = 4;
+  }
+
+  message HubLightDeviceId {
+    string device_id = 1;
+    string hub_id = 2;
+  }
+
+  message VideoEdgeId {
+    string id = 1;
+  }
+
+  message VideoEdgeChannelReference {
+    string video_edge_id = 1;
+    string channel_id = 2;
+  }
+
+  message SmartLockId {
+    string id = 1;
+  }
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/image_urls.proto";
+import "systems/ajax/protobuf/hub/name.proto";
+
+message Group {
+    string id = 0x01;
+    string image_id = 0x03;
+    bool bulk_arm_involved = 0x04;
+    bool bulk_disarm_involved = 0x05;
+    State state = 0x06;
+
+    Name name = 1000;
+    ImageUrls image_urls = 1010;
+    bool second_stage_required = 0x09;
+    TwoStageArmingStatus two_stage_arming_status = 0x0A;
+    repeated ChimesStatus chimes_status = 0x0B;
+
+    enum State {
+        NO_STATE_INFO = 0;
+        DISARMED = 1;
+        ARMED = 2;
+    }
+    enum TwoStageArmingStatus {
+        NO_TWO_STORAGE_ARMING_STATUS = 0;
+        NONE = 1;
+        APP_EXIT_TIMER_IN_PROGRESS = 2;
+        SECOND_STAGE_TIMER_IN_PROGRESS = 3;
+        ARMING_INCOMPLETE = 4;
+        FINAL_DOOR_BOUNCE_TIMER_IN_PROGRESS = 5;
+    }
+
+    enum ChimesStatus {
+        NO_CHIMES_STATUS_INFO = 0;
+        CHIMES_ENABLED = 1;
+        SIRENS_READY = 2;
+        TRIGGERS_READY = 3;
+    }
+}

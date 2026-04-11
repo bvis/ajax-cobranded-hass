@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_audio_file_for_audio_scenarios;
+
+import "v3/mobilegwsvc/service/update_audio_file_for_audio_scenarios/request.proto";
+import "v3/mobilegwsvc/service/update_audio_file_for_audio_scenarios/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_audio_file_for_audio_scenarios";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UpdateAudioFileForAudioScenariosService {
+  rpc execute (UpdateAudioFileForAudioScenariosRequest) returns (UpdateAudioFileForAudioScenariosResponse);
+};

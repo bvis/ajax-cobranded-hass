@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/notification.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/media.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom";
+option java_multiple_files = true;
+
+message MediaEnrichedNotification {
+  commonmodels.notification.Notification notification = 1;
+  commonmodels.notification.NotificationMedia media = 2;
+}

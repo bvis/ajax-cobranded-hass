@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.smartlock;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_chimes.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/patch_type.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.smartlock";
+option java_multiple_files = true;
+
+message SmartLockYalePart {
+  ModelType model_type = 1 [(proto.meta.field_tag) = "model_type"];
+  int32 hw_version = 2 [(proto.meta.field_tag) = "hw_version"];
+  KeyboardStatus keyboard_status = 3 [(proto.meta.field_tag) = "keyboard_status"];
+  SecureMode secure_mode = 4 [(proto.meta.field_tag) = "secure_mode"];
+  DoorBellDeviceChimes door_bell_device_chimes = 5;
+  Loudness loudness = 6 [(proto.meta.field_tag) = "loudness"];
+  Language language = 7 [(proto.meta.field_tag) = "language"];
+  AlarmMode alarm_mode = 8 [(proto.meta.field_tag) = "alarm_mode"];
+  UserCodeBlocking user_code_blocking = 9 [(proto.meta.field_tag) = "user_code_blocking"];
+
+  enum ModelType {
+    MODEL_TYPE_UNSPECIFIED = 0;
+    MODEL_TYPE_DOORMAN_L3S = 1 [(proto.meta.enum_tag) = "MODEL_TYPE_DOORMAN_L3S"];
+    MODEL_TYPE_DOORMAN_V2N = 2 [(proto.meta.enum_tag) = "MODEL_TYPE_DOORMAN_V2N"];
+  }
+
+  enum KeyboardStatus {
+    KEYBOARD_STATUS_UNSPECIFIED = 0;
+    KEYBOARD_STATUS_UNLOCKED = 1 [(proto.meta.enum_tag) = "KEYBOARD_STATUS_UNLOCKED"];
+    KEYBOARD_STATUS_LOCKED = 2 [(proto.meta.enum_tag) = "KEYBOARD_STATUS_LOCKED"];
+  }
+
+  enum SecureMode {
+    SECURE_MODE_UNSPECIFIED = 0;
+    SECURE_MODE_DISABLED = 1 [(proto.meta.enum_tag) = "SECURE_MODE_DISABLED"];
+    SECURE_MODE_ENABLED = 2 [(proto.meta.enum_tag) = "SECURE_MODE_ENABLED"];
+  }
+
+  message DoorBellDeviceChimes {
+    repeated DoorBellChimesTrigger chimes_triggers = 1 [(proto.meta.field_tag) = "door_bell_chime_triggers"];
+    common.DeviceChimes.Sound chimes_sound = 2 [(proto.meta.field_tag) = "door_bell_chime_signal"];
+
+    enum DoorBellChimesTrigger {
+      DOOR_BELL_CHIMES_TRIGGER_UNSPECIFIED = 0;
+      DOOR_BELL_CHIMES_TRIGGER_BUTTON = 1 [(proto.meta.enum_tag) = "DOOR_BELL_CHIME_TRIGGER_BUTTON"];
+    }
+  }
+
+  enum Loudness {
+    LOUDNESS_UNSPECIFIED = 0;
+    LOUDNESS_LOW = 1 [(proto.meta.enum_tag) = "LOUDNESS_LOW"];
+    LOUDNESS_MEDIUM = 2 [(proto.meta.enum_tag) = "LOUDNESS_MEDIUM"];
+    LOUDNESS_MAX = 3 [(proto.meta.enum_tag) = "LOUDNESS_MAX"];
+  }
+
+  enum Language {
+    LANGUAGE_UNSPECIFIED = 0;
+    LANGUAGE_ARABIC = 1 [(proto.meta.enum_tag) = "LANGUAGE_ARABIC"];
+    LANGUAGE_ENGLISH = 2 [(proto.meta.enum_tag) = "LANGUAGE_ENGLISH"];
+    LANGUAGE_FRENCH = 3 [(proto.meta.enum_tag) = "LANGUAGE_FRENCH"];
+    LANGUAGE_SPANISH = 4 [(proto.meta.enum_tag) = "LANGUAGE_SPANISH"];
+    LANGUAGE_DANISH = 5 [(proto.meta.enum_tag) = "LANGUAGE_DANISH"];
+    LANGUAGE_NORWEGIAN = 6 [(proto.meta.enum_tag) = "LANGUAGE_NORWEGIAN"];
+    LANGUAGE_SWEDISH = 7 [(proto.meta.enum_tag) = "LANGUAGE_SWEDISH"];
+    LANGUAGE_FINNISH = 8 [(proto.meta.enum_tag) = "LANGUAGE_FINNISH"];
+    LANGUAGE_RUSSIAN = 9 [(proto.meta.enum_tag) = "LANGUAGE_RUSSIAN"];
+    LANGUAGE_CHINESE = 10 [(proto.meta.enum_tag) = "LANGUAGE_CHINESE"];
+    LANGUAGE_DUTCH = 11 [(proto.meta.enum_tag) = "LANGUAGE_DUTCH"];
+    LANGUAGE_GERMAN = 12 [(proto.meta.enum_tag) = "LANGUAGE_GERMAN"];
+    LANGUAGE_GREEK = 13 [(proto.meta.enum_tag) = "LANGUAGE_GREEK"];
+    LANGUAGE_ITALIAN = 14 [(proto.meta.enum_tag) = "LANGUAGE_ITALIAN"];
+    LANGUAGE_POLISH = 15 [(proto.meta.enum_tag) = "LANGUAGE_POLISH"];
+    LANGUAGE_PORTUGUESE = 16 [(proto.meta.enum_tag) = "LANGUAGE_PORTUGUESE"];
+    LANGUAGE_TURKISH = 17 [(proto.meta.enum_tag) = "LANGUAGE_TURKISH"];
+    LANGUAGE_CZECH = 18 [(proto.meta.enum_tag) = "LANGUAGE_CZECH"];
+    LANGUAGE_SLOVAK = 19 [(proto.meta.enum_tag) = "LANGUAGE_SLOVAK"];
+    LANGUAGE_BULGARIAN = 20 [(proto.meta.enum_tag) = "LANGUAGE_BULGARIAN"];
+    LANGUAGE_HUNGARIAN = 21 [(proto.meta.enum_tag) = "LANGUAGE_HUNGARIAN"];
+    LANGUAGE_ROMANIAN = 22 [(proto.meta.enum_tag) = "LANGUAGE_ROMANIAN"];
+    LANGUAGE_BELORUSSIAN = 23 [(proto.meta.enum_tag) = "LANGUAGE_BELORUSSIAN"];
+    LANGUAGE_UKRAINIAN = 24 [(proto.meta.enum_tag) = "LANGUAGE_UKRAINIAN"];
+    LANGUAGE_ESTONIAN = 25 [(proto.meta.enum_tag) = "LANGUAGE_ESTONIAN"];
+    LANGUAGE_LITHUANIAN = 26 [(proto.meta.enum_tag) = "LANGUAGE_LITHUANIAN"];
+    LANGUAGE_LATVIAN = 27 [(proto.meta.enum_tag) = "LANGUAGE_LATVIAN"];
+    LANGUAGE_KOREAN = 28 [(proto.meta.enum_tag) = "LANGUAGE_KOREAN"];
+    LANGUAGE_JAPANESE = 29 [(proto.meta.enum_tag) = "LANGUAGE_JAPANESE"];
+  }
+
+  enum AlarmMode {
+    ALARM_MODE_UNSPECIFIED = 0;
+    ALARM_MODE_DISABLED = 1 [(proto.meta.enum_tag) = "ALARM_MODE_DISABLED"];
+    ALARM_MODE_HOME_MODE = 2 [(proto.meta.enum_tag) = "ALARM_MODE_HOME_MODE"];
+    ALARM_MODE_AWAY_MODE = 3 [(proto.meta.enum_tag) = "ALARM_MODE_AWAY_MODE"];
+  }
+
+  enum UserCodeBlocking {
+    USER_CODE_BLOCKING_UNSPECIFIED = 0;
+    USER_CODE_BLOCKING_DISABLED = 1 [(proto.meta.enum_tag) = "USER_CODE_BLOCKING_DISABLED"];
+    USER_CODE_BLOCKING_ENABLED = 2 [(proto.meta.enum_tag) = "USER_CODE_BLOCKING_ENABLED"];
+  }
+
+  message SmartLockYalePartSettings {
+    optional DoorBellDeviceChimesSettings door_bell_device_chimes = 1;
+    optional Loudness loudness = 2 [(proto.meta.field_tag) = "loudness"];
+    optional Language language = 3 [(proto.meta.field_tag) = "language"];
+    optional AlarmMode alarm_mode = 4 [(proto.meta.field_tag) = "alarm_mode"];
+    optional UserCodeBlocking user_code_blocking = 5 [(proto.meta.field_tag) = "user_code_blocking"];
+
+    message DoorBellDeviceChimesSettings {
+      repeated DoorBellChimesTriggerPatch chimes_triggers = 1 [(proto.meta.field_tag) = "door_bell_chime_triggers"];
+      optional common.DeviceChimes.Sound chimes_sound = 2 [(proto.meta.field_tag) = "door_bell_chime_signal"];
+
+      message DoorBellChimesTriggerPatch {
+        PatchType patch_type = 1;
+        DoorBellDeviceChimes.DoorBellChimesTrigger chimes_trigger = 2;
+      }
+    }
+  }
+}

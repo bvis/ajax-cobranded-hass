@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.media;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.media";
+option java_multiple_files = true;
+
+message DeleteMediaRequest {
+  string facility_id = 1;
+  string media_info_id = 2;
+}

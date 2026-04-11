@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveFragmentInfo {
+  uint64 fragment_id = 1;
+
+  uint64 ts = 2;
+
+  uint64 duration = 3;
+};

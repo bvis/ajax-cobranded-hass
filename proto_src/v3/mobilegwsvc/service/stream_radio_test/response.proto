@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_radio_test;
+
+import "google/protobuf/timestamp.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/common/device_radio_test_type.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_signal_level.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamRadioTestResponse {
+  oneof response {
+      Success success = 1;
+      Failure failure = 2;
+  }
+
+  message Success {
+    oneof entity {
+      Snapshot snapshot = 1;
+    }
+  }
+
+  message Snapshot {
+    RadioTestInfo info = 1;
+  }
+
+  message RadioTestInfo {
+    string device_id = 1;
+    RadioTestStatus status = 2;
+    commonmodels.hub.device.common.DeviceRadioTestType test_type = 3;
+    systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common.DeviceSignalLevel signal_level = 4;
+    optional google.protobuf.Timestamp started_at = 5;
+  }
+
+  enum RadioTestStatus {
+    RADIO_TEST_STATUS_UNSPECIFIED = 0;
+    RADIO_TEST_STATUS_READY_TO_START = 1;
+    RADIO_TEST_STATUS_STARTING = 2;
+    RADIO_TEST_STATUS_IN_PROGRESS = 3;
+    RADIO_TEST_STATUS_STOPPING = 4;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error device_not_found = 2;
+    }
+  }
+}

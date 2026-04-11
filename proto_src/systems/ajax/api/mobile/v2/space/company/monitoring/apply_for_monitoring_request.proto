@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.company.monitoring;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target_info.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message ApplyForMonitoringRequest {
+  string company_hex_id = 1;
+  string space_id = 2;
+  optional string account_number = 3;
+};
+
+message ApplyForMonitoringResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    optional common.accounting.FeatureTargetInfo feature_target_info = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError space_on_monitoring_already_exists = 3;
+      common.response.DefaultError permission_denied = 4;
+      common.response.DefaultError hub_locked = 5;
+      common.response.DefaultError users_limit_exceed = 6;
+      common.response.DefaultError account_number_required = 7;
+      common.response.DefaultError account_number_exists = 8;
+      common.response.DefaultError cannot_perform_action_for_initiator = 9;
+      common.response.DefaultError space_armed = 10;
+      common.response.SpaceLockedError space_locked = 11;
+    }
+  }
+};

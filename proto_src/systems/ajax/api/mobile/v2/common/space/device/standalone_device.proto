@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+import "systems/ajax/api/mobile/v2/common/space/device/hub.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/passive_hub.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/smart_lock_device.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/video_edge.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/vaelsys_camera.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StandaloneDevice {
+  oneof device {
+    Hub hub = 1;
+    VideoEdge video_edge = 2;
+    PassiveHub passive_hub = 3;
+    SmartLockDevice smart_lock = 4;
+    VaelsysCamera vaelsys_camera = 5;
+  }
+
+  reserved 20; // deprecated sorting key
+  string sorting_key = 21;
+};

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/channel_permission.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/requested_video_channel_data.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.privacy";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message TemporaryVideoAccessRequestFromProData {
+  string initiator_email = 1 [(hash_value) = true];
+  string request_id = 2;
+  repeated RequestedVideoChannelData channels = 3;
+  repeated ChannelPermission permissions = 4;
+  google.protobuf.Duration duration = 5;
+}

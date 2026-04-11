@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InviteSpaceMembersRequest {
+
+  string space_id = 1;
+
+  repeated SpaceMemberEmail emails = 2;
+};
+
+message InviteSpaceMembersResponse {
+
+  repeated InviteResult result = 1;
+
+  message InviteResult {
+
+    SpaceMemberEmail email = 1;
+
+    oneof response {
+      common.response.Success success = 21;
+      Failure failure = 22;
+    }
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError too_many_users = 4;
+      common.response.DefaultError already_exist = 5;
+      common.response.DefaultError pro_not_found = 6;
+      common.response.SpaceLockedError space_locked = 7;
+    }
+  }
+};
+
+message SpaceMemberEmail {
+  oneof email {
+    string pro_email = 1 [(hash_value) = true];
+    string user_email = 2 [(hash_value) = true];
+  }
+}

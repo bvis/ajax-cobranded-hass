@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_en54_hub_action;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_en54_hub_action";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message HubCommandEn54HubActionRequest {
+  string hub_id = 1;
+  CommandType command_type = 2;
+
+  enum CommandType {
+    COMMAND_TYPE_UNSPECIFIED = 0;
+    COMMAND_TYPE_RESET_FIRE_ALARM = 1;
+    COMMAND_TYPE_SILENCE_SOUNDERS = 2;
+    COMMAND_TYPE_RESOUND_SOUNDERS = 3;
+    COMMAND_TYPE_RESOUND_EVACUATION = 4;
+    COMMAND_TYPE_START_INV_DELAY = 5;
+    COMMAND_TYPE_OVERRIDE_INV_ACK_DELAYS = 6;
+    COMMAND_TYPE_ON_INV_ACK_DELAYS = 7;
+    COMMAND_TYPE_OFF_INV_ACK_DELAYS = 8;
+  }
+}

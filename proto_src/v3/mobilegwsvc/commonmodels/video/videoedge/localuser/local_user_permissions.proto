@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.localuser;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.localuser";
+option java_multiple_files = true;
+
+message LocalUserPermissions {
+
+  oneof access_union {
+    LocalUserAdminRole admin = 1;
+    LocalUserOperatorRole operator = 2;
+  }
+
+  message LocalUserAdminRole {}
+
+  message LocalUserOperatorRole {
+    repeated string channel_ids = 1;
+
+    repeated LocalUserChannelPermission channel_permissions = 2;
+  }
+
+  enum LocalUserChannelPermission {
+    LOCAL_USER_CHANNEL_PERMISSION_UNSPECIFIED = 0;
+    LOCAL_USER_CHANNEL_PERMISSION_VIEW_LIVE_STREAM = 1;
+    LOCAL_USER_CHANNEL_PERMISSION_VIEW_ARCHIVE = 2;
+    LOCAL_USER_CHANNEL_PERMISSION_PTZ = 3;
+    LOCAL_USER_CHANNEL_PERMISSION_SOUND = 4;
+    LOCAL_USER_CHANNEL_PERMISSION_EXPORT_ARCHIVE = 5;
+  }
+}

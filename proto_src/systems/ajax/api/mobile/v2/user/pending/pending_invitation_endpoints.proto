@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.user.pending;
+
+import "systems/ajax/api/mobile/v2/user/pending/delete_pending_invitation_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service PendingInvitationService {
+
+  rpc delete (DeletePendingInvitationRequest) returns (DeletePendingInvitationResponse);
+};

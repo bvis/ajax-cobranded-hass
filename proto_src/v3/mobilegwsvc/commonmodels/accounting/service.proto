@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/package.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/current_service_agreement.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+
+message Service {
+  oneof service {
+    systems.ajax.api.mobile.v2.common.accounting.Feature feature = 1;
+    commonmodels.accounting.Package package = 2;
+  }
+  optional CurrentServiceAgreement current_service_agreement = 3;
+  int32 max_target_count_to_assign = 4;
+}
+

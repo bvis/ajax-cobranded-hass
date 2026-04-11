@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_device_off;
+
+import "v3/mobilegwsvc/service/device_command_device_off/request.proto";
+import "v3/mobilegwsvc/service/device_command_device_off/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandDeviceOffService {
+  rpc execute (DeviceCommandDeviceOffRequest) returns (DeviceCommandDeviceOffResponse);
+};

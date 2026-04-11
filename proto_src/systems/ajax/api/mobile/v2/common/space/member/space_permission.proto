@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SpacePermission {
+  SPACE_PERMISSION_NONE = 0;
+  DELETE_MEMBERS = 1;
+  INVITE_MEMBERS = 2;
+  CHANGE_MEMBER_ROLE = 3;
+  CHANGE_MEMBER_PERMISSIONS = 4;
+  CHANGE_MEMBER_NOTIFICATION_SETTINGS = 5;
+  ARM = 6;
+  NIGHT_MODE_ARM_DISARM = 7;
+  DISARM = 8;
+  PANIC_BUTTON = 9;
+  ROOMS_EDIT = 10;
+  DEVICE_EDIT = 11;
+  GROUPS_EDIT = 12;
+  EVENT_VISIBILITY = 13;
+  STRUCTURE_VISIBILITY = 14;
+  SCENARIO_EDIT = 15;
+  PRIVACY_SETTINGS_ACCESS = 16;
+  SETTINGS_EDIT = 17;
+}

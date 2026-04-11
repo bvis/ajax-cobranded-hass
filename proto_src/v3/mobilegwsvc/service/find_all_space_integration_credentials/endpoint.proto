@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_integration_credentials;
+
+import "v3/mobilegwsvc/service/find_all_space_integration_credentials/request.proto";
+import "v3/mobilegwsvc/service/find_all_space_integration_credentials/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FindAllSpaceIntegrationCredentialsService {
+  rpc execute (FindAllSpaceIntegrationCredentialsRequest) returns (FindAllSpaceIntegrationCredentialsResponse);
+};

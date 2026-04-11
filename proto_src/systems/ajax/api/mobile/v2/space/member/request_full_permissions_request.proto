@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+option deprecated = true;
+
+message RequestFullPermissionsRequest {
+
+  common.space.SpaceLocator space_locator = 1;
+
+  oneof permissions_type {
+    PermanentPermissions permanent_permissions = 2;
+    TemporaryPermissions temporary_permissions = 3;
+  }
+
+  message PermanentPermissions {}
+
+  message TemporaryPermissions {
+    google.protobuf.Duration duration = 1;
+  }
+};
+
+message RequestFullPermissionsResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+    }
+  }
+}

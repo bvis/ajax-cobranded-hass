@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.hub.v1;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.hub.v1";
+option java_multiple_files = true;
+
+import "v1/common/hub-index.proto";
+
+message GetHubIndexesResponse {
+  repeated  systems.ajax.mobilegw.grpc.common.v1.HubIndex hub_indexes = 1;
+}
+

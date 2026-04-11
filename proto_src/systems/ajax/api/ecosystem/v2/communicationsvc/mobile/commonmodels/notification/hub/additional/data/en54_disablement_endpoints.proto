@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message En54DisablementEndpoints { // 1C in the HtS
+  repeated Endpoint endpoints = 1[deprecated = true];
+
+  repeated EndpointData endpoint_data = 2;
+
+  message EndpointData {
+    Endpoint endpoint = 1;
+    optional string name = 2;
+  }
+
+  enum Endpoint {
+    ENDPOINT_UNSPECIFIED = 0;
+    ENDPOINT_SMOKE = 1;
+    ENDPOINT_TEMP = 2;
+    ENDPOINT_TEMP_RAPID_RISE = 3;
+    ENDPOINT_SOUNDER = 4;
+    ENDPOINT_VAD = 5;
+    ENDPOINT_OUTPUT_1 = 6;
+    ENDPOINT_OUTPUT_2 = 7;
+    ENDPOINT_OUTPUTS = 8;
+    ENDPOINT_INPUT = 9;
+    ENDPOINT_MCP = 10;
+  }
+}
+
+

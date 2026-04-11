@@ -1,0 +1,163 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+message HubEvent {
+	string id = 1; // may be empty if event comes from cache
+	string hub_id = 2;
+	string hub_name = 3;
+	string source_id = 4;
+	string source_name = 5;
+	string code = 6;
+	Type type = 7;
+	string source_room_name = 8;
+	string event_id = 9;
+	google.protobuf.Timestamp server_received_timestamp = 10;
+	string source_type = 11;
+	string source_room_id = 12;
+	AdditionalData additional_data = 13;
+	string hub_sub_type = 14;
+
+	enum Type {
+		ALARM = 0;
+		ALARM_RECOVERED = 1;
+		MALFUNCTION = 2;
+		FUNCTION_RECOVERED = 3;
+		SECURITY = 4;
+		COMMON = 5;
+		USER = 6;
+		LIFECYCLE = 7;
+		FIBRA_SCAN_ALARM = 8;
+	}
+
+	message AdditionalData {
+		oneof test_oneof {
+			AccessRequest access_request = 1;
+			Coordinates coordinates = 2;
+			DeviceMalfunctions device_malfunctions = 3;
+			ResourceDescription resource_description = 4;
+			FirmwareVersion firmware_version = 5;
+			MalfunctionAdditionalData malfunction_additional_data = 6;
+			Initiator initiator_additional_data = 7;
+			ApprovePermissionsRequestPermanentlyAdditionalData approve_permissions_permanently_additional_data = 8;
+			RejectPermissionsRequestAdditionalData reject_permissions_additional_data = 9;
+			ApprovePermissionsRequestTemporaryAdditionalData approve_permissions_temporary_additional_data = 10;
+			ClaimPermissionsRequestTemporaryAdditionalData claim_permissions_request_temporary_additional_data = 11;
+			ClaimPermissionsRequestPermanentAdditionalData claim_permissions_request_permanent_additional_data = 12;
+		}
+
+		message AccessRequest {
+			uint64 request_id = 1;
+			string pro_id = 2;
+			string pro_name = 3;
+			string pro_email = 4;
+			string pro_company_id = 5;
+			string owner_id = 6;
+			string owner_name = 7;
+			string owner_email = 8;
+			AccessRights requested_access_rights = 9;
+			uint32 access_time_hours = 10;
+
+			enum AccessRights {
+				FULL_ACCESS = 0;
+			}
+		}
+
+		message Coordinates {
+			double latitude = 1;
+			double longitude = 2;
+		}
+
+		message DeviceMalfunctions {
+			repeated DeviceMalfunction items = 1;
+
+			message DeviceMalfunction {
+				string obj_id = 1;
+				string obj_type = 2;
+				string obj_name = 3;
+				string obj_room_id = 4;
+				string obj_room_name = 5;
+				string hub_name = 6;
+				string text = 7;
+			}
+		}
+
+		message ResourceDescription {
+			repeated ResourceLink ordered_resource_links = 1;
+			google.protobuf.Timestamp link_expiration_timestamp = 2;
+
+			message ResourceLink {
+				string url = 1;
+				Status status = 2;
+
+				enum Status {
+					IN_PROGRESS = 0;
+					READY = 1;
+					FAILED = 2;
+				}
+			}
+		}
+
+		message FirmwareVersion {
+			string version = 1;
+		}
+
+		message MalfunctionAdditionalData {
+			DeviceMalfunctionInfo device_malfunction = 1;
+
+			enum DeviceMalfunctionInfo {
+				NO_MALFUNCTION_INFO = 0;
+				CABLE_BREAK_ISSUE = 1;
+				VOLTAGE_INSTABILITY = 2;
+				SIREN_VOLUME_TEST_REQUIRED = 3;
+				CO_SENSOR_MALFUNCTION = 4;
+				CO_SENSOR_LEVEL_EXCEEDED = 5;
+				SMOKE_DETECTOR_CAMERA_MALFUNCTION = 6;
+				MICROWAVE_SENSOR_CALIBRATION_ERROR = 7;
+				ACCELEROMETER_MALFUNCTION = 8;
+				BAD_INPUT_RESISTANCE = 9;
+				MODEM_MALFUNCTION = 27;
+				WIFI_CONNECTION_FAIL = 28;
+				BATTERY_MALFUNCTION = 29;
+				BATTERY_CHARGE_ERROR = 30;
+				SOFTWARE_MALFUNCTION = 31;
+				FLASH_MALFUNCTION = 32;
+			}
+		}
+
+		message Initiator {
+			string initiator_name = 1;
+		}
+
+		message ApprovePermissionsRequestPermanentlyAdditionalData {
+			string name = 1;
+			string email = 2;
+		}
+
+		message RejectPermissionsRequestAdditionalData {
+			string name = 1;
+			string email = 2;
+		}
+
+		message ApprovePermissionsRequestTemporaryAdditionalData {
+			string name = 1;
+			string email = 2;
+			int32 access_time_hours = 3;
+		}
+
+		message ClaimPermissionsRequestTemporaryAdditionalData {
+			string claimID = 1;
+			string emailCompany = 2;
+			int32 access_time_hours = 3;
+		}
+
+		message ClaimPermissionsRequestPermanentAdditionalData {
+			string claimID = 1;
+			string emailCompany = 2;
+		}
+	}
+}

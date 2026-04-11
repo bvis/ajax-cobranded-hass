@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.detector;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/detector/set_detector_enabled_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/detector/set_detector_settings_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeDetectorService {
+  rpc setEnabled(SetDetectorEnabledRequest) returns (SetDetectorEnabledResponse) {}
+
+  rpc setSettings(SetDetectorSettingsRequest) returns (SetDetectorSettingsResponse) {}
+};

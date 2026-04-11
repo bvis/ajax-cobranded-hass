@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.network;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/network/update_network_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/network/set_network_desired_configuration_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeNetworkService {
+  rpc update(UpdateNetworkRequest) returns (UpdateNetworkResponse) {}
+
+  rpc setDesiredConfiguration(SetNetworkDesiredConfigurationRequest) returns (SetNetworkDesiredConfigurationResponse) {}
+};

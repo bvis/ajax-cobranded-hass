@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_candidate.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_candidate_filters.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/session_description.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/stream.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamWebrtcRequest {
+
+  oneof signaling_message {
+    Init init = 1;
+    AskStreams ask_streams = 2;
+    NewIceCandidate new_ice_candidate = 3;
+    Offer offer = 4;
+    Answer answer = 5;
+    PeerConnectionEstablished peer_connection_established = 6;
+  }
+
+  message Init {
+    api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+    string video_edge_id = 2;
+
+    repeated api.mobile.v2.common.video.webrtc.Stream initial_streams = 3;
+
+    api.mobile.v2.common.video.webrtc.IceCandidateFilters ice_filters = 4;
+
+    bool allow_large_rtp_packets = 5;
+  }
+
+  message AskStreams {
+    repeated api.mobile.v2.common.video.webrtc.Stream streams = 1;
+  }
+
+  message NewIceCandidate {
+    api.mobile.v2.common.video.webrtc.IceCandidate candidate = 1;
+  }
+
+  message Offer {
+    api.mobile.v2.common.video.webrtc.SessionDescription session_description = 1;
+  }
+
+  message Answer {
+    api.mobile.v2.common.video.webrtc.SessionDescription session_description = 1;
+  }
+
+  message PeerConnectionEstablished {
+    google.protobuf.Duration latency = 1;
+
+    api.mobile.v2.common.video.NetworkTechnologyType network_technology_type = 2;
+
+    api.mobile.v2.common.video.TransportProtocolType transport_protocol_type = 3;
+
+    api.mobile.v2.common.video.IceCandidateType ice_candidate_type = 4;
+  }
+}

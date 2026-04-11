@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.mediadevice;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/disable_channels_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/enable_channels_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/set_media_device_desired_settings_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/add_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/add_video_edge_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/remove_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/set_enabled_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/make_permanent_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/discovering/discover_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/mediadevice/set_media_device_connection_settings_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeMediaDeviceService {
+  rpc add(AddMediaDeviceRequest) returns (AddMediaDeviceResponse);
+
+  rpc addVideoEdge(AddVideoEdgeRequest) returns (AddVideoEdgeResponse);
+
+  rpc remove (RemoveMediaDeviceRequest) returns (RemoveMediaDeviceResponse);
+
+  rpc setEnabled(SetMediaDeviceEnabledRequest) returns (SetMediaDeviceEnabledResponse);
+
+  rpc setDesiredSettings(SetMediaDeviceDesiredSettingsRequest) returns (SetMediaDeviceDesiredSettingsResponse);
+
+  rpc makePermanent(MakeMediaDevicePermanentRequest) returns (MakeMediaDevicePermanentResponse);
+
+  rpc discover(discovering.DiscoverMediaDevicesRequest) returns (stream discovering.DiscoverMediaDevicesResponse);
+
+  rpc setConnectionSettings(SetMediaDeviceConnectionSettingsRequest) returns (SetMediaDeviceConnectionSettingsResponse);
+
+  rpc enableChannels(EnableMediaDeviceChannelsRequest) returns (EnableMediaDeviceChannelsResponse);
+
+  rpc disableChannels(DisableMediaDeviceChannelsRequest) returns (DisableMediaDeviceChannelsResponse);
+};

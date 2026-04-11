@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+import "v1/common/access-rights.proto";
+import "v1/common/privacy/employee-photo-on-demand-access.proto";
+import "v1/common/privacy/employee-surveillance-cameras-access.proto";
+import "v1/facility/facility.proto";
+import "v1/facility/facility-monitoring-status.proto";
+import "v1/facility/facility-editable-fields.proto";
+import "v1/hub/monitoring-company-on-hub.proto";
+
+message FacilityStreamResponse {
+  Facility facility = 1;
+  common.AccessRights access_rights = 2;
+  repeated systems.ajax.mobilegw.grpc.v1.hub.MonitoringCompanyOnHub monitoring_companies = 4;
+  facility.FacilityEditableFields facility_editable_fields = 6;
+  common.privacy.EmployeePhotoOnDemandAccess employee_photo_on_demand_access = 7;
+  common.privacy.EmployeeSurveillanceCamerasAccess employee_surveillance_cameras_access = 8;
+}

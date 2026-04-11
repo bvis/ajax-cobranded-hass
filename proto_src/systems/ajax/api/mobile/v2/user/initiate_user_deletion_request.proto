@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.user;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InitiateUserDeletionRequest {};
+
+message InitiateUserDeletionResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError user_not_found = 1;
+      ProtectedFromDeletionDueToCompaniesError user_is_owner_in_companies = 2;
+      ProtectedFromDeletionDueToCompaniesError user_is_employee_in_companies = 3;
+      ProtectedFromDeletionDueToSpacesError protected_from_deletion_due_to_spaces = 4;
+      common.response.DefaultError cannot_send_confirmation_codes = 5;
+    }
+
+    message ProtectedFromDeletionDueToCompaniesError {
+      repeated Company companies = 1;
+
+      message Company {
+        string company_id = 1;
+
+        string name = 2;
+
+        optional v2.common.image.Images image = 3;
+      }
+    }
+
+    message ProtectedFromDeletionDueToSpacesError {
+      repeated Space last_user_in_spaces = 1;
+
+      message Space {
+        string space_id = 1;
+
+        string name = 2;
+
+        optional v2.common.image.Images image = 3;
+      }
+    }
+  }
+};

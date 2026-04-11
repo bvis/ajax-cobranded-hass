@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+import "systems/ajax/api/mobile/v2/facility/accept_legal_agreement_request.proto";
+import "systems/ajax/api/mobile/v2/facility/enable_privacy_override_request.proto";
+import "systems/ajax/api/mobile/v2/facility/disable_privacy_override_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FacilityPrivacyOverrideService {
+  rpc acceptLegalAgreement (AcceptLegalAgreementRequest) returns (AcceptLegalAgreementResponse);
+  rpc enablePrivacyOverride (EnablePrivacyOverrideRequest) returns (EnablePrivacyOverrideResponse);
+  rpc disablePrivacyOverride (DisablePrivacyOverrideRequest) returns (DisablePrivacyOverrideResponse);
+}

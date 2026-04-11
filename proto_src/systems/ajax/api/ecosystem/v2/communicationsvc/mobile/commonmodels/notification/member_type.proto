@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+
+enum MemberType {
+  MEMBER_TYPE_UNSPECIFIED = 0;
+  MEMBER_TYPE_USER = 1;
+  MEMBER_TYPE_PRO = 2;
+  MEMBER_TYPE_COMPANY = 3;
+}

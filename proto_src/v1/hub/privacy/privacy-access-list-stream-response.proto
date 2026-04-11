@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+
+import "v1/hub/privacy/privacy-motion-cam-access.proto";
+import "v1/hub/privacy/privacy-streaming-cam-access.proto";
+
+message PrivacyAccessListStreamResponse {
+  repeated PrivacyMotionCamAccess motion_cam_privacy_access = 1;
+  repeated PrivacyStreamingCamAccess streaming_cam_privacy_access = 2;
+}

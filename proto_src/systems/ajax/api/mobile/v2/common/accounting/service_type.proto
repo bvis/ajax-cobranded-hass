@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum ServiceType {
+  SERVICE_TYPE_N0_INFO = 0;
+  SERVICE_TYPE_DEALER = 1;
+  SERVICE_TYPE_RESELLER = 2;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.resend_confirmation_codes;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/validation/validation_by.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.resend_confirmation_codes";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ResendConfirmationCodesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    uint32 expected_token_length = 1;
+
+    oneof phone_validation_type {
+      commonmodels.validation.ValidationBySms validation_by_sms = 2;
+      commonmodels.validation.ValidationByCall validation_by_call = 3;
+    }
+  }
+
+  message Failure {
+
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error email_validation_failed = 2;
+      commonmodels.Error phone_validation_failed = 3;
+      commonmodels.Error cannot_request_confirmation_codes = 4;
+      commonmodels.Error cannot_send_confirmation_codes = 5;
+    }
+  }
+}

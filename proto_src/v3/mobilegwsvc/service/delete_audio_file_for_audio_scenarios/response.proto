@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_audio_file_for_audio_scenarios;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.delete_audio_file_for_audio_scenarios";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeleteAudioFileForAudioScenariosResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.Error conflict = 2;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/bypass_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/cms_device_index.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_common_capabilities.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_malfunctions.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_migration_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_profile.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_telemetry.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/self_monitoring_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonFibraPart {
+  DeviceProfile device_profile = 1;
+  DeviceTelemetry device_telemetry = 2;
+  DeviceMalfunctions device_malfunctions = 3;
+  CmsDeviceIndex cms_device_index = 5;
+  FibraLine fibra_line = 6;
+  LineVoltage line_voltage = 7;
+  BypassPart bypass_part = 8;
+  repeated DeviceCommonCapability device_common_capabilities = 9;
+  DeviceMigrationStatus device_migration_status = 10;
+  LineExtender line_extender = 11;
+  SelfMonitoringPart self_monitoring_part = 12;
+}
+
+message LineVoltage {
+  int32 value = 1[(proto.meta.field_tag) = "line_voltage_value"];
+  LineVoltageStatus line_voltage_status = 2[(proto.meta.field_tag) = "line_voltage_status"];
+
+  enum LineVoltageStatus {
+    LINE_VOLTAGE_STATUS_UNSPECIFIED = 0;
+    LINE_VOLTAGE_STATUS_ALERT = 1[(proto.meta.enum_tag) = "LINE_VOLTAGE_STATUS_ALERT"];
+    LINE_VOLTAGE_STATUS_OK = 2[(proto.meta.enum_tag) = "LINE_VOLTAGE_STATUS_OK"];
+  }
+}
+
+message LineExtender {
+  string name = 1;
+  int32 output = 2;
+  int32 index = 3;
+  ObjectType object_type = 4;
+}
+
+message FibraLine {
+  oneof type {
+    Line line = 1;
+    Ring ring = 2;
+  }
+
+  message Line {
+    int32 value = 1;
+  }
+
+  message Ring {
+    int32 input = 1;
+    int32 output = 2;
+  }
+}

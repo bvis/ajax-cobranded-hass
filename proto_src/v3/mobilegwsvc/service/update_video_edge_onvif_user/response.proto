@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_onvif_user;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/onvif/onvif_settings.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_onvif_user";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateVideoEdgeOnvifUserResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    commonmodels.video.videoedge.onvif.OnvifSettings settings = 1;
+  }
+
+  message Failure {
+
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_armed = 3;
+      commonmodels.Error space_not_found = 4;
+      commonmodels.Error video_edge_not_found = 5;
+      commonmodels.Error video_edge_is_offline = 6;
+      commonmodels.Error unimplemented_video_edge_command = 7;
+      commonmodels.Error onvif_user_not_found = 8;
+      commonmodels.Error onvif_user_already_exists = 9;
+    }
+  }
+};

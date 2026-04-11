@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_notification_settings;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_settings.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_notification_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetVideoNotificationSettingsResponse {
+
+  oneof response {
+    // Success (exception to the rules so as not to additionally support old apps)
+    commonmodels.video.videoedge.channel.notification.VideoNotificationSettings success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    // reserved for space armed error
+    reserved 3;
+
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 4;
+      commonmodels.Error video_edge_not_found = 5;
+      commonmodels.Error channel_not_found = 6;
+    }
+  }
+}

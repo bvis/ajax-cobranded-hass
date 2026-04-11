@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message BackupConnectionContext {
+    HubConnectionStatus hub_connection_status = 1;
+    optional string parent_notification_id = 2;
+
+    enum HubConnectionStatus {
+        HUB_CONNECTION_STATUS_UNSPECIFIED = 0;
+        HUB_CONNECTION_STATUS_ONLINE = 1;
+        HUB_CONNECTION_STATUS_OFFLINE = 2;
+    }
+}

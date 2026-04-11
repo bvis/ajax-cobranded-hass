@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+message Error {}
+
+message Success {}
+
+message HubBusyError {
+  ErrorCause error_cause = 1;
+}
+
+message HubWrongStateError {
+  ErrorCause error_cause = 1;
+}
+
+message ErrorCause {
+  oneof cause {
+    Error hub_scan = 1;
+    Error hub_pwr_test = 2;
+    Error dev_busy = 3;
+    Error dfu_in_progress = 4;
+    Error radiotest = 5;
+    Error dev_zone_test = 6;
+    Error card_process = 7;
+    Error armed = 8;
+    Error exit_timer = 9;
+    Error route = 10;
+    Error dev_offline = 11;
+    Error ext_power = 12;
+    Error dev_always_active = 13;
+    Error not_supported = 14;
+    Error buses_problem = 15;
+    Error iwh_objects_limit_error = 16;
+    Error iwh_test_in_progress = 17;
+    Error ring_problem = 18;
+    Error ring_unregistered = 19;
+    Error ring_disconnected = 20;
+    Error active_call = 21;
+    Error fp_bukhoor_forbidden_time = 22;
+    Error fp_fire_alarm = 23;
+    Error dev_bypassed = 24;
+    Error wrong_power_supply_settings = 25;
+    Error in_lines_short_circuit = 26;
+    Error out_lines_short_circuit = 27;
+    Error wifi_func_not_work = 28;
+    Error dev_power_overload = 29;
+    Error battery_low = 30;
+    Error extra_comm_chan_required = 31;
+    Error jamming_detected = 32;
+  }
+
+  oneof details {
+    Source source = 1000;
+  }
+
+  message Source {
+    string device_hex_id = 1;
+    ecosystem.v2.hubsvc.commonmodels.ObjectType  object_type = 2;
+  }
+}
+
+enum UpdateType {
+  UPDATE_TYPE_UNSPECIFIED = 0;
+  UPDATE_TYPE_ADD = 1;
+  UPDATE_TYPE_UPDATE = 2;
+  UPDATE_TYPE_REMOVE = 3;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message Gyroscope {
+
+  message GyroscopeSensorSettings {
+    optional AlertIfMoved alert_if_moved = 5[(proto.meta.field_tag) = "alert_if_moved"];
+    optional AccelSensitivity accelerometer_sensitivity = 2[(proto.meta.field_tag) = "accel_sensitivity"];
+  }
+
+  repeated Capability capabilities = 3;
+
+  AccelSensitivity accelerometer_sensitivity = 4[(proto.meta.field_tag) = "accel_sensitivity"];
+
+  AlertIfMoved alert_if_moved = 5[(proto.meta.field_tag) = "alert_if_moved"];
+
+  enum AlertIfMoved {
+    ALERT_IF_MOVED_UNSPECIFIED = 0;
+    ALERT_IF_MOVED_ENABLED = 1[(proto.meta.enum_tag) = "ALERT_IF_MOVED_ENABLED"];
+    ALERT_IF_MOVED_DISABLED = 2[(proto.meta.enum_tag) = "ALERT_IF_MOVED_DISABLED"];
+  }
+
+  enum AccelSensitivity {
+    ACCEL_SENSITIVITY_UNSPECIFIED = 0;
+    ACCEL_SENSITIVITY_LOW = 1[(proto.meta.enum_tag) = "ACCEL_SENSITIVITY_LOW"];
+    ACCEL_SENSITIVITY_NORMAL = 2[(proto.meta.enum_tag) = "ACCEL_SENSITIVITY_NORMAL"];
+    ACCEL_SENSITIVITY_HIGH = 3[(proto.meta.enum_tag) = "ACCEL_SENSITIVITY_HIGH"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_ACCELEROMETER_SENSITIVITY = 1;
+  }
+}
