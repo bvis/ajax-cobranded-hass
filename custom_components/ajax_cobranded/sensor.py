@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+    from custom_components.ajax_cobranded.api.hub_object import SimCardInfo
     from custom_components.ajax_cobranded.api.models import Device
 
 _LOGGER = logging.getLogger(__name__)
@@ -98,7 +99,7 @@ async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
     coordinator: AjaxCobrandedCoordinator = entry.runtime_data
-    entities: list[AjaxSensor] = []
+    entities: list[SensorEntity] = []
     for device_id, device in coordinator.devices.items():
         if device.battery is not None:
             entities.append(
@@ -117,6 +118,13 @@ async def async_setup_entry(
                 entities.append(
                     AjaxSensor(coordinator=coordinator, device_id=device_id, sensor_key=key)
                 )
+
+    # Add SIM sensors for hub devices that have SIM info
+    for space in coordinator.spaces.values():
+        if space.hub_id in coordinator.sim_info:
+            entities.append(AjaxSimStatusSensor(coordinator=coordinator, hub_id=space.hub_id))
+            entities.append(AjaxSimImeiSensor(coordinator=coordinator, hub_id=space.hub_id))
+
     async_add_entities(entities)
 
 
@@ -168,3 +176,62 @@ class AjaxSensor(CoordinatorEntity[AjaxCobrandedCoordinator], SensorEntity):
         if raw is None:
             return None
         return float(raw) if isinstance(raw, float) else int(raw)
+
+
+class AjaxSimBaseSensor(CoordinatorEntity[AjaxCobrandedCoordinator], SensorEntity):
+    """Base class for SIM card sensors attached to a hub device."""
+
+    _attr_has_entity_name = True
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_state_class = SensorStateClass.MEASUREMENT
+
+    def __init__(self, coordinator: AjaxCobrandedCoordinator, hub_id: str) -> None:
+        super().__init__(coordinator)
+        self._hub_id = hub_id
+        # Find hub device to populate device_info
+        hub_device = coordinator.devices.get(hub_id)
+        if hub_device:
+            self._attr_device_info = DeviceInfo(
+                identifiers={(DOMAIN, hub_id)},
+                name=hub_device.name,
+                manufacturer=MANUFACTURER,
+                model=hub_device.device_type.replace("_", " ").title(),
+            )
+
+    @property
+    def _sim_info(self) -> SimCardInfo | None:
+        return self.coordinator.sim_info.get(self._hub_id)
+
+    @property
+    def available(self) -> bool:
+        return self._sim_info is not None
+
+
+class AjaxSimStatusSensor(AjaxSimBaseSensor):
+    """Sensor reporting the SIM card connection status."""
+
+    _attr_translation_key = "sim_status"
+
+    def __init__(self, coordinator: AjaxCobrandedCoordinator, hub_id: str) -> None:
+        super().__init__(coordinator, hub_id)
+        self._attr_unique_id = f"ajax_cobranded_{hub_id}_sim_status"
+
+    @property
+    def native_value(self) -> str | None:
+        sim = self._sim_info
+        return sim.status_name if sim else None
+
+
+class AjaxSimImeiSensor(AjaxSimBaseSensor):
+    """Sensor exposing the hub IMEI number."""
+
+    _attr_translation_key = "sim_imei"
+
+    def __init__(self, coordinator: AjaxCobrandedCoordinator, hub_id: str) -> None:
+        super().__init__(coordinator, hub_id)
+        self._attr_unique_id = f"ajax_cobranded_{hub_id}_sim_imei"
+
+    @property
+    def native_value(self) -> str | None:
+        sim = self._sim_info
+        return sim.imei if sim else None

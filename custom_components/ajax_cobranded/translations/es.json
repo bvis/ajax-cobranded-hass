@@ -85,6 +85,12 @@
             },
             "wifi_signal_level": {
                 "name": "Nivel de senal Wi-Fi"
+            },
+            "sim_status": {
+                "name": "Estado SIM"
+            },
+            "sim_imei": {
+                "name": "IMEI"
             }
         },
         "switch": {

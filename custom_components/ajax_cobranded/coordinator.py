@@ -11,6 +11,7 @@ from typing import TYPE_CHECKING, Any
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from custom_components.ajax_cobranded.api.devices import DevicesApi
+from custom_components.ajax_cobranded.api.hub_object import HubObjectApi, SimCardInfo
 from custom_components.ajax_cobranded.api.models import Device as DeviceModel
 from custom_components.ajax_cobranded.api.security import SecurityApi
 from custom_components.ajax_cobranded.api.spaces import SpacesApi
@@ -42,8 +43,10 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self._spaces_api = SpacesApi(client)
         self._security_api = SecurityApi(client)
         self._devices_api = DevicesApi(client)
+        self._hub_object_api = HubObjectApi(client)
         self.spaces: dict[str, Space] = {}
         self.devices: dict[str, Device] = {}
+        self.sim_info: dict[str, SimCardInfo] = {}
         self._notification_listener: AjaxNotificationListener | None = None
         self._stream_tasks: list[asyncio.Task[None]] = []
         self._streams_started: bool = False
@@ -55,6 +58,10 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     @property
     def devices_api(self) -> DevicesApi:
         return self._devices_api
+
+    @property
+    def hub_object_api(self) -> HubObjectApi:
+        return self._hub_object_api
 
     @property
     def notification_listener(self) -> AjaxNotificationListener | None:
@@ -85,6 +92,13 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 for device in space_devices:
                     all_devices[device.id] = device
             self.devices = all_devices
+
+            # Fetch SIM info for each hub
+            for space in self.spaces.values():
+                if space.hub_id:
+                    sim = await self._hub_object_api.get_sim_info(space.hub_id)
+                    if sim:
+                        self.sim_info[space.hub_id] = sim
 
             return {"spaces": self.spaces, "devices": self.devices}
         except Exception as err:
