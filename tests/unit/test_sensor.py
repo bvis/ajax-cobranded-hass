@@ -11,7 +11,6 @@ from custom_components.ajax_cobranded.sensor import (
     SENSOR_TYPES,
     AjaxSensor,
     AjaxSimImeiSensor,
-    AjaxSimStatusSensor,
 )
 
 
@@ -245,72 +244,6 @@ def _make_hub_device(hub_id: str = "hub-1") -> Device:
         statuses={},
         battery=None,
     )
-
-
-class TestAjaxSimStatusSensor:
-    def _make_coordinator(self, hub_id: str, sim: SimCardInfo | None) -> MagicMock:
-        coordinator = MagicMock()
-        coordinator.devices = {hub_id: _make_hub_device(hub_id)}
-        coordinator.sim_info = {hub_id: sim} if sim else {}
-        return coordinator
-
-    def test_native_value_returns_status_name(self) -> None:
-        sim = SimCardInfo(active_sim=1, status=2, imei="123456789012345")
-        coordinator = self._make_coordinator("hub-1", sim)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.native_value == "active"
-
-    def test_native_value_inactive(self) -> None:
-        sim = SimCardInfo(active_sim=2, status=1, imei="")
-        coordinator = self._make_coordinator("hub-1", sim)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.native_value == "inactive"
-
-    def test_native_value_returns_none_when_no_sim_info(self) -> None:
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.native_value is None
-
-    def test_available_when_sim_info_present(self) -> None:
-        sim = SimCardInfo(active_sim=1, status=2, imei="123")
-        coordinator = self._make_coordinator("hub-1", sim)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.available is True
-
-    def test_unavailable_when_no_sim_info(self) -> None:
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.available is False
-
-    def test_unique_id(self) -> None:
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor.unique_id == "ajax_cobranded_hub-1_sim_status"
-
-    def test_translation_key(self) -> None:
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor._attr_translation_key == "sim_status"
-
-    def test_is_diagnostic(self) -> None:
-        from homeassistant.const import EntityCategory
-
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor._attr_entity_category == EntityCategory.DIAGNOSTIC
-
-    def test_device_info_set_when_hub_device_exists(self) -> None:
-        coordinator = self._make_coordinator("hub-1", None)
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-1")
-        assert sensor._attr_device_info is not None
-        assert ("ajax_cobranded", "hub-1") in sensor._attr_device_info["identifiers"]
-
-    def test_device_info_none_when_hub_not_in_devices(self) -> None:
-        coordinator = MagicMock()
-        coordinator.devices = {}
-        coordinator.sim_info = {}
-        sensor = AjaxSimStatusSensor(coordinator=coordinator, hub_id="hub-99")
-        assert not hasattr(sensor, "_attr_device_info") or sensor._attr_device_info is None
 
 
 class TestAjaxSimImeiSensor:

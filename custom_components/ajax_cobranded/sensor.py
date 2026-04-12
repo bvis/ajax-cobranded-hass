@@ -122,7 +122,6 @@ async def async_setup_entry(
     # Add SIM sensors for hub devices that have SIM info
     for space in coordinator.spaces.values():
         if space.hub_id in coordinator.sim_info:
-            entities.append(AjaxSimStatusSensor(coordinator=coordinator, hub_id=space.hub_id))
             entities.append(AjaxSimImeiSensor(coordinator=coordinator, hub_id=space.hub_id))
 
     async_add_entities(entities)
@@ -206,21 +205,6 @@ class AjaxSimBaseSensor(CoordinatorEntity[AjaxCobrandedCoordinator], SensorEntit
     @property
     def available(self) -> bool:
         return self._sim_info is not None
-
-
-class AjaxSimStatusSensor(AjaxSimBaseSensor):
-    """Sensor reporting the SIM card connection status."""
-
-    _attr_translation_key = "sim_status"
-
-    def __init__(self, coordinator: AjaxCobrandedCoordinator, hub_id: str) -> None:
-        super().__init__(coordinator, hub_id)
-        self._attr_unique_id = f"ajax_cobranded_{hub_id}_sim_status"
-
-    @property
-    def native_value(self) -> str | None:
-        sim = self._sim_info
-        return sim.status_name if sim else None
 
 
 class AjaxSimImeiSensor(AjaxSimBaseSensor):
