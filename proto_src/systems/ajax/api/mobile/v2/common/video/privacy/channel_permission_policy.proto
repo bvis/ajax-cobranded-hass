@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.privacy;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+
+message ChannelPermissionPolicy {
+  oneof policy {
+    AlwaysChannelPermissionPolicy always = 1;
+
+    WhenArmedChannelPermissionPolicy when_armed = 2;
+
+    AfterAlarmChannelPermissionPolicy after_alarm = 3;
+  }
+
+  message AlwaysChannelPermissionPolicy {}
+
+  message WhenArmedChannelPermissionPolicy {}
+
+  message AfterAlarmChannelPermissionPolicy {
+    google.protobuf.Duration duration = 1;
+  }
+}

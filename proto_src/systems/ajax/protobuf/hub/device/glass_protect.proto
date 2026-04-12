@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message GlassProtect {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    int32 sensitivity = 0x31;
+    google.protobuf.BoolValue extra_contact_closed = 0x32;
+    bool always_active = 0x33;
+    bool extra_contact_aware = 0x34;
+    repeated ChimeTrigger chime_triggers = 0x3A;
+    int32 chime_signal = 0x3B;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        EXTRA_CONTACT = 1;
+        GLASS = 2;
+    }
+
+    enum ChimeTrigger {
+        NO_CHIME_TRIGGER_INFO = 0;
+        CHIME_EXTRA_CONTACT = 2;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.scenario;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/alarm_source.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/alarm_sources_condition.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/target_video_edge.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/video_scenario.proto";
+
+message CreateScenarioRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  string name = 2;
+
+  repeated common.video.scenario.AlarmSource alarm_sources = 3;
+
+  common.video.scenario.AlarmSourcesCondition alarm_sources_condition = 4;
+
+  repeated common.video.scenario.TargetVideoEdge targets = 5;
+
+  common.video.scenario.MonitoringState monitoring_state = 6;
+}
+
+message CreateScenarioResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    common.video.scenario.VideoScenario scenario = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError space_armed = 4;
+      common.response.DefaultError empty_source_list = 5;
+      common.response.DefaultError hub_not_found = 6;
+      common.response.DefaultError source_not_found = 7;
+      common.response.DefaultError target_channel_list_is_empty = 8;
+      common.response.DefaultError target_video_edge_not_found = 9;
+      common.response.DefaultError target_channel_not_found = 10;
+      common.response.DefaultError invalid_channel_state = 11;
+      common.response.DefaultError duplicated_name = 12;
+      common.response.SpaceLockedError space_locked = 13;
+    }
+  }
+}

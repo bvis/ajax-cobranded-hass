@@ -1,0 +1,13 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.integration;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.integration";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SpaceIntegrationType {
+  SPACE_INTEGRATION_TYPE_UNSPECIFIED = 0;
+  SPACE_INTEGRATION_TYPE_YALE_SMART_LOCK = 1;
+  SPACE_INTEGRATION_TYPE_YALE_SMART_LOCK_NA = 2;
+}
+

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/connection_status.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message AssignedExtender {
+  optional ExtenderInfo extender_info = 1;
+
+  repeated Capability capabilities = 2;
+
+  message ExtenderInfo {
+    string id = 1;
+    int32 device_index = 2;
+    string name = 3;
+    ConnectionStatus connection_status = 4;
+    Type type = 5;
+
+    enum Type {
+      TYPE_UNSPECIFIED = 0;
+      TYPE_REX = 1;
+      TYPE_REX2 = 2;
+    }
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_REX = 1;
+    CAPABILITY_REX2 = 2;
+  }
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.image;
+
+option java_package = "systems.ajax.api.mobile.v2.common.image";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message Image {
+  reserved 1; // legacy resolution
+  string url = 2[(disable_logging) = true];
+  Resolution resolution = 3;
+
+  enum Resolution{
+    RESOLUTION_UNSPECIFIED = 0;
+    _300x300 = 1;
+    _128x128 = 2;
+    _64x64 = 3;
+    _100x100 = 4;
+    _200x200 = 5 ;
+  }
+}
+
+message Images {
+  repeated Image images = 1;
+  string image_id = 2;
+}

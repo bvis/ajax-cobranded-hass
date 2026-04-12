@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.ask_video_edge_direct_connect_access;
+
+import "v3/mobilegwsvc/service/ask_video_edge_direct_connect_access/request.proto";
+import "v3/mobilegwsvc/service/ask_video_edge_direct_connect_access/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.ask_video_edge_direct_connect_access";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service AskVideoEdgeDirectConnectAccessService {
+  rpc execute (AskVideoEdgeDirectConnectAccessRequest) returns (AskVideoEdgeDirectConnectAccessResponse);
+};

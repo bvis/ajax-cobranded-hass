@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.directconnect;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/directconnect/ask_bluetooth_access.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeDirectConnectService {
+  rpc askBluetoothAccess(AskBluetoothDirectConnectAccessRequest) returns (AskBluetoothDirectConnectAccessResponse) {}
+};

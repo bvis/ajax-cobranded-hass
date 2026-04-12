@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.logo;
+
+option java_package = "systems.ajax.api.mobile.v2.common.logo";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+
+message Logo {
+  string image_id = 1;
+  repeated systems.ajax.api.mobile.v2.common.image.Image images = 2;
+}
+

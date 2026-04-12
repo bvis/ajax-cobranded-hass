@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.confirm_restore_password;
+
+import "v3/mobilegwsvc/service/confirm_restore_password/request.proto";
+import "v3/mobilegwsvc/service/confirm_restore_password/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.confirm_restore_password";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ConfirmRestorePasswordService {
+  rpc execute (ConfirmRestorePasswordRequest) returns (ConfirmRestorePasswordResponse);
+};

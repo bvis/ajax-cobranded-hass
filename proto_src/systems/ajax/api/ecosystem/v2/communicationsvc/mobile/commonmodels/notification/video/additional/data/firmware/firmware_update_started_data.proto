@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.firmware;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.firmware";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message FirmwareUpdateStartedData {
+
+  // optional in case of force update
+  optional string member_id = 1;
+
+  // optional in case of force update
+  optional string member_user_name = 2 [(hash_value) = true];
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "Hub";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum DeviceColor {
+  DEVICE_COLOR_UNSPECIFIED = 0;
+  DEVICE_COLOR_WHITE = 1;
+  DEVICE_COLOR_BLACK = 2;
+  DEVICE_COLOR_FOG = 3;
+  DEVICE_COLOR_GREY = 4;
+  DEVICE_COLOR_GRAPHITE = 5;
+  DEVICE_COLOR_IVORY = 6;
+  DEVICE_COLOR_OYSTER = 7;
+  DEVICE_COLOR_OLIVE = 8;
+  DEVICE_COLOR_RED = 9;
+  DEVICE_COLOR_BLUE = 10;
+  DEVICE_COLOR_YELLOW = 11;
+  DEVICE_COLOR_GREEN = 12;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.v2.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.v2.hub";
+option java_multiple_files = true;
+
+enum HubUserType {
+    NO_HUB_USER_TYPE_INFO = 0;
+    USER = 1;
+    PRO = 2;
+    COMPANY = 3;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_radio_test_stop;
+
+import "v3/mobilegwsvc/service/device_command_radio_test_stop/request.proto";
+import "v3/mobilegwsvc/service/device_command_radio_test_stop/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandRadioTestStopService {
+  rpc execute(DeviceCommandRadioTestStopRequest) returns (DeviceCommandRadioTestStopResponse);
+}
+

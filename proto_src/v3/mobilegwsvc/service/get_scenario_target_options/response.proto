@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_target_options;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_target_options";
+option swift_prefix = "";
+
+message GetScenarioTargetOptionsResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated ScenarioTargetOption scenario_target_options = 2;
+  }
+
+  message Failure  {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_not_found = 2;
+      commonmodels.Error permissions_denied = 3;
+      commonmodels.Error space_armed = 4;
+    }
+  }
+
+  message ScenarioTargetOption {
+    oneof option {
+      ScheduleAccessTargetOption schedule_access_target_option = 1;
+      GenericObjectTargetOption phod_target_option = 2;
+      GenericObjectTargetOption switching_state_target_option = 3;
+      VideoEdgeTargetOption video_edge_target_option = 4;
+      GenericObjectTargetOption smart_lock_target_option = 5;
+    }
+  }
+
+  message GenericObjectTargetOption {
+    string object_id = 1;
+  }
+
+  message ScheduleAccessTargetOption {
+    string object_id = 1;
+    ScheduleAccessTargetType type = 2;
+    bool has_full_access_for_any_group = 3;
+
+    enum ScheduleAccessTargetType {
+      SCHEDULE_ACCESS_TARGET_TYPE_UNSPECIFIED = 0;
+      SCHEDULE_ACCESS_TARGET_TYPE_ACCESS_CARD = 1;
+      SCHEDULE_ACCESS_TARGET_TYPE_ACCESS_CODE = 2;
+    }
+  }
+
+  message VideoEdgeTargetOption {
+    string video_edge_id = 1;
+    repeated Channel channels = 2;
+
+    message Channel {
+      string channel_id = 1;
+    }
+  }
+}

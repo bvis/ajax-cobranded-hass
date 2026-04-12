@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_temporary_video_edge_channel_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CancelTemporaryVideoEdgeChannelPermissionsRequest {
+  mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  // should be a full space member ID
+  string assignee_id = 2;
+}

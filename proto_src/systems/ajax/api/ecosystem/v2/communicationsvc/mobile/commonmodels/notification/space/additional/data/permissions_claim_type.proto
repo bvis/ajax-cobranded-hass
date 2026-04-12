@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+import "google/protobuf/duration.proto";
+
+message PermissionsClaimType {
+  oneof permissions_type {
+    Permanent permanent = 1;
+    Temporary temporary = 2;
+  }
+
+  message Permanent {}
+  message Temporary {
+    google.protobuf.Duration duration = 1;
+  }
+}

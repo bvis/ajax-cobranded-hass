@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_followed_groups;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_followed_groups";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetAvailableFollowedGroupsRequest {
+  string group_id = 1;
+  string space_id = 2;
+}

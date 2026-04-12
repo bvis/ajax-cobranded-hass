@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.monitoring;
+
+import "google/protobuf/empty.proto";
+import "systems/ajax/mobile/v2/service/hub/company/monitoring/request/apply-for-monitoring-request.proto";
+import "systems/ajax/mobile/v2/service/hub/company/monitoring/apply-for-monitoring-with-account-number.proto";
+import "systems/ajax/mobile/v2/service/hub/company/monitoring/request/decline-monitoring-request.proto";
+import "systems/ajax/mobile/v2/service/hub/company/monitoring/request/cancel-monitoring-declination-request.proto";
+
+option java_package = "systems.ajax.mobile.v2.service.hub.company.monitoring";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+service MonitoringCompanyService {
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hubUsersLimitExceeded"
+*/
+  rpc applyForMonitoring(
+  systems.ajax.mobile.v2.service.hub.company.monitoring.request.ApplyForMonitoringRequest
+      ) returns (google.protobuf.Empty);
+
+  rpc applyForMonitoringWithAccountNumber(ApplyForMonitoringWithAccountNumberRequest)
+      returns (ApplyForMonitoringWithAccountNumberResponse);
+
+  /*
+* Possible error statuses and corresponding error templates
+
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+*/
+  rpc declineMonitoring(
+  systems.ajax.mobile.v2.service.hub.company.monitoring.request.DeclineMonitoringRequest
+      ) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* PERMISSION_DENIED = "systems.ajax.mobilegw.error.notEnoughPermissions"
+* FAILED_PRECONDITION = "systems.ajax.mobilegw.error.hub.isLocked"
+*/
+  rpc cancelMonitoringDeclination(
+  systems.ajax.mobile.v2.service.hub.company.monitoring.request.CancelMonitoringDeclinationRequest
+      ) returns (google.protobuf.Empty);
+}

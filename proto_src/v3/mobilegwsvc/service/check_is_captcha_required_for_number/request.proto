@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.check_is_captcha_required_for_number;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.check_is_captcha_required_for_number";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CheckIsCaptchaRequiredForNumberRequest {
+  string phone_number = 1;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/app_settings.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_channel.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_detector.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_storage_device.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player";
+option swift_prefix = "";
+
+message PlayerVideoEdge {
+  string id = 1;
+
+  repeated PlayerChannel channels = 3;
+
+  repeated PlayerDetector detectors = 4;
+
+  repeated PlayerStorageDevice storage_devices = 5;
+
+  string timezone_id = 6;
+
+  mobile.v2.common.video.videoedge.spacesettings.AppSettings app_settings = 7;
+}

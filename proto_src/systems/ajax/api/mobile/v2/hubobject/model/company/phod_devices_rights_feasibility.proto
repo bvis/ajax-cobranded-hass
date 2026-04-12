@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.company;
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject.model.company";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum PhodDevicesRightsFeasibility {
+  NO_PHOD_DEVICES_RIGHTS_FEASIBILITY_INFO = 0;
+  SLOW_AND_PHOD_DEVICES = 1;
+  PHOD_DEVICES = 2;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SmartLockPermission {
+    SMART_LOCK_PERMISSION_UNSPECIFIED = 0;
+    SMART_LOCK_PERMISSION_MANAGE_LOCK = 1;
+}

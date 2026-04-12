@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_lines_power_test_updates;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_fibra_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_lines_power_test_updates";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamLinesPowerTestResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    LinesPowerTest line_power_test = 1;
+  }
+
+  message LinesPowerTest {
+
+    oneof state {
+      Unknown unknown = 1;
+      Blocked blocked = 2;
+      Active active = 3;
+      Finished finished = 4;
+    }
+  }
+
+  message Unknown {}
+
+  message Blocked {
+
+    oneof reason {
+      NoFibraDevices no_fibra_devices = 1;
+      Malfunction malfunction = 2;
+      MalfunctionOnRings malfunction_on_rings = 3;
+    }
+
+    message NoFibraDevices {}
+    message Malfunction {}
+    message MalfunctionOnRings {
+      repeated v2.hubsvc.commonmodels.device.common.FibraLine lines = 1;
+    }
+  }
+
+  message Active {
+    google.protobuf.Duration duration = 1;
+    bool is_soft_short_circuit = 2;
+    PowerTestActiveState power_test_active_state = 3;
+
+    enum PowerTestActiveState {
+      POWER_TEST_ACTIVE_STATE_UNSPECIFIED = 0;
+      POWER_TEST_ACTIVE_STATE_READY_TO_START = 1;
+      POWER_TEST_ACTIVE_STATE_STARTING = 2;
+      POWER_TEST_ACTIVE_STATE_IN_PROGRESS = 3;
+      POWER_TEST_ACTIVE_STATE_FINISHING = 4;
+    }
+  }
+
+  message Finished {
+    google.protobuf.Timestamp finish_timestamp = 1;
+    PowerTestFinishedState power_test_finished_state = 2;
+
+    oneof result {
+      Success success = 10;
+      Interrupted interrupted = 11;
+    }
+
+    message Success {
+      PowerState power_state = 1;
+      repeated LinePowerState line_power_states = 3;
+    }
+
+    message Interrupted {}
+
+    enum PowerTestFinishedState{
+      POWER_TEST_FINISHED_STATE_UNSPECIFIED = 0;
+      POWER_TEST_FINISHED_STATE_RESETTING = 1;
+      POWER_TEST_FINISHED_STATE_READY_TO_RESET = 2;
+    }
+  }
+
+  message LinePowerState {
+    v2.hubsvc.commonmodels.device.common.FibraLine line = 1;
+    PowerState power_state = 2;
+    repeated DevicePowerState device_power_states = 3;
+  }
+
+  message DevicePowerState {
+    string device_name = 1;
+    v2.hubsvc.commonmodels.ObjectType device_type = 2;
+    optional v2.hubsvc.commonmodels.device.common.LineExtender line_extender = 3;
+    PowerState power_state = 4;
+    string device_id = 5;
+  }
+
+  enum PowerState {
+    POWER_STATE_UNSPECIFIED = 0;
+    POWER_STATE_OK = 1;
+    POWER_STATE_LOW = 2;
+    POWER_STATE_LOST = 3;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+    }
+  }
+}

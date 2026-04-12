@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_local_users;
+
+import "v3/mobilegwsvc/service/get_video_edge_local_users/request.proto";
+import "v3/mobilegwsvc/service/get_video_edge_local_users/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_local_users";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetVideoEdgeLocalUsersService {
+  rpc execute (GetVideoEdgeLocalUsersRequest) returns (GetVideoEdgeLocalUsersResponse);
+};

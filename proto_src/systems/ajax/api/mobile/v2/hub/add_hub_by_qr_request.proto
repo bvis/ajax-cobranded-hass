@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hub;
+
+import "systems/ajax/api/mobile/v2/common/hub/hub_box_type.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_color.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_label.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AddHubByQrRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  string hub_qr_code = 2;
+
+  string hub_name = 3;
+
+  string room_id = 4;
+
+  optional common.space.device.DeviceColor device_color = 5;
+
+  optional common.space.device.DeviceLabel device_label = 6;
+
+  optional common.hub.HubBoxType box_type = 7;
+};
+
+message AddHubByQrResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError permission_denied = 4;
+      common.response.SpaceLockedError space_locked = 5;
+      common.response.DefaultError hub_already_in_space = 6;
+      common.response.DefaultError room_not_found = 7;
+      common.response.LimitExceededError active_hubs_limit_exceeded = 8;
+      common.response.LimitExceededError passive_hubs_limit_exceeded = 9;
+      common.response.DefaultError hub_in_use = 10;
+      common.response.DefaultError hub_not_found = 11;
+      common.response.DefaultError hub_offline = 12;
+      common.response.DefaultError hub_qr_code_invalid = 13;
+      common.response.DefaultError hub_claim_error = 14;
+      common.response.DefaultError hub_not_empty = 15;
+      common.response.DefaultError hub_error = 16;
+      common.response.DefaultError hub_wrong_state = 17;
+      common.response.HubBusyError hub_busy = 18;
+      common.response.DefaultError member_not_support_add_fibra_and_hybrid_hub = 19;
+      common.response.DefaultError member_not_authorized_add_hub = 20;
+      common.response.DefaultError member_not_authorized_add_fibra_and_hybrid_hub = 21;
+      common.response.DefaultError hub_firmware_version_not_support_migration = 22;
+      common.response.LimitExceededError members_limit_exceeded = 23;
+      common.response.LimitExceededError rooms_limit_exceeded = 24;
+      common.response.LimitExceededError groups_limit_exceeded = 25;
+      common.response.DefaultError hub_firmware_version_not_support_groups = 26;
+      common.response.DefaultError hub_in_use_by_space_with_no_admin = 27;
+    }
+  }
+};

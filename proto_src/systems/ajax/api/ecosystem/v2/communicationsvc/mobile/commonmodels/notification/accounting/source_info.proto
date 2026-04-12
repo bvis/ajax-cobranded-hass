@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/source/info/hub_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/source/info/video_edge_info.proto";
+
+message AccountingNotificationSourceInfo {
+  oneof source_info_case {
+    source.info.HubInfo hub_info = 100;
+    source.info.VideoEdgeInfo video_edge_info = 101;
+  }
+}

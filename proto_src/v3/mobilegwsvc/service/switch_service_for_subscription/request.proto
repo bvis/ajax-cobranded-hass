@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_service_for_subscription;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.switch_service_for_subscription";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SwitchServiceForSubscriptionRequest {
+  string current_subscription_id = 1;
+  oneof service_id {
+    string feature_id = 3;
+    string package_id = 4;
+  }
+  optional string agreement_version = 5;
+}

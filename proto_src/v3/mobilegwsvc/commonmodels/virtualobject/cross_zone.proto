@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject;
+
+import "systems/ajax/api/mobile/v2/common/space/device/hub_device.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.virtualobject";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CrossZone {
+  string id = 0x01;
+  string name = 0x02;
+  int32 confirmation_timeout = 0x03; // [30 - 60]
+  int32 confirmation_alarms_count = 0x04; // [2 - 5]
+  UnconfirmedAlarmType unconfirmed_alarm_type = 0x05;
+  bool count_repeated_alarms = 0x0601;
+  bool reset_bypass = 0x0602;
+  bool include_entry_delay = 0x0603;
+  bool tamper_confirmation = 0x0604;
+  bool sirens_react_on_confirmation = 0x0605;
+  repeated systems.ajax.api.mobile.v2.common.space.device.HubDevice included_devices = 0x07;
+
+  enum UnconfirmedAlarmType {
+    UNCONFIRMED_ALARM_TYPE_UNSPECIFIED = 0;
+    UNCONFIRMED_ALARM_TYPE_DO_NOT_NOTIFY = 1;
+    UNCONFIRMED_ALARM_TYPE_POSTPONED_WARNING = 2;
+    UNCONFIRMED_ALARM_TYPE_INSTANT_WARNING = 3;
+    UNCONFIRMED_ALARM_TYPE_ALARM = 4;
+  }
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_join_request;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_join_request";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ApproveJoinByQrResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error permission_denied = 1;
+      commonmodels.Error space_armed = 2;
+      commonmodels.Error too_many_users = 3;
+      commonmodels.Error already_exist = 4;
+      commonmodels.Error request_expired = 5;
+    }
+  }
+}

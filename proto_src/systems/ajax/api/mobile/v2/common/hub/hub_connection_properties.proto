@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/time/duration_option.proto";
+
+message HubConnectionProperties {
+  HubOfflineEventDelayDuration hub_offline_event_delay_duration = 1;
+  HubChannelOfflineEventDelayDuration hub_channel_offline_event_delay_duration = 2;
+
+  message HubOfflineEventDelayDuration {
+    repeated systems.ajax.api.mobile.v2.common.time.DurationOption duration_options = 1;
+  }
+
+  message HubChannelOfflineEventDelayDuration {
+    repeated systems.ajax.api.mobile.v2.common.time.DurationOption duration_options = 1;
+  }
+}

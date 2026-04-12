@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message Button {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    ButtonMode button_mode = 0x31;
+    string associated_user_id = 0x32;
+    Brightness brightness = 0x33;
+    FalsePressFilter false_press_filter = 0x35;
+    CustomAlarmType custom_alarm_type = 0x37;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        SECURITY_BUTTON = 1;
+    }
+
+    enum ButtonMode {
+        NO_BUTTON_MODE_INFO = 0;
+        PANIC_BUTTON = 1;
+        SMART_BUTTON = 2;
+        INTERCONNECT_DELAY = 3;
+    }
+
+    enum Brightness {
+        NO_BRIGHTNESS_INFO = 0;
+        OFF = 1;
+        LOW = 2;
+        HIGH = 4;
+    }
+
+    enum FalsePressFilter {
+        NO_FALSE_PRESS_FILTER_INFO = 0;
+        DISABLED = 1;
+        LONG_PUSH = 2;
+        DOUBLE_CLICK = 3;
+    }
+
+    enum CustomAlarmType {
+        NO_CUSTOM_ALARM_TYPE = 0;
+        BURGLARY = 1;
+        FIRE = 2;
+        MEDICAL = 3;
+        PANIC = 4;
+        GAS = 5;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

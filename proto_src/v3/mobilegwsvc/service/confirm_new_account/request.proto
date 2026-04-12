@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.confirm_new_account;
+
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.confirm_new_account";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ConfirmNewAccountRequest {
+
+  commonmodels.type.UserRole user_role = 1;
+
+  string email = 2 [(hash_value) = true];
+
+  string phone_token = 3 [(hash_value) = true];
+
+  string email_token = 4 [(hash_value) = true];
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_join_request;
+
+import "v3/mobilegwsvc/service/approve_join_request/request.proto";
+import "v3/mobilegwsvc/service/approve_join_request/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.approve_join_request";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ApproveJoinByQrService {
+  rpc execute (ApproveJoinByQrRequest) returns (ApproveJoinByQrResponse);
+};

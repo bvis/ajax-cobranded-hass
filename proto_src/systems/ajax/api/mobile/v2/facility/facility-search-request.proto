@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+option swift_prefix = "";
+option java_multiple_files = true;
+
+import "v1/facility/facility.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+message FacilitySearchRequest {
+  string search_phrase = 1;
+  uint32 limit = 2;
+  uint64 offset = 3;
+}
+
+message FacilitySearchResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated systems.ajax.mobilegw.grpc.v1.facility.Facility facilities = 1;
+    uint64 offset = 2;
+    uint64 counter = 3;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+    }
+  }
+}

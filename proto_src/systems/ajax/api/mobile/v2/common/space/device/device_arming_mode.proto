@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+import "google/protobuf/duration.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message DeviceArmingMode {
+  oneof mode {
+    Instant instant = 1;
+    EntryExit entry_exit = 2;
+    Follower follower = 3;
+    Disabled disabled = 4;
+  }
+
+  message Instant {}
+
+  message EntryExit {
+    optional google.protobuf.Duration arm_delay = 1;
+    optional google.protobuf.Duration alarm_delay = 2;
+    optional google.protobuf.Duration night_mode_arm_delay = 3;
+    optional google.protobuf.Duration night_mode_alarm_delay = 4;
+  }
+
+  message Follower {
+    optional google.protobuf.Duration night_mode_alarm_delay = 4;
+  }
+
+  message Disabled {}
+}

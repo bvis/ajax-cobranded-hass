@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/patch_type.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message SelfMonitoringPart {
+  repeated Capability capabilities = 1;
+  repeated SelfMonitoringConfig self_monitoring_configs = 2 [(proto.meta.field_tag) = "self_monitoring_configs"];
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_ARC_REPORTING = 1;
+  }
+
+  enum SelfMonitoringConfig {
+    SELF_MONITORING_CONFIG_UNSPECIFIED = 0;
+    SELF_MONITORING_CONFIG_LOCAL_ALARM = 1 [(proto.meta.enum_tag) = "SELF_MONITORING_CONFIG_LOCAL_ALARM"];
+    SELF_MONITORING_CONFIG_DISABLE_ARC_REPORTING = 2 [(proto.meta.enum_tag) = "SELF_MONITORING_CONFIG_DISABLE_ARC_REPORTING"];
+  }
+
+  message SelfMonitoringPartSettings {
+
+    repeated SelfMonitoringConfigPatch self_monitoring_configs = 2 [(proto.meta.field_tag) = "self_monitoring_configs"];
+
+    message SelfMonitoringConfigPatch {
+      PatchType patch_type = 1;
+      SelfMonitoringConfig self_monitoring_config = 2;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.send_feedback_on_video_functionality;
+
+import "v3/mobilegwsvc/service/send_feedback_on_video_functionality/request.proto";
+import "v3/mobilegwsvc/service/send_feedback_on_video_functionality/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.send_feedback_on_video_functionality";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SendFeedbackOnVideoFunctionalityService {
+  rpc execute(SendFeedbackOnVideoFunctionalityRequest) returns (SendFeedbackOnVideoFunctionalityResponse);
+};

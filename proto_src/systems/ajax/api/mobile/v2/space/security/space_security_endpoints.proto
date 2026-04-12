@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.security;
+
+import "systems/ajax/api/mobile/v2/space/security/arm_to_night_mode_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/disarm_from_night_mode_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/group/arm_group_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/group/disarm_group_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/arm_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/disarm_request.proto";
+import "systems/ajax/api/mobile/v2/space/security/set_security_mode_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceSecurityService {
+  rpc arm(ArmSpaceRequest) returns (ArmSpaceResponse);
+
+  rpc armToNightMode(ArmSpaceToNightModeRequest) returns (ArmSpaceToNightModeResponse);
+
+  rpc disarmFromNightMode(DisarmSpaceFromNightModeRequest) returns (DisarmSpaceFromNightModeResponse);
+
+  rpc disarm(DisarmSpaceRequest) returns (DisarmSpaceResponse);
+
+  rpc setSecurityMode(SetSecurityModeRequest) returns (SetSecurityModeResponse);
+
+  rpc armGroup(security.group.ArmSpaceGroupRequest) returns (security.group.ArmSpaceGroupResponse);
+
+  rpc disarmGroup(security.group.DisarmSpaceGroupRequest) returns (security.group.DisarmSpaceGroupResponse);
+};

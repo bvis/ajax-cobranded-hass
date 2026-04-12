@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+import "google/protobuf/field_mask.proto";
+
+message FacilityEditableFields {
+  google.protobuf.FieldMask general_info_editable_fields = 1;
+  repeated EditableSection editable_sections = 2;
+
+  enum EditableSection {
+    MEDIA = 0;
+    NOTES = 1;
+    RESPONSIBLE_PERSONS = 2;
+    PRIVACY_OVERRIDE = 3;
+  }
+}

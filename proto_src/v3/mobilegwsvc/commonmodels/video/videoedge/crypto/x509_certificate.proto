@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.crypto;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.crypto";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message X509Certificate {
+    // [required]
+    string id = 1;
+
+    // [optional]
+    // Human-readable name.
+    string alias = 2;
+
+    // [required]
+    // e.g. "9d86218557f99e04aa1a0cf00ac08bf362f87086ce7f4cf963bab5baa88d5aff"
+    string sha256_fingerprint = 3;
+
+    // Is this certificate used, e.g. assigned to ONVIF server.
+    // Used certificates cannot be deleted.
+    bool used = 4;
+};
+
+enum X509Version {
+    X509_VERSION_UNSPECIFIED = 0;
+    X509_VERSION_1 = 1;
+    X509_VERSION_2 = 2;
+    X509_VERSION_3 = 3;
+};

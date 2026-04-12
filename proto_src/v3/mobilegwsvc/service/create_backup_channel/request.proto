@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CreateBackupChannelRequest {
+
+  string video_edge_id = 1 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 2;
+
+  string hub_id = 3 [(log_marker) = LOG_MARKER_HUB_ID];
+}

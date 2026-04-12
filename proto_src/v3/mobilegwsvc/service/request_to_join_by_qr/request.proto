@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_to_join_by_qr;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_to_join_by_qr";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InitiateJoinByQrRequest {
+  string hub_qr_code = 1;
+}

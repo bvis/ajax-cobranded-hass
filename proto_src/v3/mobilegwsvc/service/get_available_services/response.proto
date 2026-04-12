@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_services;
+
+import "v3/mobilegwsvc/commonmodels/accounting/service.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/reseller.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetAvailableServicesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated AvailableService available_services = 1 [deprecated = true];
+    oneof services {
+      // each service will only be present in one of the lists:
+      // in ungrouped_available_services_list if it is not assigned to any groups
+      // in available_service_groups_list if its assigned to some group
+      AvailableServicesList ungrouped_available_services_list = 2;
+      AvailableServiceGroupsList available_service_groups_list = 3;
+    }
+  }
+
+  message AvailableServicesList {
+    repeated AvailableService ungrouped_available_services = 1;
+  }
+
+  message AvailableServiceGroupsList {
+    repeated AvailableServicesGroup available_service_groups = 2;
+  }
+
+  message AvailableService {
+    commonmodels.accounting.Service service = 1;
+    repeated systems.ajax.api.mobile.v2.common.accounting.AccountingCompany resellers = 2 [deprecated = true];
+    repeated commonmodels.accounting.Reseller reseller_infos = 3;
+  }
+
+  message AvailableServicesGroup {
+    string id = 1;
+    string name = 2;
+    //    reserved for group description
+    reserved 3;
+    string lokalise_id = 4;
+    repeated AvailableServicesGroupItem item = 5;
+    int32 order = 6;
+  }
+
+  message AvailableServicesGroupItem {
+    int32 order = 1;
+    AvailableService service = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error available_mandatory_service_not_found = 2;
+      commonmodels.Error reseller_not_found = 3;
+      commonmodels.Error dealer_not_found = 4;
+      NotAvailableForUserError not_available_for_user = 5;
+    }
+
+    message NotAvailableForUserError {
+      commonmodels.type.UserRole user_role = 1;
+    }
+  }
+}

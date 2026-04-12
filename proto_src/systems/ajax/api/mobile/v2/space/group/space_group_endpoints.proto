@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.group;
+
+import "systems/ajax/api/mobile/v2/space/group/assign_devices_to_group_request.proto";
+import "systems/ajax/api/mobile/v2/space/group/create_group_request.proto";
+import "systems/ajax/api/mobile/v2/space/group/delete_group_request.proto";
+import "systems/ajax/api/mobile/v2/space/group/update_group_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceGroupService {
+  rpc create(CreateGroupRequest) returns (CreateGroupResponse);
+
+  rpc update(UpdateGroupRequest) returns (UpdateGroupResponse);
+
+  rpc delete(DeleteGroupRequest) returns (DeleteGroupResponse);
+
+  rpc assignDevicesToGroup(AssignDevicesToGroupRequest) returns (AssignDevicesToGroupResponse);
+};

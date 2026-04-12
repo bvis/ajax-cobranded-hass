@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario.action;
+
+import "systems/ajax/api/mobile/v2/common/space/scenario/action/change_arming_state.proto";
+import "systems/ajax/api/mobile/v2/common/space/scenario/action/switch_state.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Action {
+  oneof kind {
+    ChangeArmingStateAction change_arming_state = 1;
+    SwitchStateAction switch_state = 2;
+  }
+}

@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_edge;
+
+import "google/protobuf/field_mask.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/backupchannel/backup_channel_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/diagnostics/diagnostics_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/leds/leds.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/mcu.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network_interface.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/video_edge_space_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/system/system_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/onvif/onvif_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/video_edge.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/channel_source_settings.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/video_edge_base.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamVideoEdgeResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof update {
+      InitialState initial_state = 1;
+      CompletelyChanged completely_changed = 2;
+      PartiallyChanged partially_changed = 3;
+      ChannelSourceSettingsUpdate channel_source_settings_update = 4;
+    }
+
+    message InitialState {
+      systems.ajax.api.mobile.v2.common.video.videoedge.VideoEdge video_edge = 1;
+
+      repeated commonmodels.video.videoedge.channel.ChannelSourceSettings channel_source_settings = 2;
+    };
+
+    message CompletelyChanged {
+      ecosystem.v3.mobilegwsvc.commonmodels.video.video_edge.VideoEdgeBase video_edge_base = 1;
+    };
+
+    message PartiallyChanged {
+      string video_edge_id = 100 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+      oneof change_union {
+        systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice.MediaDevice device = 1;
+        systems.ajax.api.mobile.v2.common.video.videoedge.channel.Channel channel = 2;
+        systems.ajax.api.mobile.v2.common.video.videoedge.archive.Archive archive = 3 [(disable_logging) = true];
+        systems.ajax.api.mobile.v2.common.video.videoedge.detector.Detector detector = 4;
+        systems.ajax.api.mobile.v2.common.video.videoedge.network.Network network = 5;
+        systems.ajax.api.mobile.v2.common.video.videoedge.diagnostics.DiagnosticsSettings diagnostics_settings = 6 [(disable_logging) = true];
+        systems.ajax.api.mobile.v2.common.video.videoedge.system.SystemInfo system_info = 7;
+        systems.ajax.api.mobile.v2.common.video.videoedge.ConnectionState connection_state = 8;
+        systems.ajax.api.mobile.v2.common.video.videoedge.network.NetworkInterface network_interface = 9;
+        systems.ajax.api.mobile.v2.common.video.videoedge.storage.StorageDevice storage_device = 10;
+        systems.ajax.api.mobile.v2.common.video.videoedge.firmware.Firmware firmware = 11;
+        systems.ajax.api.mobile.v2.common.video.videoedge.leds.Leds leds = 12;
+        string name = 13;
+        systems.ajax.api.mobile.v2.common.video.videoedge.storage.Storage storage = 14;
+        systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu mcu = 15;
+        systems.ajax.api.mobile.v2.common.video.videoedge.onvif.OnvifInfo onvif_info = 16;
+        systems.ajax.api.mobile.v2.common.video.videoedge.spacesettings.VideoEdgeSpaceSettings space_settings = 101;
+        systems.ajax.api.mobile.v2.common.video.videoedge.backupchannel.BackupChannelInfo backup_channel_info = 200;
+      }
+
+      google.protobuf.FieldMask mask = 1000;
+
+      commonmodels.UpdateType update_type = 1001;
+    };
+
+    message ChannelSourceSettingsUpdate {
+
+      oneof kind {
+        NvrSourceSettingsUpdates nvr_source_settings_updates = 1;
+      }
+
+      message NvrSourceSettingsUpdates {
+        repeated NvrSourceSettingsUpdate nvr_source_settings_updates = 1;
+      }
+
+      message NvrSourceSettingsUpdate {
+        string video_edge_id = 1;
+
+        string channel_id = 2;
+
+        oneof kind {
+          commonmodels.video.videoedge.channel.NvrSourceSettings snapshot = 3;
+          string video_edge_name = 4;
+          mobile.v2.common.video.videoedge.ConnectionState video_edge_connection_state = 5;
+          mobile.v2.common.video.videoedge.archive.RecordMode record_mode = 6;
+          mobile.v2.common.video.videoedge.archive.RecordPolicy record_policy = 7;
+          commonmodels.video.videoedge.channel.NvrSourceSettings.StorageDevice storage_device = 8;
+          ChannelStates channel_states = 9;
+        }
+
+        message ChannelStates {
+          repeated mobile.v2.common.video.videoedge.channel.ChannelState channel_states = 1;
+        }
+
+        commonmodels.UpdateType update_type = 1000;
+      }
+    };
+  }
+
+  message Failure {
+    oneof error {
+      systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.Error bad_request = 1;
+      systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.Error space_not_found = 2;
+      systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.Error video_edge_not_found = 3;
+      systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.Error permission_denied = 4;
+    }
+  }
+}

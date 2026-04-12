@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.firmware;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/firmware/resource_id.proto";
+
+option swift_prefix = "Hub";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.firmware";
+option java_multiple_files = true;
+
+message DeviceFirmwareUpdate {
+  string device_id = 1;
+  ResourceId resource_id = 2;
+  Status status = 5;
+  google.protobuf.BoolValue is_critical = 6;
+
+  message Status {
+    oneof status {
+      google.protobuf.Empty not_started = 1;
+      int32 downloading = 2; //[0-99]%
+      google.protobuf.Empty downloaded = 3;
+      google.protobuf.Empty installing = 4;
+      google.protobuf.Empty completed = 5;
+      google.protobuf.Empty failed = 6;
+    }
+  }
+}
+

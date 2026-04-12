@@ -1,0 +1,23 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.firmware;
+
+option swift_prefix = "";
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.firmware";
+
+import "google/protobuf/empty.proto";
+
+message FirmwareUpdate {
+  string target_id = 1;
+  Status status = 4;
+
+  message Status {
+    oneof status {
+      google.protobuf.Empty not_started = 1;
+      int32 downloading = 2;
+      google.protobuf.Empty success = 3;
+      google.protobuf.Empty failure = 4;
+      google.protobuf.Empty installing = 5;
+    }
+  }
+}

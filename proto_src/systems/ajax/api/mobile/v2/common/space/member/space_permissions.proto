@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+import "systems/ajax/api/mobile/v2/common/space/member/space_permission.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpacePermissions {
+  repeated SpacePermission permissions = 1;
+
+  bool has_system_settings_permissions = 2;
+
+  // TODO should be removed in SPAC-3895
+  // is buffer field to be mapped into expiration_timestamp in ProCurrentMember
+  optional google.protobuf.Timestamp expiredAt = 3 [deprecated = true];
+}

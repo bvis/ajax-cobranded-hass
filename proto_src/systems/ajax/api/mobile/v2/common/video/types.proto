@@ -1,0 +1,268 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+enum StreamType {
+  ST_UNKNOWN = 0;
+  ST_MAIN = 1;
+  ST_SUB = 2;
+};
+
+enum FrameType {
+  FT_UNKNOWN = 0;
+  FT_VIDEO = 1;
+  FT_AUDIO = 2;
+  FT_METADATA = 3;
+};
+
+message FrameTypeId {
+  FrameType frame_type = 1;
+
+  // Short message name from vmspb.metadata. namespace, such as "Figures" or "Thumbnail".
+  string metadata_type = 2;
+};
+
+enum VideoCodec {
+  VC_UNKNOWN = 0;
+  H264 = 1;
+  H265 = 2;
+  MJPEG = 3;
+};
+
+enum AudioCodec {
+  AC_UNKNOWN = 0;
+  G711_ULAW = 1;
+  G711_ALAW = 2;
+  AAC = 3;
+  MP2 = 4;
+  G726 = 5;
+  G722 = 6;
+};
+
+enum VideoBitrateType {
+  VBT_NONE = 0;
+  CBR = 1;
+  VBR = 2;
+};
+
+enum ObjectClass {
+  OC_OTHER = 0;
+  OC_PERSON = 1;
+  OC_PET = 2;
+  OC_VEHICLE = 3;
+};
+
+message Mask {
+  uint32 width = 1;
+  uint32 height = 2;
+  // Values are 0/1.
+  bytes data = 3 [(disable_logging) = true];
+};
+
+message VideoResolution {
+  uint32 width = 1;
+
+  uint32 height = 2;
+};
+
+message Int32Range {
+  int32 min_value = 1;
+
+  int32 max_value = 2;
+};
+
+message UInt32Range {
+  uint32 min_value = 1;
+
+  uint32 max_value = 2;
+};
+
+message FloatRange {
+  float min_value = 1;
+
+  float max_value = 2;
+};
+
+message DurationRange {
+  // [optional]
+  google.protobuf.Duration min_value = 1;
+
+  // [optional]
+  google.protobuf.Duration max_value = 2;
+};
+
+message TimestampRange {
+  google.protobuf.Timestamp min_value = 1;
+
+  google.protobuf.Timestamp max_value = 2;
+};
+
+message Point2f {
+  float x = 1;
+
+  float y = 2;
+};
+
+message Point2i {
+  int32 x = 1;
+
+  int32 y = 2;
+};
+
+message Rect2f {
+  Point2f top_left = 1;
+
+  Point2f size = 2;
+};
+
+message Rect2i {
+  Point2i top_left = 1;
+
+  Point2i size = 2;
+};
+
+message MacAddress {
+  bytes data = 1; // 48-bit mac hardware address.
+};
+
+message IpAddress {
+  oneof address {
+    IpAddressV4 v4 = 1;
+    IpAddressV6 v6 = 2;
+  }
+};
+
+message IpAddressV4 {
+  fixed32 data = 1; // In network byte order.
+};
+
+message IpAddressV6 {
+  bytes data = 1; // 128-bit integer, in network byte order.
+  uint64 scope_id = 2;
+};
+
+enum CryptoHashAlgorithm {
+  CHA_NONE = 0;
+  CHA_SHA256 = 1;
+  CHA_SHA1 = 2;
+};
+
+enum CryptoCipherAlgorithm {
+  CCA_NONE = 0;
+  CCA_AES256_GCM = 1;
+};
+
+enum ExposurePriority {
+  EP_NONE = 0;
+  EP_LOW_NOISE = 1;
+  EP_FRAME_RATE = 2;
+};
+
+enum PredefinedExposureMeteringArea {
+  PREDEFINED_EXPOSURE_METERING_AREA_UNSPECIFIED = 0;
+  PREDEFINED_EXPOSURE_METERING_AREA_FULL_FRAME = 1;
+  PREDEFINED_EXPOSURE_METERING_AREA_TOP = 2;
+  PREDEFINED_EXPOSURE_METERING_AREA_RIGHT = 3;
+  PREDEFINED_EXPOSURE_METERING_AREA_BOTTOM = 4;
+  PREDEFINED_EXPOSURE_METERING_AREA_LEFT = 5;
+  PREDEFINED_EXPOSURE_METERING_AREA_CENTER = 6;
+}
+
+enum IrCutFilterAutoBoundaryType {
+  IFB_NONE = 0;
+  IFB_COMMON = 1;
+  IFB_TO_ON = 2;
+  IFB_TO_OFF = 3;
+}
+
+message Color {
+  // [0, 255]
+  // intensity of r color component.
+  uint32 r = 1;
+
+  // [0, 255]
+  // intensity of g color component.
+  uint32 g = 2;
+
+  // [0, 255]
+  // intensity of b color component.
+  uint32 b = 3;
+
+  // [0, 255]
+  // Alpha channel.
+  uint32 a = 4;
+}
+
+enum PrivacyMaskType {
+  PRIVACY_MASK_TYPE_UNSPECIFIED = 0;
+  PRIVACY_MASK_TYPE_COLOR = 1;
+  PRIVACY_MASK_TYPE_PIXELATED = 2;
+  PRIVACY_MASK_TYPE_BLURRED = 3;
+}
+
+enum AntiFlickerType {
+  ANTI_FLICKER_TYPE_UNSPECIFIED = 0;
+  ANTI_FLICKER_TYPE_DISABLED = 1;
+  ANTI_FLICKER_TYPE_50HZ = 2;
+  ANTI_FLICKER_TYPE_60HZ = 3;
+}
+
+message ShutterSpeed {
+  string id = 1;
+  google.protobuf.Duration duration = 2;
+}
+
+// Presets allow us to define set of settings templates.
+enum AutoExposurePreset {
+  AUTO_EXPOSURE_PRESET_UNSPECIFIED = 0;
+  AUTO_EXPOSURE_PRESET_LESS_NOISE = 1;
+  AUTO_EXPOSURE_PRESET_BALANCE = 2;
+  AUTO_EXPOSURE_PRESET_LESS_MOTION_BLUR = 3;
+}
+
+enum Rotation {
+  ROTATION_UNSPECIFIED = 0;
+  ROTATION_0 = 1;
+  ROTATION_90 = 2;
+  ROTATION_180 = 3;
+  ROTATION_270 = 4;
+};
+
+enum VideoSourceType {
+  VIDEO_SOURCE_TYPE_UNSPECIFIED = 0;
+  VIDEO_SOURCE_TYPE_VIDEO_EDGE = 1;
+  VIDEO_SOURCE_TYPE_CLOUD_ARCHIVE = 2;
+};
+
+enum IceCandidateType {
+  ICE_CANDIDATE_TYPE_UNSPECIFIED = 0;
+  ICE_CANDIDATE_TYPE_HOST = 1;
+  ICE_CANDIDATE_TYPE_REFLEXIVE = 2;
+  ICE_CANDIDATE_TYPE_RELAY = 3;
+};
+
+enum NetworkTechnologyType {
+  NETWORK_TECHNOLOGY_TYPE_UNSPECIFIED = 0;
+  NETWORK_TECHNOLOGY_TYPE_ETHERNET = 1;
+  NETWORK_TECHNOLOGY_TYPE_WIFI = 2;
+  NETWORK_TECHNOLOGY_TYPE_CELLULAR = 3;
+}
+
+enum TransportProtocolType {
+  TRANSPORT_PROTOCOL_TYPE_UNSPECIFIED = 0;
+  TRANSPORT_PROTOCOL_TYPE_TCP = 1;
+  TRANSPORT_PROTOCOL_TYPE_UDP = 2;
+}
+
+enum ImageProfileType {
+  IMAGE_PROFILE_TYPE_UNSPECIFIED = 0;
+  IMAGE_PROFILE_TYPE_NATURAL = 1;
+  IMAGE_PROFILE_TYPE_INSTAMODE = 2;
+}

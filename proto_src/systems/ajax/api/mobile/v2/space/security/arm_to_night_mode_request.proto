@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.security;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ArmSpaceToNightModeRequest {
+  common.space.SpaceLocator space_locator = 1;
+
+  bool ignore_alarms = 2;
+}
+
+message ArmSpaceToNightModeResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError another_transition_is_in_progress = 4;
+      common.response.DefaultError already_in_the_requested_security_state = 5;
+      common.response.DefaultError illegal_space_security_mode = 6;
+      common.response.DefaultError hub_offline = 7;
+      common.response.HubBusyError hub_busy = 8;
+      common.response.DefaultError hub_blocked_by_service_provider = 9;
+      common.response.DefaultError hub_alarm_reset_required = 10;
+      common.response.HubDetectedMalfunctionsError hub_detected_malfunctions = 11;
+      common.response.SpaceLockedError space_locked = 12;
+      common.response.DefaultError action_is_limited_in_empty_space = 13;
+      common.response.DefaultError hub_not_allowed_to_perform_command = 14;
+    }
+  }
+}

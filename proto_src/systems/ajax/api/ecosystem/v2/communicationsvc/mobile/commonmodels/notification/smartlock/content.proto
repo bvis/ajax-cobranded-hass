@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.smartlock;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/smartlock/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/smartlock/source.proto";
+
+message SmartLockNotificationContent {
+  event.smartlock.SmartLockEventQualifier qualifier = 1;
+  SmartLockNotificationSource source = 2;
+}

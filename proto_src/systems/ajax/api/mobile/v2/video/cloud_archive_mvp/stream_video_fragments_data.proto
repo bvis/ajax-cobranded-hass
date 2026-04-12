@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/fragment_error.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveStreamVideoFragmentsDataRequest {
+  // [required]
+  string video_edge_guid = 1;
+
+  // [required]
+  string channel_guid = 2;
+
+  common.video.StreamType stream_type = 3;
+
+  string space_id = 4;
+
+  // default = false
+  bool enable_presigned_urls_for_fragment_data = 100;
+
+  // default = false
+  bool enable_presigned_urls_for_fragment_part_data = 101;
+}
+
+message CloudArchiveStreamVideoFragmentsDataResponse {
+  // [optional]
+  string tag = 1;
+
+  oneof response_union {
+    string session_id = 100;
+
+    CloudArchiveVideoFragmentData fragment_data = 101;
+    CloudArchiveVideoFragmentPartData fragment_part_data = 102;
+  }
+
+  message CloudArchiveVideoFragmentData {
+    uint64 fragment_id = 1;
+
+    FragmentError error = 2;
+
+    // MP4 fragment.
+    bytes data = 3 [(disable_logging) = true];
+
+    // url for MP4 fragment (only when enable_presigned_urls_for_fragment_data=true)
+    string data_url = 4 [(disable_logging) = true];
+  };
+
+  message CloudArchiveVideoFragmentPartData {
+    uint64 fragment_id = 1;
+
+    uint32 offset = 2;
+
+    FragmentError error = 3;
+
+    // MP4 fragment part.
+    bytes data = 4 [(disable_logging) = true];
+
+    // url for MP4 fragment part (only when enable_presigned_urls_for_fragment_part_data=true)
+    string data_url = 5 [(disable_logging) = true];
+
+    // pre-signed url does not support range param, so need to pass it as header where key is "Range" and value "1-100"
+    Header data_url_header = 6;
+
+    message Header {
+      string key = 1;
+
+      string value = 2;
+    }
+  };
+}

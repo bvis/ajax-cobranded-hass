@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.firmware;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StartDeviceFirmwareUpdateRequest {
+  string hub_id = 1;
+  string device_id = 2;
+}
+
+message StartDeviceFirmwareUpdateResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      systems.ajax.api.mobile.v2.common.response.DefaultError illegal_argument = 1;
+      HubIllegalStateError hub_illegal_state = 2;
+      systems.ajax.api.mobile.v2.common.response.DefaultError hub_offline = 3;
+      systems.ajax.api.mobile.v2.common.response.DefaultError update_not_found = 4;
+      systems.ajax.api.mobile.v2.common.response.DefaultError permission_denied = 5;
+    }
+
+    message HubIllegalStateError {
+      RejectionReason rejection_reason = 1;
+
+      oneof details {
+        Source source = 2;
+      }
+
+      message Source {
+        string device_hex_id = 1;
+        string device_type = 2;
+        ecosystem.v2.hubsvc.commonmodels.ObjectType device_type_v2 = 3;
+      }
+
+      enum RejectionReason {
+        REJECTION_REASON_UNSPECIFIED = 0;
+        REJECTION_REASON_HUB_SCAN = 1;
+        REJECTION_REASON_HUB_PWR_TEST = 2;
+        REJECTION_REASON_DEV_BUSY = 3;
+        REJECTION_REASON_DFU_IN_PROGRESS = 4;
+        REJECTION_REASON_RADIOTEST = 5;
+        REJECTION_REASON_DEV_ZONE_TEST = 6;
+        REJECTION_REASON_CARD_PROCESS = 7;
+        REJECTION_REASON_ARMED = 8;
+        REJECTION_REASON_EXIT_TIMER = 9;
+        reserved 10; // deprecated
+        REJECTION_REASON_ROUTE = 11;
+        REJECTION_REASON_DEV_OFFLINE = 12;
+        REJECTION_REASON_EXT_POWER = 13;
+        REJECTION_REASON_DEV_ALWAYS_ACTIVE = 14;
+        REJECTION_REASON_NOT_SUPPORTED = 15;
+        REJECTION_REASON_BUSES_PROBLEM = 16;
+        REJECTION_REASON_IWH_OBJECTS_LIMIT_ERROR = 17;
+        REJECTION_REASON_IWH_TEST_IN_PROGRESS = 18;
+        REJECTION_REASON_RING_PROBLEM = 19;
+        REJECTION_REASON_RING_UNREGISTERED = 20;
+        REJECTION_REASON_RING_DISCONNECTED = 21;
+        REJECTION_REASON_ACTIVE_CALL = 22;
+        REJECTION_REASON_FP_BUKHOOR_FORBIDDEN_TIME = 23;
+        REJECTION_REASON_FP_FIRE_ALARM = 24;
+        REJECTION_REASON_DEV_BYPASSED = 25;
+        REJECTION_REASON_WRONG_POWER_SUPPLY_SETTINGS = 26;
+        REJECTION_REASON_IN_LINES_SHORT_CIRCUIT = 27;
+        REJECTION_REASON_OUT_LINES_SHORT_CIRCUIT = 28;
+        REJECTION_REASON_WIFI_FUNC_NOT_WORK = 29;
+        REJECTION_REASON_DEV_POWER_OVERLOAD = 30;
+        REJECTION_REASON_BATTERY_LOW = 31;
+        REJECTION_REASON_EXTRA_COMM_CHAN_REQUIRED = 32;
+        REJECTION_REASON_JAMMING_DETECTED = 33;
+      }
+    }
+  }
+}

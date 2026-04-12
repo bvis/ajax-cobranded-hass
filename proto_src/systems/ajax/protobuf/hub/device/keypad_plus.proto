@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message KeypadPlus {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    repeated AccessProfile access_profiles = 0x3E;
+    StarButtonFunction star_button_function = 0x38;
+
+    string password = 0x31;
+    string force_disarm_password = 0x33;
+    bool block_on_multiple_password_failures = 0x36;
+    int32 time_to_block_on_multiple_password_failures_minutes = 0x34;
+    google.protobuf.BoolValue blocked = 0x37;
+    bool allow_fast_arming = 0x35;
+    int32 brightness_level = 0x3B;
+    int32 volume_level = 0x3C;
+    string associated_group_id = 0x3D;
+    string password_hash = 0x4A;
+    string password_hash_duress = 0x4B;
+
+    bool arm_inversion = 0x40;
+    bool nfc_enabled = 0x41;
+    bool ble_enabled = 0x42;
+    BleSensitivity ble_sensitivity = 0x43;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        SECURITY_BUTTON = 1;
+    }
+
+    enum StarButtonFunction {
+        NO_STAR_BUTTON_FUNCTION_INFO = 0;
+        DISABLED = 1;
+        PANIC = 2;
+        MUTE_FIRE_ALARM = 3;
+    }
+
+    enum AccessProfile {
+        NO_ACCESS_PROFILE_INFO = 0;
+        KEYBOARD_PASSWORD = 1;
+        USER_PASSWORD = 2;
+    }
+
+    enum BleSensitivity {
+        NO_BLE_SENSITIVITY = 0;
+        WELL_BELLOW_AVERAGE = 1;
+        BELLOW_AVERAGE = 2;
+        AVERAGE = 3;
+        ABOVE_AVERAGE = 4;
+        WELL_ABOVE_AVERAGE = 5;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+        S_PLUS = 1;
+    }
+}

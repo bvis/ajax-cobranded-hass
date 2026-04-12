@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media.video;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media.video";
+option java_multiple_files = true;
+
+option swift_prefix = "";
+
+message HubVideoScenarioMedia {
+  option deprecated = true;
+
+  repeated ChannelAlarmFrameMetadata channel_metadata = 1;
+
+  message ChannelAlarmFrameMetadata {
+    string video_edge_id = 1;
+
+    string channel_id = 2;
+
+    string channel_name = 3;
+
+    optional string room_name = 4;
+
+    FrameDataResult frame_data_result = 5;
+  }
+
+  message FrameDataResult {
+    oneof data_result {
+      UrlList url_list = 1;
+      PermissionDenied permission_denied = 2;
+    }
+  }
+
+  message UrlList {
+    repeated string urls = 1 [(hash_value) = true];
+  }
+
+  message PermissionDenied {
+  }
+}

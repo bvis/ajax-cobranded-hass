@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.webrtc;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/stream.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AskWebRtcStreamsRequest {
+  string video_edge_id = 1;
+
+  string webrtc_session_id = 2;
+
+  repeated common.video.webrtc.Stream streams = 3;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+}
+
+message AskWebRtcStreamsResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    /**
+     * Streams that were actually sent to the video edge.
+     * (e.g. the initial list could be filtered by channel permissions
+     * also FrameTypeId with audio can be filtered out if user has no such permission)
+     */
+    repeated common.video.webrtc.Stream streams = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError session_not_found = 2;
+      common.response.DefaultError video_edge_not_found = 3;
+      common.response.DefaultError permission_denied = 4;
+      common.response.DefaultError video_edge_is_offline = 5;
+    }
+  }
+}

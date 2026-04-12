@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message ErrorCodeInfo {
+  oneof value {
+    WaterStopErrorCodeInfo water_stop_error_code_info = 1;
+  }
+
+  message WaterStopErrorCodeInfo {
+
+    repeated WaterStopErrorCode water_stop_error_codes = 1;
+
+    enum WaterStopErrorCode {
+      WATER_STOP_ERROR_CODE_UNSPECIFIED = 0;
+      WATER_STOP_ERROR_CODE_DEVICE_OFFLINE = 1;
+      WATER_STOP_ERROR_CODE_IN_BYPASS_MODE = 2;
+      WATER_STOP_ERROR_CODE_VALVE_STATE_CLOSE = 3;
+      WATER_STOP_ERROR_CODE_VALVE_STATE_UNKNOWN = 4;
+      WATER_STOP_ERROR_CODE_BATTERY_ERROR = 5;
+      WATER_STOP_ERROR_CODE_LOW_BATTERY = 6;
+      WATER_STOP_ERROR_CODE_TAMPER_OPEN = 7;
+      WATER_STOP_ERROR_CODE_NO_RESPONSE = 8;
+      WATER_STOP_ERROR_CODE_FIRE_ALARM = 9;
+      WATER_STOP_ERROR_CODE_DEVICE_BUSY = 10;
+      WATER_STOP_ERROR_CODE_GENERIC = 11;
+    }
+  }
+}

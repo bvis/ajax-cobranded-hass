@@ -1,0 +1,20 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/relay_channel.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message RelaySingleChannelCustomProperties {
+  RelayChannel channel = 1;
+}
+
+// example of multi-relay device. probably might be identical for MultiRelayFibra, FourChannelsTwoRelaysTwoLogical
+//message RelayFourChannelCustomProperties {
+//  RelayChannel channel_1 = 1;
+//  RelayChannel channel_2 = 2;
+//  RelayChannel channel_3 = 3;
+//  RelayChannel channel_4 = 4;
+//}

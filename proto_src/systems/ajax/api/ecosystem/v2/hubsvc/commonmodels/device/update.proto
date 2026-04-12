@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_profile.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/light_indication.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_beep_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/alarm_restriction.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/alarm_verification.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/post_alarm_indication.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_siren_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/group_association.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/gyroscope.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/self_monitoring_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_masking_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/detection_mode_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_device_notifications_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/led_indication_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_siren_triggers.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/light_indication_area_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_sound_compliance_pattern_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/radio_interference_detection_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_siren_tamper_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/motion_detection_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/smartlock/smart_lock_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/smartlock/smart_lock_yale_part.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message Update{
+  oneof case {
+    ecosystem.v2.hubsvc.commonmodels.device.common.DeviceProfile.DeviceProfileSettings device_profile_settings = 1;
+    ecosystem.v2.hubsvc.commonmodels.device.common.LightIndication.LightIndicationSettings light_indication_settings = 2;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonBeepPart.CommonBeepPartSettings common_beep_part_settings = 3;
+    ecosystem.v2.hubsvc.commonmodels.device.common.AlarmRestriction.AlarmRestrictionSettings alarm_restriction_settings = 4;
+    ecosystem.v2.hubsvc.commonmodels.device.common.AlarmVerification.AlarmVerificationSettings alarm_verification_settings = 5;
+    ecosystem.v2.hubsvc.commonmodels.device.common.PostAlarmIndication.PostAlarmIndicationSettings post_alarm_indication_settings = 6;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonSirenPart.SirenSettings siren_settings = 7;
+    ecosystem.v2.hubsvc.commonmodels.device.common.GroupAssociation.GroupAssociationSettings group_association_settings = 8;
+    ecosystem.v2.hubsvc.commonmodels.device.common.Gyroscope.GyroscopeSensorSettings gyroscope_sensor_settings = 9;
+    ecosystem.v2.hubsvc.commonmodels.device.common.SelfMonitoringPart.SelfMonitoringPartSettings self_monitoring_part_settings = 10;
+    ecosystem.v2.hubsvc.commonmodels.device.common.LightIndicationAreaPart.LightIndicationAreaPartSettings light_indication_area_part_settings = 11;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonSoundCompliancePatternPart.CommonSoundCompliancePatternPartSettings common_sound_compliance_pattern_part_settings = 12;
+    ecosystem.v2.hubsvc.commonmodels.device.common.RadioInterferenceDetectionPart.RadioInterferenceDetectionSettings radio_interference_detection_settings = 13;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonSirenTamperPart.CommonSirenTamperPartSettings common_siren_tamper_part_settings = 14;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonMaskingPart.CommonMaskingPartSettings common_masking_part_settings = 15;
+    ecosystem.v2.hubsvc.commonmodels.device.common.DetectionModePart.DetectionModePartSettings detection_mode_part_settings = 16;
+    ecosystem.v2.hubsvc.commonmodels.device.common.CommonDeviceNotificationsPart.DeviceNotificationsPartSettings device_notifications_part_settings = 17;
+    ecosystem.v2.hubsvc.commonmodels.device.common.LedIndicationPart.LedIndicationPartSettings led_indication_part_settings = 18;
+    ecosystem.v2.hubsvc.commonmodels.device.common.SirenTriggers.SirenTriggerSettings siren_trigger_settings = 19;
+    ecosystem.v2.commonmodels.device.common.CommonArmingPart.CommonArmingPartSettings common_arming_part_settings = 20;
+    ecosystem.v2.hubsvc.commonmodels.device.common.MotionDetectionPart.MotionDetectionPartSettings motion_detection_part_settings = 21;
+    ecosystem.v2.hubsvc.commonmodels.device.smartlock.SmartLockPart.SmartLockPartSettings smart_lock_part_settings = 22;
+    ecosystem.v2.hubsvc.commonmodels.device.smartlock.SmartLockYalePart.SmartLockYalePartSettings smart_lock_yale_part_settings = 23;
+  }
+}

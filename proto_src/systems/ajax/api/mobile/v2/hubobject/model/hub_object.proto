@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/installation/installation_company.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/monitoring/monitoring_company.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/privacy/surveillance_cameras_company_access.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/privacy/photo_on_demand_company_access.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/privacy/privacy_override.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/firmware/device_firmware_update.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/firmware/system_firmware_update.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_connection_properties.proto";
+option java_package = "systems.ajax.api.mobile.v2.hubobject.model";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message HubObject {
+  string hex_id = 1;
+
+  InstallationCompanies installation_companies = 50;
+  MonitoringCompanies monitoring_companies = 51;
+  PhotoOnDemandCompaniesAccess photo_on_demand_companies_access = 52;
+  SurveillanceCamerasCompaniesAccess surveillance_cameras_companies_access = 53;
+  PrivacyOverrides privacy_overrides = 54;
+  SimCard sim_card = 55;
+
+  reserved 100;
+
+  DeviceFirmwareUpdates device_firmware_updates = 200;
+  systems.ajax.api.mobile.v2.hubobject.model.firmware.SystemFirmwareUpdate system_firmware_update = 201;
+  systems.ajax.api.mobile.v2.common.hub.HubConnectionProperties hub_connection_properties = 202;
+
+  message InstallationCompanies {
+    repeated systems.ajax.api.mobile.v2.hubobject.model.company.installation.InstallationCompany installation_company = 1;
+  }
+
+  message MonitoringCompanies {
+    repeated systems.ajax.api.mobile.v2.hubobject.model.company.monitoring.MonitoringCompany monitoring_company = 1;
+  }
+
+  message PhotoOnDemandCompaniesAccess{
+    repeated systems.ajax.api.mobile.v2.hubobject.model.company.privacy.PhotoOnDemandCompanyAccess company_access = 1;
+  }
+
+  message SurveillanceCamerasCompaniesAccess{
+    repeated systems.ajax.api.mobile.v2.hubobject.model.company.privacy.SurveillanceCamerasCompanyAccess company_access = 1;
+  }
+
+  message PrivacyOverrides {
+    repeated systems.ajax.api.mobile.v2.hubobject.model.company.privacy.PrivacyOverride privacy_override = 1;
+  }
+
+  message DeviceFirmwareUpdates {
+    repeated systems.ajax.api.mobile.v2.hubobject.model.firmware.DeviceFirmwareUpdate device_firmware_update = 1;
+  }
+
+  message SimCard {
+    int32 active_sim_card = 1;
+    SimCardStatus sim_card_status = 2;
+    string imei = 3;
+    google.protobuf.Timestamp deactivation_date = 4;
+
+    enum SimCardStatus {
+      SIM_CARD_STATUS_NO_INFO = 0;
+      SIM_CARD_STATUS_INACTIVE = 1;
+      SIM_CARD_STATUS_ACTIVE = 2;
+    }
+  }
+}

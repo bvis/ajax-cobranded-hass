@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SmartLockEventSettings {
+  optional bool lockStateChanged = 1;
+
+  optional bool scenarioExecuted = 2;
+
+  optional bool doorbellButtonPressed = 3;
+}

@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.mediadevice.discovering;
+
+import "google/protobuf/empty.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/discovering/discovery_address.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DiscoverMediaDevicesRequest {
+  string video_edge_id = 1;
+
+  Filter filter = 2;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+
+  message Filter {
+    repeated common.video.videoedge.mediadevice.MediaDeviceProtocol protocols = 1;
+  }
+}
+
+message DiscoverMediaDevicesResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof success_union {
+      InstantDiscoveringResult instant_discovering_result = 1;
+      DiscoveredMediaDevice device_added = 2;
+      DiscoveredMediaDevice device_removed = 3;
+      DiscoveredMediaDevice device_updated = 4;
+      google.protobuf.Empty unknown = 10000;
+    }
+  }
+
+  message InstantDiscoveringResult {
+    repeated DiscoveredMediaDevice devices = 1;
+  }
+
+  message DiscoveredMediaDevice {
+    string uuid = 1;
+
+    string vendor = 2;
+
+    string model = 3;
+
+    repeated common.video.videoedge.mediadevice.discovering.DiscoveryAddress addresses = 4;
+
+    bool already_added = 5;
+
+    string name = 6;
+
+    // [optional] - if discovered media device is a video edge
+    DiscoveredVideoEdgeInfo video_edge_info = 7;
+  };
+
+  message DiscoveredVideoEdgeInfo {
+
+    string video_edge_id = 1;
+
+    common.video.videoedge.about.About.Type type = 2;
+
+    bool installed = 3;
+
+    optional string room_id = 4;
+
+    optional string group_id = 5;
+
+    repeated AvailableChannel channels = 6;
+
+    common.video.videoedge.about.About.Color color = 7;
+  }
+
+  message AvailableChannel {
+    string id = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError video_edge_not_found = 4;
+      common.response.DefaultError video_edge_is_offline = 5;
+      common.response.DefaultError role_access_required = 6;
+    }
+  }
+}
+

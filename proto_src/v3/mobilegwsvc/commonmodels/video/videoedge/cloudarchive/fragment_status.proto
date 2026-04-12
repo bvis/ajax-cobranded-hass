@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.cloudarchive;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.cloudarchive";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum FragmentStatus {
+  // Some unknown status
+  FRAGMENT_STATUS_UNSPECIFIED = 0;
+
+  // Fragment is ok.
+  FRAGMENT_STATUS_OK = 1;
+
+  // Fragment is missing.
+  FRAGMENT_STATUS_MISSING = 2;
+
+  // Failed to retrieve fragment, m.b. try again later.
+  FRAGMENT_STATUS_FAILED = 3;
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message Decimal {
+  int32 scale = 3001;
+  bytes unscaledBytes = 3002;
+}

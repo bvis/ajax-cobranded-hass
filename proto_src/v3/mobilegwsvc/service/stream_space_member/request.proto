@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_space_member;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_space_member";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamSpaceMemberRequest {
+  string space_id = 1;
+
+  string space_member_id = 2;
+}

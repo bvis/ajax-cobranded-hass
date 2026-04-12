@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.v2.gw.session;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.v2.gw.session";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/gw/error.proto";
+
+message SessionInfo {
+  Session session = 1;
+  EventType event_type = 2;
+  string user_id = 3;
+}
+
+message Session {
+  int64 session_id = 1;
+  int64 session_creation_timestamp = 2;
+  string last_connection_ip = 3;
+  string client_device_model = 4;
+  string client_os = 5;
+  int64 session_expiry_time = 6;
+  string client_version_major = 7;
+  string client_device_id = 8;
+  bool legacy_session = 9;
+  string application_label = 10;
+  int64 session_refresh_timestamp = 11;
+  bool is_active = 12;
+}
+
+message GetActiveSessionsResponse {
+  oneof test_oneof {
+    ActiveSessions sessions = 1;
+    GwError error = 2;
+  }
+}
+
+message ActiveSessions {
+  repeated Session sessions = 1;
+}
+
+message DropUserSessionResponse {
+  oneof test_oneof {
+    Response response = 1;
+    GwError error = 2;
+  }
+}
+
+message CreateNewSessionResponse {
+  oneof test_oneof {
+    Session session = 1;
+    GwError error = 2;
+  }
+}
+enum EventType {
+  CREATED = 0;
+  DELETED = 1;
+}
+
+enum Response {
+  SUCCESSFUL = 0;
+}

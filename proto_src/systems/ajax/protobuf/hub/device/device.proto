@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/device/door_protect.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect.proto";
+import "systems/ajax/protobuf/hub/device/fire_protect.proto";
+import "systems/ajax/protobuf/hub/device/glass_protect.proto";
+import "systems/ajax/protobuf/hub/device/leaks_protect.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect_curtain.proto";
+import "systems/ajax/protobuf/hub/device/range_extender.proto";
+import "systems/ajax/protobuf/hub/device/combi_protect.proto";
+import "systems/ajax/protobuf/hub/device/fire_protect_plus.proto";
+import "systems/ajax/protobuf/hub/device/keypad.proto";
+import "systems/ajax/protobuf/hub/device/space_control.proto";
+import "systems/ajax/protobuf/hub/device/button.proto";
+import "systems/ajax/protobuf/hub/device/double_button.proto";
+import "systems/ajax/protobuf/hub/device/motion_cam.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect_plus.proto";
+import "systems/ajax/protobuf/hub/device/door_protect_plus.proto";
+import "systems/ajax/protobuf/hub/device/transmitter.proto";
+import "systems/ajax/protobuf/hub/device/relay.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect_outdoor.proto";
+import "systems/ajax/protobuf/hub/device/street_siren.proto";
+import "systems/ajax/protobuf/hub/device/street_siren_double_deck.proto";
+import "systems/ajax/protobuf/hub/device/home_siren.proto";
+import "systems/ajax/protobuf/hub/device/keypad_plus.proto";
+import "systems/ajax/protobuf/hub/device/socket.proto";
+import "systems/ajax/protobuf/hub/device/wall_switch.proto";
+import "systems/ajax/protobuf/hub/device/universal_device.proto";
+
+import "systems/ajax/protobuf/hub/device/wire_input.proto";
+import "systems/ajax/protobuf/hub/device/wire_siren.proto";
+import "systems/ajax/protobuf/hub/device/yavir_access_control.proto";
+import "systems/ajax/protobuf/hub/device/access_key.proto";
+import "systems/ajax/protobuf/hub/device/multi_transmitter.proto";
+import "systems/ajax/protobuf/hub/device/wire_input_mt.proto";
+import "systems/ajax/protobuf/hub/device/keypad_combi.proto";
+import "systems/ajax/protobuf/hub/device/dual_curtain_outdoor.proto";
+import "systems/ajax/protobuf/hub/device/access_card.proto";
+import "systems/ajax/protobuf/hub/device/motion_cam_outdoor.proto";
+
+import "systems/ajax/protobuf/hub/device/door_protect_fibra.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect_fibra.proto";
+import "systems/ajax/protobuf/hub/device/glass_protect_fibra.proto";
+import "systems/ajax/protobuf/hub/device/combi_protect_fibra.proto";
+import "systems/ajax/protobuf/hub/device/keypad_fibra.proto";
+import "systems/ajax/protobuf/hub/device/motion_protect_plus_fibra.proto";
+import "systems/ajax/protobuf/hub/device/door_protect_plus_fibra.proto";
+import "systems/ajax/protobuf/hub/device/street_siren_fibra.proto";
+import "systems/ajax/protobuf/hub/device/home_siren_fibra.proto";
+import "systems/ajax/protobuf/hub/device/street_siren_double_deck_fibra.proto";
+import "systems/ajax/protobuf/hub/device/range_extender2.proto";
+import "systems/ajax/protobuf/hub/device/vhf_bridge.proto";
+import "systems/ajax/protobuf/hub/device/socket_base.proto";
+
+import "systems/ajax/protobuf/hub/device/hub_device.proto";
+
+message Device {
+    oneof test_oneof {
+        DoorProtect door_protect = 0x01;
+        MotionProtect motion_protect = 0x02;
+        FireProtect fire_protect = 0x03;
+        GlassProtect glass_protect = 0x04;
+        LeaksProtect leak_protect = 0x05;
+        MotionProtectCurtain motion_protect_curtain = 0x06;
+        RangeExtender range_extender = 0x07;
+        CombiProtect combi_protect = 0x08;
+        FireProtectPlus fire_protect_plus = 0x09;
+        Keypad keypad = 0x0A;
+        SpaceControl space_control = 0x0B;
+        Button button = 0x0C;
+        MotionCam motion_cam = 0x0D;
+        MotionProtectPlus motion_protect_plus = 0x0E;
+        DoorProtectPlus door_protect_plus = 0x0F;
+        UniversalDevice universal_device = 0x10;
+        Transmitter transmitter = 0x11;
+        Relay relay = 0x12;
+        MotionProtectOutdoor motion_protect_outdoor = 0x13;
+        StreetSiren street_siren = 0x14;
+        HomeSiren home_siren = 0x15;
+        systems.ajax.protobuf.hub.device.MotionCamOutdoor motion_cam_outdoor = 0x18;
+        KeypadPlus keypad_plus = 0x19;
+        systems.ajax.protobuf.hub.device.DualCurtainOutdoor dual_curtain_outdoor = 0x1A;
+        StreetSirenDoubleDeck street_siren_double_deck = 0x1B;
+        MultiTransmitter multi_transmitter = 0x1C;
+        WireInputMt wire_input_mt = 0x1D;
+        Socket socket = 0x1E;
+        WallSwitch wall_switch = 0x1F;
+
+        WireInput wire_input = 0x26;
+        WireSiren wire_siren = 0x27;
+        YavirAccessControl yavir_access_control = 0x28;
+        AccessKey access_key = 0x29;
+        systems.ajax.protobuf.hub.device.AccessCard access_card = 0x2E;
+
+        HubDevice hub = 0x21;
+
+        DoubleButton double_button = 0x42;
+        systems.ajax.protobuf.hub.device.KeypadCombi keypad_combi = 0x43;
+        systems.ajax.protobuf.hub.device.VhfBridge vhf_bridge = 0x45;
+        systems.ajax.protobuf.hub.device.RangeExtender2 range_extender2 = 0x46;
+        SocketBase socket_base = 0x4C;
+
+        systems.ajax.protobuf.hub.device.DoorProtectFibra door_protect_fibra = 0x61;
+        systems.ajax.protobuf.hub.device.MotionProtectFibra motion_protect_fibra = 0x62;
+        systems.ajax.protobuf.hub.device.GlassProtectFibra glass_protect_fibra = 0x64;
+        systems.ajax.protobuf.hub.device.CombiProtectFibra combi_protect_fibra = 0x68;
+        systems.ajax.protobuf.hub.device.KeypadFibra keypad_fibra = 0x6A;
+        systems.ajax.protobuf.hub.device.MotionProtectPlusFibra motion_protect_plus_fibra = 0x6E;
+        systems.ajax.protobuf.hub.device.DoorProtectPlusFibra door_protect_plus_fibra = 0x6F;
+        systems.ajax.protobuf.hub.device.StreetSirenFibra street_siren_fibra = 0x74;
+        systems.ajax.protobuf.hub.device.HomeSirenFibra home_siren_fibra = 0x75;
+        systems.ajax.protobuf.hub.device.StreetSirenDoubleDeckFibra street_siren_double_deck_fibra = 0x7B;
+    }
+}

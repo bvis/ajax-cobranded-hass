@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum ImageStatus {
+  IMAGE_STATUS_UNSPECIFIED = 0;
+  IMAGE_STATUS_IN_PROGRESS = 1;
+  IMAGE_STATUS_READY = 2;
+  IMAGE_STATUS_FAILED = 3;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_sample_play;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandSamplePlayRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+  SamplePlay sample_play = 4;
+
+  message SamplePlay {
+    uint32 audio_sample_index = 1;
+    uint32 repeat_count = 2;
+  }
+}

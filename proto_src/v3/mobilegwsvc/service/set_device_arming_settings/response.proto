@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_device_arming_settings;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_device_arming_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetDeviceArmingSettingsResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_armed = 2;
+      commonmodels.Error permission_denied = 3;
+      commonmodels.Error device_not_found = 4;
+    }
+  }
+}

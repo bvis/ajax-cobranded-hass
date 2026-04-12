@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/bypass_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/cms_device_index.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_profile.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonButtonPart {
+  DeviceProfile device_profile = 1;
+
+  CmsDeviceIndex cms_device_index = 0x27;
+
+  BypassPart bypass_part = 0xB7;
+
+  Brightness brightness = 0x31;
+
+  AssociatedUser associated_user = 0x34;
+
+  // Investigate if should be present in common. Didn't find in HtS for double button
+  AlarmIfPressed alarm_if_pressed = 100;
+
+  enum Brightness {
+    BRIGHTNESS_UNSPECIFIED = 0;
+    BRIGHTNESS_OFF = 1;
+    BRIGHTNESS_LOW = 2;
+    reserved 3;
+    BRIGHTNESS_HIGH = 4;
+  }
+
+  message AssociatedUser {
+    string id = 1;
+  }
+
+  enum AlarmIfPressed {
+    ALARM_IF_PRESSED_UNSPECIFIED = 0;
+    ALARM_IF_PRESSED_DISABLED = 1;
+    ALARM_IF_PRESSED_ENABLED = 2;
+  }
+}

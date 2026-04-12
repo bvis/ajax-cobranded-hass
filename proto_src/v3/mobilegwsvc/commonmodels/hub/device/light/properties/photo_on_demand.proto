@@ -1,0 +1,20 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+// PhOD supported on Hub and device: Hub(OxDB, 0 bit) &&
+// ((!MOTION_CAM && hub-fastPhod(0xE4, 2 bit)) || (!MOTION_CAM_FIBRA && hub-slowPhod(0xE4, 0 bit))
+// ActionProperty won't be present without matching conditions above
+message PhotoOnDemand {
+  EstimatedArmingState estimated_arming_state = 1;
+
+  enum EstimatedArmingState {
+    ESTIMATED_ARMING_STATE_UNSPECIFIED = 0;
+    ESTIMATED_ARMING_STATE_DISARMED = 1;
+    ESTIMATED_ARMING_STATE_ARMED = 2;
+    ESTIMATED_ARMING_STATE_N_A = 3;
+  }
+}

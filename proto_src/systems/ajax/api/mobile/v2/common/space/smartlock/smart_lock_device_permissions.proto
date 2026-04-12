@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_permission.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+message SmartLockPermissions {
+  string device_id = 1;
+
+  repeated SmartLockPermission smart_lock_permissions = 2 [deprecated = true];
+
+  repeated PermissionState permissions = 3;
+
+  message PermissionState {
+    SmartLockPermission permission = 1;
+    Type type = 2;
+
+    message Type {
+
+      oneof kind {
+        Permanent permanent = 1;
+        TemporaryWhenAlertReceived temporary_when_alert_received = 2;
+      }
+
+      message Permanent {}
+
+      message TemporaryWhenAlertReceived {
+        google.protobuf.Duration duration = 1;
+        optional google.protobuf.Timestamp expired_at = 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light;
+
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/eol_sensor_properties.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/keyarm_lock.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/motion_cam_hdr.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/relay_single_channel_custom_properties.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/relay_channel.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/reset_fire_alarm_wi.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/wire_inputs.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/fire_zone_id.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/light_switch_channel.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/transmitter_index.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/fire_device_action_button.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/light_common_hub_device.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/photo_on_demand.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/fire_zones.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/download_firmware_update.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/billing_company.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/properties/subscription_state.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/hub_box_appearance.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/vhf_bridge_outputs.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/access_devices.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/keypad_lock.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/socket_base_channel.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/life_quality_info.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/water_stop_channel.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light";
+option java_multiple_files = true;
+
+message LightHubDevice {
+  LightCommonHubDevice common_device = 1;
+
+  CustomProperties custom_properties = 2 [deprecated = true];
+
+  repeated SpreadProperties spread_properties = 3;
+
+  repeated DeviceSpecificProperties device_specific_properties = 4;
+
+  message CustomProperties {
+    oneof properties {
+      properties.RelaySingleChannelCustomProperties relay_single_channel_properties = 2;
+    }
+  }
+
+  // Used to render device list spread actions / statuses (button, switch, lq info, assigned device count, etc)
+  message SpreadProperties {
+
+    int32 sort_index = 1;
+
+    oneof properties {
+      properties.RelayChannel channel = 2;
+      properties.ResetFireAlarmWi reset_fire_alarm_wi = 3;
+      properties.WireInputs wire_inputs = 4;
+      properties.LightSwitchChannel light_switch_channel = 5;
+      properties.KeyarmLock keyarm_lock = 6;
+      properties.FireDeviceActionButton fire_device_action_button = 7;
+      properties.PhotoOnDemand photo_on_demand = 8;
+      properties.FireZones fire_zones = 9;
+      properties.DownloadFirmwareUpdate download_firmware_update = 10;
+      properties.BillingCompany billing_company = 11;
+      space.device.light.properties.SubscriptionState subscription_state = 12;
+      properties.VhfBridgeOutputs vhf_bridge_outputs = 13;
+      properties.KeypadLock keypad_lock = 14;
+      properties.SocketBaseChannel socket_base_channel = 15;
+      properties.LifeQualityInfo life_quality_info = 16;
+      properties.WaterStopChannel water_stop_channel = 17;
+    }
+  }
+
+  // To be used to pass device-specific properties, not related to device list actions.
+  message DeviceSpecificProperties {
+    oneof properties {
+      properties.FireZoneId fire_zone_id = 1;
+      properties.TransmitterIndex transmitter_index = 2;
+      properties.MotionCamHdr motion_cam_hdr = 4;
+      properties.EolSensorProperties eol_sensor_properties = 5;
+      properties.HubBoxAppearance hub_box_appearance = 6;
+      properties.AccessDevices access_devices = 7;
+    }
+    // reserved 3 for keyarm id backward compatibility
+    reserved 3;
+  }
+}

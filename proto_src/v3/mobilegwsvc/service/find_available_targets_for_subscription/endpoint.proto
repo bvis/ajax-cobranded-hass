@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_targets_for_subscription;
+
+import "v3/mobilegwsvc/service/find_available_targets_for_subscription/request.proto";
+import "v3/mobilegwsvc/service/find_available_targets_for_subscription/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_targets_for_subscription";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FindAvailableTargetsForSubscriptionService {
+  rpc execute (FindAvailableTargetsForSubscriptionRequest) returns (FindAvailableTargetsForSubscriptionResponse);
+};

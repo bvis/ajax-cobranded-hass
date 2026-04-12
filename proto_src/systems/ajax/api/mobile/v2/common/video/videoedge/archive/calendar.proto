@@ -1,0 +1,48 @@
+// Calendar description
+
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.archive;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+
+// A calendar is sort of a very broad index that can be used
+// to tell which days of the year actually contain VIDEO records.
+message Calendar {
+  // [required]
+  // First non-empty day of archive, it's guaranteed that 'start_day' is aligned
+  // to day boundary, i.e. time is 00:00:00.000
+  google.protobuf.Timestamp start_day = 1;
+
+  // 0 - day doesn't contain any video records.
+  // != 0 - day contains some video records.
+  bytes days = 2;
+
+  // All of the above is in UTC as usual, if we want to map to local time we
+  // must use 'tz_map'. This timezone map is a bit more complicated than the one
+  // in timeline. The reason is that single UTC non-empty day can actually have many
+  // timezone switches, thus, in terms of local time one UTC day can be equal to
+  // many days in local time. And vice versa, many UTC days can get mapped to a single
+  // day in local time.
+  repeated TzEntry tz_map = 3;
+
+  // Each entry has meaning such as "starting from day 'day' in order
+  // to get local days from UTC day you must apply 'offsets' to that day".
+  // e.g. suppose your 'tz_map' is [ 2jan : {-1, 0}, 15jan : {1, 2} ]
+  // and calendar starts at 2jan and lasts for 20 days. What this means is that
+  // 2jan - 14jan in UTC actually map to 1jan - 14jan in local time.
+  // 15jan - 21jan in UTC actually map to 16jan - 23jan in local time.
+  // So in local time this single contiguous interval in UTC 2jan - 21jan maps
+  // to two separate: 1jan - 14jan, 16jan - 23jan.
+  message TzEntry {
+    // [required]
+    // It's guaranteed that 'day' is aligned to day boundary, i.e. time is 00:00:00.000
+    google.protobuf.Timestamp day = 1;
+
+    // Offsets are in days, i.e. "1" = +1 day, "-2" = -2 days, etc.
+    repeated int32 offsets = 2;
+  }
+};

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_lite.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CreateSpaceRequest {
+  string name = 1;
+
+  optional string image_id = 2;
+
+  optional string device_qr_code = 3;
+};
+
+message CreateSpaceResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    // Should be removed after space aps release
+    string space_id = 1 [deprecated = true];
+
+    common.space.LiteSpace lite_space = 2;
+
+    oneof created_with_warning {
+      common.response.AddDeviceError add_device_failed = 10;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError empty_spaces_limit_exceeded = 2;
+    }
+  }
+};

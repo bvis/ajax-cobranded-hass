@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/about/get_about_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/install_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/uninstall_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/stream_updates_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/time/set_time_zone_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/set_basic_settings.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeService {
+  rpc install(InstallVideoEdgeRequest) returns (InstallVideoEdgeResponse) {}
+
+  rpc uninstall(UninstallVideoEdgeRequest) returns (UninstallVideoEdgeResponse) {}
+
+  rpc streamUpdates(StreamVideoEdgeUpdatesRequest) returns (stream StreamVideoEdgeUpdatesResponse) {}
+
+  rpc setTimeZone(time.SetTimeZoneRequest) returns (time.SetTimeZoneResponse) {}
+
+  rpc getAbout(GetVideoEdgeAboutRequest) returns (GetVideoEdgeAboutResponse) {
+    option deprecated = true;
+  }
+
+  rpc setBasicSettings(SetBasicSettingsRequest) returns (SetBasicSettingsResponse);
+};

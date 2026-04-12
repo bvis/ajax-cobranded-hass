@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_space_integration_oauth_authorization_code_url;
+
+import "v3/mobilegwsvc/service/get_space_integration_oauth_authorization_code_url/request.proto";
+import "v3/mobilegwsvc/service/get_space_integration_oauth_authorization_code_url/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetSpaceIntegrationOAuthAuthorizationCodeUrlService {
+  rpc execute (GetSpaceIntegrationOAuthAuthorizationCodeUrlRequest) returns (GetSpaceIntegrationOAuthAuthorizationCodeUrlResponse);
+};

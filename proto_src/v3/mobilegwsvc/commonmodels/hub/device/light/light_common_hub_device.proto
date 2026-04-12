@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light;
+
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_profile.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light";
+option java_multiple_files = true;
+
+message LightCommonHubDevice {
+  space.device.light.LightDeviceProfile profile = 1;
+
+  string hub_id = 2;
+
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+}

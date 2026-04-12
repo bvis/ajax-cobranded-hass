@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.media;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.media";
+option java_multiple_files = true;
+
+import "v1/media/media.proto";
+
+message StreamMediaResponse {
+  repeated Media media = 1;
+}

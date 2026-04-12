@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.type;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.type";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_USER = 1;
+  USER_ROLE_PRO = 2;
+}

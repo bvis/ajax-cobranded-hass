@@ -1,0 +1,784 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DoorOpened {}
+message ExtContactOpened {}
+message RollerShutterAlarm {}
+message RollerShutterOffline {}
+message ShockDetected {}
+message TiltDetected {}
+message AutomaticBypassByNumber {}
+message AutomaticBypassByRestoreTimer {}
+message AutomaticBypassOff {}
+message PowerLow {}
+message BypassOn {}
+message DeviceCommunicationLoss {}
+message FirmwareUpdateInProgress {}
+message Malfunction {}
+message ObjectAdded {}
+message TamperBypassOn {}
+message TamperOpened {}
+message TurnOff {}
+message UnregisteredDeviceEvent {}
+message ArcFaultDetected {}
+message Button1On {}
+message Button2On {}
+message RelayCurrentHigh {}
+message RelayCurrentHighDevice {}
+message RelayCurrentHighUser {}
+message RelayCurrentLow {}
+message RelayCurrentOk {}
+message RelayNotResponding {}
+message RelayOffByTimer {}
+message RelayOn {}
+message RelayOnByArming {}
+message RelayOnByButton {}
+message RelayOnByDevice {}
+message RelayOnByDisarming {}
+message RelayOnByScenario {}
+message RelayOnByUser {}
+message RelayOverheatingDetected {}
+message RelayUnableToSwitchOff {}
+message RelayVoltageHigh {}
+message RelayVoltageLow {}
+message RelayVoltageOk {}
+message DataChannelCommunicationLoss {}
+message MaskingDetected {}
+message MaskingDetectedLeft {}
+message MaskingDetectedRight {}
+message MotionDetected {}
+message PhotoByScenario {}
+message PhotoByScenarioUnsuccessful {}
+message PhotoByScenarioWithName {}
+message PhotoByScenarioUnsuccessfulWithName {}
+message PhotoOnDemand {}
+message PhotoOnDemandUnsuccessful {}
+message PhotoOnDemandUnsuccessfulWithName {}
+message PhotoOnDemandWithName {}
+message MotionDetectedLeft {}
+message MotionDetectedRight {}
+message PhotoBySchedule {}
+message PhotoByScheduleUnsuccessful {}
+message CameraDirty {}
+message FireAlarm {}
+message FireAlarmMuted {}
+message HighCoLevelDetected {}
+message HighCoLevelDetectedEarlyWarning {}
+message ReserveBatteryLow {}
+message SmokeChamberTestNotPassed {}
+message SmokeChamberTestPassed {}
+message SmokeDetected {}
+message SmokeDetectedEarlyWarning {}
+message TemperatureHigh {}
+message TemperatureHighEarlyWarning {}
+message TemperatureRiseDetected {}
+message TemperatureRiseDetectedEarlyWarning {}
+message FireProtectMalfunction {}
+message HeatTestNotPassed {}
+message HeatTestPassed {}
+message HighCcoLevelDetected {}
+message CoTestNotPassed {}
+message CoTestPassed {}
+message Co2High {}
+message HumidityHigh {}
+message HumidityLow {}
+message HumidityOk {}
+message TemperatureLow {}
+message TemperatureOk {}
+message Arm {}
+message ArmAttempt {}
+message ArmingIncomplete {}
+message ArmWithMalfunctions {}
+message Disarm {}
+message DuressDisarm {}
+message DuressNightModeOff {}
+message GroupArm {}
+message GroupArmAttempt {}
+message GroupArmWithMalfunctions {}
+message GroupDisarm {}
+message GroupDuressDisarm {}
+message NightModeOff {}
+message NightModeOn {}
+message NightModeOnAttempt {}
+message NightModeOnWithMalfunctions {}
+message PanicButtonPressed {}
+message PasswordAttempt {}
+message SecurityStateTransitionProgressUpdated {}
+message DuressAuthorization {}
+message ArmDuringUpgradeAttempt {}
+message BusShortCircuit {}
+message CellularSignalLow {}
+message CmsConnectionLoss {}
+message DonorChosen {}
+message EthernetConnectionLoss {}
+message FactoryReset {}
+message GsmConnectionLoss {}
+message HoldUpAlarmConfirmed {}
+message IncorrectCms {}
+message IntrusionAlarmConfirmed {}
+message MigrationStart {}
+message ServerConnectionLoss {}
+message MigrationOk {}
+message MigrationFailed {}
+message TargetChosen {}
+message TurnOn {}
+message WalkTestStart {}
+message WiFiConnectionLoss {}
+message WingsNoiseHigh {}
+message SettingsChanged {}
+message AccessDeniedToCompany {}
+message AccessDeniedToPro {}
+message AccessRequest {}
+message ChimeActivated {}
+message ChimeActivatedInGroup {}
+message PermanentAccessGrantedToCompany {}
+message PermanentAccessGrantedToPro {}
+message PhotoByScenarioOn {}
+message PhotoOnDemandOn {}
+message SystemRestored {}
+message SystemRestoreDenied {}
+message SystemRestoreRequest {}
+message TemporaryAccessGrantedToCompany {}
+message TemporaryAccessGrantedToPro {}
+message BatteryDisconnected {}
+message BridgeNotResponding {}
+message CardDeactivated {}
+message CodeDeactivated {}
+message CustomEvent {}
+message DeactivatedCardAttempt {}
+message DetectorShortCircuit {}
+message DeviceMoved {}
+message EthernetCommunicationLoss {}
+message ExternalContactLost {}
+message ExternalContactOk {}
+message ExternalContactShortCircuit {}
+message ExternalMalfunction {}
+message ExternalPowerLoss {}
+message FireDetectorShortCircuit {}
+message FrontTamperOpened {}
+message GasDetected {}
+message GlassBreakDetected {}
+message HoldUpLongPress {}
+message HoldUpShortPress {}
+message IntrusionAlarm {}
+message JewellerNoiseHigh {}
+message LeakDetected {}
+message MedicalAlarm {}
+message MonitoringStarted {}
+message PermanentAccessRequest {}
+message S1Alarm {}
+message S3Alarm {}
+message ScenarioNotExecuted {}
+message TemporaryAccessRequest {}
+message BatteryLow {}
+message BackTamperOpened {}
+message ShortCircuit {}
+message TamperBoardDisconnect {}
+message BusVoltageHigh {}
+message LineSabotage {}
+message FuseBreak {}
+message TimezoneChanged {}
+message RingBroken {}
+message BusConflict {}
+message EndOfLife {}
+message DevFWUpgradeStarted {}
+message DevFWUpgradeFailed {}
+message DevFWUpgradeFinished {}
+message BusPowerDisabled {}
+message OnetimeFullBypassOn {}
+message OnetimeTamperBypassOn {}
+message LifeQualityMalfunction {}
+message ValveOpenedByButton {}
+message ValveOpenedByScenario {}
+message ValveOpenedByArming {}
+message ValveOpenedByDisarming {}
+message ValveOpenedByDevice {}
+message ValveOpenedByUser {}
+message UndefinedValvePosition {}
+message BatteryError {}
+message RestoreRequest {}
+message BusVoltageLow {}
+message ChargerError {}
+message OverheatingDetected {}
+message KeypadBlocked {}
+message KeypadUnblockedByTimer {}
+message KeypadUnblockedByUser {}
+message RelayUnableToSwitchByUser {}
+message RelayUnableToSwitchByScenario {}
+message RelayUnableToSwitchByArming {}
+message RelayUnableToSwitchByDisarming {}
+message KeyarmBlocked {}
+message KeyarmUnblockedByUser {}
+message BusesBreak {}
+message BusesConflict {}
+message BusesUnregistered {}
+message ReedSwitchBroken {}
+message AccelerometerBroken {}
+message MagneticSensorBroken {}
+message CalibrationRequired {}
+message ActivationRRUCode {}
+message DeactivationRRUCode {}
+message ImproperKeyarmUsage {}
+message VideoScenarioTriggered {}
+message BatterySavingModeActivation {}
+message PeriodicTest {}
+message ExitError {}
+message RecentClosing {}
+message ShortCircuitSingleOutput {}
+message BusVoltageHighSingleOutput {}
+message BusVoltageLowSingleOutput {}
+message BusPowerDisabledSingleOutput {}
+message LockViolation {}
+message DuressCode {}
+message SeismicAlarm {}
+message TempSensorHighTemperature {}
+message TempSensorLowTemperature {}
+message LocalExitError {}
+message AbortBurglary {}
+message BurglaryCancel {}
+message DeviceSupervisionFailure{}
+message SelfTestPassed {}
+message SelfTestFailed {}
+message MaskingDetectedMalfunction {}
+message StartCall {}
+message EndCall {}
+message SurveillanceScenarioExecuted {}
+message BatterySavingModeActivationFailed {}
+message UnvacatedPremises {}
+message PasswordReset {}
+message MotionDetectedInAllowedDirection {}
+message MotionDetectedInForbiddenDirection {}
+message MotionDetectedInAllowedDirectionTimerStarted {}
+message MotionDetectedInAllowedDirectionTimerActive {}
+message AllowedDirectionTimerEnded {}
+message VideoArchiveExportPrepared {}
+message VideoArchiveExportFailed {}
+message ExtSrcLowVoltage {}
+message JwlAntennaDisconnect {}
+message JwlAntennaConnect {}
+message WingsAntennaDisconnect {}
+message WingsAntennaConnect {}
+message GsmAntennaDisconnect {}
+message GsmAntennaConnect {}
+message JwlAntennaDamaged {}
+message WingsAntennaDamaged {}
+message GsmAntennaDamaged {}
+message CSmokeDetected {}
+message InCall {}
+message OutCall {}
+message InCallError {}
+message OutCallError {}
+message CallbackRequest {}
+message OutCallNoResponse {}
+message OutCallTimeout {}
+message InCallMissed {}
+message InCallTimeout {}
+message CallbackDenied {}
+message IntrusionAlarmConfirmedGeneral {}
+message IntrusionAlarmConfirmedDetailed {}
+message UnverifiedAlarm {}
+message SmartBracketOpened {}
+message PirSensorBroken {}
+message MicrowaveSensorBroken {}
+message IncorrectDeviceInstallation {}
+message MaskingSensorBroken {}
+message MaskingSensorCalibrationFailed {}
+message BukhoorEnabled {}
+message BukhoorDisabled {}
+message BukhoorDisabledByTimeout {}
+message SipConnectionLoss {}
+message SmartHomeMotionDetected {}
+message HumanDetected {}
+message PetDetected {}
+message CarDetected {}
+message RingButtonPressed {}
+message CaseBreakDetected {}
+message SelfTestDeviceDisconnected {}
+message SeismoSensorBroken {}
+message VorfChannelCommunicationLoss {}
+message RelayShortCircuit {}
+message BoltSwitchContactOpened {}
+message BlockingElementOpened {}
+message ValveStuckPreventionNotExecuted {}
+message ValveStuckPreventionExecuted {}
+message ShortCircuitSingleOutput1 {}
+message BusVoltageHighSingleOutput1 {}
+message BusVoltageLowSingleOutput1 {}
+message ShortCircuitSingleOutput2 {}
+message BusVoltageHighSingleOutput2 {}
+message BusVoltageLowSingleOutput2 {}
+message LineConnectError {}
+message PhotoOnDemandForDetectionArea {}
+message PhotoOnDemandForDetectionAreaUnsuccessful {}
+message EN54FireAlarmReset {}
+message DeviceDoesNotRespond {}
+message SounderFault {}
+message VADFault {}
+message HeatDetectionFault {}
+message SmokeDetectionFault {}
+message MotionDetectedDuringTest {}
+message AlarmAnnunciationTest {}
+message BatteryTemperatureOutOfRange {}
+message ExitDelayComplete {}
+message GroupAutoArm {}
+message GroupAutoArmWithMalfunctions {}
+message GroupAutoArmAttempt {}
+message GroupAutoDisarm {}
+message AutoArmNotExecuted {}
+message AutoArm {}
+message AutoArmWithMalfunctions {}
+message AutoDisarm {}
+message AutoSelfTestPassed {}
+message AutoSelfTestFailed {}
+message AutoSelfTestError {}
+message EN54Silence{}
+message EN54Resound{}
+message TriggerGroupNotArmed {}
+message AlarmAnnunciationTestByUser {}
+message AlarmAnnunciationTestByCard {}
+message AlarmAnnunciationTestByCode {}
+message WiFiModuleUpgradeStarted {}
+message WiFiModuleUpgradeFailed {}
+message HubModuleUpgradeFinished {}
+message OutPowerOverload {}
+message BatterySavingModeWakeupSMS {}
+message EndpointDisabledByUser {}
+message EndpointDisabledByCode {}
+message EndpointDisabledByCard {}
+message InCallTimeoutBSM {}
+message OutCallTimeoutBSM {}
+message BatterySavingModeWakeupByScheduled {}
+message OutputFault {}
+message EN54TamperOpened {}
+message EN54PowerLow {}
+message EN54DeviceCommunicationLoss {}
+message EN54FireAlarm {}
+message EN54MedicalAlarm {}
+message EN54PanicButtonPressed {}
+message EN54GasDetected {}
+message EN54ExternalFault {}
+message EN54LeakDetected {}
+message ExternalContactHardFault {}
+message FaultAlarm {}
+message RelayOnByAccessCode {}
+message RelayOnByAccessCard {}
+message RelayOnByTimer {}
+message RelayOffByUser {}
+message RelayOffByAccessCode {}
+message RelayOffByAccessCard {}
+message Evacuation {}
+message CustomAlarm {}
+message AudioRecord {}
+message RelayOnByFailSafe {}
+message RelayOffByFailSafe {}
+message DelaysOverride {}
+message SoftwareSystemFault {}
+message MemorySystemFault {}
+message ArcReportingOff {}
+message FireDelaysOn {}
+message FireDelaysOff {}
+message BatteryFault {}
+message FireZoneTest {}
+message CmsDeliveryFailed {}
+message DayAlarmTemporaryBypassActivated {}
+message DuressDayAlarmTemporaryBypassActivated {}
+message DayAlarmBypassActivated {}
+message DuressDayAlarmBypassActivated {}
+message DayAlarmBypassNotRestored {}
+message ExternalContactResistanceFault {}
+
+message HubEventTag {
+  reserved 222, 239, 240, 283, 301, 302, 303, 304, 305;
+
+  oneof event_tag_case {
+    DoorOpened door_opened = 1;
+    ExtContactOpened ext_contact_opened = 2;
+    RollerShutterAlarm roller_shutter_alarm = 3;
+    RollerShutterOffline roller_shutter_offline = 4;
+    ShockDetected shock_detected = 5;
+    TiltDetected tilt_detected = 6;
+    AutomaticBypassByNumber automatic_bypass_by_number = 7;
+    AutomaticBypassByRestoreTimer automatic_bypass_by_restore_timer = 8;
+    AutomaticBypassOff automatic_bypass_off = 9;
+    PowerLow power_low = 10;
+    BypassOn bypass_on = 11;
+    DeviceCommunicationLoss device_communication_loss = 12;
+    FirmwareUpdateInProgress firmware_update_in_progress = 13;
+    Malfunction malfunction = 14;
+    ObjectAdded object_added = 15;
+    TamperBypassOn tamper_bypass_on = 16;
+    TamperOpened tamper_opened = 17;
+    TurnOff turn_off = 18;
+    UnregisteredDeviceEvent unregistered_device_event = 19;
+    ArcFaultDetected arc_fault_detected = 20;
+    Button1On button_1_on = 21;
+    Button2On button_2_on = 22;
+    RelayCurrentHigh relay_current_high = 23;
+    RelayCurrentHighDevice relay_current_high_device = 24;
+    RelayCurrentHighUser relay_current_high_user = 25;
+    RelayCurrentLow relay_current_low = 26;
+    RelayCurrentOk relay_current_ok = 27;
+    RelayNotResponding relay_not_responding = 28;
+    RelayOffByTimer relay_off_bytimer = 29;
+    RelayOn relay_on = 30;
+    RelayOnByArming relay_on_by_arming = 31;
+    RelayOnByButton relay_on_by_button = 32;
+    RelayOnByDevice relay_on_by_device = 33;
+    RelayOnByDisarming relay_on_by_disarming = 34;
+    RelayOnByScenario relay_on_by_scenario = 35;
+    RelayOnByUser relay_on_by_user = 36;
+    RelayOverheatingDetected relay_overheating_detected = 37;
+    RelayUnableToSwitchOff relay_unable_to_switch_off = 38;
+    RelayVoltageHigh relay_voltage_high = 39;
+    RelayVoltageLow relay_voltage_low = 40;
+    RelayVoltageOk relay_voltage_ok = 41;
+    DataChannelCommunicationLoss data_channel_communication_loss = 42;
+    MaskingDetected masking_detected = 43;
+    MaskingDetectedLeft masking_detected_left = 44;
+    MaskingDetectedRight masking_detected_right = 45;
+    MotionDetected motion_detected = 46;
+    PhotoByScenario photo_by_scenario = 47;
+    PhotoByScenarioUnsuccessful photo_by_scenario_unsuccessful = 48;
+    PhotoOnDemand photo_on_demand = 49;
+    PhotoOnDemandUnsuccessful photo_on_demand_unsuccessful = 50;
+    PhotoOnDemandUnsuccessfulWithName photo_on_demand_unsuccessful_with_name = 51;
+    PhotoOnDemandWithName photo_on_demand_with_name = 52;
+    MotionDetectedLeft motion_detected_left = 53;
+    MotionDetectedRight motion_detected_right = 54;
+    PhotoBySchedule photo_by_schedule = 55;
+    PhotoByScheduleUnsuccessful photo_by_schedule_unsuccessful = 56;
+    CameraDirty camera_dirty = 57;
+    FireAlarm fire_alarm = 58;
+    FireAlarmMuted fire_alarm_muted = 59;
+    HighCoLevelDetected high_co_level_detected = 60;
+    HighCoLevelDetectedEarlyWarning high_co_level_detected_early_warning = 61;
+    ReserveBatteryLow reserve_battery_low = 62;
+    SmokeChamberTestNotPassed smoke_chamber_test_not_passed = 63;
+    SmokeChamberTestPassed smoke_chamber_test_passed = 64;
+    SmokeDetected smoke_detected = 65;
+    SmokeDetectedEarlyWarning smoke_detected_early_warning = 66;
+    TemperatureHigh temperature_high = 67;
+    TemperatureHighEarlyWarning temperature_high_early_warning = 68;
+    TemperatureRiseDetected temperature_rise_detected = 69;
+    TemperatureRiseDetectedEarlyWarning temperature_rise_detected_early_warning = 70;
+    FireProtectMalfunction fire_protect_malfunction = 71;
+    HeatTestNotPassed heat_test_not_passed = 72;
+    HeatTestPassed heat_test_passed = 73;
+    HighCcoLevelDetected high_cco_level_detected = 74;
+    CoTestNotPassed co_test_not_passed = 75;
+    CoTestPassed co_test_passed = 76;
+    Co2High co_2_high = 77;
+    HumidityHigh humidity_high = 78;
+    HumidityLow humidity_low = 79;
+    HumidityOk humidity_ok = 80;
+    TemperatureLow temperature_low = 81;
+    TemperatureOk temperature_ok = 82;
+    Arm arm = 83;
+    ArmAttempt arm_attempt = 84;
+    ArmingIncomplete arming_incomplete = 85;
+    ArmWithMalfunctions arm_with_malfunctions = 86;
+    Disarm disarm = 87;
+    DuressDisarm duress_disarm = 88;
+    DuressNightModeOff duress_night_mode_off = 89;
+    GroupArm group_arm = 90;
+    GroupArmAttempt group_arm_attempt = 91;
+    GroupArmWithMalfunctions group_arm_with_malfunctions = 92;
+    GroupDisarm group_disarm = 93;
+    GroupDuressDisarm group_duress_disarm = 94;
+    NightModeOff night_mode_off = 95;
+    NightModeOn night_mode_on = 96;
+    NightModeOnAttempt night_mode_on_attempt = 97;
+    NightModeOnWithMalfunctions night_mode_on_with_malfunctions = 98;
+    PanicButtonPressed panic_button_pressed = 99;
+    PasswordAttempt password_attempt = 100;
+    SecurityStateTransitionProgressUpdated security_state_transition_progress_updated = 101;
+    DuressAuthorization duress_authorization = 102;
+    ArmDuringUpgradeAttempt arm_during_upgrade_attempt = 103;
+    BusShortCircuit bus_short_circuit = 104;
+    CellularSignalLow cellular_signal_low = 105;
+    CmsConnectionLoss cms_connection_loss = 106;
+    DonorChosen donor_chosen = 107;
+    EthernetConnectionLoss ethernet_connection_loss = 108;
+    FactoryReset factory_reset = 109;
+    GsmConnectionLoss gsm_connection_loss = 110;
+    HoldUpAlarmConfirmed hold_up_alarm_confirmed = 111;
+    IncorrectCms incorrect_cms = 112;
+    IntrusionAlarmConfirmed intrusion_alarm_confirmed = 113;
+    MigrationStart migration_start = 114;
+    ServerConnectionLoss server_connection_loss = 115;
+    MigrationOk migration_ok = 116;
+    MigrationFailed migration_failed = 117;
+    TargetChosen target_chosen = 118;
+    TurnOn turn_on = 119;
+    WalkTestStart walk_test_start = 120;
+    WiFiConnectionLoss wi_fi_connection_loss = 121;
+    WingsNoiseHigh wings_noise_high = 122;
+    SettingsChanged settings_changed = 123;
+    AccessDeniedToCompany access_denied_to_company = 124;
+    AccessDeniedToPro access_denied_to_pro = 125;
+    AccessRequest access_request = 126;
+    ChimeActivated chime_activated = 127;
+    ChimeActivatedInGroup chime_activated_in_group = 128;
+    PermanentAccessGrantedToCompany permanent_access_granted_to_company = 129;
+    PermanentAccessGrantedToPro permanent_access_granted_to_pro = 130;
+    PhotoByScenarioOn photo_by_scenario_on = 131;
+    PhotoOnDemandOn photo_on_demand_on = 132;
+    SystemRestored system_restored = 133;
+    SystemRestoreDenied system_restore_denied = 134;
+    SystemRestoreRequest system_restore_request = 135;
+    TemporaryAccessGrantedToCompany temporary_access_granted_to_company = 136;
+    TemporaryAccessGrantedToPro temporary_access_granted_to_pro = 137;
+    BatteryDisconnected battery_disconnected = 138;
+    BridgeNotResponding bridge_not_responding = 139;
+    CardDeactivated CardDeactivated = 140;
+    CodeDeactivated code_deactivated = 141;
+    CustomEvent custom_event = 142;
+    DeactivatedCardAttempt deactivated_card_attempt = 143;
+    DetectorShortCircuit detector_short_circuit = 144;
+    DeviceMoved device_moved = 145;
+    EthernetCommunicationLoss ethernet_communication_loss = 146;
+    ExternalContactLost external_contact_lost = 147;
+    ExternalContactOk external_contact_ok = 148;
+    ExternalContactShortCircuit external_contact_short_circuit = 149;
+    ExternalMalfunction external_malfunction = 150;
+    ExternalPowerLoss external_power_loss = 151;
+    FireDetectorShortCircuit fire_detector_short_circuit = 152;
+    FrontTamperOpened front_tamper_opened = 153;
+    GasDetected gas_detected = 154;
+    GlassBreakDetected glass_break_detected = 155;
+    HoldUpLongPress hold_up_long_press = 156;
+    HoldUpShortPress hold_up_short_press = 157;
+    IntrusionAlarm intrusion_alarm = 158;
+    JewellerNoiseHigh jeweller_noise_high = 159;
+    LeakDetected leak_detected = 160;
+    MedicalAlarm medical_alarm = 161;
+    MonitoringStarted monitoring_started = 162;
+    PermanentAccessRequest permanent_access_request = 163;
+    S1Alarm s_1_alarm = 164;
+    S3Alarm s_3_alarm = 165;
+    ScenarioNotExecuted scenario_not_executed = 166;
+    TemporaryAccessRequest temporary_access_request = 167;
+    BatteryLow battery_low = 168;
+    BackTamperOpened back_tamper_opened = 169;
+    ShortCircuit short_circuit = 170;
+    TamperBoardDisconnect tamper_board_disconnect = 171;
+    BusVoltageHigh bus_voltage_high = 172;
+    LineSabotage line_sabotage = 173;
+    FuseBreak fuse_break = 174;
+    TimezoneChanged timezone_changed = 175;
+    RingBroken ring_broken = 176;
+    BusConflict bus_conflict = 177;
+    EndOfLife end_of_life = 178;
+    DevFWUpgradeStarted dev_fw_upgrade_started = 179;
+    DevFWUpgradeFailed dev_fw_upgrade_failed = 180;
+    DevFWUpgradeFinished dev_fw_upgrade_finished = 181;
+    BusPowerDisabled bus_power_disabled = 182;
+    OnetimeFullBypassOn onetime_full_bypass_on = 183;
+    OnetimeTamperBypassOn onetime_tamper_bypass_on = 184;
+    LifeQualityMalfunction life_quality_malfunction = 185;
+    ValveOpenedByButton valve_opened_by_button = 186;
+    ValveOpenedByScenario valve_opened_by_scenario = 187;
+    ValveOpenedByArming valve_opened_by_arming = 188;
+    ValveOpenedByDisarming valve_opened_by_disarming = 189;
+    ValveOpenedByDevice valve_opened_by_device = 190;
+    ValveOpenedByUser valve_opened_by_user = 191;
+    UndefinedValvePosition undefined_valve_position = 192;
+    BatteryError battery_error = 193;
+    RestoreRequest restore_request = 194; // SystemRestoreRequest 0x47
+    BusVoltageLow bus_voltage_low = 195;
+    ChargerError charger_error = 196;
+    OverheatingDetected overheating_detected = 197;
+    KeypadBlocked keypad_blocked = 198;
+    KeypadUnblockedByTimer keypad_unblocked_by_timer = 199;
+    KeypadUnblockedByUser keypad_unblocked_by_user = 200;
+    RelayUnableToSwitchByUser relay_unable_to_switch_by_user = 201;
+    RelayUnableToSwitchByScenario relay_unable_to_switch_by_scenario = 202;
+    RelayUnableToSwitchByArming relay_unable_to_switch_by_arming = 203;
+    RelayUnableToSwitchByDisarming relay_unable_to_switch_by_disarming = 204;
+    KeyarmBlocked keyarm_blocked = 205;
+    KeyarmUnblockedByUser keyarm_unblocked_by_user = 206;
+    BusesBreak buses_break = 207;
+    BusesConflict buses_conflict = 208;
+    BusesUnregistered buses_unregistered = 209;
+    ReedSwitchBroken reed_switch_broken = 210;
+    AccelerometerBroken accelerometer_broken = 211;
+    MagneticSensorBroken magnetic_sensor_broken = 212;
+    CalibrationRequired calibration_required = 213;
+    ActivationRRUCode activation_rru_code = 214;
+    DeactivationRRUCode deactivation_rru_code = 215;
+    ImproperKeyarmUsage improper_keyarm_usage = 216;
+    VideoScenarioTriggered video_scenario_triggered = 217;
+    BatterySavingModeActivation battery_saving_mode_activation = 218;
+    PeriodicTest periodic_test = 219;
+    ExitError exit_error = 220;
+    RecentClosing recent_closing = 221;
+    ShortCircuitSingleOutput short_circuit_single_output = 223;
+    BusVoltageHighSingleOutput bus_voltage_high_single_output = 224;
+    BusVoltageLowSingleOutput bus_voltage_low_single_output = 225;
+    BusPowerDisabledSingleOutput bus_power_disabled_single_output = 226;
+    LockViolation lock_violation = 233;
+    DuressCode duress_code = 234;
+    SeismicAlarm seismic_alarm = 235;
+    TempSensorHighTemperature temp_sensor_high_temperature = 236;
+    TempSensorLowTemperature temp_sensor_low_temperature = 237;
+    LocalExitError local_exit_error = 227;
+    AbortBurglary abort_burglary = 228;
+    BurglaryCancel burglary_cancel = 229;
+    DeviceSupervisionFailure device_supervision_failure = 230;
+    SelfTestPassed self_test_passed = 231;
+    SelfTestFailed self_test_failed = 232;
+    MaskingDetectedMalfunction masking_detected_malfunction = 238;
+    SurveillanceScenarioExecuted surveillance_scenario_executed = 241;
+    BatterySavingModeActivationFailed battery_saving_mode_activation_failed = 242;
+    PhotoByScenarioWithName photo_by_scenario_with_name = 243;
+    PhotoByScenarioUnsuccessfulWithName photo_by_scenario_unsuccessful_with_name = 244;
+    UnvacatedPremises unvacated_premises = 245;
+    PasswordReset password_reset = 246;
+    MotionDetectedInAllowedDirection motion_detected_in_allowed_direction = 247;
+    MotionDetectedInForbiddenDirection motion_detected_in_forbidden_direction = 248;
+    MotionDetectedInAllowedDirectionTimerStarted motion_detected_in_allowed_direction_timer_started = 249;
+    MotionDetectedInAllowedDirectionTimerActive motion_detected_in_allowed_direction_timer_active = 250;
+    AllowedDirectionTimerEnded allowed_direction_timer_ended = 251;
+    VideoArchiveExportPrepared video_archive_export_prepared = 252;
+    VideoArchiveExportFailed video_archive_export_failed = 253;
+    ExtSrcLowVoltage ext_src_low_voltage = 254;
+    JwlAntennaDisconnect jwl_antenna_disconnect = 255;
+    JwlAntennaConnect jwl_antenna_connect = 256;
+    WingsAntennaDisconnect wings_antenna_disconnect = 257;
+    WingsAntennaConnect wings_antenna_connect = 258;
+    GsmAntennaDisconnect gsm_antenna_disconnect = 259;
+    GsmAntennaConnect gsm_antenna_connect = 260;
+    JwlAntennaDamaged jwl_antenna_damaged = 261;
+    WingsAntennaDamaged wings_antenna_damaged = 262;
+    GsmAntennaDamaged gsm_antenna_damaged = 263;
+    CSmokeDetected csmoke_detected = 264;
+    InCall in_call = 265;
+    OutCall out_call = 266;
+    InCallError in_call_error = 267;
+    OutCallError out_call_error = 268;
+    CallbackRequest callback_request = 269;
+    OutCallNoResponse out_call_no_response = 270;
+    OutCallTimeout out_call_timeout = 271;
+    InCallMissed in_call_missed = 272;
+    InCallTimeout in_call_timeout = 273;
+    CallbackDenied callback_denied = 274;
+    IntrusionAlarmConfirmedGeneral intrusion_alarm_confirmed_general = 275;
+    IntrusionAlarmConfirmedDetailed intrusion_alarm_confirmed_detailed = 276;
+    UnverifiedAlarm unverified_alarm = 277;
+    SmartBracketOpened smart_bracket_opened = 278;
+    PirSensorBroken pir_sensor_broken = 279;
+    MicrowaveSensorBroken microwave_sensor_broken = 280;
+    IncorrectDeviceInstallation incorrect_device_installation = 281;
+    MaskingSensorBroken masking_sensor_broken = 282;
+    MaskingSensorCalibrationFailed masking_sensor_calibration_failed = 284;
+    BukhoorEnabled bukhoor_enabled = 285;
+    BukhoorDisabled bukhoor_disabled = 286;
+    BukhoorDisabledByTimeout bukhoor_disabled_by_timeout = 287;
+    SipConnectionLoss sip_connection_loss = 288;
+    SmartHomeMotionDetected smart_home_motion_detected = 289;
+    HumanDetected human_detected = 290;
+    PetDetected pet_detected = 291;
+    CarDetected car_detected = 292;
+    RingButtonPressed ring_button_pressed = 293 [deprecated = true];
+    CaseBreakDetected case_break_detected = 294;
+    SelfTestDeviceDisconnected self_test_device_disconnected = 295;
+    SeismoSensorBroken seismo_sensor_broken = 296;
+    VorfChannelCommunicationLoss vorf_channel_communication_loss = 297;
+    RelayShortCircuit relay_short_circuit = 298;
+    BoltSwitchContactOpened bolt_switch_contact_opened = 299;
+    BlockingElementOpened blocking_element_opened = 300;
+    ValveStuckPreventionNotExecuted valve_stuck_prevention_not_executed = 306;
+    ValveStuckPreventionExecuted valve_stuck_prevention_executed = 307;
+    ShortCircuitSingleOutput1 short_circuit_single_output1 = 308;
+    BusVoltageHighSingleOutput1 bus_voltage_high_single_output1 = 309;
+    BusVoltageLowSingleOutput1 bus_voltage_low_single_output1 = 310;
+    ShortCircuitSingleOutput2 short_circuit_single_output2 = 311;
+    BusVoltageHighSingleOutput2 bus_voltage_high_single_output2 = 312;
+    BusVoltageLowSingleOutput2 bus_voltage_low_single_output2 = 313;
+    LineConnectError line_connect_error = 314;
+    PhotoOnDemandForDetectionArea photo_on_demand_for_detection_area = 315;
+    PhotoOnDemandForDetectionAreaUnsuccessful photo_on_demand_for_detection_area_unsuccessful = 316;
+    EN54FireAlarmReset en54_fire_alarm_reset = 317;
+    DeviceDoesNotRespond device_does_not_respond = 318;
+    SounderFault sounder_fault = 319;
+    VADFault vad_fault = 320;
+    HeatDetectionFault heat_detection_fault = 321;
+    SmokeDetectionFault smoke_detection_fault = 322;
+    MotionDetectedDuringTest motion_detected_during_test = 323;
+    AlarmAnnunciationTest alarm_annunciation_test = 324;
+    BatteryTemperatureOutOfRange battery_temperature_out_of_range = 325;
+    ExitDelayComplete exit_delay_complete = 326;
+    GroupAutoArm group_auto_arm = 327;
+    GroupAutoArmWithMalfunctions group_auto_arm_with_malfunctions = 328;
+    GroupAutoArmAttempt group_auto_arm_attempt = 329;
+    GroupAutoDisarm group_auto_disarm = 330;
+    AutoArmNotExecuted auto_arm_not_executed = 331;
+    AutoArm auto_arm = 332;
+    AutoArmWithMalfunctions auto_arm_with_malfunctions = 333;
+    AutoDisarm auto_disarm = 334;
+    AutoSelfTestPassed auto_self_test_passed = 335;
+    AutoSelfTestFailed auto_self_test_failed = 336;
+    AutoSelfTestError auto_self_test_error = 337;
+    EN54Silence en54_silence = 338;
+    EN54Resound en54_resound = 339;
+    TriggerGroupNotArmed trigger_group_not_armed = 340;
+    AlarmAnnunciationTestByUser alarm_annunciation_test_by_user = 341;
+    AlarmAnnunciationTestByCard alarm_annunciation_test_by_card = 342;
+    AlarmAnnunciationTestByCode alarm_annunciation_test_by_code = 343;
+    WiFiModuleUpgradeStarted wifi_module_upgrade_started = 344;
+    WiFiModuleUpgradeFailed wifi_module_upgrade_failed = 345;
+    HubModuleUpgradeFinished hub_module_upgrade_finished = 346;
+    OutPowerOverload out_power_overload = 347;
+    BatterySavingModeWakeupSMS battery_saving_mode_wakeup_sms = 348;
+    EndpointDisabledByUser endpoint_disabled_by_user = 349;
+    EndpointDisabledByCode endpoint_disabled_by_code = 350;
+    EndpointDisabledByCard endpoint_disabled_by_card = 351;
+    InCallTimeoutBSM in_call_timeout_bsm = 352;
+    OutCallTimeoutBSM out_call_timeout_bsm = 353;
+    BatterySavingModeWakeupByScheduled battery_saving_mode_wakeup_by_scheduled = 354;
+    OutputFault output_fault = 355;
+    EN54TamperOpened en54_tamper_opened = 356;
+    EN54PowerLow en54_power_low = 357;
+    EN54DeviceCommunicationLoss en54_device_communication_loss = 358;
+    EN54FireAlarm en54_fire_alarm = 359;
+    EN54MedicalAlarm en54_medical_alarm = 360;
+    EN54PanicButtonPressed en54_panic_button_pressed = 361;
+    EN54GasDetected en54_gas_detected = 362;
+    EN54ExternalFault en54_external_fault = 363;
+    EN54LeakDetected en54_leak_detected = 364;
+    ExternalContactHardFault external_contact_hard_fault = 365;
+    FaultAlarm fault_alarm = 366;
+    RelayOnByAccessCode relay_on_by_access_code = 367;
+    RelayOnByAccessCard relay_on_by_access_card = 368;
+    RelayOnByTimer relay_on_by_timer = 369;
+    RelayOffByUser relay_off_by_user = 370;
+    RelayOffByAccessCode relay_off_by_access_code = 371;
+    RelayOffByAccessCard relay_off_by_access_card = 372;
+    Evacuation evacuation = 373;
+    CustomAlarm custom_alarm = 374;
+    AudioRecord audio_record = 375;
+    RelayOnByFailSafe relay_on_by_fail_safe = 376;
+    RelayOffByFailSafe relay_off_by_fail_safe = 377;
+    DelaysOverride delays_override = 378;
+    SoftwareSystemFault software_system_fault = 379;
+    MemorySystemFault memory_system_fault = 380;
+    ArcReportingOff arc_reporting_off = 381;
+    FireDelaysOn fire_delays_on = 382;
+    FireDelaysOff fire_delays_off = 383;
+    BatteryFault battery_fault = 384;
+    FireZoneTest fire_zone_test = 385;
+    CmsDeliveryFailed cms_delivery_failed = 386;
+    DayAlarmTemporaryBypassActivated day_alarm_temporary_bypass_activated = 387;
+    DuressDayAlarmTemporaryBypassActivated duress_day_alarm_temporary_bypass_activated = 388;
+    DayAlarmBypassActivated day_alarm_bypass_activated = 389;
+    DuressDayAlarmBypassActivated duress_day_alarm_bypass_activated = 390;
+    DayAlarmBypassNotRestored day_alarm_bypass_not_restored = 391;
+    ExternalContactResistanceFault external_contact_resistance_fault = 392;
+  }
+}

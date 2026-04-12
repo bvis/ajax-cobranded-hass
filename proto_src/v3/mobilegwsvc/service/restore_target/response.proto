@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.restore_target;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.restore_target";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RestoreTargetResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error dealer_not_found = 2;
+      commonmodels.Error subscription_plan_not_found = 3;
+      commonmodels.Error illegal_state = 4;
+      commonmodels.Error target_not_found = 5;
+      commonmodels.Error dealer_did_not_suspend_target = 6;
+    }
+  }
+}

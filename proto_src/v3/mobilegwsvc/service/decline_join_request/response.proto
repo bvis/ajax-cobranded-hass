@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.decline_join_request;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.decline_join_request";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeclineJoinByQrResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error request_expired = 3;
+    }
+  }
+}

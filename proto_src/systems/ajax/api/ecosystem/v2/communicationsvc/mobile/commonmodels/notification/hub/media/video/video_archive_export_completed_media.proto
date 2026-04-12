@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media.video;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/video/types.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media.video";
+option java_multiple_files = true;
+
+option swift_prefix = "";
+
+message VideoArchiveExportCompletedMedia {
+  option deprecated = true;
+
+  repeated VideoExportedRecording recordings = 1;
+
+  message VideoExportedRecording {
+    systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.video.VideoCodec codec = 1;
+
+    google.protobuf.Timestamp start_timestamp = 2;
+
+    google.protobuf.Duration timezone_offset = 3;
+
+    string url = 4 [(hash_value) = true];
+
+    string file_name = 5;
+  };
+};

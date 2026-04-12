@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.privacy;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum ChannelPermission {
+    CHANNEL_PERMISSION_NONE = 0;
+    VIEW_LIVE_STREAM = 1;
+    VIEW_ARCHIVE = 2;
+    PTZ = 3;
+    SOUND = 4;
+    /**
+     * EXPORT_ARCHIVE permission depends on VIEW_ARCHIVE,
+     * it means that you can't grant EXPORT_ARCHIVE without VIEW_ARCHIVE (bad_request will be returned),
+     * and when VIEW_ARCHIVE is deleted EXPORT_ARCHIVE will be deleted as well
+     */
+    EXPORT_ARCHIVE = 5;
+}

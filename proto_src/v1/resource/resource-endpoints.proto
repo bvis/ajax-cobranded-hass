@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.resource;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.resource";
+
+import "v1/resource/resource.proto";
+
+service ResourceService {
+  rpc getCountries(GetCountriesRequest) returns (GetCountriesResponse);
+}

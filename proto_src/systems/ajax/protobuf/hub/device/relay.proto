@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message Relay {
+    CommonDevicePart common_part = 1000;
+
+    repeated SwitchState switch_state = 0x38;
+    repeated ArmActions actions_on_arming = 0x3F;
+    ContactNormalState contact_normal_state = 0x44;
+    LockupRelayMode lockup_relay_mode = 0x46;
+    google.protobuf.Int32Value voltage_milli_volts = 0x35;
+    int32 lockup_relay_time_seconds = 0x45;
+
+    Subtype subtype = 0xC3;
+
+    enum ContactNormalState {
+        NOT_CONTACT_NORMAL_STATE_INFO = 0;
+        NO = 1;
+        NC = 2;
+    }
+
+    enum LockupRelayMode {
+        NO_LOCKUP_RELAY_MODE_INFO = 0;
+        BISTABLE = 1;
+        IMPULSE = 2;
+    }
+
+    enum SwitchState {
+        OFF_TOO_LOW_VOLTAGE = 0;
+        OFF_HIGH_VOLTAGE = 1;
+        CONTACT_HANG = 4;
+        OFF_HIGH_TEMPERATURE = 5;
+        SWITCHED_OFF = 7;
+    }
+
+    enum ArmActions {
+        NO_ARM_ACTIONS_INFO = 0;
+        ARM_SWITCH_ON = 1;
+        ARM_SWITCH_OFF = 2;
+        DISARM_SWITCH_ON = 3;
+        DISARM_SWITCH_OFF = 4;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

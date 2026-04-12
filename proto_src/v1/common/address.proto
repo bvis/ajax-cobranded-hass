@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+message Address {
+  string country = 1;
+  string state = 2;
+  string city = 3;
+  string zip_code = 4;
+  string address_line1 = 5;
+  string address_line2 = 6;
+}

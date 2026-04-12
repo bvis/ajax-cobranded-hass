@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.firmware;
+
+import "google/protobuf/empty.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SystemFirmwareUpdate {
+  string firmware_version = 1;
+  Status status = 2;
+  int32 firmware_version_raw = 3;
+
+  message Status {
+    oneof status {
+      google.protobuf.Empty not_started = 1;
+      google.protobuf.Empty downloading = 2;
+    }
+  }
+}
+
+

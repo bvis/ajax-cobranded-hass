@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_metadata_fragments_content;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/cloudarchive/fragment_status.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_metadata_fragments_content";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamCloudArchiveMetadataFragmentsContentResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof content_case {
+      FragmentContent fragment_content = 1;
+    }
+  }
+
+  message FragmentContent {
+    // [optional]
+    string tag = 1;
+
+    // [required]
+    uint64 fragment_id = 2;
+
+    // [required]
+    commonmodels.cloudarchive.FragmentStatus status = 3;
+
+    // Url for content of serialized 'Frames' (unzip content before parse 'Frames'),
+    // content url is absent when status != FRAGMENT_STATUS_OK
+    // Possible case when url is valid but content already is deleted by cloud, need to handle such case on client side
+    optional string content_url = 4 [(disable_logging) = true];
+
+    message Frames {
+      repeated Frame entries = 1;
+    }
+
+    message Frame {
+      // microseconds in UTC
+      uint64 timestamp = 1;
+
+      bytes data = 2;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+    }
+  }
+}

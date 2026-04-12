@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.accounting;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.accounting";
+
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/feature.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+message FindResellerForSimCardsRequest {
+  string email = 1;
+}
+
+message FindResellerForSimCardsResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    systems.ajax.api.mobile.v2.common.accounting.AccountingCompany company = 1;
+    repeated systems.ajax.api.mobile.v2.common.accounting.Feature features = 2;
+  }
+
+  message Failure {
+    string message = 100;
+    oneof failures {
+        systems.ajax.api.mobile.v2.common.response.DefaultError not_found = 1;
+    }
+  }
+}
+

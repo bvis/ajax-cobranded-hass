@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.firmware;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_version.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.video.videoedge.firmware";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message VideoEdgeFirmwareId {
+
+  string product_type = 1;
+
+  string platform_name = 2;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.firmware.FirmwareVersion firmware_version = 3;
+};

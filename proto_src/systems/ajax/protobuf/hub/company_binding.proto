@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message CompanyBinding {
+    string company_id = 1000;
+    string hub_id = 1001;
+    State state = 0x01;
+    bool billing_enabled = 0x02;
+    bool company_locked = 0x03;
+    bool hub_blocked_by_company = 0x04;
+    string balance = 0x05;
+    string subscription_fee = 0x06;
+    string currency = 0x07;
+    string next_payment_date = 0x08;
+    string company_name = 0x09;
+
+    enum State {
+        NO_STATE_INFO = 0;
+        PENDING_ACCEPTANCE = 1;
+        ACCEPTED = 2;
+        PENDING_DELETION = 3;
+    }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_automation_scenarios;
+
+import "v3/mobilegwsvc/service/stream_automation_scenarios/request.proto";
+import "v3/mobilegwsvc/service/stream_automation_scenarios/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_automation_scenarios";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamAutomationScenariosUpdatesService {
+  rpc execute(StreamHubAutomationScenariosRequest) returns (stream StreamHubAutomationScenariosResponse);
+}

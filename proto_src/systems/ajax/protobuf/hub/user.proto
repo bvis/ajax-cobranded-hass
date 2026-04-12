@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/image_urls.proto";
+
+message User {
+    string id = 1000;
+    string first_name = 0x01;
+    string email = 0x02;
+    string phone = 0x03;
+    string language = 0x0E;
+    int32 index = 0x0F;
+    int32 agreement_version = 0x11;
+    string attached_company_id = 0x1C;
+    repeated Permission permissions = 0x14;
+    HubBindingRole hub_binding_role = 0x15;
+    repeated RestorePermission restore_permissions = 0x20;
+
+    string password_hash = 0x1E;
+    string password_hash_duress = 0x1F;
+
+    string image_id = 0x0D;
+    string keypad_prefix = 1040;
+    ImageUrls image_urls = 1010;
+
+    NotificationSettings notification_settings = 1020;
+    message NotificationSettings {
+        repeated NotificationChannel.Type alarms = 0x09;
+        repeated MessageNotificationChannel.Type events = 0x10;
+        repeated MessageNotificationChannel.Type malfunctions = 0x0A;
+        repeated MessageNotificationChannel.Type armings = 0x0B;
+
+        message NotificationChannel {
+            enum Type {
+                NO_NOTIFICATION_CHANNEL_INFO = 0;
+                PUSH = 1;
+                SMS = 2;
+                CALL = 3;
+            }
+        }
+
+        message MessageNotificationChannel {
+            enum Type {
+                NO_MESSAGE_NOTIFICATION_CHANNEL_INFO = 0;
+                PUSH = 1;
+                SMS = 2;
+            }
+        }
+    }
+
+    repeated GroupPermissions group_permissions = 1030;
+    message GroupPermissions {
+        string group_id = 1000;
+        repeated Permission permissions = 1010;
+
+        enum Permission {
+            NO_PERMISSION_INFO = 0;
+            ARM = 1;
+            DISARM = 2;
+        }
+    }
+
+    enum HubBindingRole {
+        NO_ROLE_INFO = 0;
+        USER = 1;
+        MASTER = 2;
+        PRO = 3;
+        COMPANY = 4;
+    }
+
+    enum Permission {
+        RESERVED_0 = 0;
+        USER_DELETE = 1;
+        USER_ADD = 2;
+        USER_ROLE_UPDATE = 3;
+        USER_PERMISSIONS_UPDATE = 4;
+        USER_NOTIFICATION_SETTINGS_UPDATE = 5;
+        RESERVED_6 = 6;
+        RESERVED_7 = 7;
+        ARM = 8;
+        NIGHT_MODE = 9;
+        DISARM = 10;
+        PANIC = 11;
+        ROOM_ADD_UPDATE_DELETE = 12;
+        DEVICE_ADD_UPDATE_DELETE = 13;
+        HUB_NET_SETTINGS_UPDATE = 14;
+        HUB_OTHER_SETTINGS_UPDATE = 15;
+        STATE_COMMANDS = 16;
+        FIRMWARE_COMMANDS = 17;
+        CAMERA_ADD_UPDATE_DELETE = 18;
+        CAMERA_GET = 19;
+        GROUP_ADD_UPDATE_DELETE = 20;
+        EVENTS_GET = 21;
+        GET = 22;
+        SCENARIO = 23;
+        CHIMES_UPDATE = 24;
+        PRIVACY_ACCESS_SETTINGS = 25;
+        RESERVED_26 = 26;
+        RESERVED_27 = 27;
+        RESERVED_28 = 28;
+        RESERVED_29 = 29;
+        RESERVED_30 = 30;
+        RESERVED_31 = 31;
+    }
+
+    enum RestorePermission {
+        NO_RESTORE_PERMISSION_INFO = 0;
+        RESTORE_CONFIRMED_ALARMS = 1;
+        RESTORE_CONFIRMED_HU_ALARMS = 2;
+        RESTORE_UNCONFIRMED_ALARMS = 3;
+        RESTORE_UNCONFIRMED_HU_ALARMS = 4;
+        RESTORE_TAMPER_ACTIVATION = 5;
+        RESTORE_EXTERNAL_POWER_ACTIVATION = 6;
+        RESTORE_ATS_ACTIVATION = 7;
+        RESTORE_OTHER_FAULT_ACTIVATION = 8;
+    }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.resume_target;
+
+import "v3/mobilegwsvc/service/resume_target/request.proto";
+import "v3/mobilegwsvc/service/resume_target/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.resume_target";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ResumeTargetService {
+  rpc execute (ResumeTargetRequest) returns (ResumeTargetResponse);
+};

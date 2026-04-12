@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+
+enum ServiceState {
+  SERVICE_STATE_UNSPECIFIED = 0;
+  SERVICE_STATE_REQUIRED = 1;
+  SERVICE_STATE_ACTIVE = 2;
+  SERVICE_STATE_SUSPENDED = 3;
+  SERVICE_STATE_AVAILABLE = 4;
+  SERVICE_STATE_NOT_AVAILABLE = 5;
+}

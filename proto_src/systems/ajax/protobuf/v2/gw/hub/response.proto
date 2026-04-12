@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.v2.gw.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.v2.gw.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/user.proto";
+import "systems/ajax/protobuf/v2/hub/hub_for_migration.proto";
+import "systems/ajax/protobuf/gw/error.proto";
+
+message SubscriptionResponse {
+  int64 timestamp_to_drop = 1;
+  repeated User.Permission permissions = 2;
+}
+
+message GetHubForMigrationResponse {
+  oneof response {
+    GwError error = 1;
+    systems.ajax.protobuf.v2.hub.HubForMigration hub_for_migration = 2;
+  }
+}

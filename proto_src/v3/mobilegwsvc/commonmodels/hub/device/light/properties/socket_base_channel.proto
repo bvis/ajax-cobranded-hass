@@ -1,0 +1,44 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "v3/mobilegwsvc/commonmodels/hub/device/light/properties/action_timer.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message SocketBaseChannel {
+  ChannelId id = 1;
+  OperatingMode operating_mode = 2;
+  repeated Malfunction malfunctions = 3;
+  State state = 4;
+  optional ActionTimer shutoff_timer = 5;
+  bool is_transitioning = 6;
+
+  enum OperatingMode {
+    OPERATING_MODE_UNSPECIFIED = 0;
+    OPERATING_MODE_IMPULSE = 1;
+    OPERATING_MODE_BISTABLE = 2;
+  }
+
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_OFF = 1;
+    STATE_ON = 2;
+  }
+
+  enum ChannelId {
+    CHANNEL_ID_UNSPECIFIED = 0;
+    CHANNEL_ID_1 = 1;
+  }
+
+  enum Malfunction {
+    MALFUNCTION_UNSPECIFIED = 0;
+    MALFUNCTION_LOW_VOLTAGE = 1;
+    MALFUNCTION_HIGH_VOLTAGE = 2;
+    MALFUNCTION_HIGH_CURRENT_PROTECTION = 3;
+    MALFUNCTION_HIGH_TEMPERATURE_DETECTED = 4;
+    MALFUNCTION_RELAY_STUCK = 5;
+    MALFUNCTION_ARC_SPARK_DETECTED = 6;
+  }
+}

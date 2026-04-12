@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_scheduled_access;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_scheduled_access";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "v3/mobilegwsvc/commonmodels/scheduled_acesss/scheduled_access.proto";
+
+message UpdateScheduledAccessRequest {
+  commonmodels.scheduled_access.ScheduledAccess scheduled_access = 1;
+  string hub_id = 2;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_cloud_archive_storage_info;
+
+import "v3/mobilegwsvc/service/get_video_cloud_archive_storage_info/request.proto";
+import "v3/mobilegwsvc/service/get_video_cloud_archive_storage_info/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_cloud_archive_storage_info";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetVideoCloudArchiveStorageInfoService {
+
+  rpc execute(GetVideoCloudArchiveStorageInfoRequest) returns (GetVideoCloudArchiveStorageInfoResponse);
+}

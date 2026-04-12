@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.capture_photo_on_demand_for_detection_area;
+
+import "v3/mobilegwsvc/service/capture_photo_on_demand_for_detection_area/request.proto";
+import "v3/mobilegwsvc/service/capture_photo_on_demand_for_detection_area/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.capture_photo_on_demand_for_detection_area";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CapturePhotoOnDemandForDetectionAreaService {
+  rpc execute(CapturePhotoOnDemandForDetectionAreaRequest) returns (CapturePhotoOnDemandForDetectionAreaResponse);
+}

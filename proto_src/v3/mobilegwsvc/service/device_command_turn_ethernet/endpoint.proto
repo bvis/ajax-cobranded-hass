@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet;
+
+import "v3/mobilegwsvc/service/device_command_turn_ethernet/request.proto";
+import "v3/mobilegwsvc/service/device_command_turn_ethernet/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandTurnEthernetService {
+  rpc execute(DeviceCommandTurnEthernetRequest) returns (DeviceCommandTurnEthernetResponse);
+}

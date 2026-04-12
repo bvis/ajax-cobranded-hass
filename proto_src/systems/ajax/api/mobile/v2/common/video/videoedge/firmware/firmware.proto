@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.firmware;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_version.proto";
+
+message Firmware {
+    // [optional]
+    // Firmware update status, only available when the video edge is online.
+    FirmwareUpdateStatus update_status = 1;
+
+    // [required]
+    bool critical_update_available = 2;
+};
+
+message FirmwareUpdateStatus {
+    // [required]
+    // Firmware we're updating / updated to.
+    FirmwareVersion version = 1;
+
+    FirmwareUpdateState state = 2;
+
+    // [0, 100]
+    uint32 progress = 3;
+
+    FirmwareUpdateError error = 4;
+};
+
+enum FirmwareUpdateState {
+    FUS_OTHER = 0;
+
+    // Not doing anything.
+    FUS_IDLE = 1;
+
+    // Downloading new firmware image.
+    FUS_DOWNLOADING = 2;
+
+    // Applying new firmware image.
+    FUS_APPLYING = 3;
+};
+
+enum FirmwareUpdateError {
+    FUR_OTHER = 0;
+
+    FUR_OK = 1;
+
+    // Software crash, power failure, etc. during early update phase.
+    FUR_ABORTED = 2;
+
+    // Firmware image download failed, e.g. bad URL or certificate validation failure.
+    FUR_DOWNLOAD_FAILED = 3;
+
+    // Bad firmware image.
+    FUR_BAD_IMAGE = 4;
+
+    // Firmware image is not compatible with current device, e.g. major version mismatch.
+    FUR_INCOMPATIBLE_VERSION = 5;
+
+    // Firmware image is for different product.
+    FUR_PRODUCT_MISMATCH = 6;
+
+    // Firmware image is for different platform.
+    FUR_PLATFORM_MISMATCH = 7;
+
+    // Firmware image flashing failed.
+    FUR_FLASHING_FAILED = 8;
+
+    // Failed to move user data to new flash partition, probably user data is too big and
+    // needs a wipe or firmware image is way too large and there's no room for user data.
+    FUR_USERDATA_MOVE_FAILED = 9;
+
+    // Unable to set firmware switch, it's not possible to boot into new firmware.
+    FUR_FWSWITCH_FAILED = 10;
+
+    // Firmware image validation failed, e.g. secure boot failed or kernel paniced on startup.
+    FUR_IMAGE_VALIDATION_FAILED = 11;
+
+    // New firmware image booted successfully, but software was not stable enough, e.g. kept crashing or
+    // was unable to connect to cloud.
+    FUR_LIFETIME_VALIDATION_FAILED = 12;
+};

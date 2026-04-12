@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum FragmentError {
+  // Some other error.
+  FE_OTHER = 0;
+
+  // Fragment is ok.
+  FE_OK = 1;
+
+  // Fragment is missing.
+  FE_MISSING = 2;
+
+  // Failed to retrieve fragment, m.b. try again later.
+  FE_FAILED = 3;
+};

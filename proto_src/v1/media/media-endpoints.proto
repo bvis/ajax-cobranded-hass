@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.media;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/empty.proto";
+
+import "v1/common/image-chunk.proto";
+
+import "v1/media/stream-media-request.proto";
+import "v1/media/stream-media-response.proto";
+import "v1/media/create-media-info-request.proto";
+import "v1/media/create-media-info-response.proto";
+import "v1/media/update-media-info-request.proto";
+import "v1/media/update-media-info-response.proto";
+import "v1/media/delete-media-request.proto";
+import "v1/media/upload-media-response.proto";
+
+service MediaService {
+  // media
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound"
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+*/
+  rpc streamMedia (StreamMediaRequest) returns (stream StreamMediaResponse);
+  /*
+  * Possible error statuses and corresponding error templates
+  * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+  */
+  rpc createMediaInfo (CreateMediaInfoRequest) returns (CreateMediaInfoResponse);
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc updateMediaInfo (UpdateMediaInfoRequest) returns (UpdateMediaInfoResponse);
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc deleteMedia (DeleteMediaRequest) returns (google.protobuf.Empty);
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* INVALID_ARGUMENT = "systems.ajax.mobilegw.error.invalidArgumentError"
+*/
+  rpc uploadMedia (stream common.ImageChunk) returns (UploadMediaResponse);
+}

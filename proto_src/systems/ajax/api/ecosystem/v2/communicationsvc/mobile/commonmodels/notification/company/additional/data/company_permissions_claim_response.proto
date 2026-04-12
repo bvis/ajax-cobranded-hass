@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Company";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/additional/data/permission_claim_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/additional/data/initiator_info.proto";
+
+message CompanyPermissionsClaimResponse {
+  string request_id = 1;
+  string company_name = 2;
+  string company_mail = 3;
+
+  PermissionsClaimType permissions_type = 4;
+  InitiatorInfo initiator_info = 5 [deprecated = true];
+}

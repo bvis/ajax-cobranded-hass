@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/video/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/source.proto";
+
+message VideoNotificationContent {
+  event.video.VideoEventQualifier qualifier = 1;
+  VideoNotificationSource source = 2;
+  // Contains the time of the device or hub (for the backup channel) when the event occurred
+  optional google.protobuf.Timestamp event_timestamp = 3;
+}

@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/capability/space_capabilities.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/privacy_override.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_installation_company.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_monitoring_company.proto";
+import "systems/ajax/api/mobile/v2/common/space/current_member.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/standalone_device.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/pending_member.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member.proto";
+import "systems/ajax/api/mobile/v2/common/space/room/room.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/group/group.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/space_security_mode.proto";
+import "systems/ajax/api/mobile/v2/common/space/space.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_profile.proto";
+import "systems/ajax/api/mobile/v2/common/time/time_zone.proto";
+import "systems/ajax/api/mobile/v2/common/video/video_wall.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_address.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/service_deactivation_pending_status.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/extra_services_availability_status.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamSpaceUpdatesRequest {
+  common.space.SpaceLocator space_locator = 1;
+};
+
+message StreamSpaceUpdatesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    oneof success {
+      common.space.Space snapshot = 1;
+      Update update = 2;
+      Updates updates = 3;
+    }
+
+    message Updates {
+      repeated Update updates = 1;
+    }
+
+    message Update {
+      string space_id = 1;
+
+      SpaceUpdateType space_update_type = 2;
+
+      oneof entity {
+        // initiator-level
+        common.space.CurrentMember current_member = 19;
+        int32 total_notification_unread_counter = 28;
+
+        // space-level
+        common.space.security.SpaceSecurityMode security_mode = 11;
+        common.space.security.group.Group group = 12;
+        common.space.SpaceProfile profile = 13;
+        // don't send member updates for new apps
+        // members list deprecated in the space.proto
+        common.space.member.SpaceMember member = 14[deprecated = true];
+        common.space.room.Room room = 15;
+        common.space.device.StandaloneDevice device = 16;
+        common.space.company.SpaceInstallationCompany installation_company = 17;
+        common.space.company.SpaceMonitoringCompany monitoring_company = 18;
+        common.space.company.PrivacyOverride privacy_override = 20;
+        common.time.TimeZone time_zone_id = 21;
+        common.space.member.PendingMember pending_member = 22;
+        common.video.VideoWall video_wall = 23;
+        common.space.SpaceAddress address = 24;
+        common.accounting.ServiceDeactivationPendingStatus service_deactivation_pending_status = 25;
+        common.accounting.ExtraServicesAvailabilityStatus extra_services_availability_status = 26;
+        common.space.capability.SpaceCapabilities space_capabilities = 27;
+      }
+
+      enum SpaceUpdateType {
+        SPACE_UPDATE_TYPE_UNKNOWN = 0;
+        SPACE_UPDATE_TYPE_ADD = 1;
+        SPACE_UPDATE_TYPE_UPDATE = 2;
+        SPACE_UPDATE_TYPE_REMOVE = 3;
+      }
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+    }
+  }
+};

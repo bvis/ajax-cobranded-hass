@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_channel_calendar;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_channel_calendar";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetChannelCalendarRequest {
+  // [required]
+  string space_id = 1;
+
+  // [required]
+  string video_edge_id = 2;
+
+  // [required]
+  string channel_id = 3;
+
+  // [required]
+  SourceType source_type = 4;
+
+  enum SourceType {
+    SOURCE_TYPE_UNSPECIFIED = 0;
+    SOURCE_TYPE_VIDEO_EDGE_ARCHIVE = 1;
+    SOURCE_TYPE_CLOUD_ARCHIVE = 2;
+  }
+}

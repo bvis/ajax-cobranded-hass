@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+enum Role {
+  OWNER = 0;
+  SENIOR_CMS_ENGINEER = 1;
+  CMS_ENGINEER = 2;
+  HEAD_OF_INSTALLERS = 3;
+  INSTALLER = 4;
+  HEAD_OF_OPERATORS = 5;
+  OPERATOR = 6;
+  RAPID_RESPONSE_TEAM = 7;
+  SUBSCRIPTION_MANAGER = 8;
+  SENIOR_SUBSCRIPTION_MANAGER = 9;
+}

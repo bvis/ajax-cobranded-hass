@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message PhotoOnDemandDevicePermissions {
+
+  DevicePermission device_permission = 1;
+
+  message DevicePermission {
+    string device_id = 1;
+    oneof current_availability_mode {
+      NotAllowed not_allowed = 20;
+      AllowedAlways allowed_always = 21;
+      WhenArmed when_armed = 22;
+      AfterAlarm after_alarm = 23;
+    }
+  }
+
+  message NotAllowed {}
+  message AllowedAlways {}
+  message WhenArmed {}
+
+  message AfterAlarm {
+    google.protobuf.Timestamp capture_photo_available_until = 1;
+    optional int32 configured_time_to_capture_photo_minutes = 2;
+  }
+}

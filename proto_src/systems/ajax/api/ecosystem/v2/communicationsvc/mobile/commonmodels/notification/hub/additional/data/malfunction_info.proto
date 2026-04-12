@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message MalfunctionInfo {
+  MalfunctionCase malfunction_info = 1;
+
+  enum MalfunctionCase {
+    NO_MALFUNCTION_INFO = 0;
+    CABLE_BREAK_ISSUE = 1;
+    VOLTAGE_INSTABILITY = 2;
+    SIREN_VOLUME_TEST_REQUIRED = 3;
+    CO_SENSOR_MALFUNCTION = 4;
+    CO_SENSOR_LEVEL_EXCEEDED = 5;
+    SMOKE_DETECTOR_CAMERA_MALFUNCTION = 6;
+    MICROWAVE_SENSOR_CALIBRATION_ERROR = 7;
+    ACCELEROMETER_MALFUNCTION = 8;
+    BAD_INPUT_RESISTANCE = 9;
+    BAD_TEMPERATURE = 10;
+    END_OF_LIFE = 11;
+    BATTERY_HARDWARE_MALFUNCTION = 23;
+    MEMORY_MALFUNCTION = 24;
+    WATCHDOG_MALFUNCTION = 25;
+    BATTERY_LOAD_MALFUNCTION = 26;
+    MODEM_MALFUNCTION = 27;
+    WIFI_CONNECTION_FAIL = 28;
+    BATTERY_MALFUNCTION = 29;
+    BATTERY_CHARGE_ERROR = 30;
+    SOFTWARE_MALFUNCTION = 31;
+    FLASH_MALFUNCTION = 32;
+    HARDWARE_MALFUNCTION= 33;
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.leds;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Leds {
+    // [optional]
+    LogoLed logo = 1;
+
+    message LogoLed {
+        // [0, 100]
+        uint32 brightness = 1;
+    }
+};

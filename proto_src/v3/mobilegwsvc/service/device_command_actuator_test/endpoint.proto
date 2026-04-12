@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_actuator_test;
+
+import "v3/mobilegwsvc/service/device_command_actuator_test/request.proto";
+import "v3/mobilegwsvc/service/device_command_actuator_test/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandActuatorTestService {
+  rpc execute(DeviceCommandActuatorTestRequest) returns (DeviceCommandActuatorTestResponse);
+}

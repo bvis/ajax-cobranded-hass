@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.v2.hub;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.v2.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/config_migration_state.proto";
+import "systems/ajax/protobuf/hub/lightweight_hub.proto";
+
+message HubForMigration {
+    LightweightHub hub = 1;
+    ConfigMigrationState config_migration_state = 1080;
+}

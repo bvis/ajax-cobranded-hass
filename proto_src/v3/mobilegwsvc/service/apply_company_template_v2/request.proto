@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.apply_company_template_v2;
+
+import "v3/mobilegwsvc/commonmodels/company/templates/device_identifier.proto";
+import "v3/mobilegwsvc/commonmodels/company/templates/device_settings_locator.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.apply_company_template_v2";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ApplyCompanyTemplateV2Request {
+  commonmodels.company.templates.DeviceSettingsLocator device_settings_locator = 1;
+  string space_id = 2;
+  repeated commonmodels.company.templates.DeviceIdentifier devices = 3;
+}

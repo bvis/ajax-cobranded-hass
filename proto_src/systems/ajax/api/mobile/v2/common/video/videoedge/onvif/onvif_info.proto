@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.onvif;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message OnvifInfo {
+  bool user_auth_enabled = 1;
+};
+

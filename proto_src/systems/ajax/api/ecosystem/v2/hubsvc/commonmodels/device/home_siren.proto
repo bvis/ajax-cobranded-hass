@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/alarm_restriction.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/alarm_verification.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_siren_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_standard_compliance_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_battery.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_tamper_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_temperature.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_jeweller_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/group_association.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/post_alarm_indication.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/radio_interference_detection_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message HomeSiren {
+  common.CommonJewellerPart common_jeweller_part = 1;
+  common.CommonSirenPart common_siren_part = 2;
+  common.AlarmVerification alarm_verification = 3;
+  common.AlarmRestriction alarm_restriction = 4;
+  common.PostAlarmIndication post_alarm_indication_props = 5;
+  common.DeviceBatteryWithoutCharging device_battery = 6;
+  common.DeviceTemperature device_temperature = 7;
+  common.DeviceTamperStatus device_tamper_status = 8[(proto.meta.field_tag) = "tampered"];
+  common.CommonStandardCompliancePart common_standard_compliance_part = 9;
+  common.GroupAssociation group_association = 10;
+}
+
+message HomeSirenG3 {
+  common.CommonJewellerPart common_jeweller_part = 1;
+  common.CommonSirenPart common_siren_part = 2;
+  common.AlarmVerification alarm_verification = 3;
+  common.AlarmRestriction alarm_restriction = 4;
+  common.PostAlarmIndication post_alarm_indication_props = 5;
+  common.DeviceBatteryWithoutCharging device_battery = 6;
+  common.DeviceTemperature device_temperature = 7;
+  common.DeviceTamperStatus device_tamper_status = 8[(proto.meta.field_tag) = "tampered"];
+  common.CommonStandardCompliancePart common_standard_compliance_part = 9;
+  common.GroupAssociation group_association = 10;
+  common.RadioInterferenceDetectionPart radio_interference_detection_part = 11;
+}
+
+message HomeSirenS {
+  common.CommonJewellerPart common_jeweller_part = 1;
+  common.CommonSirenPart common_siren_part = 2;
+  common.AlarmVerification alarm_verification = 3;
+  common.AlarmRestriction alarm_restriction = 4;
+  common.PostAlarmIndication post_alarm_indication_props = 5;
+  common.DeviceBatteryWithoutCharging device_battery = 6;
+  common.DeviceTemperature device_temperature = 7;
+  common.DeviceTamperStatus device_tamper_status = 8[(proto.meta.field_tag) = "tampered"];
+  common.CommonStandardCompliancePart common_standard_compliance_part = 9;
+  common.GroupAssociation group_association = 10;
+}

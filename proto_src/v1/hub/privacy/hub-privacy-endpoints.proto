@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+option swift_prefix = "";
+
+import "google/protobuf/empty.proto";
+
+import "v1/hub/privacy/privacy-access-list-stream-request.proto";
+import "v1/hub/privacy/privacy-access-list-stream-response.proto";
+import "v1/hub/privacy/privacy-set-streaming-cam-access-request.proto";
+import "v1/hub/privacy/privacy-set-motion-cam-access-request.proto";
+
+service HubPrivacyService {
+  rpc streamPrivacyAccessList (PrivacyAccessListStreamRequest) returns (stream PrivacyAccessListStreamResponse);
+  rpc setMotionCamPrivacyAccess (PrivacySetMotionCamAccessRequest) returns (google.protobuf.Empty);
+  rpc setStreamingCamPrivacyAccess (PrivacySetStreamingCamAccessRequest) returns (google.protobuf.Empty);
+}

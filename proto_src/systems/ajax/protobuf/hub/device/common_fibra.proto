@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+message CommonFibraPart {
+	int32 bus_number = 0x3D;
+	repeated ScanState scan_state = 0x5C;
+	BlinkingCmdState blinking_cmd_state = 0x5D;
+	MaxPowerTestResult max_power_test_result = 0x5E;
+
+	enum ScanState {
+		NO_SCAN_STATE = 0;
+		SCANNED = 1;
+		BLINKING = 2;
+	}
+
+	enum BlinkingCmdState {
+		NO_BLINKING_CMD_STATE = 0;
+		IDLE = 1;
+		NEED_STOP_BLINKING = 2;
+		NEED_BLINKING = 3;
+	}
+
+	enum MaxPowerTestResult {
+		NO_DATA = 0;
+		OK = 1;
+		POWER_IS_LOW = 2;
+		POWER_IS_LOST = 3;
+	}
+}

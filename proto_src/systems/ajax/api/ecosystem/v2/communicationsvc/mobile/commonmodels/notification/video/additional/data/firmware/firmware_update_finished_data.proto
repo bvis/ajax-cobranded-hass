@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.firmware;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.firmware";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message FirmwareUpdateFinishedData {
+
+  // Deprecated, use firmware_id instead
+  reserved 1;
+
+  VideoEdgeFirmwareId firmware_id = 2;
+
+  message VideoEdgeFirmwareId {
+
+    string product_type = 1;
+
+    string platform_name = 2;
+
+    FirmwareVersion firmware_version = 3;
+
+    message FirmwareVersion {
+      // [required]
+      uint32 major = 1;
+
+      // [required]
+      uint32 minor = 2;
+
+      // [optional]
+      string extra = 3;
+    };
+  };
+}

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.firmware;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware_version.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/release_notes.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CheckForFirmwareUpdateRequest {
+  string video_edge_id = 1;
+
+  /* Language code from list (ref: https://ajaxsystems.atlassian.net/wiki/spaces/DT/pages/3788898376/KPT+Common+types#%D0%AF%D0%B7%D1%8B%D0%BA%D0%B8-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0). */
+  string language_code = 2;
+
+  // [optional] - will become required once the client apps are adjusted accordingly
+  common.space.SpaceLocator space_locator = 3;
+};
+
+message CheckForFirmwareUpdateResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    /* Field is unset when there are no updates, so user have latest firmware version. */
+    FirmwareUpdate firmwareUpdate = 1;
+
+    message FirmwareUpdate {
+      common.video.videoedge.firmware.FirmwareVersion firmware_version = 1;
+
+      /* In case when selected locale not found, there are english release notes by default.
+       * Field is unset when selected locale not found and no default release notes. */
+      common.video.videoedge.firmware.ReleaseNotes release_notes = 2;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError video_edge_not_found = 3;
+    }
+  }
+};

@@ -1,0 +1,99 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Inici de sessio Ajax Security",
+                "description": "Introdueix les credencials del teu compte Ajax Security.",
+                "data": { "email": "Correu electronic", "password": "Contrasenya", "app_label": "Etiqueta d'app (nom de l'app co-branded)" }
+            },
+            "2fa": {
+                "title": "Autenticacio de dos factors",
+                "description": "Introdueix el codi de 6 digits de la teva app d'autenticacio.",
+                "data": { "totp_code": "Codi TOTP" }
+            },
+            "select_spaces": {
+                "title": "Seleccionar espais",
+                "description": "Tria quins espais (hubs) afegir.",
+                "data": { "spaces": "Espais" }
+            }
+        },
+        "error": {
+            "invalid_auth": "Correu o contrasenya incorrectes.",
+            "invalid_totp": "Codi TOTP incorrecte. Torna-ho a provar.",
+            "cannot_connect": "No es pot connectar als servidors d'Ajax.",
+            "unknown": "S'ha produit un error inesperat."
+        },
+        "abort": {
+            "already_configured": "Aquest compte ja esta configurat.",
+            "account_locked": "Compte bloquejat. Torna-ho a provar mes tard.",
+            "reauth_successful": "Reautenticacio correcta."
+        }
+    },
+    "entity": {
+        "button": {
+            "capture_photo": {
+                "name": "Capturar foto"
+            }
+        },
+        "binary_sensor": {
+            "monitoring": {
+                "name": "Connexio CRA"
+            },
+            "gsm": {
+                "name": "Mobil connectat"
+            },
+            "lid": {
+                "name": "Tapa oberta"
+            },
+            "ext_contact": {
+                "name": "Contacte extern trencat"
+            },
+            "ext_alert": {
+                "name": "Alerta contacte extern"
+            },
+            "drilling": {
+                "name": "Perforacio de caixa"
+            },
+            "anti_mask": {
+                "name": "Anti-enmascarament"
+            },
+            "malfunction": {
+                "name": "Avaria"
+            },
+            "interference": {
+                "name": "Interferencia"
+            },
+            "relay_stuck": {
+                "name": "Rele bloquejat"
+            },
+            "always_active": {
+                "name": "Sempre actiu"
+            },
+            "connectivity": {
+                "name": "Connectivitat"
+            },
+            "problem": {
+                "name": "Problema"
+            }
+        },
+        "sensor": {
+            "signal_level": {
+                "name": "Nivell de senyal"
+            },
+            "gsm_type": {
+                "name": "Tipus GSM"
+            },
+            "wifi_signal_level": {
+                "name": "Nivell de senyal Wi-Fi"
+            }
+        },
+        "switch": {
+            "channel_1": {
+                "name": "Canal 1"
+            },
+            "channel_2": {
+                "name": "Canal 2"
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_user_spaces_with_pagination;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_lite.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_user_spaces_with_pagination";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindUserSpacesWithPaginationResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated api.mobile.v2.common.space.LiteSpace spaces = 1;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+}

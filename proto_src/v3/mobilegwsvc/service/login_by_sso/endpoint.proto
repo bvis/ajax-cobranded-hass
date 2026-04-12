@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_sso;
+
+import "v3/mobilegwsvc/service/login_by_sso/request.proto";
+import "v3/mobilegwsvc/service/login_by_sso/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_sso";
+option swift_prefix = "";
+
+service LoginBySsoService {
+  rpc execute(LoginBySsoRequest) returns (LoginBySsoResponse);
+}

@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/name.proto";
+import "systems/ajax/protobuf/hub/image_urls.proto";
+
+message CommonDevicePart {
+    string id = 0x01;
+    google.protobuf.Int32Value temperature = 0x02;
+    DeviceSignalLevel signal_level = 0x03;
+    google.protobuf.BoolValue tampered = 0x04;
+    google.protobuf.Int32Value battery_charge_level_percentage = 0x05;
+
+    Name name = 1000;
+
+    string room_id = 0x0A;
+    google.protobuf.BoolValue online = 0x0B;
+    google.protobuf.Int32Value issues_count = 0x0F;
+    DeviceState state = 0x10;
+    int32 device_transmission_power_mode = 0x15;
+    bool night_mode_arm = 0x16;
+    repeated DeviceMalfunction malfunctions = 0x17;
+    int32 assigned_extender = 0x23;
+    DeviceColor color = 0x26;
+    int32 cms_device_index = 0x27;
+    google.protobuf.BoolValue battery_ok = 0x2C;
+    string group_id = 0x50;
+    google.protobuf.Int32Value battery_charge_volt = 0x99;
+    int32 arm_delay_seconds = 0xAC;
+    int32 alarm_delay_seconds = 0xAD;
+    bool apply_delays_to_night_mode = 0xAE;
+    string firmware_version = 0xB0;
+    bool verifies_alarm = 0xB5;
+    BypassMode bypass_mode = 0xB6;
+    repeated IsBypassMode is_bypass_mode = 0xB7;
+    DeviceAlarmLogicType device_alarm_logic_type = 0xBC;
+    IndicatorLightMode indicator_light_mode = 0xBB;
+    int32 perimeter_arm_delay_seconds = 0xC0;
+    int32 perimeter_alarm_delay_seconds = 0xC1;
+    EstimatedArmingState estimated_arming_state = 0xC2;
+
+    int32 migration_state = 0x9F;
+
+    enum DeviceColor {
+        NO_COLOR_INFO = 0;
+        WHITE = 0x01;
+        BLACK = 0x02;
+        WHITE_LABEL_WHITE = 0x03;
+        WHITE_LABEL_BLACK = 0x04;
+    }
+
+    enum DeviceSignalLevel {
+        NO_SIGNAL_LEVEL_INFO = 0;
+        NO_SIGNAL = 1;
+        WEAK = 2;
+        NORMAL = 3;
+        STRONG = 4;
+    }
+
+    enum DeviceState {
+        NO_DEVICE_STATE_INFO = 0;
+        PASSIVE = 1;
+        ACTIVE = 2;
+        DETECTION_AREA_TEST = 3;
+        RADIO_CONNECTION_TEST = 4;
+        WAIT_RADIO_CONNECTION_TEST_START = 5;
+        WAIT_RADIO_CONNECTION_TEST_END = 6;
+        WAIT_DETECTION_AREA_TEST_START = 7;
+        WAIT_DETECTION_AREA_TEST_END = 8;
+        WAIT_REGISTRATION = 9;
+        WAIT_RADIO_CHANNEL_TEST_START = 10;
+        RADIO_CHANNEL_TEST = 11;
+        WAIT_RADIO_CHANNEL_TEST_END = 12;
+    }
+
+    enum DeviceMalfunction {
+        NO_MALFUNCTION_INFO = 0;
+        CABLE_BREAK_ISSUE = 1;
+        VOLTAGE_INSTABILITY = 2;
+        SIREN_VOLUME_TEST_REQUIRED = 3;
+        CO_SENSOR_MALFUNCTION = 4;
+        CO_SENSOR_LEVEL_EXCEEDED = 5;
+        SMOKE_DETECTOR_CAMERA_MALFUNCTION = 6;
+        MICROWAVE_SENSOR_CALIBRATION_ERROR = 7;
+        ACCELEROMETER_MALFUNCTION = 8;
+        BAD_INPUT_RESISTANCE = 9;
+        MODEM_MALFUNCTION = 27;
+        WIFI_CONNECTION_FAIL = 28;
+        BATTERY_MALFUNCTION = 29;
+        BATTERY_CHARGE_ERROR = 30;
+        SOFTWARE_MALFUNCTION = 31;
+        FLASH_MALFUNCTION = 32;
+    }
+
+    enum BypassMode {
+        NO_BYPASS_MODE_INFO = 0;
+        ENGINEER_BYPASS_OFF = 1;
+        ENGINEER_BYPASS_ON = 2;
+        TAMPER_BYPASS_ON = 3;
+    }
+
+    enum IsBypassMode {
+        NO_IN_BYPASS_MODE = 0;
+        ENABLED_ENGINEER_BYPASS = 1;
+        ENABLED_TAMPER_BYPASS = 2;
+        AUTO_BYPASS_BY_COUNT = 3;
+        AUTO_BYPASS_BY_ACTIVE = 4;
+    }
+
+    enum DeviceAlarmLogicType {
+        NO_DEVICE_ALARM_LOGIC_TYPE = 0;
+        NONE = 1;
+        ARMING_COMPLETION_DEVICE = 2;
+        ENTRY_ROUTE = 3;
+    }
+
+    enum IndicatorLightMode {
+        NO_INDICATOR_LIGHT_MODE_INFO = 0;
+        DONT_BLINK_ON_ALARM = 1;
+        STANDARD = 2;
+    }
+
+    enum EstimatedArmingState {
+        NO_ESTIMATED_ARMING_STATE_INFO = 0;
+        DISARMED = 1;
+        ARMED = 2;
+        N_A = -127;
+    }
+}

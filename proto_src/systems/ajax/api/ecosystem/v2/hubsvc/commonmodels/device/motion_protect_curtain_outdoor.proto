@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_jeweller_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_wings_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_masking_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/gyroscope.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_device_notifications_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/led_indication_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/detection_mode_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_battery.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_tamper_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_temperature.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_siren_triggers.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/motion_detection_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_warnings.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+
+message MotionProtectCurtainOutdoorMini {
+  v2.commonmodels.device.common.CommonArmingPart common_arming_part = 1;
+  common.DeviceTemperature device_temperature = 2;
+  common.MotionDetectionPart motion_detection_part = 3;
+  common.DeviceTamperStatus device_tamper_status = 4[(proto.meta.field_tag) = "tampered"];
+  common.SirenTriggers siren_triggers = 5;
+  common.CommonJewellerPart common_jeweller_part = 6;
+  common.CommonWingsPart common_wings_part = 7;
+  common.CommonMaskingPart common_masking_part = 8;
+  common.Gyroscope gyroscope = 9;
+  common.CommonDeviceNotificationsPart device_notifications_part = 10;
+  common.LedIndicationPart led_indication_part = 11;
+  common.DetectionModePart detection_mode_part = 12;
+  common.DeviceBatteryWithoutCharging device_battery_without_charging_part = 13;
+  common.DeviceWarnings device_warnings = 14;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security.group;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+option java_package = "systems.ajax.api.mobile.v2.common.space.security.group";
+
+enum FollowingGroupAutoDisarm {
+  FOLLOWING_GROUP_AUTO_DISARM_UNSPECIFIED = 0;
+  FOLLOWING_GROUP_AUTO_DISARM_DISABLED = 1;
+  FOLLOWING_GROUP_AUTO_DISARM_ENABLED = 2;
+}

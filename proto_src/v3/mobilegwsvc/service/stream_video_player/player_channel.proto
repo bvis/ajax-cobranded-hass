@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_capabilities.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/cloudarchive/cloud_archive.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player";
+option swift_prefix = "";
+
+message PlayerChannel {
+  string id = 1;
+
+  // [optional]
+  // It's only set when this channel maps some channel of a media device.
+  // If it's not set - it's a zombie channel.
+  mobile.v2.common.video.videoedge.channel.MediaDeviceInfo device_info = 2;
+
+  // [optional]
+  AudioOutputSettings audio_output_settings = 3;
+
+  // [optional]
+  VideoCapabilities video_capabilities = 4;
+
+  // [optional]
+  VideoSettings video_settings = 5;
+
+  // [optional]
+  AudioSettings audio_settings = 6;
+
+  // [optional] set only if this video edge / channel supports cloud archive
+  mobile.v2.common.video.videoedge.channel.cloudarchive.CloudArchive cloud_archive = 7;
+
+  message AudioOutputSettings {}
+
+  message AudioSettings {
+    bool enabled = 1;
+  }
+
+  message VideoCapabilities {
+    mobile.v2.common.video.videoedge.mediadevice.VideoCapabilities.Ptz ptz = 1;
+  }
+
+  message VideoSettings {
+    mobile.v2.common.video.VideoResolution main_resolution = 1;
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.webrtc;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message IceServer {
+  repeated string urls = 1;
+
+  string username = 2 [(hash_value) = true];
+
+  string credential = 3 [(hash_value) = true];
+};

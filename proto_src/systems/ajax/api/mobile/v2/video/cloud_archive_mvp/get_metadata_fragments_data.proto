@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CloudArchiveGetMetadataFragmentsDataRequest {
+  // [required]
+  string session_id = 1;
+
+  // [optional]
+  string tag = 2;
+
+  repeated Entry entries = 3;
+
+  message Entry {
+    uint64 fragment_id = 1;
+  }
+}

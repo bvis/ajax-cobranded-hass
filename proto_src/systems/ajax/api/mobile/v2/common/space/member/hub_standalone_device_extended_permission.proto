@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum HubStandaloneDevicePermissionExtended {
+  HUB_STANDALONE_DEVICE_PERMISSION_EXTENDED_UNSPECIFIED = 0;
+  HUB_STANDALONE_DEVICE_PERMISSION_EXTENDED_EN54_ACCESS_LEVEL_2 = 1;
+  HUB_STANDALONE_DEVICE_PERMISSION_EXTENDED_EN54_EVACUATION = 2;
+}

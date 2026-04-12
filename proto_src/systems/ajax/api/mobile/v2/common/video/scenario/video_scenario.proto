@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.scenario;
+
+import "systems/ajax/api/mobile/v2/common/video/scenario/alarm_source.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/alarm_sources_condition.proto";
+import "systems/ajax/api/mobile/v2/common/video/scenario/target_video_edge.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message VideoScenario {
+  string id = 1;
+
+  bool enabled = 2;
+
+  string name = 3;
+
+  repeated AlarmSource alarm_sources = 4;
+
+  AlarmSourcesCondition alarm_sources_condition = 5;
+
+  repeated TargetVideoEdge targets = 6;
+
+  MonitoringState monitoring_state = 7;
+}

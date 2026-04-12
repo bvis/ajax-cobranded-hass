@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+message CommonDeviceNotificationsPart {
+
+  repeated Notification device_notifications = 1;
+
+  message DeviceNotificationsPartSettings {
+    repeated Notification device_notifications = 1[(proto.meta.field_tag) = "device_notifications"];
+  }
+
+  message Notification {
+    NotificationType notification_type = 1;
+    IsEnabled is_enabled = 2;
+  }
+
+  enum NotificationType {
+    NOTIFICATION_TYPE_UNSPECIFIED = 0;
+    NOTIFICATION_TYPE_INCORRECT_DEVICE_INSTALLATION = 1;
+  }
+
+  enum IsEnabled{
+    IS_ENABLED_UNSPECIFIED = 0;
+    IS_ENABLED_DISABLED = 1;
+    IS_ENABLED_ENABLED = 2;
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice.discovering;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+
+message DiscoveryAddress {
+  string host = 1;
+
+  string port = 2;
+
+  MediaDeviceProtocol protocol = 3;
+};

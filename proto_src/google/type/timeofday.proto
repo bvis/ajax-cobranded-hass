@@ -1,0 +1,15 @@
+// Stub for google/type/timeofday.proto
+syntax = "proto3";
+
+package google.type;
+
+option java_package = "com.google.type";
+option java_outer_classname = "TimeOfDayProto";
+option java_multiple_files = true;
+
+message TimeOfDay {
+  int32 hours = 1;
+  int32 minutes = 2;
+  int32 seconds = 3;
+  int32 nanos = 4;
+}

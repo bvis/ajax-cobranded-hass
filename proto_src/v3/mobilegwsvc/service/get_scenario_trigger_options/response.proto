@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options";
+option swift_prefix = "";
+
+message GetScenarioTriggerOptionsResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated ScenarioTriggerOption scenario_trigger_options = 1;
+  }
+
+  message Failure  {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_not_found = 2;
+      commonmodels.Error permissions_denied = 3;
+      commonmodels.Error space_armed = 4;
+      commonmodels.Error hub_not_found = 5;
+    }
+  }
+
+  message ScenarioTriggerOption {
+    oneof option {
+      GenericObjectTriggerOption temperature_trigger_option = 1;
+      AlarmingDeviceTriggerOption alarming_device_trigger_option = 2;
+      GenericObjectTriggerOption cross_zone_trigger_option = 3;
+      GenericObjectTriggerOption smart_lock_trigger_option = 4;
+    }
+  }
+
+  message GenericObjectTriggerOption {
+    string object_id = 1;
+  }
+
+  message AlarmingDeviceTriggerOption {
+    string device_id = 1;
+    repeated AlarmOption alarm = 2;
+  }
+
+  message AlarmOption {
+    bool enabled = 1;
+    AlarmType alarm_type = 2;
+  }
+
+  enum AlarmType {
+    ALARM_TYPE_UNSPECIFIED = 0;
+    ALARM_TYPE_REED = 1;
+    ALARM_TYPE_CONTACT = 2;
+    ALARM_TYPE_MOTION = 3;
+    ALARM_TYPE_MOTION_CAM_OUTDOOR_MOVE = 4;
+    ALARM_TYPE_COMBI_GLASS = 5;
+    ALARM_TYPE_PANIC = 6;
+    ALARM_TYPE_BUTTON_PANIC = 7;
+    ALARM_TYPE_ROLLER_SHUTTER_CUT = 8;
+    ALARM_TYPE_VIBRATION = 9;
+    ALARM_TYPE_TILT = 10;
+    ALARM_TYPE_GLASS = 11;
+    ALARM_TYPE_TRANSMITTER_CONTACT = 12;
+    ALARM_TYPE_TRANSMITTER_MOVE = 13;
+    ALARM_TYPE_WIRE_INPUT_SERVICE = 14;
+    ALARM_TYPE_WIRE_INPUT_SERVICE_2 = 15;
+    ALARM_TYPE_WIRE_INPUT_SERVICE_3 = 16;
+    ALARM_TYPE_WIRE_INPUT_ROLLER_SHUTTER_ALARM = 17;
+    ALARM_TYPE_WIRE_INPUT_ROLLER_SHUTTER_CUT = 18;
+    ALARM_TYPE_SMOKE = 19;
+    ALARM_TYPE_TEMP = 20;
+    ALARM_TYPE_TEMPRISE = 21;
+    ALARM_TYPE_CO = 22;
+    ALARM_TYPE_LEAK = 23;
+    ALARM_TYPE_DCO_LEFT = 24;
+    ALARM_TYPE_DCO_RIGHT = 25;
+    ALARM_TYPE_KPT_PANIC = 26;
+    ALARM_TYPE_KPT_FIRE = 27;
+    ALARM_TYPE_KPT_MEDICAL = 28;
+    ALARM_TYPE_SWITCH_BASE_FIRE = 29;
+    ALARM_TYPE_MPCO_PLUS_MOVE = 30;
+    ALARM_TYPE_SPFG3_SEISMIC = 31;
+    ALARM_TYPE_SPFG3_SHOCK = 32;
+    ALARM_TYPE_SPFG3_TEMP_RISE = 33;
+    ALARM_TYPE_SPFG3_CASE_BROKEN = 34;
+    ALARM_TYPE_SPFG3_TILT = 35;
+  }
+}

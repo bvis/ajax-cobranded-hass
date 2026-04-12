@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+
+import "v1/hub/privacy/privacy-motion-cam-access.proto";
+
+message PrivacySetMotionCamAccessRequest {
+  string hub_id = 1;
+  PrivacyMotionCamAccess privacy_access = 2;
+}

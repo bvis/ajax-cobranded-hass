@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space;
+
+import "systems/ajax/api/mobile/v2/space/create_space_request.proto";
+import "systems/ajax/api/mobile/v2/space/join_space_request.proto";
+import "systems/ajax/api/mobile/v2/space/stream_space_updates_request.proto";
+import "systems/ajax/api/mobile/v2/space/user/stream_user_spaces_request.proto";
+import "systems/ajax/api/mobile/v2/space/user/user_spaces_page_request.proto";
+import "systems/ajax/api/mobile/v2/space/delete_space_request.proto";
+import "systems/ajax/api/mobile/v2/space/press_panic_button_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceService {
+
+  rpc create(CreateSpaceRequest) returns (CreateSpaceResponse) {
+    option deprecated = true;
+  };
+
+  rpc stream(StreamSpaceUpdatesRequest) returns (stream StreamSpaceUpdatesResponse);
+
+  rpc streamUserSpaces(user.StreamUserSpacesRequest) returns (stream user.StreamUserSpacesResponse);
+
+  rpc findUserSpacesWithPagination(user.FindUserSpacesWithPaginationRequest) returns (user.FindUserSpacesWithPaginationResponse);
+
+  rpc delete(DeleteSpaceRequest) returns (DeleteSpaceResponse);
+
+  rpc pressPanicButton(PressPanicButtonRequest) returns (PressPanicButtonResponse);
+
+  rpc join(JoinSpaceRequest) returns (JoinSpaceResponse);
+};

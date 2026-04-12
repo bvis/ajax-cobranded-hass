@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message WireInput {
+    string id = 0x01;
+    Name name = 1000;
+    repeated SirenTrigger siren_triggers = 0x03;
+    string group_id = 0x04;
+    int32 arm_delay_seconds = 0x05;
+    int32 alarm_delay_seconds = 0x06;
+    bool apply_delays_to_night_mode = 0x08;
+    bool night_mode_arm = 0x09;
+    ExternalContactMode external_contact_mode = 0x0A;
+    ExternalContactAlarmMode external_contact_alarm_mode = 0x0B;
+    ExternalContactState external_contact_state = 0x0D;
+    bool tampered = 0x10;
+    bool external_contact_always_active = 0x0C;
+    int32 service_problems = 0x13;
+    BypassMode bypass_mode = 0x1C;
+    repeated IsBypassMode is_bypass_mode = 0x1D;
+    WireInputType wire_input_type = 0x0F;
+    string room_id = 0x11;
+    int32 cms_device_index = 0x12;
+    bool verifies_alarm = 0x19;
+    int32 perimeter_arm_delay_seconds = 0xBF;
+    int32 perimeter_alarm_delay_seconds = 0xC0;
+    repeated ChimeTrigger chime_triggers = 0x22;
+    int32 chime_signal = 0x23;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        EXTRA_CONTACT = 1;
+        SHORT_CIRCUIT = 2;
+    }
+
+    enum ExternalContactMode {
+        NO_EXTERNAL_CONTACT_MODE_INFO = 0;
+        DISABLED = 1;
+        NORMALLY_OPEN = 2;
+        NORMALLY_CLOSED = 3;
+        NORMALLY_CLOSED_R = 4;
+        NORMALLY_OPEN_R = 5;
+    }
+
+    enum ExternalContactState {
+        NO_EXTERNAL_CONTACT_STATE = 0;
+        BROKEN = 1;
+        NORMAL = 2;
+        CONTACT_SHORT_CIRCUIT = 3;
+        NOT_AVAILABLE = 4;
+    }
+
+    enum ExternalContactAlarmMode {
+        NO_EXTERNAL_CONTACT_ALARM_MODE_INFO = 0;
+        BISTABLE = 1;
+        PULSE = 2;
+    }
+
+    enum WireInputType {
+        NO_WIRE_INPUT_TYPE_INFO = 0;
+        SENSOR = 1;
+        TAMPER = 2;
+    }
+
+    enum BypassMode {
+        NO_BYPASS_MODE_INFO = 0;
+        OFF = 1;
+        ON = 2;
+    }
+
+    enum IsBypassMode {
+        NO_IN_BYPASS_MODE = 0;
+        ENABLED_BYPASS = 1;
+        NOT_USED = 2;
+        AUTO_BYPASS_BY_COUNT = 3;
+        AUTO_BYPASS_BY_ACTIVE = 4;
+    }
+
+    enum ChimeTrigger {
+        NO_CHIME_TRIGGER_INFO = 0;
+        CHIME_EXTRA_CONTACT = 1;
+    }
+}

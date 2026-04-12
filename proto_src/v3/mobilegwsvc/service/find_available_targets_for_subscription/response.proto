@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_targets_for_subscription;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_targets_for_subscription";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAvailableTargetsForSubscriptionResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    int32 max_target_count_to_assign = 1;
+    repeated commonmodels.accounting.EnrichedTargetInfo selected_targets = 2;
+    repeated commonmodels.accounting.EnrichedTargetInfo available_targets = 3;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error subscription_not_found = 1;
+    }
+  }
+}

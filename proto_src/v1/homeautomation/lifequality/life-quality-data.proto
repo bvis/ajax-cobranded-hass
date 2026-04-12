@@ -1,0 +1,51 @@
+syntax = "proto3";
+import "google/type/datetime.proto";
+
+package systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality;
+
+option swift_prefix = "";
+option java_multiple_files = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.homeautomation.lifequality";
+
+message LifeQualityDataItem {
+  oneof data {
+    float value_y = 1;
+    LifeQualityDataRange value_y_range = 2;
+  }
+}
+
+message LifeQualityDataRange {
+  float min_value_y = 1;
+  float max_value_y = 2;
+}
+
+message LifeQualityDataResponse {
+  map<uint64, LifeQualityDataItem> values_temperature = 1;
+  map<uint64, LifeQualityDataItem> values_humidity = 2;
+  map<uint64, LifeQualityDataItem> values_airquality = 3;
+}
+
+message LifeQualityDataRequest {
+  string hub_hex_id = 1;
+  string device_hex_id = 2;
+  LifeQualityDataDiscreteness discreteness = 3;
+  google.type.TimeZone time_zone = 4;
+  uint64 start_timestamp = 5;
+  uint64 end_timestamp = 6;
+}
+
+message StreamLifeQualityDataRequest {
+  string hub_hex_id = 1;
+  string device_hex_id = 2;
+  LifeQualityDataDiscreteness discreteness = 3;
+  google.type.TimeZone time_zone = 4;
+  uint64 start_timestamp = 5;
+}
+
+enum LifeQualityDataDiscreteness  {
+  LIFE_QUALITY_DATA_DISCRETENESS_UNSPECIFIED = 0;
+  LIFE_QUALITY_DATA_DISCRETENESS_MINUTE = 1;
+  LIFE_QUALITY_DATA_DISCRETENESS_HOUR = 2;
+  LIFE_QUALITY_DATA_DISCRETENESS_DAY = 3;
+  LIFE_QUALITY_DATA_DISCRETENESS_MONTH = 4;
+}

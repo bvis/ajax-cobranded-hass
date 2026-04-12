@@ -1,0 +1,103 @@
+// Archive description
+
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.archive;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+
+message Archive {
+  google.protobuf.Duration ring_depth = 1 [deprecated = true]; // Use max_ring_depth instead.
+
+  Stats stats = 2;
+
+  FrameDropEvents frame_drop_events = 3;
+
+  MaxRingDepth max_ring_depth = 4;
+};
+
+enum MaxRingDepth {
+  MAX_RING_DEPTH_UNSPECIFIED = 0;
+  MAX_RING_DEPTH_1_DAY = 1;
+  MAX_RING_DEPTH_2_DAYS = 2;
+  MAX_RING_DEPTH_3_DAYS = 3;
+  MAX_RING_DEPTH_7_DAYS = 4;
+  MAX_RING_DEPTH_14_DAYS = 5;
+  MAX_RING_DEPTH_28_DAYS = 6;
+  MAX_RING_DEPTH_30_DAYS = 7;
+  MAX_RING_DEPTH_60_DAYS = 8;
+  MAX_RING_DEPTH_90_DAYS = 9;
+  MAX_RING_DEPTH_180_DAYS = 10;
+  MAX_RING_DEPTH_360_DAYS = 11;
+  MAX_RING_DEPTH_UNLIMITED = 100;
+}
+
+message Stats {
+  google.protobuf.Duration archive_duration = 1;
+};
+
+// archive service can drop frames if they can't be dumped to storage fast enough
+// This message contains information about the number of such cases
+// Also it contains 10 last time periods during which archive service had to drop frames from prebuffer
+message FrameDropEvents {
+  // [required]
+  // The number of slow archive writing cases which caused frame drops
+  uint32 count = 1;
+
+  // [required]
+  // 10 last time periods (local timestamps) during which archive service had to drop frames from prebuffer
+  repeated TimestampRange time_ranges = 2;
+};
+
+enum RecordMode {
+  RM_UNKNOWN = 0;
+  RM_DISABLED = 1;
+  RM_PERMANENT = 2;
+  RM_ON_DETECTION = 3;
+};
+
+enum RecordPolicy {
+  RP_UNKNOWN = 0;
+  RP_ALWAYS = 1;
+  RP_WHEN_REQUESTED = 2;
+};
+
+enum PlayerState {
+  PS_NONE = 0;
+  PS_PLAYING = 1;
+  PS_PAUSED = 2;
+};
+
+message PlayerStatus {
+  PlayerState state = 1;
+
+  google.protobuf.Timestamp pos = 2;
+};
+
+message Timeline {
+  UpdateType update_type = 1;
+
+  TimestampRange ts_range = 2;
+
+  bytes seconds = 3;
+
+  repeated TzEntry tz_map = 4;
+
+  enum UpdateType {
+    NONE = 0;
+    MERGE = 1;
+    REPLACE = 2;
+  }
+
+  message TzEntry {
+    google.protobuf.Timestamp ts = 1;
+
+    google.protobuf.Duration tz_offset = 2;
+  }
+};

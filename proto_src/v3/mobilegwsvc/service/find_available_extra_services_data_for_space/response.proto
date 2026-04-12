@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_extra_services_data_for_space;
+
+import "v3/mobilegwsvc/commonmodels/accounting/postpayment_service_group.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/prepayment_service_group.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/failure/not_available_for_user_error.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/find_available_services_context.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_available_extra_services_data_for_space";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAvailableExtraServicesDataForSpaceResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof flow_data {
+      PrepaymentData prepayment_flow_data = 1;
+      PostPaymentData post_payment_flow_data = 2;
+    }
+
+    message PrepaymentData {
+      repeated commonmodels.accounting.AvailablePrePaymentServiceGroup available_prepayment_service_groups = 1;
+    }
+
+    message PostPaymentData {
+      repeated commonmodels.accounting.AvailablePostPaymentServiceGroup available_post_payment_service_groups = 1;
+      commonmodels.accounting.FindAvailableServicesContext current_context = 2;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error internal_error = 1;
+      commonmodels.Error bad_request = 2;
+      commonmodels.Error available_mandatory_service_not_found = 3;
+      commonmodels.Error reseller_not_found = 4;
+      commonmodels.Error dealer_not_found = 5;
+      commonmodels.accounting.failure.NotAvailableForUserError not_available_for_user = 6;
+    }
+  }
+}

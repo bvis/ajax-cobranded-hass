@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.activate_services;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.activate_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ActivateServicesRequest {
+  repeated string feature_target_id = 1;
+  systems.ajax.api.mobile.v2.common.accounting.FeatureTarget feature_target = 2;
+  repeated ServiceToActivate service_to_activate = 3;
+  string reseller_id = 4;
+  optional string agreement_version = 5;
+
+  message ServiceToActivate {
+    oneof service_id {
+      string feature_id = 1;
+      string package_id = 2;
+    }
+  }
+}

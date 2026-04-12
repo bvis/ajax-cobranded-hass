@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.device.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.device.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum BatteryChargedState {
+  BATTERY_CHARGED_STATE_UNSPECIFIED = 0;
+  BATTERY_CHARGED_STATE_LOW_CHARGED = 1;
+  BATTERY_CHARGED_STATE_FULL_CHARGED = 2;
+}

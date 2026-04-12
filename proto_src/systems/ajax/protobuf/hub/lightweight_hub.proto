@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+import "systems/ajax/protobuf/hub/device/hub_device.proto";
+import "systems/ajax/protobuf/hub/image_urls.proto";
+
+
+message LightweightHub {
+    string id = 0x0A;
+    string name = 1000;
+    bool groups_enabled = 0x7E;
+    HubDevice.State state = 0x08;
+    HubDevice.StateWithGroups state_with_groups = 0x89;
+    ImageUrls image_urls = 1020;
+    google.protobuf.BoolValue online = 1030;
+    HubDevice.Color color = 0x49;
+    HubDevice.Subtype subtype = 0x75;
+    google.protobuf.Int32Value warnings_total_count = 0x6C;
+    HubDevice.Firmware firmware = 1040;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/source.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/accounting/qualifier.proto";
+
+message AccountingNotificationContent {
+  event.accounting.AccountingEventQualifier qualifier = 1;
+  AccountingNotificationSource source = 2;
+}

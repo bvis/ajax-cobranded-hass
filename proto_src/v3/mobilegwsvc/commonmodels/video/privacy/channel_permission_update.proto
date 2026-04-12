@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.privacy;
+
+import "systems/ajax/api/mobile/v2/common/video/privacy/channel_permission.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.privacy";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ChannelPermissionUpdate {
+  mobile.v2.common.video.privacy.ChannelPermission permission = 1;
+
+  ChannelPermissionState state = 2;
+
+  enum ChannelPermissionState {
+    CHANNEL_PERMISSION_STATE_UNSPECIFIED = 0;
+    CHANNEL_PERMISSION_STATE_ENABLED = 1;
+    CHANNEL_PERMISSION_STATE_DISABLED = 2;
+  }
+}

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.capture_photo_on_demand_for_detection_area;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.capture_photo_on_demand_for_detection_area";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CapturePhotoOnDemandForDetectionAreaResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {}
+
+  message Failure {
+    reserved 6, 7;
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2; // company on hub not found too
+      commonmodels.HubWrongStateError hub_wrong_state = 3;
+      commonmodels.HubBusyError hub_busy = 4;
+      commonmodels.Error hub_offline = 5;
+      commonmodels.Error hub_request_already_performed = 8;
+      // other errors will be implemented during review and implementation
+    }
+  }
+};

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.cloud_archive_mvp;
+
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/get_metadata_fragments_data.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/get_metadata_fragments_info.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/get_video_fragments_data.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/get_video_fragments_info.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/stream_video_fragments_data.proto";
+import "systems/ajax/api/mobile/v2/video/cloud_archive_mvp/stream_metadata_fragments_data.proto";
+import "google/protobuf/empty.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.video.cloud_archive_mvp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// For cloud archive mvp only
+service CloudArchiveService {
+  rpc getVideoFragmentsInfo(CloudArchiveGetVideoFragmentsInfoRequest) returns (CloudArchiveGetVideoFragmentsInfoResponse) {}
+  rpc getMetadataFragmentsInfo(CloudArchiveGetMetadataFragmentsInfoRequest) returns (CloudArchiveGetMetadataFragmentsInfoResponse) {}
+
+  rpc streamVideoFragmentsData(CloudArchiveStreamVideoFragmentsDataRequest) returns (stream CloudArchiveStreamVideoFragmentsDataResponse) {}
+  rpc streamMetadataFragmentsData(CloudArchiveStreamMetadataFragmentsDataRequest) returns (stream CloudArchiveStreamMetadataFragmentsDataResponse) {}
+
+  rpc getVideoFragmentsData(CloudArchiveGetVideoFragmentsDataRequest) returns (google.protobuf.Empty) {}
+  rpc getMetadataFragmentsData(CloudArchiveGetMetadataFragmentsDataRequest) returns (google.protobuf.Empty) {}
+}

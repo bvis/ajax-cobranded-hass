@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.company;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/company_info.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/standalone_device_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_permissions.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceInstallationCompany {
+  systems.ajax.api.mobile.v2.hubobject.model.company.CompanyInfo company_info = 1;
+
+  space.member.SpacePermissions space_permissions = 2;
+  repeated space.member.StandaloneDevicePermissions devices_permissions = 3;
+  google.protobuf.Timestamp permissions_expired_at = 5;
+  space.member.DisplayMemberPermissions display_member_permissions = 7;
+
+  optional int32 hub_user_index = 6;
+  string space_member_id = 8;
+
+  InstallationCompanyType type = 9;
+
+  enum InstallationCompanyType {
+    INSTALLATION_COMPANY_TYPE_UNSPECIFIED = 0;
+    INSTALLATION_COMPANY_TYPE_INSTALLATION = 1;
+    INSTALLATION_COMPANY_TYPE_SERVICE = 2;
+  }
+}

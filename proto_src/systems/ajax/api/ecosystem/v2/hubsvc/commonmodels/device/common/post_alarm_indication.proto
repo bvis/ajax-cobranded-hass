@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message PostAlarmIndication {
+
+  message PostAlarmIndicationSettings{
+    optional PostAlarmIndicationMode post_alarm_indication_mode = 1[(proto.meta.field_tag) = "post_alarm_indication_mode"];
+  }
+
+  PostAlarmIndicationMode post_alarm_indication_mode = 1[(proto.meta.field_tag) = "post_alarm_indication_mode"];
+  repeated Capability capabilities = 2;
+
+  enum PostAlarmIndicationMode {
+    POST_ALARM_INDICATION_MODE_UNSPECIFIED = 0;
+    POST_ALARM_INDICATION_MODE_DISABLED = 1[(proto.meta.enum_tag) = "POST_ALARM_INDICATION_MODE_DISABLED"];
+    POST_ALARM_INDICATION_MODE_ENABLED = 2[(proto.meta.enum_tag) = "POST_ALARM_INDICATION_MODE_ENABLED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_POST_ALARM_INDICATION = 1;
+  }
+}

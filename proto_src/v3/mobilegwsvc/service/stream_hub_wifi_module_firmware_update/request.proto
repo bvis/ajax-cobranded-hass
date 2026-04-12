@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_hub_wifi_module_firmware_update;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_hub_wifi_module_firmware_update";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamHubWifiModuleUpdateRequest {
+  string hub_id = 1;
+}

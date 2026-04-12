@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.detection;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.detection";
+option swift_prefix = "";
+
+option java_multiple_files = true;
+
+//   points[i+1]
+//      |
+// LEFT | RIGHT
+//      |
+//   points[i]
+enum LineCrossingDirection {
+  LINE_CROSSING_DIRECTION_UNSPECIFIED = 0;
+  LINE_CROSSING_DIRECTION_LEFT_TO_RIGHT = 1;
+  LINE_CROSSING_DIRECTION_RIGHT_TO_LEFT = 2;
+  LINE_CROSSING_DIRECTION_ANY = 3;
+}

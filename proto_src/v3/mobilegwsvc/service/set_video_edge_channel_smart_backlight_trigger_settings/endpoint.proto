@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_channel_smart_backlight_trigger_settings;
+
+import "v3/mobilegwsvc/service/set_video_edge_channel_smart_backlight_trigger_settings/request.proto";
+import "v3/mobilegwsvc/service/set_video_edge_channel_smart_backlight_trigger_settings/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_channel_smart_backlight_trigger_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SetVideoEdgeChannelSmartBacklightTriggerSettingsService {
+  rpc execute(SetVideoEdgeChannelSmartBacklightTriggerSettingsRequest) returns (SetVideoEdgeChannelSmartBacklightTriggerSettingsResponse);
+};

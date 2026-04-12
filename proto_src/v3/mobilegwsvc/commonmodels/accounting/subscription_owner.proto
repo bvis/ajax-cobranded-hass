@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/api/mobile/v2/hubobject/model/company/company_info.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SubscriptionOwner {
+  oneof owner {
+    User user = 1;
+    mobile.v2.hubobject.model.company.CompanyInfo company = 2;
+    mobile.v2.common.accounting.AccountingCompany accounting_company = 3;
+  }
+
+  message User {
+    string user_hex_id = 1;
+    string first_name = 2 [(hash_value) = true];
+    string last_name = 3 [(hash_value) = true];
+    api.mobile.v2.common.image.Images images = 4;
+  }
+}

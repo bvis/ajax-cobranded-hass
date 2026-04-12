@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.create_backup_channel";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CreateBackupChannelResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success { }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_not_found = 2;
+      commonmodels.Error permission_denied = 3;
+      commonmodels.Error video_edge_not_found = 4;
+      commonmodels.Error hub_not_found = 5;
+      commonmodels.Error space_armed = 6;
+      commonmodels.Error hub_error = 7;
+      commonmodels.Error search_timeout = 8;
+      commonmodels.Error hub_is_busy = 9;
+      commonmodels.Error wrong_hub_state = 10;
+      commonmodels.Error objects_limit_exceeded = 11;
+      commonmodels.Error hub_device_already_added = 12;
+      commonmodels.Error unknown_hub_device = 13;
+      commonmodels.Error unsupported_hub_device = 14;
+      commonmodels.Error need_update_hub_firmware = 15;
+      commonmodels.Error hub_offline = 16;
+      commonmodels.Error video_edge_is_offline = 17;
+      commonmodels.Error mcu_io_error = 18;
+      commonmodels.Error mcu_invalid_state = 19;
+      commonmodels.Error mcu_no_response_from_mcu = 20;
+    }
+  }
+};

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.hub.company.privacy";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/hub/photo_on_demand_company_rights.proto";
+
+message ChangePhotoOnDemandCompanyAccessRequest {
+  string hub_id = 1;
+  string company_id = 2;
+  systems.ajax.api.mobile.v2.common.hub.PhotoOnDemandCompanyRights company_rights = 3;
+}
+
+
+message ChangePhotoOnDemandCompanyAccessResponse {
+  oneof response {
+    systems.ajax.api.mobile.v2.common.response.Success success = 1;
+    Error error = 2;
+  }
+
+  message Error {
+    oneof errors {
+      systems.ajax.api.mobile.v2.common.response.InternalError internal_error = 1;
+      systems.ajax.api.mobile.v2.common.response.CompanyOnHubNotFoundError company_on_hub_not_found_error = 2;
+      systems.ajax.api.mobile.v2.common.response.PermissionDeniedError permission_denied_error = 3;
+      systems.ajax.api.mobile.v2.common.response.DeadlineExceededError deadline_exceeded_error = 4;
+    }
+  }
+}

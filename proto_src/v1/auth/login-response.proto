@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.auth;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.auth";
+option java_multiple_files = true;
+
+import "v1/user/user-company.proto";
+import "v1/user/user-info.proto";
+import "v1/company/employee.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message LoginResponse {
+  string user_id = 1;
+  string session_token = 2 [(hash_value) = true];
+  string company_id = 3;
+  company.Employee.EmployeeInfo employee_info = 4;
+  repeated user.UserCompany user_companies = 5;
+  user.UserInfo user_info = 6;
+}

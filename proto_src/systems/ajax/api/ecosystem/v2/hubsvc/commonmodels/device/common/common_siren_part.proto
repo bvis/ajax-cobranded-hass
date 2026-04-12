@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/light_indication.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/common_beep_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonSirenPart {
+
+  SirenSettings siren_settings = 1;
+  CommonBeepPart common_beep_part = 2;
+  LightIndication light_indication = 4;
+
+  repeated SirenVolumeLevel siren_volume_level_capabilities = 5;
+  repeated Capabilities capabilities = 6;
+  ExtendedAlarmDuration extended_alarm_duration_capability = 7;
+
+  message SirenSettings {
+    optional int32 alarm_duration = 1 [(proto.meta.field_tag) = "alarm_duration"];
+    optional SirenVolumeLevel siren_volume_level = 3[(proto.meta.field_tag) = "siren_volume_level"];
+  }
+
+  enum ExtendedAlarmDuration {
+    EXTENDED_ALARM_DURATION_UNSPECIFIED = 0;
+    EXTENDED_ALARM_DURATION_NOT_SUPPORTED = 1;
+    EXTENDED_ALARM_DURATION_RESTRICTED = 2;
+    EXTENDED_ALARM_DURATION_ALWAYS = 3;
+  }
+
+  enum SirenVolumeLevel {
+    SIREN_VOLUME_LEVEL_UNSPECIFIED = 0;
+    SIREN_VOLUME_LEVEL_VERY_LOUD = 1 [(proto.meta.enum_tag) = "SIREN_VOLUME_LEVEL_VERY_LOUD"];
+    SIREN_VOLUME_LEVEL_LOUD = 18 [(proto.meta.enum_tag) = "SIREN_VOLUME_LEVEL_LOUD"];
+    SIREN_VOLUME_LEVEL_QUIET = 29 [(proto.meta.enum_tag) = "SIREN_VOLUME_LEVEL_QUIET"];
+    SIREN_VOLUME_LEVEL_DISABLED = 32 [(proto.meta.enum_tag) = "SIREN_VOLUME_LEVEL_DISABLED"];
+  }
+
+  enum Capabilities {
+    CAPABILITIES_UNSPECIFIED = 0;
+    CAPABILITIES_VOLUME_TEST = 1;
+    CAPABILITIES_VOLUME_LIST_EXTENDED = 2;
+    CAPABILITIES_ALARM_DURATION_WARNING = 3;
+    CAPABILITIES_EXTENDED_ALARM_DURATION_SSF = 4;
+  }
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Accounting";
+
+message DealerInfo {
+  string company_hex_id = 1;
+  string name = 2;
+}

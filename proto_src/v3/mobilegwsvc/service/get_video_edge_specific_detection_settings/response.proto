@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_specific_detection_settings;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_video_edge_specific_detection_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetVideoEdgeSpecificDetectionSettingsResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof settings {
+      mobile.v2.common.video.videoedge.detector.PirDetectorSettings pir = 1;
+      mobile.v2.common.video.videoedge.detector.MotionDetectorSettings motion = 2;
+      mobile.v2.common.video.videoedge.detector.ObjectDetectorSettings object = 3;
+    }
+  }
+
+  message Failure {
+
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error space_not_found = 2;
+      commonmodels.Error permission_denied = 3;
+      commonmodels.Error video_edge_not_found = 4;
+      commonmodels.Error channel_not_found = 5;
+      commonmodels.Error detector_not_found = 6;
+    }
+  }
+};

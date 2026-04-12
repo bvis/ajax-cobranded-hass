@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_siren_chime_settings_on_video_edge;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/motion_cam_video_base.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_siren_chime_settings_on_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeSirenChimeSettingsRequest {
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  repeated commonmodels.hub.device.MotionCamVideoBase.ChimeTrigger chime_triggers = 3;
+
+  int32 chime_signal = 4;
+}

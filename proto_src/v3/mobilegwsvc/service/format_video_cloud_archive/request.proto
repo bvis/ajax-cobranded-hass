@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.format_video_cloud_archive;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.format_video_cloud_archive";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FormatVideoCloudArchiveRequest {
+
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  string channel_id = 3;
+}

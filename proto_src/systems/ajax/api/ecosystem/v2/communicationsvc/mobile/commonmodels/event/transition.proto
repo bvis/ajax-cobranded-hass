@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message EventTransition {
+  oneof transition {
+    Triggered triggered = 1;
+    Recovered recovered = 2;
+    Impulse impulse = 3;
+  }
+
+  message Triggered {}
+  message Recovered {}
+  message Impulse {}
+}

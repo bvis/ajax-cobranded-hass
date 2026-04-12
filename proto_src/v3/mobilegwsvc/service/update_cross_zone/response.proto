@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_cross_zone;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_cross_zone";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateCrossZoneResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error hub_not_found = 2;
+      commonmodels.Error cross_zone_not_found = 3;
+      commonmodels.Error illegal_argument = 4;
+      commonmodels.Error request_timeout = 5;
+      commonmodels.Error permission_denied = 6;
+      commonmodels.Error hub_offline = 7;
+      commonmodels.Error hub_error = 8;
+      commonmodels.HubBusyError hub_busy = 9;
+      commonmodels.HubWrongStateError hub_wrong_state = 10;
+    }
+  }
+}

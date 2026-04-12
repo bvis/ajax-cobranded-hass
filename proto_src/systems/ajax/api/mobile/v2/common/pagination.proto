@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Pagination {
+  oneof case {
+    string forward_exclusive_pagination_token = 1; // for search by >
+  }
+}

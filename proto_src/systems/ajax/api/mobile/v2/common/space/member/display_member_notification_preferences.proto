@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DisplayMemberNotificationPreferences {
+  DisplayMemberPushPreferences member_push_preferences = 1;
+  DisplayMemberSmsPreferences member_sms_preferences = 2;
+  DisplayMemberCallPreferences member_call_preferences = 3;
+  DisplayMemberPushPreferencesV2 member_push_preferences_v2 = 4;
+}
+
+message DisplayMemberPushPreferences {
+  repeated DisplayMemberPushPreference push_preferences = 1;
+}
+
+message DisplayMemberPushPreferencesV2 {
+  optional Alarm alarm = 1;
+  optional Malfunction malfunction = 2;
+  optional Security security = 3;
+  optional SystemEvent system_event = 4;
+  optional NonSecurityAlert non_security_alert = 5;
+  optional Automation automation = 6;
+  optional SmartLock smart_lock = 7;
+  optional Video video = 8;
+  optional DoorbellRinging doorbell_ringing = 9;
+
+  message Alarm {
+    Intrusion intrusion = 1;
+    Panic panic = 2;
+    Fire fire = 3;
+    Leakage leakage = 4;
+    Video video = 5;
+
+    message Intrusion {
+      PushPreferenceState state = 1;
+    }
+    message Panic {
+      PushPreferenceState state = 1;
+    }
+    message Fire {
+      PushPreferenceState state = 1;
+    }
+    message Leakage {
+      PushPreferenceState state = 1;
+    }
+    message Video {
+      PushPreferenceState state = 1;
+    }
+  }
+
+  message Malfunction {
+    bool enabled = 1;
+  }
+  message Security {
+    bool enabled = 1;
+  }
+  message SystemEvent {
+    bool enabled = 1;
+  }
+  message NonSecurityAlert {
+    bool enabled = 1;
+  }
+  message Automation {
+    bool enabled = 1;
+  }
+  message SmartLock {
+    bool enabled = 1;
+  }
+  message DoorbellRinging {
+    bool enabled = 1 [deprecated = true];
+    DoorbellRingingPushPreferenceState state = 2;
+  }
+
+  enum DoorbellRingingPushPreferenceState {
+    DOORBELL_RINGING_PUSH_PREFERENCE_STATE_UNSPECIFIED = 0;
+    DOORBELL_RINGING_PUSH_PREFERENCE_STATE_DISABLE = 1;
+    DOORBELL_RINGING_PUSH_PREFERENCE_STATE_NORMAL = 2;
+    DOORBELL_RINGING_PUSH_PREFERENCE_STATE_CRITICAL = 3;
+    DOORBELL_RINGING_PUSH_PREFERENCE_STATE_PHONE_CALL = 4;
+  }
+
+  message Video {
+    Motion motion = 1;
+    Human human = 2;
+    Pet pet = 3;
+    Vehicle vehicle = 4;
+    ScenarioExecuted scenario_executed = 5;
+
+    message Motion {
+      bool enabled = 1;
+    }
+    message Human {
+      bool enabled = 1;
+    }
+    message Pet {
+      bool enabled = 1;
+    }
+    message Vehicle {
+      bool enabled = 1;
+    }
+    message ScenarioExecuted {
+      bool enabled = 1;
+    }
+  }
+
+  enum PushPreferenceState {
+    PUSH_PREFERENCE_STATE_UNSPECIFIED = 0;
+    PUSH_PREFERENCE_STATE_DISABLE = 1;
+    PUSH_PREFERENCE_STATE_NORMAL = 2;
+    PUSH_PREFERENCE_STATE_CRITICAL = 3;
+  }
+}
+
+message DisplayMemberSmsPreferences {
+  repeated DisplayMemberSmsPreference sms_preferences = 1;
+}
+
+message DisplayMemberCallPreferences {
+  repeated DisplayMemberCallPreference call_preferences = 1;
+}
+
+enum DisplayMemberPushPreference {
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_UNSPECIFIED = 0;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_ALARM = 1;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_MALFUNCTION = 2;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_SECURITY = 3;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_SYSTEM_EVENT = 4;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_NON_SECURITY_ALERT = 5;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_AUTOMATION = 6;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_SMART_LOCK = 7;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_MOTION = 8;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_HUMAN = 9;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_PET = 10;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_VEHICLE = 11;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_SCENARIO_EXECUTED = 12;
+  DISPLAY_SPACE_MEMBER_PUSH_PREFERENCE_VIDEO_RING_BUTTON_PRESSED = 13;
+}
+
+enum DisplayMemberSmsPreference {
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_UNSPECIFIED = 0;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_ALARM = 1;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_MALFUNCTION = 2;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_SECURITY = 3;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_SYSTEM_EVENT = 4;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_NON_SECURITY_ALERT = 5;
+  DISPLAY_SPACE_MEMBER_SMS_PREFERENCE_AUTOMATION = 6;
+}
+
+enum DisplayMemberCallPreference {
+  DISPLAY_SPACE_MEMBER_CALL_PREFERENCE_UNSPECIFIED = 0;
+  DISPLAY_SPACE_MEMBER_CALL_PREFERENCE_ALARM = 1;
+}

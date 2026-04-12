@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "v1/hub/hub-add-hub-request.proto";
+import "v1/hub/hub-add-hub-response.proto";
+import "v1/hub/get-hub-indexes-request.proto";
+import "v1/hub/get-hub-indexes-response.proto";
+
+service HubService {
+
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound"
+* INVALID_ARGUMENT - systems.ajax.a911.constraints.*"
+*/
+  rpc addHub (HubAddHubRequest) returns (HubAddHubResponse);
+  rpc getHubIndexes (systems.ajax.mobilegw.grpc.hub.v1.GetHubIndexesRequest) returns (systems.ajax.mobilegw.grpc.hub.v1.GetHubIndexesResponse);
+}

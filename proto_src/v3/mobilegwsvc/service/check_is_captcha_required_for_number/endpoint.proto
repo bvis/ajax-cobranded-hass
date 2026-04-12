@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.check_is_captcha_required_for_number;
+
+import "v3/mobilegwsvc/service/check_is_captcha_required_for_number/request.proto";
+import "v3/mobilegwsvc/service/check_is_captcha_required_for_number/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.check_is_captcha_required_for_number";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CheckIsCaptchaRequiredForNumberService {
+  rpc execute (CheckIsCaptchaRequiredForNumberRequest) returns (CheckIsCaptchaRequiredForNumberResponse);
+};

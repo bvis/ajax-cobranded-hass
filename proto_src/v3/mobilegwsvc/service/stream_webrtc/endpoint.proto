@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc;
+
+import "v3/mobilegwsvc/service/stream_webrtc/request.proto";
+import "v3/mobilegwsvc/service/stream_webrtc/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamWebrtcService {
+  rpc execute(stream StreamWebrtcRequest) returns (stream StreamWebrtcResponse);
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_monitoring_company.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message BillingCompany {
+
+  systems.ajax.api.mobile.v2.common.image.Images company_logo = 1;
+
+  string company_name = 2;
+
+  systems.ajax.api.mobile.v2.common.space.company.SpaceMonitoringCompany.CompanyBillingInfo company_billing_info = 3;
+}

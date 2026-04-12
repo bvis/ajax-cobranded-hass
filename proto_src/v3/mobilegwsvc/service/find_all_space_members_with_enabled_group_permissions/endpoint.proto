@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_members_with_enabled_group_permissions;
+
+import "v3/mobilegwsvc/service/find_all_space_members_with_enabled_group_permissions/request.proto";
+import "v3/mobilegwsvc/service/find_all_space_members_with_enabled_group_permissions/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_space_members_with_enabled_group_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FindAllSpaceMembersWithEnabledGroupPermissionsService {
+  rpc execute(FindAllSpaceMembersWithEnabledGroupPermissionsRequest) returns (FindAllSpaceMembersWithEnabledGroupPermissionsResponse);
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security;
+
+import "systems/ajax/api/mobile/v2/common/space/security/group/group_mode_space_security.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/regular/regular_mode_space_security.proto";
+import "systems/ajax/api/mobile/v2/common/space/security/displayed_space_security_state.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SpaceSecurityMode {
+  oneof mode {
+    security.regular.RegularModeSpaceSecurity regular_mode = 1;
+    security.group.GroupModeSpaceSecurity group_mode = 2;
+  }
+
+  DisplayedSpaceSecurityState displayed_security_state = 13;
+}

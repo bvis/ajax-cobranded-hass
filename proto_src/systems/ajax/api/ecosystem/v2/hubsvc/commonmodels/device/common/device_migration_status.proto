@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+enum DeviceMigrationStatus {
+  DEVICE_MIGRATION_STATUS_UNSPECIFIED = 0;
+  DEVICE_MIGRATION_STATUS_NOT_IN_MIGRATION = 1;
+  DEVICE_MIGRATION_STATUS_IN_PROCESS = 2;
+}

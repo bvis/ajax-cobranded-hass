@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.company;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/logo/logo.proto";
+
+message ShortCompany {
+  string company_hex_id = 1;
+  string name = 2;
+  systems.ajax.api.mobile.v2.common.logo.Logo logo = 3;
+  string websiteUrl = 4;
+}

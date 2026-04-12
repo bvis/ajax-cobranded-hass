@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum DurationOption {
+    DURATION_OPTION_UNSPECIFIED = 0;
+    DURATION_OPTION_UNLIMITED = 1;
+    DURATION_OPTION_ZERO = 20;
+    DURATION_OPTION_10_SECONDS = 19;
+    DURATION_OPTION_30_SECONDS = 2;
+    DURATION_OPTION_60_SECONDS = 3;
+    DURATION_OPTION_90_SECONDS = 17;
+    DURATION_OPTION_120_SECONDS = 4;
+    DURATION_OPTION_5_MINUTES = 5;
+    DURATION_OPTION_10_MINUTES = 6;
+    DURATION_OPTION_15_MINUTES = 7;
+    DURATION_OPTION_30_MINUTES = 8;
+    DURATION_OPTION_60_MINUTES = 9;
+    DURATION_OPTION_1_DAY = 10;
+    DURATION_OPTION_2_DAYS = 11;
+    DURATION_OPTION_3_DAYS = 12;
+    DURATION_OPTION_5_DAYS = 18;
+    DURATION_OPTION_7_DAYS = 13;
+    DURATION_OPTION_14_DAYS = 14;
+    DURATION_OPTION_28_DAYS = 15;
+    DURATION_OPTION_30_DAYS = 16;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+/*
+ * Compact image urls structure.
+ * Contains base_path as a required prefix to build URL and suffix values
+ * for different image size.
+ *
+ * Example:
+ *   small_image_url = image_urls.base_path + image_urls.small
+ */
+message ImageUrls {
+    string small = 1000;
+    string medium = 1010;
+    string big = 1020;
+
+    string base_path = 2000;
+}

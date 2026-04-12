@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.suspend_target;
+
+import "v3/mobilegwsvc/service/suspend_target/request.proto";
+import "v3/mobilegwsvc/service/suspend_target/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.suspend_target";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SuspendTargetService {
+  rpc execute (SuspendTargetRequest) returns (SuspendTargetResponse);
+};

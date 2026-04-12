@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.smartlock;
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "SmartLock";
+
+message Added {}
+message Removed {}
+message ConnectionLoss {}
+message LockedManually {}
+message LockedByExternalUser {}
+message LockedBySpaceMember {}
+message LockedByScenario {}
+message LockingFailed {}
+message BatteryLow {}
+message DoorbellPressed {}
+message LockedAutomatically {}
+message LockedByKeypad {}
+message KeypadTemporarilyDisabled {}
+message LockedByMatter {}
+
+message SmartLockEventTag {
+  oneof event_tag_case {
+    Added added = 1;
+    Removed removed = 2;
+    ConnectionLoss connection_loss = 3;
+    LockedManually locked_manually = 4;
+    LockedByExternalUser locked_by_external_user = 5;
+    LockedBySpaceMember locked_by_space_member = 6;
+    LockedByScenario locked_by_scenario = 7;
+    LockingFailed locking_failed = 8;
+    BatteryLow battery_low = 9;
+    DoorbellPressed doorbell_pressed = 10;
+    LockedAutomatically locked_automatically = 11;
+    LockedByKeypad locked_by_keypad = 12;
+    KeypadTemporarilyDisabled keypad_temporarily_disabled = 13;
+    LockedByMatter locked_by_matter = 14;
+  }
+}

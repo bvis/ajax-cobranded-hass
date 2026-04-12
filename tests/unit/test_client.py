@@ -1,0 +1,216 @@
+"""Tests for the gRPC client core."""
+
+from __future__ import annotations
+
+import time
+from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
+
+from custom_components.ajax_cobranded.api.client import AjaxGrpcClient
+from custom_components.ajax_cobranded.api.session import AjaxSession
+from custom_components.ajax_cobranded.const import GRPC_HOST, GRPC_PORT
+
+
+class TestClientInit:
+    def test_default_host_port(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._host = GRPC_HOST
+        client._port = GRPC_PORT
+        assert client._host == "mobile-gw.prod.ajax.systems"
+        assert client._port == 443
+
+    def test_session_created(self) -> None:
+        client = AjaxGrpcClient(email="test@example.com", password="secret")
+        assert isinstance(client._session, AjaxSession)
+        assert client._session._email == "test@example.com"
+
+    def test_session_property(self) -> None:
+        client = AjaxGrpcClient(email="a@b.com", password="p")
+        assert client.session is client._session
+
+    def test_is_connected_false_initially(self) -> None:
+        client = AjaxGrpcClient(email="a@b.com", password="p")
+        assert client.is_connected is False
+
+    def test_is_connected_true_with_channel_and_auth(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._channel = MagicMock()
+        client._session = MagicMock()
+        client._session.is_authenticated = True
+        assert client.is_connected is True
+
+    def test_get_channel_raises_when_not_connected(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._channel = None
+        with pytest.raises(ConnectionError, match="not connected"):
+            client._get_channel()
+
+    def test_get_channel_returns_channel(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        mock_channel = MagicMock()
+        client._channel = mock_channel
+        assert client._get_channel() is mock_channel
+
+
+class TestClientConnect:
+    @pytest.mark.asyncio
+    async def test_connect_creates_channel(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._host = GRPC_HOST
+        client._port = GRPC_PORT
+        client._channel = None
+
+        mock_channel = MagicMock()
+        with (
+            patch("grpc.ssl_channel_credentials"),
+            patch("grpc.aio.secure_channel", return_value=mock_channel) as mock_secure,
+        ):
+            await client.connect()
+            mock_secure.assert_called_once()
+            assert client._channel is mock_channel
+
+    @pytest.mark.asyncio
+    async def test_close_clears_channel(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        mock_channel = AsyncMock()
+        client._channel = mock_channel
+        client._refresh_task = None
+        client._session = MagicMock()
+
+        await client.close()
+        mock_channel.close.assert_called_once()
+        assert client._channel is None
+
+    @pytest.mark.asyncio
+    async def test_close_cancels_refresh_task(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        mock_channel = AsyncMock()
+        client._channel = mock_channel
+        client._session = MagicMock()
+
+        mock_task = MagicMock()
+        mock_task.done.return_value = False
+        client._refresh_task = mock_task
+
+        await client.close()
+        mock_task.cancel.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_close_when_no_channel(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._channel = None
+        client._refresh_task = None
+        client._session = MagicMock()
+        # Should not raise
+        await client.close()
+
+
+class TestRateLimit:
+    @pytest.mark.asyncio
+    async def test_rate_limit_passes_under_limit(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._rate_limit_timestamps = []
+        # Should not block when under limit
+        await client._check_rate_limit()
+        assert len(client._rate_limit_timestamps) == 1
+
+    @pytest.mark.asyncio
+    async def test_rate_limit_cleans_old_timestamps(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        # Add old timestamps
+        old_time = time.monotonic() - 200
+        client._rate_limit_timestamps = [old_time] * 5
+        await client._check_rate_limit()
+        # Old timestamps should be removed
+        assert len(client._rate_limit_timestamps) == 1
+
+
+class TestClientRetry:
+    @pytest.mark.asyncio
+    async def test_retry_on_transient_error(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._session = AjaxSession()
+
+        call_count = 0
+
+        async def flaky_call() -> str:
+            nonlocal call_count
+            call_count += 1
+            if call_count < 3:
+                raise ConnectionError("UNAVAILABLE")
+            return "success"
+
+        result = await client._retry(flaky_call, max_retries=3, base_delay=0.01)
+        assert result == "success"
+        assert call_count == 3
+
+    @pytest.mark.asyncio
+    async def test_retry_exhausted(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._session = AjaxSession()
+
+        async def always_fails() -> str:
+            raise ConnectionError("UNAVAILABLE")
+
+        with pytest.raises(ConnectionError):
+            await client._retry(always_fails, max_retries=2, base_delay=0.01)
+
+    @pytest.mark.asyncio
+    async def test_retry_reraises_non_transient_grpc_error(self) -> None:
+        import grpc
+
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._session = AjaxSession()
+
+        mock_error = MagicMock(spec=grpc.aio.AioRpcError)
+        mock_error.code.return_value = grpc.StatusCode.NOT_FOUND
+
+        async def fails_with_non_transient() -> str:
+            raise mock_error
+
+        with pytest.raises(TypeError):
+            await client._retry(fails_with_non_transient, max_retries=3, base_delay=0.01)
+
+
+class TestCallUnary:
+    @pytest.mark.asyncio
+    async def test_call_unary(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._rate_limit_timestamps = []
+        mock_channel = MagicMock()
+        client._channel = mock_channel
+        mock_session = MagicMock()
+        mock_session.get_call_metadata.return_value = [("token", "abc")]
+        client._session = mock_session
+
+        mock_response = MagicMock()
+        mock_method = AsyncMock(return_value=mock_response)
+        mock_channel.unary_unary.return_value = mock_method
+
+        mock_request = MagicMock()
+        mock_response_type = MagicMock()
+
+        result = await client.call_unary("/some/method", mock_request, mock_response_type)
+        assert result is mock_response
+        mock_channel.unary_unary.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_call_server_stream(self) -> None:
+        client = AjaxGrpcClient.__new__(AjaxGrpcClient)
+        client._rate_limit_timestamps = []
+        mock_channel = MagicMock()
+        client._channel = mock_channel
+        mock_session = MagicMock()
+        mock_session.get_call_metadata.return_value = []
+        client._session = mock_session
+
+        mock_stream = MagicMock()
+        mock_method = MagicMock(return_value=mock_stream)
+        mock_channel.unary_stream.return_value = mock_method
+
+        mock_request = MagicMock()
+        mock_response_type = MagicMock()
+
+        result = await client.call_server_stream("/some/method", mock_request, mock_response_type)
+        assert result is mock_stream

@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.company;
+
+option swift_prefix = "";
+
+service SecurityCompanyService {
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc getCompanies(GetCompaniesRequest) returns (GetCompaniesResponse);
+
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc getCompaniesV2(GetCompaniesRequest) returns (GetCompaniesResponseV2);
+
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc getCompany(GetCompanyRequest) returns (SecurityCompany);
+  /*
+ * Possible error statuses and corresponding error templates
+ * INVALID_ARGUMENT = "systems.ajax.mobilegw.constraints.*"
+ */
+  rpc searchCompany(SearchCompanyRequest) returns(SearchCompanyResponse);
+}
+
+message GetCompaniesRequest {
+  string country_code = 1;
+  string hub_hex_id = 2;
+}
+
+message GetCompaniesResponse {
+  repeated SecurityCompanyPreview on_monitoring = 1;
+  repeated SecurityCompanyPreview all = 2;
+}
+
+message GetCompaniesResponseV2 {
+  repeated SecurityCompanyPreview all = 1;
+}
+
+message GetCompanyRequest {
+  string company_id = 1;
+  string hub_hex_id = 2;
+}
+
+message SearchCompanyRequest {
+  string email = 1;
+  string hub_hex_id = 2;
+}
+
+message SearchCompanyResponse {
+  repeated SecurityCompanyPreview companies = 1;
+}
+
+enum SecurityCompanyStatus {
+  NO_STATE = 0;
+  PENDING_APPROVAL = 1;
+  APPROVED = 2;
+  PENDING_REMOVAL = 3;
+}
+
+message SecurityCompanyData {
+  string id = 1;
+  string name = 2;
+  string logo_url = 3;
+  SecurityCompanyStatus monitoring_status = 4;
+  int32 hub_user_index = 5;
+  AccountNumberRequiredStatus account_number_required_status = 6;
+
+  enum AccountNumberRequiredStatus {
+    ACCOUNT_NUMBER_REQUIRED_STATUS_UNSPECIFIED = 0;
+    ACCOUNT_NUMBER_REQUIRED_STATUS_REQUIRED = 1;
+    ACCOUNT_NUMBER_REQUIRED_STATUS_NOT_REQUIRED = 2;
+  }
+}
+
+message SecurityCompanyContact {
+  string phone_number = 1;
+  string description = 2;
+}
+
+message SecurityCompanyLocation {
+  string country_code = 1;
+}
+
+message SecurityCompanyDetails {
+  string web_site_url = 1;
+  string description = 2;
+  repeated SecurityCompanyLocation locations = 3;
+  repeated SecurityCompanyContact contacts = 4;
+  repeated string emails = 5;
+}
+
+message SecurityCompanyPreview {
+  SecurityCompanyData data = 1;
+}
+
+message SecurityCompany {
+  SecurityCompanyData data = 1;
+  SecurityCompanyDetails details = 2;
+}

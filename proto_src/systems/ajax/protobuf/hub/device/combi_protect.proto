@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message CombiProtect {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    bool motion_sensor_aware = 0x31;
+    bool glass_break_sensor_aware = 0x32;
+    int32 motion_sensitivity = 0x33;
+    int32 glass_break_sensitivity = 0x34;
+    bool motion_sensor_always_active = 0x35;
+    bool glass_break_sensor_always_active = 0x36;
+    google.protobuf.BoolValue motion_detected = 0x37;
+    google.protobuf.BoolValue glass_break_detected = 0x38;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        MOTION = 1;
+        GLASS = 2;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

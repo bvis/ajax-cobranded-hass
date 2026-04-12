@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_to_join_by_qr;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.request_to_join_by_qr";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InitiateJoinByQrResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.Error member_already_exists = 2;
+      commonmodels.Error hub_offline = 3;
+      commonmodels.Error limit_reached = 4;
+    }
+  }
+}

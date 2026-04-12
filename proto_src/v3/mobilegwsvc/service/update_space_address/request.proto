@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_address;
+
+import "systems/ajax/api/mobile/v2/common/space/space_address.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_address";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateAddressRequest {
+  string space_id = 1;
+  systems.ajax.api.mobile.v2.common.space.SpaceAddress address = 2;
+}

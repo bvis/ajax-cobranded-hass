@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetUrlRequest {
+  common.space.smartlock.SmartLockType smart_lock_type = 1;
+}
+
+message GetUrlResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string url = 1;
+  }
+
+  message Failure {
+    string message = 100;
+  }
+}

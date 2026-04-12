@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options;
+
+import "v3/mobilegwsvc/service/get_scenario_trigger_options/request.proto";
+import "v3/mobilegwsvc/service/get_scenario_trigger_options/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_scenario_trigger_options";
+option swift_prefix = "";
+
+service GetScenarioTriggerOptionsService {
+  rpc execute(GetScenarioTriggerOptionsRequest) returns (GetScenarioTriggerOptionsResponse);
+}

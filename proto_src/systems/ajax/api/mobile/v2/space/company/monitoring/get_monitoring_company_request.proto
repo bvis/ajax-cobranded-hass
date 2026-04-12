@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.company.monitoring;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/company/space_monitoring_company.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message GetMonitoringCompanyRequest {
+  string company_hex_id = 1;
+  string space_id = 2;
+};
+
+message GetMonitoringCompanyResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    common.space.company.SpaceMonitoringCompany company = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+    }
+  }
+};

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+import "v1/facility/facility.proto";
+
+message FacilityStreamNotesResponse {
+  repeated Facility.Note notes = 1;
+}

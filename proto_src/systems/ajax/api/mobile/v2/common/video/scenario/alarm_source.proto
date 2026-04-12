@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.scenario;
+
+import "systems/ajax/api/mobile/v2/common/video/scenario/alarm/alarm.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AlarmSource {
+  string source_id = 1;
+
+  repeated alarm.Alarm alarms = 2;
+
+  HtsAlarm hts_alarm = 999;
+
+  message HtsAlarm {
+    string hts_device_type = 1;
+
+    repeated string hts_event_codes = 2;
+  }
+}

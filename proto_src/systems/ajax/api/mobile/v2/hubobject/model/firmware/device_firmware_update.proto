@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject.model.firmware;
+
+import "systems/ajax/api/mobile/v2/common/resource_id.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceFirmwareUpdate {
+  string device_id = 1;
+  systems.ajax.api.mobile.v2.common.ResourceId resource_id = 2;
+  Status status = 5;
+  google.protobuf.BoolValue is_critical = 6;
+
+  message Status {
+    oneof status {
+      google.protobuf.Empty not_started = 1;
+      int32 downloading = 2; //[0-99]%
+      google.protobuf.Empty downloaded = 3;
+      google.protobuf.Empty installing = 4;
+      google.protobuf.Empty completed = 5;
+      google.protobuf.Empty failed = 6;
+    }
+  }
+}
+

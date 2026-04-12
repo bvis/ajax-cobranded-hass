@@ -1,0 +1,225 @@
+"""Tests for sensor entities."""
+
+from __future__ import annotations
+
+from unittest.mock import MagicMock
+
+from custom_components.ajax_cobranded.api.models import BatteryInfo, Device
+from custom_components.ajax_cobranded.const import DeviceState
+from custom_components.ajax_cobranded.sensor import SENSOR_TYPES, AjaxSensor
+
+
+class TestSensorTypes:
+    def test_battery_type_exists(self) -> None:
+        assert "battery_level" in SENSOR_TYPES
+
+    def test_temperature_type_exists(self) -> None:
+        assert "temperature" in SENSOR_TYPES
+
+    def test_humidity_type_exists(self) -> None:
+        assert "humidity" in SENSOR_TYPES
+
+    def test_co2_type_exists(self) -> None:
+        assert "co2" in SENSOR_TYPES
+
+    def test_signal_strength_type_exists(self) -> None:
+        assert "signal_strength" in SENSOR_TYPES
+
+    def test_gsm_type_exists(self) -> None:
+        assert "gsm_type" in SENSOR_TYPES
+
+    def test_wifi_signal_level_exists(self) -> None:
+        assert "wifi_signal_level" in SENSOR_TYPES
+
+
+class TestAjaxSensor:
+    def _make_device(self, statuses: dict, battery: BatteryInfo | None = None) -> Device:
+        return Device(
+            id="dev-1",
+            hub_id="hub-1",
+            name="Sensor Device",
+            device_type="life_quality",
+            room_id=None,
+            group_id=None,
+            state=DeviceState.ONLINE,
+            malfunctions=0,
+            bypassed=False,
+            statuses=statuses,
+            battery=battery,
+        )
+
+    def test_battery_level(self) -> None:
+        device = self._make_device({}, battery=BatteryInfo(level=85, is_low=False))
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert sensor.native_value == 85
+
+    def test_temperature(self) -> None:
+        device = self._make_device({"temperature": 22.5})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor.native_value == 22.5
+
+    def test_humidity(self) -> None:
+        device = self._make_device({"humidity": 60})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="humidity")
+        assert sensor.native_value == 60
+
+    def test_co2(self) -> None:
+        device = self._make_device({"co2": 800})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="co2")
+        assert sensor.native_value == 800
+
+    def test_signal_strength(self) -> None:
+        device = self._make_device({"signal_strength": 3})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
+        )
+        assert sensor.native_value == 3
+
+    def test_native_value_returns_none_when_no_device(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor.native_value is None
+
+    def test_native_value_returns_none_when_key_missing(self) -> None:
+        device = self._make_device({})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor.native_value is None
+
+    def test_unique_id(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert sensor.unique_id == "ajax_cobranded_dev-1_battery_level"
+
+    def test_device_info_with_device(self) -> None:
+        device = self._make_device({})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert sensor._attr_device_info is not None
+        assert ("ajax_cobranded", "dev-1") in sensor._attr_device_info["identifiers"]
+
+    def test_device_info_without_device(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert not hasattr(sensor, "_attr_device_info") or sensor._attr_device_info is None
+
+    def test_battery_sensor_is_diagnostic(self) -> None:
+        from homeassistant.const import EntityCategory
+
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert sensor._attr_entity_category == EntityCategory.DIAGNOSTIC
+
+    def test_signal_strength_sensor_is_diagnostic(self) -> None:
+        from homeassistant.const import EntityCategory
+
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
+        )
+        assert sensor._attr_entity_category == EntityCategory.DIAGNOSTIC
+
+    def test_temperature_sensor_has_no_entity_category(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor._attr_entity_category is None
+
+    def test_signal_strength_disabled_by_default(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
+        )
+        assert sensor._attr_entity_registry_enabled_default is False
+
+    def test_battery_sensor_enabled_by_default(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="battery_level")
+        assert sensor._attr_entity_registry_enabled_default is True
+
+    def test_signal_strength_has_translation_key(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
+        )
+        assert sensor._attr_translation_key == "signal_level"
+
+    def test_available_when_online(self) -> None:
+        device = self._make_device({})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor.available is True
+
+    def test_unavailable_when_device_missing(self) -> None:
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor.available is False
+
+    def test_gsm_type_sensor(self) -> None:
+        device = self._make_device({"gsm_type": 3})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="gsm_type")
+        assert sensor.native_value == 3
+        assert sensor._attr_translation_key == "gsm_type"
+
+    def test_gsm_type_sensor_is_diagnostic(self) -> None:
+        from homeassistant.const import EntityCategory
+
+        coordinator = MagicMock()
+        coordinator.devices = {}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="gsm_type")
+        assert sensor._attr_entity_category == EntityCategory.DIAGNOSTIC
+
+    def test_hub_sensor_has_no_via_device(self) -> None:
+        from custom_components.ajax_cobranded.api.models import Device
+        from custom_components.ajax_cobranded.const import DeviceState
+
+        hub_device = Device(
+            id="hub-1",
+            hub_id="hub-1",
+            name="Hub",
+            device_type="hub_two_4g",
+            room_id=None,
+            group_id=None,
+            state=DeviceState.ONLINE,
+            malfunctions=0,
+            bypassed=False,
+            statuses={"gsm_type": 3},
+            battery=None,
+        )
+        coordinator = MagicMock()
+        coordinator.devices = {"hub-1": hub_device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="hub-1", sensor_key="gsm_type")
+        assert sensor._attr_device_info is not None
+        assert "via_device" not in sensor._attr_device_info
+
+    def test_non_hub_sensor_has_via_device(self) -> None:
+        device = self._make_device({"temperature": 22.5})
+        coordinator = MagicMock()
+        coordinator.devices = {"dev-1": device}
+        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
+        assert sensor._attr_device_info is not None
+        assert sensor._attr_device_info.get("via_device") == ("ajax_cobranded", "hub-1")

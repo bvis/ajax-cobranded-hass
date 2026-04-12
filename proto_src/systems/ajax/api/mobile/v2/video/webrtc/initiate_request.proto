@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.webrtc;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_candidate.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_candidate_filters.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_server.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/stream.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/session_description.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message InitiateWebRtcRequest {
+  string video_edge_id = 1;
+
+  repeated common.video.webrtc.Stream initial_streams = 2;
+
+  common.video.webrtc.IceCandidateFilters ice_filters = 3;
+
+  bool allow_large_rtp_packets = 4;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+};
+
+message InitiateWebRtcResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    oneof signaling_message {
+      WebRtcInit init = 1;
+      WebRtcOffer offer = 2;
+      WebRtcNewIceCandidate new_ice_candidate = 3;
+      WebRtcAnswer answer = 4;
+    }
+
+
+    message WebRtcInit {
+      string session_id = 1;
+
+      repeated common.video.webrtc.IceServer ice_servers = 2;
+
+      /**
+       * Streams that were actually sent to the video edge.
+       * (e.g. the initial list could be filtered by channel permissions
+       * also FrameTypeId with audio can be filtered out if user has no such permission)
+       */
+      repeated common.video.webrtc.Stream streams = 3;
+    };
+
+    message WebRtcOffer {
+      common.video.webrtc.SessionDescription session_description = 1;
+    };
+
+    message WebRtcAnswer {
+      common.video.webrtc.SessionDescription session_description = 1;
+    };
+
+    message WebRtcNewIceCandidate {
+      api.mobile.v2.common.video.webrtc.IceCandidate candidate = 1;
+    };
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError video_edge_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError video_edge_is_offline = 4;
+    }
+  }
+};

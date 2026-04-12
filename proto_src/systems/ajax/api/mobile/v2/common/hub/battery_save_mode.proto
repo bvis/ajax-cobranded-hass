@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+option java_multiple_files = true;
+option swift_prefix = "SpaceHubBSM";
+
+enum BatterySaveModeStatus {
+    BATTERY_SAVE_MODE_STATUS_UNSPECIFIED = 0;
+    BATTERY_SAVE_MODE_STATUS_NORMAL = 1;
+    BATTERY_SAVE_MODE_STATUS_BATTERY_SAVING = 2;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+enum NotificationChannel {
+  NO_NOTIFICATION_CHANNEL_INFO = 0;
+  PUSH = 1;
+  SMS = 2;
+  CALL = 3;
+}

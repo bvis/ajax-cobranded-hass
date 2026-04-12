@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_sign_on_url;
+
+import "v3/mobilegwsvc/service/get_sign_on_url/request.proto";
+import "v3/mobilegwsvc/service/get_sign_on_url/response.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_sign_on_url";
+option swift_prefix = "";
+
+service GetSignOnUrlService {
+  rpc execute(GetSignOnUrlRequest) returns (GetSignOnUrlResponse);
+}

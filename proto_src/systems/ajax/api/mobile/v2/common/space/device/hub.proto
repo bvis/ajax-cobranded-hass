@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+import "systems/ajax/api/mobile/v2/common/accounting/service_state.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_box_type.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_feature.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_color.proto";
+import "systems/ajax/api/mobile/v2/common/space/device/device_constraints.proto";
+import "systems/ajax/api/mobile/v2/common/space/displayed_chime_status.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Hub {
+  string id = 1;
+
+  optional string room_id = 2;
+
+  v2.common.accounting.ServiceState service_state = 3;
+
+  optional DeviceColor device_color = 4;
+
+  optional common.hub.HubBoxType box_type = 5;
+
+  DeviceConstraints constraints = 6;
+
+  common.hub.HubFeatures hub_features = 7;
+
+  common.space.DisplayedChimeStatus chime_status = 8;
+};

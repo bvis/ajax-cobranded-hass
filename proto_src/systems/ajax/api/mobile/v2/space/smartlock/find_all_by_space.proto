@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_in_space.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllSmartLocksBySpaceRequest {
+  string space_id = 1;
+}
+
+message FindAllSmartLocksBySpaceResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated common.space.smartlock.SmartLockInSpace smart_locks = 1;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError permission_denied = 1;
+      common.response.DefaultError bad_request = 2;
+      common.response.DefaultError space_not_found = 3;
+    }
+  }
+}

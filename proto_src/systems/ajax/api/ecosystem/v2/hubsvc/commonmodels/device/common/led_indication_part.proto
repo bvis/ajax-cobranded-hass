@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message LedIndicationPart {
+  LedIndication led_indication = 1[(proto.meta.field_tag) = "indicator_light_mode"];
+  repeated Capability capabilities = 2;
+
+  message LedIndicationPartSettings {
+    optional LedIndication led_indication = 1[(proto.meta.field_tag) = "indicator_light_mode"];
+  }
+
+  enum LedIndication {
+    LED_INDICATION_UNSPECIFIED = 0;
+    LED_INDICATION_ENABLED = 1[(proto.meta.enum_tag) = "LED_INDICATION_ENABLED"];
+    LED_INDICATION_DISABLED = 2[(proto.meta.enum_tag) = "LED_INDICATION_DISABLED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_LED_INDICATION = 1;
+  }
+}

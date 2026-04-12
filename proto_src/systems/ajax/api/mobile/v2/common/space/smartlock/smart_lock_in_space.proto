@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_space_settings.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SmartLockInSpace {
+  string id = 1;
+  SmartLock details= 2;
+  SmartLockSpaceSettings space_settings = 3;
+}

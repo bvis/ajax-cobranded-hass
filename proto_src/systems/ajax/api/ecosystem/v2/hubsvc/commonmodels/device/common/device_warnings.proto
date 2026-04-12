@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message DeviceWarnings {
+  repeated WarningData warnings = 1;
+
+  message WarningData {
+    oneof warning_data {
+      InstallationIssue installation_issue = 1;
+      AntimaskingNotCalibrated antimasking_not_calibrated = 2;
+    }
+  }
+
+  message InstallationIssue {}
+
+  message AntimaskingNotCalibrated {}
+}

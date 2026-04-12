@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/folder.proto";
+
+message UnreadNotificationCounters {
+  repeated UnreadCounterEntry counters = 1;
+
+  message UnreadCounterEntry {
+    NotificationFolder folder = 1;
+    int32 unread_events_count = 2;
+  }
+}

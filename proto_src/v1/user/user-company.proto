@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.user;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.user";
+option java_multiple_files = true;
+
+import "v1/common/company.proto";
+import "v1/company/employee.proto";
+
+message UserCompany {
+  string company_id = 1;
+  string company_name = 2;
+  common.Company.Status company_status = 3;
+  company.Employee.ComplexRole role = 4;
+  common.Company.Logo company_logo = 5;
+  string cluster_company_id = 6;
+  common.Company.PrivacyOverrideManagementAuthorizationStatus privacy_override_management_authorization_status = 7;
+  common.Company.ServiceType service_type = 36;
+  repeated common.Company.Feature enabled_features = 37;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/source.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/company/qualifier.proto";
+
+message CompanyNotificationContent {
+  event.company.CompanyEventQualifier qualifier = 1;
+  CompanyNotificationSource source = 2;
+}

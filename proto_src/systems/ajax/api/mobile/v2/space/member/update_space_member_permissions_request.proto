@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_permissions.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateSpaceMemberPermissionsRequest {
+  string space_id = 1;
+
+  string member_id = 2;
+
+  PermissionsUpdate update = 3;
+
+  message PermissionsUpdate {
+    repeated SpacePermissionPatch space_permission_patch = 1;
+
+    repeated HubPermissionPatch hub_permission_patch = 2;
+
+    repeated HubPermissionExtendedPatch hub_permission_extended_patch = 3;
+
+    message HubPermissionPatch {
+      common.space.member.DisplaySpaceMemberHubPermission permission = 1;
+
+      bool enabled = 2;
+    }
+
+    message SpacePermissionPatch {
+      common.space.member.DisplaySpaceMemberSpacePermission permission = 1;
+
+      bool enabled = 2;
+    }
+
+    message HubPermissionExtendedPatch {
+      common.space.member.DisplaySpaceMemberHubPermissionExtended permission = 1;
+
+      bool enabled = 2;
+    }
+  }
+};
+
+
+message UpdateSpaceMemberPermissionsResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.SpaceLockedError space_locked = 4;
+    }
+  }
+};

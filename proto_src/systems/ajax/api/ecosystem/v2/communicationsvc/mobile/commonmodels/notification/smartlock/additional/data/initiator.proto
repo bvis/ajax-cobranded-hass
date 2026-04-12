@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.smartlock.additional.data;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message Initiator {
+  string id = 1;
+  Type type = 2;
+  string name = 3 [(hash_value) = true];
+
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_EXTERNAL_USER = 1;
+    TYPE_SPACE_MEMBER = 2;
+    TYPE_SCENARIO = 3;
+  }
+}

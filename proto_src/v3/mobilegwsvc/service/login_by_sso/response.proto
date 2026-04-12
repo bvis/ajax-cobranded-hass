@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_sso;
+
+import "v1/user/user-company.proto";
+import "v3/mobilegwsvc/commonmodels/account/lite_account.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_sso";
+option swift_prefix = "";
+
+message LoginBySsoResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof response {
+      SignOnUrlResponse sign_on_url_response = 1;
+      LoginResponse login_response = 2;
+      CompanyList company_list = 3;
+    }
+
+    message SignOnUrlResponse {
+      string sign_on_url = 1;
+      string request_id = 2 [(hash_value) = true];
+    }
+
+    message LoginResponse {
+      bytes user_session_token = 1;
+      commonmodels.account.LiteAccount lite_account = 2;
+      string user_id = 3;
+      string a911_session_token = 4 [(hash_value) = true];
+      mobilegw.grpc.v1.user.UserCompany user_company = 5;
+    }
+  }
+
+  message CompanyList {
+    repeated mobilegw.grpc.v1.user.UserCompany companies = 1;
+  }
+
+  message Failure  {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error sso_config_not_found = 2;
+      commonmodels.Error unauthenticated = 3;
+      commonmodels.Error account_not_confirmed = 4;
+      commonmodels.Error account_locked = 5;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/space/member/hub_standalone_device_permission.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/hub_restore_after_alarm_permission.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/photo_on_demand_device_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/hub_standalone_device_extended_permission.proto";
+
+message HubStandaloneDevicePermissions {
+  string hub_id = 2;
+
+  repeated HubStandaloneDevicePermission hub_permissions = 1;
+  repeated HubRestoreAfterAlarmPermission hub_restore_after_alarm_permissions = 3;
+  repeated PhotoOnDemandDevicePermissions photo_on_demand_device_permissions = 4;
+  repeated HubStandaloneDevicePermissionExtended hub_permissions_extended = 5;
+}

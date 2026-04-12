@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_color.proto";
+import "systems/ajax/api/mobile/v2/common/hub/hub_box_type.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message HubBoxAppearance {
+
+  ecosystem.v2.hubsvc.commonmodels.device.common.DeviceColor box_color = 1;
+
+  mobile.v2.common.hub.HubBoxType box_type = 2;
+}

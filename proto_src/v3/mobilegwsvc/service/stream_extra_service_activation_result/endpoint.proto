@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_service_activation_result;
+
+import "v3/mobilegwsvc/service/stream_extra_service_activation_result/request.proto";
+import "v3/mobilegwsvc/service/stream_extra_service_activation_result/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_service_activation_result";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamExtraServiceActivationResultService {
+  rpc execute(StreamExtraServiceActivationResultRequest) returns (stream StreamExtraServiceActivationResultResponse);
+}

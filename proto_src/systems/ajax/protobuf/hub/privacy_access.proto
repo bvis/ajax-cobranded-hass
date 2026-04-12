@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message PrivacyAccessList {
+  string  hub_id = 1;
+  repeated PrivacyAccess privacy_access = 2;
+}
+
+message PrivacyAccess {
+  string userHexId = 1;
+  TargetObjectType target_object_type = 2;
+  string target_device_hex_id = 3;
+  PodAccessMode pod_access_mode = 4;
+  bool permission_active = 5;
+
+  enum PodAccessMode {
+    NO_POD_ACCESS_MODE_INFO = 0;
+    ALWAYS = 1;
+    ARMED = 2;
+  }
+
+  enum TargetObjectType {
+    NO_TARGET_OBJECT_TYPE_INFO = 0;
+    MOTION_CAM = 1;
+    MOTION_CAM_OUTDOOR = 2;
+    STREAMING_CAMERA = 3;
+  }
+}

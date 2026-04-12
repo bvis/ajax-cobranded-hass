@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_video_fragments_content;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/cloudarchive/fragment_status.proto";
+import "google/protobuf/duration.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_cloud_archive_video_fragments_content";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamCloudArchiveVideoFragmentsContentResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof content_case {
+      FragmentContent fragment_content = 1;
+      FragmentPartContent fragment_part_content = 2;
+      Init init = 3;
+    }
+  }
+
+  message Init {
+    // Playback should be paused after playback_duration_interval, when there was no input from user
+    google.protobuf.Duration playback_duration_interval = 1;
+  }
+
+  message FragmentContent {
+    // [optional]
+    string tag = 1;
+
+    // [required]
+    uint64 fragment_id = 2;
+
+    // [required]
+    commonmodels.cloudarchive.FragmentStatus status = 3;
+
+    // MP4 fragment url, content url is absent when status != FRAGMENT_STATUS_OK
+    // Possible case when url is valid but content already is deleted by cloud, need to handle such case on client side
+    optional string content_url = 4 [(disable_logging) = true];
+  }
+
+  message FragmentPartContent {
+    // [optional]
+    string tag = 1;
+
+    // [required]
+    uint64 fragment_id = 2;
+
+    // [required] - offset in microseconds
+    int32 offset = 3;
+
+    // [required]
+    commonmodels.cloudarchive.FragmentStatus status = 4;
+
+    // MP4 fragment part url, content url is absent when status != FRAGMENT_STATUS_OK
+    // Possible case when url is valid but content already is deleted by cloud, need to handle such case on client side
+    optional string content_url = 5 [(disable_logging) = true];
+
+    // these headers must be added to the content download request,
+    // because pre-signed url does not support Range as query param
+    repeated Header content_url_headers = 6;
+
+    message Header {
+      string key = 1;
+
+      string value = 2;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+      commonmodels.Error playback_limit_exceeded = 4;
+      commonmodels.Error cloud_archive_not_found = 5;
+    }
+  }
+}

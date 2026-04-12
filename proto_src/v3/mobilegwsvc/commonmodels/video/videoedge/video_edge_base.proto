@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.video_edge;
+
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/channel_base.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/mcu/mcu_base.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/detector/detector.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/diagnostics/diagnostics_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/firmware/firmware.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/leds/leds.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/network/network_interface.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/storage/storage_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/system/system_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/onvif/onvif_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/video_edge.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// this model contains solely fields from video-svc w/o enrichment from other services (space-svc/csa)
+message VideoEdgeBase {
+  string id = 1 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  string name = 2;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.ConnectionState connection_state = 3;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.archive.Archive archive = 4 [(disable_logging) = true];
+
+  repeated systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice.MediaDevice devices = 5;
+
+  repeated v3.mobilegwsvc.commonmodels.video.videoedge.channel.ChannelBase channels = 6;
+
+  repeated systems.ajax.api.mobile.v2.common.video.videoedge.detector.Detector detectors = 7;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.network.Network network = 8;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.diagnostics.DiagnosticsSettings diagnostics_settings = 9 [(disable_logging) = true];
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.system.SystemInfo system_info = 10;
+
+  repeated systems.ajax.api.mobile.v2.common.video.videoedge.network.NetworkInterface network_interfaces = 11;
+
+  repeated systems.ajax.api.mobile.v2.common.video.videoedge.storage.StorageDevice storage_devices = 12;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.firmware.Firmware firmware = 13;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.about.About about = 14;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.leds.Leds leds = 15;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.storage.Storage storage = 16;
+
+  v3.mobilegwsvc.commonmodels.video.videoedge.mcu.McuBase mcu = 17;
+
+  // may not be set if the device does not support ONVIF authentication
+  systems.ajax.api.mobile.v2.common.video.videoedge.onvif.OnvifInfo onvif_info = 18;
+};

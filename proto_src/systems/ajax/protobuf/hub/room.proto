@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/image_urls.proto";
+import "systems/ajax/protobuf/hub/name.proto";
+
+message Room {
+    string id = 0x02;
+    string image_id = 0x09;
+    Name name = 1000;
+    ImageUrls image_urls = 1100;
+}

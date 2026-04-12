@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_photo_on_demand_mode;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandPhotoOnDemandModeRequest {
+  string hub_id = 1;
+  oneof additional_param {
+    PhotoOnDemandModeUser photo_on_demand_mode_user = 2;
+    PhotoOnDemandModeScenario photo_on_demand_mode_scenario = 3;
+  }
+
+  enum  PhotoOnDemandModeUser {
+    PHOTO_ON_DEMAND_MODE_USER_UNSPECIFIED = 0;
+    PHOTO_ON_DEMAND_MODE_USER_DISABLE = 1;
+    PHOTO_ON_DEMAND_MODE_USER_ENABLE = 2;
+  }
+
+  enum  PhotoOnDemandModeScenario {
+    PHOTO_ON_DEMAND_MODE_SCENARIO_UNSPECIFIED = 0;
+    PHOTO_ON_DEMAND_MODE_SCENARIO_DISABLE = 1;
+    PHOTO_ON_DEMAND_MODE_SCENARIO_ENABLE = 2;
+  }
+}

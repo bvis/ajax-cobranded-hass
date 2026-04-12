@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_services_with_pending_deactivation;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_services_with_pending_deactivation";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/service.proto";
+
+message GetServicesWithPendingDeactivationResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated TargetPendingDeactivationServices target_services = 1;
+
+    message TargetPendingDeactivationServices {
+      v3.mobilegwsvc.commonmodels.accounting.EnrichedTargetInfo target_info = 1;
+      repeated PendingDeactivationService pending_deactivation_services = 2;
+
+      message PendingDeactivationService {
+        google.protobuf.Timestamp deactivation_date = 1;
+        ecosystem.v3.mobilegwsvc.commonmodels.accounting.Service service = 2;
+      }
+    }
+  }
+
+  message Failure {
+    oneof errors {
+      ecosystem.v3.mobilegwsvc.commonmodels.Error not_found = 1;
+    }
+  }
+}

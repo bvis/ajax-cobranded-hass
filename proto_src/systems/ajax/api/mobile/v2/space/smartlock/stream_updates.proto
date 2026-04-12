@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_in_space.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_space_settings.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamSmartLockUpdatesRequest {
+  string space_id = 1;
+}
+
+message StreamSmartLockUpdatesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof update {
+      InitialState initial_state = 1;
+      Installed installed = 2;
+      Uninstalled uninstalled = 3;
+      PartiallyChanged partially_changed = 4;
+    }
+
+    message InitialState {
+      repeated common.space.smartlock.SmartLockInSpace smart_locks = 1;
+    };
+
+    message Installed {
+      common.space.smartlock.SmartLockInSpace smart_lock = 1;
+    };
+
+    message Uninstalled {
+      string smart_lock_id = 1;
+    };
+
+    message PartiallyChanged {
+      string smart_lock_id = 100;
+
+      oneof change {
+        common.space.smartlock.SmartLock details = 1;
+        common.space.smartlock.SmartLockSpaceSettings space_settings = 2;
+      }
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError permission_denied = 1;
+      common.response.DefaultError bad_request = 2;
+      common.response.DefaultError space_not_found = 3;
+    }
+  }
+}

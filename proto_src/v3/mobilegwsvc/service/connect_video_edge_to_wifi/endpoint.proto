@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.connect_video_edge_to_wifi;
+
+import "v3/mobilegwsvc/service/connect_video_edge_to_wifi/request.proto";
+import "v3/mobilegwsvc/service/connect_video_edge_to_wifi/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.connect_video_edge_to_wifi";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ConnectVideoEdgeToWifiService {
+  rpc execute(ConnectVideoEdgeToWifiRequest) returns (ConnectVideoEdgeToWifiResponse);
+};

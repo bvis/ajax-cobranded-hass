@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.light;
+
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_profile.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/properties/subscription_state.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.light";
+option java_multiple_files = true;
+
+message LightVideoEdge {
+  reserved 2, 3;
+
+  space.device.light.LightDeviceProfile profile = 1;
+
+  repeated SpreadProperties spread_properties = 4;
+
+  VideoEdgeProperties video_edge_properties = 5;
+
+  message SpreadProperties {
+
+    // needed for stacked action properties of same kind
+    optional string id = 1;
+
+    int32 sort_index = 2;
+
+    oneof properties {
+      Channels channels = 3;
+    }
+
+    message Channels {
+      uint32 total_count = 1;
+      uint32 online_count = 2;
+    }
+  }
+
+  message VideoEdgeProperties {
+    mobile.v2.common.video.videoedge.about.About.Type video_edge_type = 1;
+  }
+}
+
+message LightVideoEdgeChannel {
+  reserved 2, 3, 4, 5, 1000;
+
+  space.device.light.LightDeviceProfile profile = 1;
+
+  VideoEdgeChannelProperties video_edge_channel_properties = 6;
+
+  repeated SpreadProperties spread_properties = 7;
+
+  message VideoEdgeChannelProperties {
+    reserved 3;
+
+    mobile.v2.common.video.videoedge.about.About.Type video_edge_type = 1;
+    mobile.v2.common.video.videoedge.channel.SourceAliases source_aliases = 2;
+    BackupChannelProperties backup_channel_properties = 4;
+
+    string video_edge_id = 1000;
+  }
+
+  message BackupChannelProperties {
+    optional string hub_id = 1;
+  }
+
+  message SpreadProperties {
+
+    // needed for stacked action properties of same kind
+    optional string id = 1;
+
+    int32 sort_index = 2;
+
+    oneof properties {
+      space.device.light.properties.SubscriptionState subscription_state = 3;
+    }
+  }
+}

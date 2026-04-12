@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_services;
+
+import "v3/mobilegwsvc/service/stream_extra_services/request.proto";
+import "v3/mobilegwsvc/service/stream_extra_services/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_extra_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamExtraServicesService {
+  rpc execute(StreamExtraServicesRequest) returns (stream StreamExtraServicesResponse);
+}

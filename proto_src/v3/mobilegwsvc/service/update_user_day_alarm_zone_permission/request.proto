@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_user_day_alarm_zone_permission;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_user_day_alarm_zone_permission";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateUserDayAlarmZonePermissionRequest {
+  string hub_id = 1;
+  string user_id = 2;
+  DayAlarmPermission day_alarm_permission = 3;
+
+  enum DayAlarmPermission {
+    DAY_ALARM_PERMISSION_UNSPECIFIED = 0;
+    DAY_ALARM_PERMISSION_NONE = 1;
+    DAY_ALARM_PERMISSION_TEMPORARY_BYPASS = 2;
+    DAY_ALARM_PERMISSION_PERMANENT_BYPASS = 3;
+  }
+}

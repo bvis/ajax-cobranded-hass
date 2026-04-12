@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.device;
+
+import "systems/ajax/api/mobile/v2/space/device/get_device_about_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceDeviceService {
+  rpc getDeviceAbout(GetDeviceAboutRequest) returns (GetDeviceAboutResponse);
+};

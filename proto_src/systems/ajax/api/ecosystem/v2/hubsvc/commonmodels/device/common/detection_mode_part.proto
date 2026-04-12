@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+message DetectionModePart {
+
+  CorrelationProcessing correlation_processing = 1[(proto.meta.field_tag) = "correlation_processing"];
+  DetectionDistance detection_distance = 2[(proto.meta.field_tag) = "detection_distance"];
+  ShatterState shatter_state = 3[(proto.meta.field_tag) = "shatter_state"];
+
+  repeated Capability capabilities = 4;
+
+  message DetectionModePartSettings {
+    optional CorrelationProcessing correlation_processing = 1[(proto.meta.field_tag) = "correlation_processing"];
+    optional DetectionDistance detection_distance = 2[(proto.meta.field_tag) = "detection_distance"];
+  }
+
+  enum CorrelationProcessing {
+    CORRELATION_PROCESSING_STATUS_UNSPECIFIED = 0;
+    CORRELATION_PROCESSING_STATUS_NOT_ACTIVE = 1[(proto.meta.enum_tag) = "CORRELATION_PROCESSING_STATUS_NOT_ACTIVE"];
+    CORRELATION_PROCESSING_STATUS_ACTIVE = 2[(proto.meta.enum_tag) = "CORRELATION_PROCESSING_STATUS_ACTIVE"];
+  }
+
+  enum DetectionDistance {
+    DETECTION_DISTANCE_UNSPECIFIED = 0;
+    DETECTION_DISTANCE_PET_IMMUNE = 1[(proto.meta.enum_tag) = "DETECTION_DISTANCE_PET_IMMUNE"];
+    DETECTION_DISTANCE_NEAR = 2[(proto.meta.enum_tag) = "DETECTION_DISTANCE_NEAR"];
+    DETECTION_DISTANCE_FAR = 3[(proto.meta.enum_tag) = "DETECTION_DISTANCE_FAR"];
+  }
+
+  enum ShatterState {
+    SHATTER_STATE_UNSPECIFIED = 0;
+    SHATTER_STATE_NORMAL = 1[(proto.meta.enum_tag) = "SHATTER_STATE_NORMAL"];
+    SHATTER_STATE_PET_IMMUNE = 2[(proto.meta.enum_tag) = "SHATTER_STATE_PET_IMMUNE"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_SETTINGS_SUPPORTED = 1;
+  }
+}

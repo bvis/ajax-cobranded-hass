@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.firmware;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/resource_id.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetFirmwareMetadataRequest {
+  systems.ajax.api.mobile.v2.common.ResourceId resource_id = 1;
+  string language_code = 2;
+}
+
+message GetFirmwareMetadataResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated string release_notes = 1;
+    repeated string before_proceed_notes = 2;
+  }
+
+  message Failure {
+    string message = 100;
+    oneof error {
+      common.response.DefaultError illegal_argument = 1;
+      common.response.DefaultError not_found = 2;
+    }
+  }
+}

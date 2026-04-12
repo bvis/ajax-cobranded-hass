@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.user;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.user";
+option java_multiple_files = true;
+
+import "v1/common/image-urls.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message UserInfo {
+  string first_name = 1 [(hash_value) = true];
+  string last_name = 2 [(hash_value) = true];
+  string locale = 3;
+  string email = 5 [(hash_value) = true];
+  string phone = 6 [(hash_value) = true];
+  common.ImageUrls image_urls = 7;
+  string cluster_user_id = 8;
+  uint32 end_user_agreement_version = 9;
+  uint32 privacy_policy_version = 10;
+}

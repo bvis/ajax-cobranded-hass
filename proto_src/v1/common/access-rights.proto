@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+option java_multiple_files = true;
+
+import "v1/common/permission.proto";
+import "v1/common/restore-permission.proto";
+
+message AccessRights {
+  int64 expiration_seconds = 1;
+  AccessType access_type = 2;
+  repeated common.Permission permissions = 3;
+
+  enum AccessType {
+    EXPIRED = 0;
+    PERMANENT = 1;
+    VALID = 2;
+  }
+}

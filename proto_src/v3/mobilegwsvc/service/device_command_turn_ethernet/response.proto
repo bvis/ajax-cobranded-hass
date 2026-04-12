@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_turn_ethernet";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandTurnEthernetResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error permission_denied = 1;
+      commonmodels.HubWrongStateError hub_wrong_state = 2;
+      commonmodels.HubBusyError hub_busy = 3;
+      commonmodels.Error hub_offline = 4;
+      commonmodels.Error network_settings_error = 5;
+    }
+  }
+}

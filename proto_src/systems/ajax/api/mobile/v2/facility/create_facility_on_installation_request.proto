@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "v1/facility/facility.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CreateFacilityOnInstallationRequest {
+  string facility_name = 1;
+  optional string registration_number = 2;
+  optional string device_qr_code = 3;
+};
+
+message CreateFacilityOnInstallationResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    systems.ajax.mobilegw.grpc.v1.facility.Facility facility = 2;
+
+    oneof created_with_warning {
+      common.response.AddDeviceError add_device_failed = 10;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError registration_number_not_unique = 2;
+      common.response.DefaultError empty_spaces_limit_exceeded = 3;
+    }
+  }
+};

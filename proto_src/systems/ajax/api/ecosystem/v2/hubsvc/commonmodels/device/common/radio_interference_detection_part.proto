@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message RadioInterferenceDetectionPart {
+  RadioInterferenceLevel radio_interference_level = 1 [(proto.meta.field_tag) = "interference_detection_status"];
+  RadioInterferenceDetection radio_interference_detection = 2 [(proto.meta.field_tag) = "interference_detection"];
+  RadioInterferenceDetectionBeep radio_interference_detection_beep = 3 [(proto.meta.field_tag) = "interference_detection_beep"];
+
+  message RadioInterferenceDetectionSettings {
+    optional RadioInterferenceDetection radio_interference_detection = 1 [(proto.meta.field_tag) = "interference_detection"];
+    optional RadioInterferenceDetectionBeep radio_interference_detection_beep = 2 [(proto.meta.field_tag) = "interference_detection_beep"];
+  }
+
+  repeated Capability capabilities = 1000;
+
+  enum RadioInterferenceLevel {
+    RADIO_INTERFERENCE_LEVEL_UNSPECIFIED = 0;
+    RADIO_INTERFERENCE_LEVEL_HIGH = 1 [(proto.meta.enum_tag) = "INTERFERENCE_LEVEL_HIGH"];
+    RADIO_INTERFERENCE_LEVEL_OK = 2 [(proto.meta.enum_tag) = "INTERFERENCE_LEVEL_OK"];
+    RADIO_INTERFERENCE_LEVEL_NOT_APPLICABLE = 3 [(proto.meta.enum_tag) = "INTERFERENCE_LEVEL_NOT_APPLICABLE"];
+  }
+
+  enum RadioInterferenceDetection {
+    RADIO_INTERFERENCE_DETECTION_UNSPECIFIED = 0;
+    RADIO_INTERFERENCE_DETECTION_DISABLED = 1 [(proto.meta.enum_tag) = "INTERFERENCE_DETECTION_DISABLED"];
+    RADIO_INTERFERENCE_DETECTION_ENABLED = 2 [(proto.meta.enum_tag) = "INTERFERENCE_DETECTION_ENABLED"];
+  }
+
+  enum RadioInterferenceDetectionBeep {
+    RADIO_INTERFERENCE_DETECTION_BEEP_UNSPECIFIED = 0;
+    RADIO_INTERFERENCE_DETECTION_BEEP_DISABLED = 1 [(proto.meta.enum_tag) = "INTERFERENCE_DETECTION_BEEP_DISABLED"];
+    RADIO_INTERFERENCE_DETECTION_BEEP_ENABLED = 2 [(proto.meta.enum_tag) = "INTERFERENCE_DETECTION_BEEP_ENABLED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_INTERFERENCE_DETECTION = 1;
+  }
+}

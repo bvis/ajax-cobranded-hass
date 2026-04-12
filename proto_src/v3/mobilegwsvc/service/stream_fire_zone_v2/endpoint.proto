@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2;
+
+import "v3/mobilegwsvc/service/stream_fire_zone_v2/request.proto";
+import "v3/mobilegwsvc/service/stream_fire_zone_v2/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamFireZoneUpdatesV2Service {
+  rpc execute(StreamFireZoneRequestV2) returns (stream StreamFireZoneResponseV2);
+}

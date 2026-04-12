@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_light_devices;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_id.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_state.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/light_device_status.proto";
+import "v3/mobilegwsvc/commonmodels/space/smartlock/light/light_smart_lock.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/light/light_video_edge.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_light_devices";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamLightDevicesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof success {
+      Snapshot snapshot = 1;
+      Updates updates = 2;
+    }
+
+    message Snapshot {
+      repeated commonmodels.space.device.light.LightDevice light_devices = 1;
+    }
+
+    message Updates {
+      repeated Update updates = 1;
+    }
+
+    message Update {
+      commonmodels.space.device.light.LightDeviceId device_id = 1;
+
+      oneof update {
+        SnapshotUpdate snapshot_update = 2;
+        StatusUpdate status_update = 3;
+        uint32 malfunctions_update = 4;
+        StateUpdate state_update = 5;
+        LightVideoEdgeUpdate light_video_edge_update = 6;
+        LightVideoEdgeChannelUpdate light_video_edge_channel_update = 7;
+        LightSmartLockUpdate light_smart_lock_update = 8;
+      }
+
+      message SnapshotUpdate {
+        commonmodels.space.device.light.LightDevice light_device = 1;
+
+        commonmodels.UpdateType update_type = 2;
+      }
+
+      message LightSmartLockUpdate {
+        oneof update {
+          SmartLockSpreadPropertiesUpdate spread_properties_update = 1;
+        }
+
+        message SmartLockSpreadPropertiesUpdate {
+          commonmodels.UpdateType update_type = 1;
+          v3.mobilegwsvc.commonmodels.space.smartlock.light.LightSmartLock.SmartLockSpreadProperty spread_property = 2;
+        }
+      }
+
+      message LightVideoEdgeUpdate {
+        reserved 1;
+        oneof update {
+          SpreadPropertiesUpdate spread_properties_update = 2;
+          string name = 3;
+          string room_id = 4;
+        }
+
+        message SpreadPropertiesUpdate {
+          commonmodels.UpdateType update_type = 1;
+          v3.mobilegwsvc.commonmodels.video.videoedge.light.LightVideoEdge.SpreadProperties spread_properties = 2;
+        }
+      }
+
+      message LightVideoEdgeChannelUpdate {
+        reserved 1, 3;
+
+        oneof update {
+          mobile.v2.common.video.videoedge.channel.SourceAliases source_aliases = 2;
+          string name = 4;
+          string room_id = 5;
+          string group_id = 6;
+          commonmodels.video.videoedge.light.LightVideoEdgeChannel.BackupChannelProperties backup_channel_properties = 7;
+        }
+      }
+
+      message StatusUpdate {
+        commonmodels.space.device.light.LightDeviceStatus status = 1;
+
+        commonmodels.UpdateType update_type = 2;
+      }
+
+      message StateUpdate {
+        commonmodels.space.device.light.LightDeviceState state = 1;
+
+        commonmodels.UpdateType update_type = 2;
+      }
+    }
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+}

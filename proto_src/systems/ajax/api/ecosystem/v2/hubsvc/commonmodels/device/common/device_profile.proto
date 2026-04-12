@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_label.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_firmware_update_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_firmware_version.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_appearance.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message DeviceProfile {
+
+  string id = 0x01[(proto.meta.field_tag) = "id"];
+
+  string name = 0x09;
+
+  DeviceColor device_color = 2;
+
+  DeviceLabel device_label = 3;
+
+  string displayed_id = 4;
+
+  message DeviceProfileSettings {
+    string name = 0x09[(proto.meta.field_tag) = "name"];
+
+    optional string device_location = 0xED[
+    (proto.meta.field_tag) = "device_location"];
+  }
+  DeviceProfileSettings device_profile_settings = 5;
+
+  DeviceAppearance device_appearance = 6;
+
+  string room_id = 0x0A;
+
+  optional string group_id = 0x50;
+
+  DeviceFirmwareVersion device_firmware_version = 0xB0;
+
+  DeviceFirmwareUpdatePart device_firmware_update = 200;
+
+  optional string device_location = 0xED;
+}

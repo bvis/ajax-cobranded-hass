@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.upsert_push_token;
+
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpsertPushTokenRequest {
+  string user_hex_id = 1;
+  commonmodels.type.UserRole user_role = 2;
+  string push_token = 3;
+  PushTokenType push_token_type = 4;
+}
+
+enum PushTokenType {
+  PUSH_TOKEN_TYPE_UNSPECIFIED = 0;
+  PUSH_TOKEN_TYPE_IOS_REGULAR = 1;
+  PUSH_TOKEN_TYPE_IOS_REGULAR_CRITICAL = 2;
+  PUSH_TOKEN_TYPE_IOS_SANDBOX = 3;
+  PUSH_TOKEN_TYPE_IOS_SANDBOX_CRITICAL = 4;
+  PUSH_TOKEN_TYPE_AOS_FCM = 5;
+  PUSH_TOKEN_TYPE_IOS_REGULAR_CRITICAL_MUTABLE = 6;
+  PUSH_TOKEN_TYPE_IOS_SANDBOX_CRITICAL_MUTABLE = 7;
+  PUSH_TOKEN_TYPE_APPLE_WATCH_REGULAR = 8;
+  PUSH_TOKEN_TYPE_APPLE_WATCH_REGULAR_SANDBOX = 9;
+}

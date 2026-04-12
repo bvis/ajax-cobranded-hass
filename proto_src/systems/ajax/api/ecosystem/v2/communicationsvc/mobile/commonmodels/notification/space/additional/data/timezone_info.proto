@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+import "google/type/datetime.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "Space";
+
+message TimezoneInfo {
+  TimeZone new_timezone = 1;
+
+  message TimeZone {
+    google.type.TimeZone time_zone = 1;
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_scheduled_service_subscription_deactivation;
+
+import "v3/mobilegwsvc/service/cancel_scheduled_service_subscription_deactivation/request.proto";
+import "v3/mobilegwsvc/service/cancel_scheduled_service_subscription_deactivation/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.cancel_scheduled_service_subscription_deactivation";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service CancelScheduledServiceSubscriptionDeactivationService {
+  rpc execute (CancelScheduledServiceSubscriptionDeactivationRequest) returns (CancelScheduledServiceSubscriptionDeactivationResponse);
+};

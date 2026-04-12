@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.user;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/empty.proto";
+
+import "v1/user/user-stream-changes-response.proto";
+import "v1/user/user-stream-companies-request.proto";
+import "v1/user/user-stream-companies-response.proto";
+
+service UserService {
+  /*
+* Possible error statuses and corresponding error templates
+*
+* TIMEOUT - systems.ajax.mobilegw.error.timeout
+* UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+* INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+* NOT_FOUND = "systems.ajax.mobilegw.error.notFound"
+*/
+  rpc streamChanges (google.protobuf.Empty) returns (stream UserStreamChangesResponse);
+  rpc streamCompanies (UserStreamCompaniesRequest) returns (stream UserStreamCompaniesResponse);
+}
+

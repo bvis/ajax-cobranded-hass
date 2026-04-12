@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.device;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetDeviceAboutRequest {
+  string qr_code = 2;
+};
+
+message GetDeviceAboutResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    oneof device_type {
+      Hub hub = 1;
+      VideoEdge video_edge = 2;
+      HubDevice hub_device = 3;
+    }
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      // This error is returned when qr is related to VideoEdge and such device is not found.
+      // This error is not returned for Hub and HubDevice (at least for now), currently
+      // success response with empty body is returned: Hub {} or HubDevice {}.
+      common.response.DefaultError device_not_found = 2;
+      //  This error is returned when qr is related to VideoEdge that is already installed.
+      common.response.DefaultError device_is_already_installed = 3;
+    };
+  }
+
+  message Hub {
+    // [optional] - this field is absent when qr_code is valid but hub is not found
+    ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 1;
+  }
+
+  message VideoEdge {
+    common.video.videoedge.about.About about = 1;
+  }
+
+  message HubDevice {
+    // [optional] - this field is absent when qr_code is valid but hub device is not found
+    ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 1;
+  }
+}

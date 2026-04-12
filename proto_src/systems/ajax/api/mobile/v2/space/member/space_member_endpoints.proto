@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.member;
+
+import "systems/ajax/api/mobile/v2/space/member/approve_requested_full_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/cancel_space_member_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/invite_members_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/reject_requested_full_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/remove_member_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/request_full_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/update_group_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/update_space_member_permissions_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/update_space_member_push_preferences_request.proto";
+import "systems/ajax/api/mobile/v2/space/member/update_space_member_role_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceMemberService {
+
+  rpc inviteMany(InviteSpaceMembersRequest) returns (InviteSpaceMembersResponse);
+
+  rpc updateGroupPermissions(UpdateSpaceMemberGroupPermissionsRequest) returns (UpdateSpaceMemberGroupPermissionsResponse);
+
+  rpc updateSpaceAndHubPermissions(UpdateSpaceMemberPermissionsRequest) returns (UpdateSpaceMemberPermissionsResponse);
+
+  rpc updateMemberRole(UpdateMemberRoleRequest) returns (UpdateMemberRoleResponse);
+
+  rpc requestFullPermissions(RequestFullPermissionsRequest) returns (RequestFullPermissionsResponse){
+    option deprecated = true;
+  };
+
+  rpc approveFullPermissionsRequest(ApproveRequestedFullPermissionsRequest) returns (ApproveRequestedFullPermissionsResponse);
+
+  rpc rejectFullPermissionsRequest(RejectRequestedFullPermissionsRequest) returns (RejectRequestedFullPermissionsResponse);
+
+  rpc updateSpaceMemberPushPreferences(UpdateSpaceMemberPushPreferencesRequest) returns (UpdateSpaceMemberPushPreferencesResponse);
+
+  rpc remove(RemoveSpaceMemberRequest) returns (RemoveSpaceMemberResponse);
+
+  rpc cancelPermissions(CancelSpaceMemberPermissionsRequest) returns (CancelSpaceMemberPermissionsResponse);
+};

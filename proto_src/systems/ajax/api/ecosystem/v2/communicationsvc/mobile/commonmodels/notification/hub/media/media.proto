@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/image_status.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/media/resource_status.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.media";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message HubNotificationMedia {
+  google.protobuf.Timestamp expirationTime = 1;
+  repeated Image images = 2;
+  repeated Audio audio = 3;
+
+  message Image {
+    ImageStatus status = 1;
+    string file_name = 2;
+    optional string url = 3 [(hash_value) = true];
+  }
+
+  message Audio {
+    ResourceStatus status = 1;
+    string file_name = 2;
+    optional string url = 3 [(hash_value) = true];
+  }
+}

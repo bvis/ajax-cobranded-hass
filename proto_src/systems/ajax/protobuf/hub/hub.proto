@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/device.proto";
+import "systems/ajax/protobuf/hub/device/hub_device.proto";
+import "systems/ajax/protobuf/hub/room.proto";
+import "systems/ajax/protobuf/hub/group.proto";
+import "systems/ajax/protobuf/hub/user.proto";
+import "systems/ajax/protobuf/hub/image_urls.proto";
+import "systems/ajax/protobuf/hub/camera.proto";
+import "systems/ajax/protobuf/hub/scenario.proto";
+import "systems/ajax/protobuf/hub/company_binding.proto";
+import "systems/ajax/protobuf/hub/config_migration_state.proto";
+
+message Hub {
+    repeated Device devices = 1000;
+    repeated Room rooms = 1010;
+    repeated Group groups = 1020;
+    repeated User users = 1030;
+    repeated Camera cameras = 1040;
+    repeated Scenario scenarios = 1050;
+    repeated CompanyBinding company_bindings = 1070;
+    ConfigMigrationState config_migration_state = 1080;
+    string settings_id = 2000;
+}

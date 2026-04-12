@@ -1,0 +1,308 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_signal_level.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/common/sim_card_status.proto";
+import "v3/mobilegwsvc/commonmodels/space/device/light/life_quality_status.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.space.device.light";
+option java_multiple_files = true;
+
+message LightDeviceStatus {
+  reserved 45, 46, 49, 81, 84, 85, 86, 87;
+
+  oneof status {
+    GsmStatus gsm_status = 1;
+    SignalStrength signal_strength = 2;
+    SimStatus sim_status = 4;
+    Monitoring monitoring = 5;
+    CameraView camera_view = 6;
+    Simple someone_has_camera_stream_access = 7;
+    Simple someone_can_make_photo = 8;
+    Battery battery = 9;
+    Simple always_active = 10;
+    RexConnected rex_connected = 11;
+    Simple delay_when_leaving = 12;
+    Simple armed_in_night_mode = 13;
+    Simple access_card_disabled = 14;
+    Simple smoke_detected = 15;
+    Simple co_level_detected = 16 ;
+    Simple high_temperature_detected = 17;
+    Simple external_contact_broken = 18;
+    Simple case_drilling_detected = 19;
+    Simple fire_alarm_fp = 20;
+    Simple external_contact_alert = 21;
+    Simple roller_shutter = 22;
+    Simple door_opened = 23;
+    Simple leak_detected = 24;
+    Nfc nfc = 25;
+    Ble ble = 26;
+    Simple power_management = 27;
+    MotionDetected motion_detected = 28;
+    Simple interconnect = 29;
+    Simple high_voltage = 30;
+    Simple low_voltage = 31;
+    Simple current_short_circuit = 32;
+    Simple high_current_protection = 33;
+    Simple contact_hang = 34;
+    Simple migration_in_process = 35;
+    Simple pd_compliance_warning = 36;
+    Simple sia_compliance_warning = 37;
+    Simple ul_not_compliant = 38;
+    Simple standard_compliance_warning = 39;
+    Simple chimes_enabled = 40;
+    Simple real_active = 41;
+    Privacy privacy = 42;
+    Simple relay_stuck = 43;
+    Simple light_switch_through_pass = 44;
+
+    Simple arc_spark_detected = 47;
+    Simple high_diff_temperature_detected = 48;
+    Simple malfunction = 50;
+    Simple end_of_service_life = 51;
+    Simple high_frame_interconnect = 52;
+    DeviceFirmware device_firmware_status = 53;
+    Simple anti_masking_alert = 54;
+    Simple interference_detected = 55;
+    Simple door_need_anti_masking = 56;
+    Simple switch_alarm_pressed = 57;
+    Simple temporary_deactivation_whole = 58;
+    Simple temporary_deactivation_tamper = 59;
+    Simple temporary_deactivation_alarms = 60;
+    Simple temporary_deactivation_timer = 61;
+    Simple one_time_deactivation_whole = 62;
+    Simple one_time_deactivation_tamper = 63;
+    Simple temporary_deactivation = 64;
+    Simple one_time_deactivation = 65;
+    mobile.v2.common.space.smartlock.SmartLockStatus.LockStatus smart_lock = 66;
+    Simple line_supply_high_temperature = 67;
+    Simple bukhoor = 68;
+    Simple smart_bracket_unlocked = 69;
+    Simple device_installation_warning = 70;
+    Simple power_line_low = 71;
+    LifeQualityStatus life_quality = 72;
+    ValueStatus temperature = 73;
+    WireInputStatus wire_input_status = 74;
+    TransmitterStatus transmitter_status = 75;
+    Simple active_subscription = 76;
+    Simple water_stop_valve_stuck = 77;
+    Simple water_stop_prevention_warning = 78;
+    Simple en54_fault = 79;
+    Simple annunciation_test_active = 80;
+    Simple lid_opened = 82;
+
+    // video
+    StorageDevice storage_device = 83;
+    WifiSignalLevelStatus wifi_signal_level_status = 92;
+    Simple onvif_user_auth_enabled = 93;
+
+    En54FireBuzzerStatus en54_fire_buzzer_status = 88;
+    Simple fire_buzzer_active = 89;
+    En54VadStatus en54_vad_status = 90;
+    Simple en54_disablement = 91;
+    Simple arc_reporting_disabled = 94;
+    WalkTestStatus walk_test_status = 95;
+  }
+
+  message StorageDevice {
+    StorageDeviceType storage_device_type = 1;
+    StorageDeviceStatus storage_device_status = 2;
+
+    enum StorageDeviceStatus {
+      STORAGE_DEVICE_STATUS_UNSPECIFIED = 0;
+      STORAGE_DEVICE_STATUS_OK = 1;
+      STORAGE_DEVICE_STATUS_WARNING = 2;
+      STORAGE_DEVICE_STATUS_ERROR = 3;
+      STORAGE_DEVICE_STATUS_UNAVAILABLE = 4;
+    }
+
+    enum StorageDeviceType {
+      STORAGE_DEVICE_TYPE_UNSPECIFIED = 0;
+      STORAGE_DEVICE_TYPE_SD_CARD = 1;
+      STORAGE_DEVICE_TYPE_HARD_DRIVE = 2;
+    }
+  }
+
+  message Simple {}
+
+  message SimStatus {
+    hub.device.common.SimCardStatus sim_card_status = 1;
+  }
+
+  message Monitoring {
+    bool cms_active = 1;
+  }
+
+  message CameraView {
+    bool has_access = 1;
+  }
+
+  message SignalStrength {
+    ecosystem.v2.hubsvc.commonmodels.device.common.DeviceSignalLevel device_signal_level = 1;
+  }
+
+  message Battery {
+    BatteryState battery_state = 1;
+    uint32 charge_level_percentage = 2;
+    bool is_without_charge = 3;
+
+    enum BatteryState {
+      BATTERY_STATE_UNSPECIFIED = 0;
+      BATTERY_STATE_OK = 1;
+      BATTERY_STATE_ERROR = 2;
+      BATTERY_STATE_WARNING = 3;
+      BATTERY_STATE_ALERT = 4;
+    }
+  }
+
+  message Nfc {
+    bool enabled = 1;
+  }
+
+  message Ble {
+    bool enabled = 1;
+  }
+
+  message MotionDetected {
+    google.protobuf.Timestamp detected_at = 1;
+  }
+
+  message Privacy {
+    bool is_video_surveillance = 1;
+    bool enabled = 2;
+  }
+
+  message GsmStatus {
+    GsmType type = 1;
+    Status status = 2;
+
+    enum GsmType {
+      GSM_TYPE_UNSPECIFIED = 0;
+      GSM_TYPE_2G = 1;
+      GSM_TYPE_3G = 2;
+      GSM_TYPE_4G = 3;
+    }
+
+    enum Status {
+      STATUS_UNSPECIFIED = 0;
+      STATUS_DISCONNECTED = 1;
+      STATUS_CONNECTED = 2;
+    }
+  }
+
+  message DeviceFirmware {
+    oneof status {
+      Simple in_progress = 1;
+      Simple failed = 2;
+      Simple critical_firmware_available = 3;
+    }
+  }
+
+  message SmartLock {
+    oneof status {
+      Simple in_progress = 1;
+      Simple failed = 2;
+    }
+  }
+
+  message LifeQualityStatus {
+    optional int32 actual_temperature = 1;
+    optional int32 actual_humidity = 2;
+    optional int32 actual_co2 = 3;
+    repeated HardwareMalfunction hardware_malfunctions = 4;
+    repeated TemperatureStatus temperature_statuses = 5;
+    repeated HumidityStatus humidity_statuses = 6;
+    repeated Co2Status co2_statuses = 7;
+  }
+
+  message ValueStatus {
+    int32 value = 1;
+  }
+
+  message WireInputStatus {
+    int32 contact_index = 1;
+    bool is_alert = 2;
+    CustomAlarmType type = 3;
+  }
+
+  message TransmitterStatus {
+    bool is_alert = 1;
+    CustomAlarmType type = 2;
+  }
+
+  message RexConnected {
+    bool is_rex_online = 1;
+  }
+
+  message En54FireBuzzerStatus {
+    BuzzerStatus status = 1;
+
+    enum BuzzerStatus {
+      BUZZER_STATUS_UNSPECIFIED = 0;
+      BUZZER_STATUS_ACTIVE = 1;
+      BUZZER_STATUS_SILENCED = 2;
+      BUZZER_STATUS_INACTIVE = 3;
+    }
+  }
+
+  message En54VadStatus {
+    VadStatus status = 1;
+
+    enum VadStatus {
+      VAD_STATUS_UNSPECIFIED = 0;
+      VAD_STATUS_ACTIVE = 1;
+      VAD_STATUS_SILENCED = 2;
+      VAD_STATUS_INACTIVE = 3;
+    }
+  }
+
+  message WalkTestStatus {
+    Status status = 1;
+
+    enum Status {
+      STATUS_UNSPECIFIED = 0;
+      STATUS_LAUNCH = 1;
+      STATUS_PROCESS = 2;
+    }
+  }
+
+  enum CustomAlarmType {
+    CUSTOM_ALARM_TYPE_UNSPECIFIED = 0;
+    CUSTOM_ALARM_TYPE_INTRUSION = 1;
+    CUSTOM_ALARM_TYPE_FIRE = 2;
+    CUSTOM_ALARM_TYPE_MEDICAL = 3;
+    CUSTOM_ALARM_TYPE_PANIC = 4;
+    CUSTOM_ALARM_TYPE_GAS = 5;
+    CUSTOM_ALARM_TYPE_TAMPER = 6;
+    CUSTOM_ALARM_TYPE_MALFUNCTION = 7;
+    CUSTOM_ALARM_TYPE_LEAK = 8;
+    CUSTOM_ALARM_TYPE_SERVICE = 9;
+    CUSTOM_ALARM_TYPE_KEY_ARM = 10;
+    CUSTOM_ALARM_TYPE_GLASS_BREAK = 11;
+    CUSTOM_ALARM_TYPE_HIGH_TEMPERATURE = 12;
+    CUSTOM_ALARM_TYPE_LOW_TEMPERATURE = 13;
+    CUSTOM_ALARM_TYPE_MASKING = 14;
+    CUSTOM_ALARM_TYPE_DURESS_CODE = 15;
+    CUSTOM_ALARM_TYPE_VIBRATION = 16;
+    CUSTOM_ALARM_TYPE_BLOCKING_ELEMENT = 17;
+    CUSTOM_ALARM_TYPE_BOLT_CONTACT = 18;
+  }
+
+
+  message WifiSignalLevelStatus {
+    WifiSignalLevel wifi_signal_level = 1;
+  }
+
+  enum WifiSignalLevel {
+    WIFI_SIGNAL_LEVEL_UNSPECIFIED = 0;
+    WIFI_SIGNAL_LEVEL_NO_SIGNAL = 1;
+    WIFI_SIGNAL_LEVEL_WEAK = 2;
+    WIFI_SIGNAL_LEVEL_NORMAL = 3;
+    WIFI_SIGNAL_LEVEL_STRONG = 4;
+    WIFI_SIGNAL_LEVEL_DISCONNECTED = 5;
+  }
+}

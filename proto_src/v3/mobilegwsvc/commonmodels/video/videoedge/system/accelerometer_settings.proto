@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.system;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.system";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AccelerometerSettings {
+  repeated AccelerometerTypeSettings accelerometer_types = 1;
+
+  message AccelerometerTypeSettings {
+    bool enabled = 1;
+
+    oneof accelerometer_union {
+      Movement movement = 100;
+      Shock shock = 101;
+    }
+
+    message Movement {
+    }
+
+    message Shock {
+    }
+  }
+}

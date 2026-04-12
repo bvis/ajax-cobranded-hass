@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel.notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum NotificationEventType {
+    NOTIFICATION_EVENT_TYPE_UNSPECIFIED = 0;
+    NOTIFICATION_EVENT_TYPE_ALARM = 1;
+    NOTIFICATION_EVENT_TYPE_REGULAR = 2;
+}

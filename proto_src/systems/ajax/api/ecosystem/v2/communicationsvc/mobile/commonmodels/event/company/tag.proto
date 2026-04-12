@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.company;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.company";
+option java_generic_services = true;
+option java_multiple_files = true;
+option swift_prefix = "Company";
+
+message InstallationCompanyInvited {}
+message InstallationCompanyRemoved {}
+message PermanentPermissionsRequested {}
+message TemporaryPermissionsRequested {}
+message RequestedPermanentPermissionsApproved {}
+message RequestedTemporaryPermissionsApproved {}
+message RequestedPermissionsRejected {}
+message MonitoringCompanyInvited {}
+message MonitoringCompanyRemoved {}
+
+message CompanyEventTag {
+  oneof event_tag_case {
+    InstallationCompanyInvited installation_company_invited = 1;
+    InstallationCompanyRemoved installation_company_removed = 2;
+    PermanentPermissionsRequested permanent_permissions_requested = 3;
+    TemporaryPermissionsRequested temporary_permissions_requested = 4;
+    RequestedPermanentPermissionsApproved requested_permanent_permissions_approved = 5;
+    RequestedTemporaryPermissionsApproved requested_temporary_permissions_approved = 6;
+    RequestedPermissionsRejected requested_permissions_rejected = 7;
+    MonitoringCompanyInvited monitoring_company_invited = 8;
+    MonitoringCompanyRemoved monitoring_company_removed = 9;
+  }
+}

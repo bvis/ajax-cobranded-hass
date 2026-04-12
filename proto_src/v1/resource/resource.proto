@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.resource;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.resource";
+option java_multiple_files = true;
+
+message Country {
+  string code = 1;
+  string name = 2;
+}
+
+message GetCountriesRequest {
+  string locale = 1;
+}
+
+message GetCountriesResponse {
+  string locale = 1;
+  repeated Country countries = 2;
+}

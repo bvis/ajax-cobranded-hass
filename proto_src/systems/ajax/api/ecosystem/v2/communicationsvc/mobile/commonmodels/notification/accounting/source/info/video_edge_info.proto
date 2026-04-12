@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting.source.info;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting.source.info";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/video_edge_type.proto";
+
+message VideoEdgeInfo {
+  notification.video.VideoEdgeType type = 1;
+  notification.video.DeviceColor color = 2;
+}

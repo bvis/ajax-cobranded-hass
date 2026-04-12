@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.channel.detection;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DetectorLocator {
+
+  // [required]
+  string channel_id = 1;
+
+  // [required]
+  DetectionType detection_type = 2;
+
+  enum DetectionType {
+    DETECTION_TYPE_UNSPECIFIED = 0;
+    DETECTION_TYPE_PIR = 1;
+    DETECTION_TYPE_MOTION = 2;
+    DETECTION_TYPE_OBJECT = 3;
+  }
+}

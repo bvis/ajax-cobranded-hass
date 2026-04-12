@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message EolSensorProperties {
+
+  repeated EolSensor eol_sensors = 1;
+
+  message EolSensor {
+    CustomAlarmType custom_alarm_type = 1;
+    bool is_main_sensor = 2;
+  }
+
+  enum CustomAlarmType {
+    CUSTOM_ALARM_TYPE_UNSPECIFIED = 0;
+    CUSTOM_ALARM_TYPE_INTRUSION = 1;
+    CUSTOM_ALARM_TYPE_FIRE = 2;
+    CUSTOM_ALARM_TYPE_MEDICAL = 3;
+    CUSTOM_ALARM_TYPE_PANIC = 4;
+    CUSTOM_ALARM_TYPE_GAS = 5;
+    CUSTOM_ALARM_TYPE_TAMPER = 6;
+    CUSTOM_ALARM_TYPE_MALFUNCTION = 7;
+    CUSTOM_ALARM_TYPE_LEAK = 8;
+    CUSTOM_ALARM_TYPE_SERVICE = 9;
+    CUSTOM_ALARM_TYPE_KEY_ARM = 10;
+    CUSTOM_ALARM_TYPE_GLASS_BREAK = 11;
+    CUSTOM_ALARM_TYPE_HIGH_TEMPERATURE = 12;
+    CUSTOM_ALARM_TYPE_LOW_TEMPERATURE = 13;
+    CUSTOM_ALARM_TYPE_MASKING = 14;
+    CUSTOM_ALARM_TYPE_DURESS_CODE = 15;
+    CUSTOM_ALARM_TYPE_VIBRATION = 16;
+    CUSTOM_ALARM_TYPE_BLOCKING_ELEMENT = 17;
+    CUSTOM_ALARM_TYPE_BOLT_CONTACT = 18;
+    CUSTOM_ALARM_TYPE_ROLLER_SHUTTER = 19;
+    CUSTOM_ALARM_TYPE_EVACUATION = 20;
+  }
+}

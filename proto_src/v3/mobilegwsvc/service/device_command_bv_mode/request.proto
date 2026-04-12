@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_bv_mode;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandBvModeRequest {
+  string hub_id = 1;
+  AlarmVerificationMode alarm_verification_mode = 2;
+
+  enum AlarmVerificationMode {
+    ALARM_VERIFICATION_MODE_UNSPECIFIED = 0;
+    ALARM_VERIFICATION_MODE_DISABLE = 1;
+    ALARM_VERIFICATION_MODE_ENABLE = 2;
+  }
+}

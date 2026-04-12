@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/app_settings.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_channel.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_detector.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_storage_device.proto";
+import "v3/mobilegwsvc/service/stream_video_player/player_video_edge.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/cloudarchive/cloud_archive.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_video_player";
+option swift_prefix = "";
+
+message Updates {
+  repeated Update updates = 1;
+}
+
+message Update {
+  string video_edge_id = 100 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  oneof kind {
+    VideoEdgeInstalled video_edge_installed = 1;
+    VideoEdgeUpdated video_edge_updated = 2;
+    TimezoneUpdated timezone_updated = 3;
+    AppSettingsUpdated app_settings_updated = 4;
+    ChannelAdded channel_added = 5;
+    ChannelMediaDeviceInfoAdded channel_media_device_info_added = 6;
+    ChannelMediaDeviceInfoRemoved channel_media_device_info_removed = 7;
+    DetectorAdded detector_added = 8;
+    DetectorStateUpdated detector_state_updated = 9;
+    DetectorRemoved detector_removed = 10;
+    StorageDeviceAdded storage_device_added = 11;
+    StorageDeviceRemoved storage_device_removed = 12;
+    ChannelVideoSettingsUpdated channel_video_settings_updated = 13;
+    ChannelAudioSettingsUpdated channel_audio_settings_updated = 14;
+    CloudArchiveUpdated cloud_archive_updated = 15;
+  }
+}
+
+message VideoEdgeInstalled {
+  PlayerVideoEdge video_edge = 1;
+}
+
+message VideoEdgeUpdated {
+  PlayerVideoEdge video_edge = 1;
+}
+
+message TimezoneUpdated {
+  string timezone_id = 2;
+}
+
+message AppSettingsUpdated {
+  mobile.v2.common.video.videoedge.spacesettings.AppSettings app_settings = 1;
+}
+
+message ChannelAdded {
+  PlayerChannel channel = 1;
+}
+
+message ChannelMediaDeviceInfoAdded {
+  string channel_id = 1;
+  mobile.v2.common.video.videoedge.channel.MediaDeviceInfo media_device_info = 2;
+}
+
+message ChannelMediaDeviceInfoRemoved {
+  string channel_id = 1;
+}
+
+message DetectorAdded {
+  PlayerDetector detector = 1;
+}
+
+message DetectorStateUpdated {
+  string detector_id = 1;
+  bool enabled = 2;
+}
+
+message DetectorRemoved {
+  string detector_id = 1;
+}
+
+message StorageDeviceAdded {
+  PlayerStorageDevice storage_device = 1;
+}
+
+message StorageDeviceRemoved {
+  string storage_device_id = 1;
+}
+
+message ChannelVideoSettingsUpdated {
+  string media_device_id = 1;
+  string channel_id_on_media_device = 2;
+  PlayerChannel.VideoSettings video_settings = 3;
+}
+
+message ChannelAudioSettingsUpdated {
+  string media_device_id = 1;
+  string channel_id_on_media_device = 2;
+  PlayerChannel.AudioSettings audio_settings = 3;
+}
+
+message CloudArchiveUpdated {
+  string channel_id = 1;
+  mobile.v2.common.video.videoedge.channel.cloudarchive.CloudArchive cloud_archive = 2;
+}

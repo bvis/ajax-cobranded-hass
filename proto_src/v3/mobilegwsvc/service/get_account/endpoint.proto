@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_account;
+
+import "v3/mobilegwsvc/service/get_account/request.proto";
+import "v3/mobilegwsvc/service/get_account/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.get_account";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetAccountService {
+  rpc execute (GetAccountRequest) returns (GetAccountResponse);
+};

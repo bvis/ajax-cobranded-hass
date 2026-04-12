@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc;
+
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_candidate.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/ice_server.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/stream.proto";
+import "systems/ajax/api/mobile/v2/common/video/webrtc/session_description.proto";
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_webrtc";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamWebrtcResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+
+    oneof signaling_message {
+      Init init = 1;
+      AskStreamsResponse ask_streams_response = 2;
+      NewIceCandidate new_ice_candidate = 3;
+      Offer offer = 4;
+      Answer answer = 5;
+    }
+
+    message Init {
+      repeated api.mobile.v2.common.video.webrtc.IceServer ice_servers = 1;
+
+      /**
+       * Streams that were actually sent to the video edge.
+       * (e.g. the initial list could be filtered by channel permissions
+       * also FrameTypeId with audio can be filtered out if user has no such permission)
+       */
+      repeated api.mobile.v2.common.video.webrtc.Stream streams = 2;
+    };
+
+    message AskStreamsResponse {
+
+      oneof response {
+        AskStreamsSuccess success = 1;
+        AskStreamsFailure failure = 2;
+      }
+
+      message AskStreamsSuccess {
+        /**
+         * Streams that were actually sent to the video edge.
+         * (e.g. the initial list could be filtered by channel permissions
+         * also FrameTypeId with audio can be filtered out if user has no such permission)
+         */
+        repeated api.mobile.v2.common.video.webrtc.Stream streams = 1;
+      }
+
+      message AskStreamsFailure {
+        oneof error {
+          commonmodels.Error bad_request = 1;
+          commonmodels.Error video_edge_not_found = 2;
+          commonmodels.Error permission_denied = 3;
+          commonmodels.Error video_edge_is_offline = 4;
+        }
+      }
+    };
+
+    message NewIceCandidate {
+      api.mobile.v2.common.video.webrtc.IceCandidate candidate = 1;
+    };
+
+    message Offer {
+      api.mobile.v2.common.video.webrtc.SessionDescription session_description = 1;
+    };
+
+    message Answer {
+      api.mobile.v2.common.video.webrtc.SessionDescription session_description = 1;
+    };
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error video_edge_not_found = 2;
+      commonmodels.Error permission_denied = 3;
+      commonmodels.Error video_edge_is_offline = 4;
+    }
+  }
+}

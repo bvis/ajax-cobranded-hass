@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hub;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RemoveHubRequest {
+
+  common.space.SpaceLocator space_locator = 1;
+
+  string hub_id = 2;
+};
+
+message RemoveHubResponse {
+
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError hub_not_found = 3;
+      common.response.DefaultError space_armed = 4;
+      common.response.DefaultError permission_denied = 5;
+      common.response.SpaceLockedError space_locked = 6;
+      common.response.DefaultError space_on_monitoring = 7;
+      common.response.DefaultError space_has_subscriptions = 8;
+      common.response.DefaultError space_has_subscriptions_by_member = 9;
+    }
+  }
+};

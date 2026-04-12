@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message SpaceControl {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    bool panic_enabled = 0x31;
+    string associated_user_id = 0x34;
+    string associated_group_id = 0x33;
+    FalsePressFilter false_press_filter = 0x35;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        SECURITY_BUTTON = 1;
+    }
+
+    enum FalsePressFilter {
+        NO_FALSE_PRESS_FILTER_INFO = 0;
+        DISABLED = 1;
+        LONG_PUSH = 2;
+        DOUBLE_CLICK = 3;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

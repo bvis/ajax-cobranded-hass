@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge;
+
+option swift_prefix = "Video";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge";
+option java_multiple_files = true;
+
+message FanSpeedSettings {
+  oneof mode {
+    FanSpeedSettingsAutoMode auto = 1;
+    FanSpeedSettingsManualMode manual = 2;
+  }
+
+  message FanSpeedSettingsAutoMode {}
+
+  message FanSpeedSettingsManualMode {
+    FanSpeedSettingsManualPreset preset = 1;
+
+    enum FanSpeedSettingsManualPreset {
+      FAN_SPEED_SETTINGS_MANUAL_PRESET_UNSPECIFIED = 0;
+      FAN_SPEED_SETTINGS_MANUAL_PRESET_LOW = 1;
+      FAN_SPEED_SETTINGS_MANUAL_PRESET_MEDIUM = 2;
+      FAN_SPEED_SETTINGS_MANUAL_PRESET_HIGH = 3;
+    }
+  }
+}

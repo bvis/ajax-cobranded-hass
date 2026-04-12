@@ -1,0 +1,33 @@
+syntax = "proto3";
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.light.properties";
+option java_multiple_files = true;
+
+message WaterStopChannel {
+  ChannelId id = 1;
+  State state = 2;
+  bool is_transitioning = 3;
+  repeated Malfunction malfunctions = 4;
+
+  enum Malfunction {
+    MALFUNCTION_UNSPECIFIED = 0;
+    MALFUNCTION_BATTERY_PLACEMENT_ERROR = 1;
+    MALFUNCTION_IS_STUCK = 2;
+    MALFUNCTION_FINISH_SETUP_REQUIRED = 3;
+    MALFUNCTION_BATTERY_LOW_ERROR = 4;
+  }
+
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_UNKNOWN = 1;
+    STATE_OFF = 2;
+    STATE_ON = 3;
+  }
+
+  enum ChannelId {
+    CHANNEL_ID_UNSPECIFIED = 0;
+    CHANNEL_ID_1 = 1;
+  }
+}

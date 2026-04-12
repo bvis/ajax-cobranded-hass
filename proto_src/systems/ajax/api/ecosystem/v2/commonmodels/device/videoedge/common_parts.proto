@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge;
+
+option swift_prefix = "Video";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge";
+option java_multiple_files = true;
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/fan_speed_settings.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/onvif_user_role.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/max_ring_depth.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/local_user_permissions.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/videoedge/network.proto";
+
+
+message VideoConnectionTypePart {
+  NetworkConfiguration ethernet = 1;
+}
+
+message VideoArchivePart {
+  MaxRingDepth max_ring_depth = 1;
+}
+
+message VideoLocalUsersPart {
+
+  repeated VideoLocalUser users = 1;
+
+  message VideoLocalUser {
+
+    string name = 1;
+
+    string password = 2 [(hash_value) = true];
+
+    LocalUserPermissions permissions = 3;
+  }
+}
+
+message TimeZonePart {
+  string time_zone_id = 1;
+}
+
+message LogoLedBrightnessPart {
+  uint32 brightness = 1;
+}
+
+message RingButtonSoundPart {
+  bool enabled = 1;
+}
+
+message FanSettingsPart {
+  FanSpeedSettings fan_speed_settings = 1;
+}
+
+message CloudConnectionPart {
+
+  google.protobuf.Duration server_ping_interval = 1;
+
+  google.protobuf.Duration connection_failure_alarm_delay = 2;
+
+  optional bool mute_connection_alarms = 3;
+}
+
+message OnvifConnectionPart {
+
+  bool onvif_user_auth_enabled = 1;
+
+  uint32 onvif_http_port = 2;
+
+  uint32 rtsp_http_port = 3;
+
+  repeated OnvifUser users = 4;
+
+  message OnvifUser {
+
+    string username = 1;
+
+    string password = 2 [(hash_value) = true];
+
+    OnvifUserRole role = 3;
+  }
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.user;
+
+import "systems/ajax/api/mobile/v2/common/space/space_profile.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_lite.proto";
+import "systems/ajax/api/mobile/v2/common/pagination.proto";
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindUserSpacesWithPaginationRequest {
+  int32 limit = 1;
+  optional common.Pagination pagination = 2;
+  optional string search_phrase = 3;
+}
+
+message FindUserSpacesWithPaginationResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated common.space.LiteSpace spaces = 1;
+    optional common.Pagination pagination = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+    }
+  }
+};

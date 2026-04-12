@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_intrusion_settings;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/motion_cam_video_base.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/common_arming_part.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_intrusion_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeIntrusionSettingsRequest {
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  int32 arm_delay_seconds = 4;
+
+  int32 alarm_delay_seconds = 5;
+
+  int32 night_mode_arm_delay_seconds = 6;
+
+  int32 night_mode_alarm_delay_seconds = 7;
+
+  ecosystem.v2.commonmodels.device.common.CommonArmingPart.ArmingMode arming_mode = 8;
+
+  repeated commonmodels.hub.device.MotionCamVideoBase.SirenTrigger siren_triggers = 9;
+}

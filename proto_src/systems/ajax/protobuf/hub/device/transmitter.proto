@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message Transmitter {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    ContactStateMode external_contact_state_mode = 0x33;
+    bool external_contact_always_active = 0x37;
+    google.protobuf.BoolValue external_contact_triggered = 0x31;
+    ExternalContactAlarmMode external_contact_alarm_mode = 0x34;
+    ContactStateMode external_device_tamper_state_mode = 0x35;
+    bool accelerometer_aware = 0x38;
+    PowerSupplyMode external_device_power_supply_mode = 0x42;
+    CustomAlarmType custom_alarm_type = 0x44;
+    repeated ChimeTrigger chime_triggers = 0x49;
+    int32 chime_signal = 0x4A;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        EXTRA_CONTACT = 1;
+        ACCELERATION = 2;
+    }
+
+    enum ContactStateMode {
+        NO_CONTACT_STATE_MODE_INFO = 0;
+        NO = 1;
+        NC = 2;
+    }
+
+    enum ExternalContactAlarmMode {
+        NO_EXTERNAL_CONTACT_ALARM_MODE_INFO = 0;
+        BISTABLE = 1;
+        IMPULSE = 2;
+    }
+
+    enum PowerSupplyMode {
+        NO_POWER_SUPPLY_MODE_INFO = 0;
+        ALWAYS_DISABLED = 1;
+        DISABLED_IF_HUB_DISARMED = 2;
+        ALWAYS_ENABLED = 3;
+    }
+
+    enum CustomAlarmType {
+        NO_CUSTOM_ALARM_TYPE = 0;
+        BURGLARY = 1;
+        FIRE = 2;
+        MEDICAL = 3;
+        PANIC = 4;
+        GAS = 5;
+    }
+
+    enum ChimeTrigger {
+        NO_CHIME_TRIGGER_INFO = 0;
+        CHIME_EXTRA_CONTACT = 1;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

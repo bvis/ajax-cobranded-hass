@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_zombie_channels_on_video_edge;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_zombie_channels_on_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindAllZombieChannelsOnVideoEdgeRequest {
+
+  string space_id = 1;
+
+  string video_edge_id = 2;
+}

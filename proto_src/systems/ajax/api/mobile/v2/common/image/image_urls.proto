@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.image;
+
+import "google/protobuf/wrappers.proto";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.mobile.v2.common.image";
+option swift_prefix = "";
+
+/*
+ * Compact image urls structure.
+ * Contains base_path as a required prefix to build URL and suffix values
+ * for different image size.
+ *
+ * Example:
+ *   small_image_url = image_urls.base_path + image_urls.small
+ */
+message ImageUrls {
+  google.protobuf.StringValue small = 1000;
+  google.protobuf.StringValue medium = 1010;
+  google.protobuf.StringValue big = 1020;
+
+  google.protobuf.StringValue base_path = 2000;
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message YavirAccessControl {
+    string id = 0x01;
+    Name name = 1000;
+    string group_id = 0x03;
+    int32 time_to_block_on_multiple_password_failures_minutes = 0x06;
+    int32 cms_device_index = 0x07;
+    bool blocking_enabled = 0x08;
+    string associated_group_id = 0x0C;
+    repeated AccessProfile access_profiles = 0x0D;
+    DeviceType device_type = 0x0E;
+    bool enabled = 0x0F;
+    string room_id = 0x12;
+    google.protobuf.BoolValue blocked = 0x09;
+    google.protobuf.BoolValue online = 0x10;
+    google.protobuf.BoolValue tampered = 0x11;
+    google.protobuf.Int32Value service_problems_count = 0x13;
+    BypassMode bypass_mode = 0x15;
+    repeated IsBypassMode is_bypass_mode = 0x16;
+    string password_hash = 0x17;
+    string password_hash_duress = 0x18;
+
+    enum AccessProfile {
+        NO_ACCESS_PROFILE_INFO = 0;
+        KEYBOARD_PASSWORD = 1;
+        USER_PASSWORD = 2;
+    }
+
+    enum DeviceType {
+        NO_DEVICE_TYPE_INFO = 0;
+        DUNAY_KEYBOARD = 1;
+        YAVIR_READER = 2;
+    }
+
+    enum BypassMode {
+        NO_BYPASS_MODE_INFO = 0;
+        ENGINEER_BYPASS_OFF = 1;
+        ENGINEER_BYPASS_ON = 2;
+        TAMPER_BYPASS_ON = 3;
+    }
+
+    enum IsBypassMode {
+        NO_IN_BYPASS_MODE = 0;
+        ENABLED_ENGINEER_BYPASS = 1;
+        ENABLED_TAMPER_BYPASS = 2;
+    }
+}

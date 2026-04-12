@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.smartlock;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SmartLock {
+  string id = 1;
+
+  string external_id = 2;
+
+  SmartLockType type = 3;
+
+  string owner_space_member_id = 4;
+
+  string name = 5;
+
+  SmartLockStatus status = 6;
+
+  SmartLockFeature feature = 7;
+
+  string serial_number = 8;
+}
+
+message ExternalSmartLock {
+  string external_id = 1;
+
+  SmartLockType type = 2;
+
+  string name = 3;
+
+  SmartLockStatus status = 4;
+
+  SmartLockFeature feature = 5;
+
+  string serial_number = 6;
+}
+
+message SmartLockStatus {
+  LockStatus lock_status = 1;
+  ConnectionStatus connection_status = 2;
+  BatteryStatus battery_status = 3;
+  AuthorizationStatus authorization_status = 4;
+
+  enum LockStatus {
+    LOCK_STATUS_UNSPECIFIED = 0;
+    LOCK_STATUS_UNLOCKED = 1;
+    LOCK_STATUS_LOCKED = 2;
+    LOCK_STATUS_UNLATCHED = 3;
+  }
+
+  enum ConnectionStatus {
+    CONNECTION_STATUS_UNSPECIFIED = 0;
+    CONNECTION_STATUS_OFFLINE = 1;
+    CONNECTION_STATUS_ONLINE = 2;
+  }
+
+  message BatteryStatus {
+    optional int32 level = 1;
+    Warning warning = 2;
+
+    enum Warning {
+      WARNING_UNSPECIFIED = 0;
+      WARNING_NONE = 1;
+      WARNING_LOW_CHARGE = 2;
+    }
+  }
+
+  enum AuthorizationStatus {
+    AUTHORIZATION_STATUS_UNSPECIFIED = 0;
+    AUTHORIZATION_STATUS_UNAUTHORIZED = 1;
+    AUTHORIZATION_STATUS_AUTHORIZED = 2;
+  }
+}
+
+message SmartLockFeature {
+  optional EmbeddedDoorbell embedded_doorbell = 1;
+  optional Bridge bridge = 2;
+  optional LatchControl latch_control = 3;
+
+  message LatchControl {}
+
+  message EmbeddedDoorbell {}
+
+  message Bridge {
+    ConnectionStatus connection_status = 1;
+
+    enum ConnectionStatus {
+      CONNECTION_STATUS_UNSPECIFIED = 0;
+      CONNECTION_STATUS_OFFLINE = 1;
+      CONNECTION_STATUS_ONLINE = 2;
+    }
+  }
+}
+
+enum SmartLockType {
+  SMART_LOCK_TYPE_UNSPECIFIED = 0;
+  SMART_LOCK_TYPE_ASSA_ABLOY = 1;
+  SMART_LOCK_TYPE_ASSA_ABLOY_NA = 2;
+}
+
+message SmartLockUpdate {
+  optional string name = 1;
+}
+
+message SmartLockAvailableToAdd {
+  ExternalSmartLock smart_lock = 1;
+  AdditionStatus addition_status = 2;
+
+  enum AdditionStatus {
+    ADDITION_STATUS_UNSPECIFIED = 0;
+    ADDITION_STATUS_ALREADY_ADDED = 1;
+    ADDITION_STATUS_AVAILABLE_TO_ADD = 2;
+  }
+}

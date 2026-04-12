@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum DeviceSpecialAppearanceType {
+  DEVICE_SPECIAL_APPEARANCE_TYPE_UNSPECIFIED = 0;
+  DEVICE_SPECIAL_APPEARANCE_TYPE_UK = 1;
+}

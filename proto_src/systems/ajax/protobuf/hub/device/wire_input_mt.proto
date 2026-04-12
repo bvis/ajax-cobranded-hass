@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message WireInputMt {
+  CommonDevicePart common_part = 1000;
+
+  repeated SirenTrigger siren_triggers = 0x2E;
+  ExternalContactMode external_contact_mode = 0x31;
+  ExternalContactAlarmMode external_contact_alarm_mode = 0x32;
+  ExternalContactState external_contact_state = 0x33;
+  ExternalContactDisruptionState external_contact_broken = 0x34;
+  InputType input_type = 0x35;
+  ReactionTimeMillis reaction_time = 0x3B;
+  google.protobuf.Int32Value assigned_mtr = 0x3C;
+  int32 input_resistance = 0x3D;
+  int32 fact_resistance = 0x3E;
+  CustomAlarmType custom_alarm = 0x3F;
+  bool alwaysActive = 0x40;
+  int64 external_contact_scenario_bits = 0x70;
+  repeated ChimeTrigger chime_triggers = 0x45;
+  int32 chime_signal = 0x46;
+
+  Subtype subtype = 0xC3;
+
+  enum ExternalContactMode {
+    NO_EXTERNAL_CONTACT_MODE_INFO = 0;
+    DISABLED = 1;
+    NORMALLY_OPEN = 2;
+    NORMALLY_CLOSED = 3;
+    NORMALLY_CLOSED_R = 4;
+    NORMALLY_OPEN_R = 5;
+  }
+
+  enum ExternalContactAlarmMode {
+    NO_EXTERNAL_CONTACT_ALARM_MODE_INFO = 0;
+    BISTABLE = 1;
+    IMPULSE = 2;
+  }
+
+  enum ExternalContactState {
+    NO_EXTERNAL_CONTACT_STATE = 0;
+    CONTACT_DISRUPTED = 1;
+    CONTACT_NORMAL = 2;
+    CONTACT_NOT_AVAILABLE = 3;
+  }
+
+  enum ExternalContactDisruptionState {
+    NO_EXTERNAL_CONTACT_DISRUPTION_STATE = 0;
+    CONTACT_DISRUPTION_NORMAL = 1;
+    CONTACT_DISRUPTION_BROKEN = 2;
+    CONTACT_DISRUPTION_NOT_AVAILABLE = 3;
+  }
+
+  enum InputType {
+    NO_INPUT_TYPE = 0;
+    DEVICE = 1;
+    TAMPER = 2;
+  }
+
+  enum ReactionTimeMillis {
+    NO_REACTION_TIME = 0;
+    _20 = 1;
+    _100 = 2;
+    _1000 = 3;
+  }
+
+  enum CustomAlarmType {
+    NO_CUSTOM_ALARM_TYPE = 0;
+    BURGLARY = 1;
+    FIRE = 2;
+    MEDICAL = 3;
+    PANIC = 4;
+    GAS = 5;
+  }
+
+  enum SirenTrigger {
+    NO_SIREN_TRIGGER_INFO = 0;
+    EXTRA_CONTACT = 1;
+    SHORT_CIRCUIT = 2;
+  }
+
+  enum ChimeTrigger {
+    NO_CHIME_TRIGGER_INFO = 0;
+    CHIME_EXTRA_CONTACT = 1;
+  }
+
+  enum Subtype {
+    NO_SUBTYPE = 0;
+  }
+}

@@ -1,0 +1,122 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Ajax Security Login",
+                "description": "Enter your Ajax Security account credentials.",
+                "data": {
+                    "email": "Email",
+                    "password": "Password",
+                    "app_label": "App label (co-branded app name)"
+                }
+            },
+            "2fa": {
+                "title": "Two-Factor Authentication",
+                "description": "Enter the 6-digit code from your authenticator app.",
+                "data": {
+                    "totp_code": "TOTP Code"
+                }
+            },
+            "select_spaces": {
+                "title": "Select Spaces",
+                "description": "Choose which spaces (hubs) to add.",
+                "data": {
+                    "spaces": "Spaces"
+                }
+            }
+        },
+        "error": {
+            "invalid_auth": "Invalid email or password.",
+            "invalid_totp": "Invalid TOTP code. Please try again.",
+            "cannot_connect": "Cannot connect to Ajax servers.",
+            "unknown": "An unexpected error occurred."
+        },
+        "abort": {
+            "already_configured": "This account is already configured.",
+            "account_locked": "Account is locked. Please try again later.",
+            "reauth_successful": "Re-authentication successful."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Ajax Security Options",
+                "data": {
+                    "poll_interval": "Fallback poll interval (seconds)",
+                    "use_pin_code": "Require PIN code for arm/disarm",
+                    "fcm_project_id": "FCM Project ID (for push notifications)",
+                    "fcm_app_id": "FCM App ID",
+                    "fcm_api_key": "FCM API Key",
+                    "fcm_sender_id": "FCM Sender ID"
+                }
+            }
+        }
+    },
+    "entity": {
+        "button": {
+            "capture_photo": {
+                "name": "Capture photo"
+            }
+        },
+        "binary_sensor": {
+            "monitoring": {
+                "name": "CRA connection"
+            },
+            "gsm": {
+                "name": "Cellular connected"
+            },
+            "lid": {
+                "name": "Lid opened"
+            },
+            "ext_contact": {
+                "name": "External contact broken"
+            },
+            "ext_alert": {
+                "name": "External contact alert"
+            },
+            "drilling": {
+                "name": "Case drilling"
+            },
+            "anti_mask": {
+                "name": "Anti-masking"
+            },
+            "malfunction": {
+                "name": "Malfunction"
+            },
+            "interference": {
+                "name": "Interference"
+            },
+            "relay_stuck": {
+                "name": "Relay stuck"
+            },
+            "always_active": {
+                "name": "Always active"
+            },
+            "connectivity": {
+                "name": "Connectivity"
+            },
+            "problem": {
+                "name": "Problem"
+            }
+        },
+        "sensor": {
+            "signal_level": {
+                "name": "Signal level"
+            },
+            "gsm_type": {
+                "name": "GSM type"
+            },
+            "wifi_signal_level": {
+                "name": "Wi-Fi signal level"
+            }
+        },
+        "switch": {
+            "channel_1": {
+                "name": "Channel 1"
+            },
+            "channel_2": {
+                "name": "Channel 2"
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/any.proto";
+
+message OfflineNotifications {
+  option deprecated = true;
+  // should contain systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.Notification only
+  repeated google.protobuf.Any notification = 1;
+}

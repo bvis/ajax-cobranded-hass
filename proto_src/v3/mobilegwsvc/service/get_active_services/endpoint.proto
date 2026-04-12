@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_active_services;
+
+import "v3/mobilegwsvc/service/get_active_services/request.proto";
+import "v3/mobilegwsvc/service/get_active_services/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_active_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetActiveServicesService {
+  rpc execute (GetActiveServicesRequest) returns (GetActiveServicesResponse);
+};

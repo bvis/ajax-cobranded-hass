@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.mediadevice;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message MakeMediaDevicePermanentRequest {
+  string video_edge_id = 1;
+
+  string media_device_id = 2;
+
+  string name = 3;
+
+  repeated NewChannel new_channel = 4;
+
+  // replaced space_id field with space locator
+  reserved 20;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 21;
+
+  message NewChannel {
+    string channel_id_on_media_device = 1;
+
+    string group_id = 2;
+
+    string room_id = 3;
+  }
+}
+
+message MakeMediaDevicePermanentResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError video_edge_not_found = 4;
+      common.response.DefaultError device_not_found = 5;
+      common.response.DefaultError room_not_found = 6;
+      common.response.DefaultError group_not_found = 7;
+      common.response.DefaultError channels_number_constraint_violation = 8;
+      common.response.DefaultError video_edge_is_offline = 9;
+    }
+  }
+}

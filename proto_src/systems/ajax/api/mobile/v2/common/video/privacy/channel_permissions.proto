@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.privacy;
+
+import "systems/ajax/api/mobile/v2/common/video/privacy/permanent_channel_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/video/privacy/temporary_channel_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/video/privacy/channel_permission.proto";
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+/**
+This model holds all permissions for a single video edge channel.
+ */
+message ChannelPermissions {
+  string channel_id = 1;
+
+  // A set of channel permissions which is currently active for this space member
+  ActiveChannelPermissions active = 2;
+
+  // All permissions which were granted to this channel (either explicitly by some user, or
+  // automatically based on some policy). Contains both permanent and temporary permission sets
+  // (however, it can be the case that only one permission set is present at a time)
+  GrantedChannelPermissions granted = 3;
+
+  message ActiveChannelPermissions {
+    repeated ChannelPermission permissions = 1;
+  }
+
+  message GrantedChannelPermissions {
+    PermanentChannelPermissions permanent = 1;
+
+    TemporaryChannelPermissions temporary = 2;
+
+    // Merged granted (permanent and temporary) channel permissions
+    MergedGrantedChannelPermissions merged = 3;
+  }
+
+  message MergedGrantedChannelPermissions {
+    repeated ChannelPermission permissions = 1;
+
+    ChannelPermissionType type = 2;
+
+    // [optional] set only if permission type is TEMPORARY
+    google.protobuf.Timestamp expire_at = 3;
+
+    enum ChannelPermissionType {
+      ACTIVE_CHANNEL_PERMISSION_TYPE_UNSPECIFIED = 0;
+      ACTIVE_CHANNEL_PERMISSION_TYPE_ALWAYS = 1;
+      ACTIVE_CHANNEL_PERMISSION_TYPE_WHEN_ARMED = 2;
+      ACTIVE_CHANNEL_PERMISSION_TYPE_AFTER_ALARM = 3;
+      ACTIVE_CHANNEL_PERMISSION_TYPE_TEMPORARY = 4;
+    }
+  }
+}

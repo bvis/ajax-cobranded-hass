@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/patch_type.proto";
+
+message SirenTriggers {
+
+  EnabledSirenTriggers settings = 1;
+
+  repeated Trigger siren_trigger_capabilities = 2;
+
+  enum Trigger {
+    TRIGGER_UNSPECIFIED = 0;
+    TRIGGER_TAMPER = 1;
+    TRIGGER_REED = 2[(proto.meta.enum_tag) = "SIREN_TRIGGER_REED"];
+    TRIGGER_EXTRA = 3[(proto.meta.enum_tag) = "SIREN_TRIGGER_EXTRA_CONTACT"];
+    TRIGGER_EXTRA2 = 4;
+    TRIGGER_EXTRA3 = 5;
+    TRIGGER_MOTION = 6[(proto.meta.enum_tag) = "SIREN_TRIGGER_MOTION"];
+    TRIGGER_GLASS = 7;
+    TRIGGER_TEMPERATURE = 8;
+    TRIGGER_TEMPERATURE_DIFF = 9;
+    TRIGGER_SMOKE = 10;
+    TRIGGER_CO = 11;
+    TRIGGER_LEAK = 12;
+    TRIGGER_ACCEL = 13;
+    TRIGGER_TILT = 14[(proto.meta.enum_tag) = "SIREN_TRIGGER_TILT"];
+    TRIGGER_SECURITY_BUTTON = 15;
+    TRIGGER_SHOCK = 16;
+    TRIGGER_SHORT_CIRCUIT = 17;
+    TRIGGER_SHUTTER_ALARM = 18;
+    TRIGGER_SHUTTER_ONLINE = 19;
+    TRIGGER_ANTIMASKING = 20[(proto.meta.enum_tag) = "SIREN_TRIGGER_ANTIMASKING"];
+    TRIGGER_TEMP_WARNING = 21;
+    TRIGGER_TEMP_CRITICAL = 22;
+    TRIGGER_FLAME_DETECTED = 23;
+    TRIGGER_MOTION_LEFT_PIR = 24;
+    TRIGGER_MOTION_RIGHT_PIR = 25;
+    TRIGGER_ANTIMASKING_LEFT_PIR = 26;
+    TRIGGER_ANTIMASKING_RIGHT_PIR = 27;
+    TRIGGER_CCO = 28;
+    TRIGGER_FIRE_ALARM = 29;
+    TRIGGER_MEDICAL_ALARM = 30;
+    TRIGGER_CSMOKE = 31;
+    TRIGGER_SEISMIC = 32;
+    TRIGGER_CASE_BREAK = 33;
+    TRIGGER_OVERHEAT = 34;
+    TRIGGER_ENTRY_DELAY = 35;
+  }
+
+  message SirenTriggerSettings {
+    repeated SirenTriggerPatch siren_triggers = 1[(proto.meta.field_tag) = "siren_triggers"];
+  }
+
+  message SirenTriggerPatch {
+    PatchType type = 1;
+    Trigger trigger = 2;
+  }
+
+  message EnabledSirenTriggers {
+    repeated Trigger enabled_triggers = 1[(proto.meta.field_tag) = "siren_triggers"];
+  }
+}

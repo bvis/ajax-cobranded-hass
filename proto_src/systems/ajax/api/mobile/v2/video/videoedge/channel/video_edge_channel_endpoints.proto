@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.channel;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/set_record_settings_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/set_settings_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeChannelService {
+  rpc setSettings(SetChannelSettingsRequest) returns (SetChannelSettingsResponse) {}
+
+  rpc setRecordSettings(SetChannelRecordSettingsRequest) returns (SetChannelRecordSettingsResponse) {}
+};

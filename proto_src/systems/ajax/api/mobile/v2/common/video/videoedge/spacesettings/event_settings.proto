@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.spacesettings;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message EventSettings {
+  bool muteConnectionAlarms = 1;
+}

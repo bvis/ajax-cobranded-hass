@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device;
+
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message WalkTestSensor {
+  oneof type {
+    MagneticContact magnetic_contact = 1;
+    ExternalContact external_contact = 2;
+    MotionSensor motion_sensor = 3;
+    MotionSensorRight motion_sensor_right = 4;
+    MotionSensorLeft motion_sensor_left = 5;
+    SmokeSensor smoke_sensor = 6;
+    GasSensor gas_sensor = 7;
+    CoSensor co_sensor = 8;
+    PanicButton panic_button = 9;
+    GlassBreakSensor glass_break_sensor = 10;
+    MaskingSensor masking_sensor = 11;
+    TemperatureSensor temperature_sensor = 12;
+    SeismicSensor seismic_sensor = 13;
+    ShockSensor shock_sensor = 14;
+    TiltSensor tilt_sensor = 15;
+    TamperSensor tamper_sensor = 16;
+    IntrusionSensor intrusion_sensor = 17;
+    FireSensor fire_sensor = 18;
+    MedicalAlarm medical_alarm = 19;
+    Malfunction malfunction = 20;
+    LeakSensor leak_sensor = 21;
+    CustomEvent custom_event = 22;
+    DuressCode duress_code = 23;
+    RollerShutterSensor roller_shutter_sensor = 24;
+    MaskingSensorRight masking_sensor_right = 25;
+    MaskingSensorLeft masking_sensor_left = 26;
+  }
+
+  message MagneticContact {}
+  message ExternalContact {}
+
+  message MotionSensor {}
+  message MotionSensorRight {}
+  message MotionSensorLeft {}
+  message MaskingSensor {}
+  message MaskingSensorRight {}
+  message MaskingSensorLeft {}
+
+  message SmokeSensor {}
+  message CoSensor {}
+
+  message SeismicSensor {}
+
+  message PanicButton {}
+  message GlassBreakSensor {}
+  message TemperatureSensor {}
+  message ShockSensor {}
+  message TiltSensor {}
+  message TamperSensor {}
+
+  // Wire-Input specific
+  message IntrusionSensor {}
+  message FireSensor {}
+  message GasSensor {}
+  message MedicalAlarm {}
+  message Malfunction {}
+  message LeakSensor {}
+  message CustomEvent {}
+  message DuressCode {}
+  message RollerShutterSensor {}
+}

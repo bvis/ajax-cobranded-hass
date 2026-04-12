@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_mute_all_fire_detectors;
+
+import "v3/mobilegwsvc/service/device_command_mute_all_fire_detectors/request.proto";
+import "v3/mobilegwsvc/service/device_command_mute_all_fire_detectors/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// in HTS table it`s 0x0B SOUND_OFF_GROUP
+service DeviceCommandMuteAllFireDetectorsService {
+  rpc execute (DeviceCommandMuteAllFireDetectorsRequest) returns (DeviceCommandMuteAllFireDetectorsResponse);
+};

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message WireSiren {
+    string id = 0x01;
+    Name name = 1000;
+    string group_id = 0x03;
+    string room_id = 0x04;
+    bool enabled = 0x06;
+    int32 alarm_duration = 0x07;
+    bool beep_on_arm_disarm = 0x08;
+    repeated BeepOnArmDisarm beep_on_arm_disarm_v2 = 0x080;
+    bool beep_on_delay = 0x09;
+    repeated BeepOnDelay beep_on_delay_v2 = 0x090;
+    string associated_group_id = 0x0A;
+    int32 cms_device_index = 0x0B;
+
+    enum BeepOnArmDisarm {
+        NO_BEEP_ON_ARM_DISARM_INFO = 0;
+        BEEP_ON_ARM = 1;
+        BEEP_ON_DISARM = 2;
+        BEEP_ON_NIGHT_ARM = 3;
+        BEEP_ON_NIGHT_DISARM = 4;
+    }
+
+    enum BeepOnDelay {
+        NO_BEEP_ON_DELAY_INFO = 0;
+        BEEP_ON_ARM_DELAY = 1;
+        BEEP_ON_DISARM_DELAY = 2;
+        BEEP_ON_NIGHT_ARM_DELAY = 3;
+        BEEP_ON_NIGHT_DISARM_DELAY = 4;
+    }
+}

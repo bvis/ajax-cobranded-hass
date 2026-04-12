@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/security_standart.proto";
+import "systems/ajax/api/ecosystem/v2/commonmodels/device/common/always_active.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonArmingPart {
+
+  message CommonArmingPartSettings {
+    optional NightModeArm night_mode_arm = 0x16[(proto.meta.field_tag) = "night_mode_arm"];
+
+    optional ArmDelay arm_delay = 0xAC;
+
+    optional PerimeterArmDelay perimeter_arm_delay = 0xC0;
+
+    optional ArmingMode arming_mode = 0xC5[(proto.meta.field_tag) = "arming_mode"];
+
+    optional AlarmDelay alarm_delay = 0xAD;
+
+    optional PerimeterAlarmDelay perimeter_alarm_delay = 0xC1;
+
+    /**
+    Deprecated. Instead, use it in parts of sensor
+    Example -  MotionDetectionPart
+    */
+    optional AlwaysActive always_active = 1002[
+      (proto.meta.field_tag) = "always_active",
+      deprecated = true
+    ];
+  }
+
+  NightModeArm night_mode_arm = 0x16[(proto.meta.field_tag) = "night_mode_arm"];
+
+  ArmDelay arm_delay = 0xAC;
+
+  ApplyDelaysToNightMode apply_delays_to_night_mode = 0xAE[(proto.meta.field_tag) = "apply_delays_to_night_mode"];
+
+  PerimeterArmDelay perimeter_arm_delay = 0xC0;
+
+  ArmingMode arming_mode = 0xC5[(proto.meta.field_tag) = "arming_mode"];
+
+  AlarmDelay alarm_delay = 0xAD;
+
+  VerifiesAlarm verifies_alarm = 0xB5[(proto.meta.field_tag) = "alarm_verification"];
+
+  PerimeterAlarmDelay perimeter_alarm_delay = 0xC1;
+
+  DeviceAlarmLogicType device_alarm_logic_type = 0xBC;
+
+  IndicatorLightMode indicator_light_mode = 0xBB;
+
+  repeated ArmingCapability arming_capabilities = 1000;
+
+  SecurityStandard current_standard = 1001;
+
+  /**
+  Deprecated. Instead, use it in parts of sensor
+  Example - MotionDetectionPart
+   */
+  AlwaysActive always_active = 1002[
+    (proto.meta.field_tag) = "always_active",
+    deprecated = true
+  ];
+
+  message ArmDelay {
+    int32 seconds = 1[(proto.meta.field_tag) = "arm_delay_seconds"];
+  }
+
+  message PerimeterArmDelay {
+    int32 seconds = 1[(proto.meta.field_tag) = "perimeter_arm_delay_seconds"];
+  }
+
+  message AlarmDelay {
+    int32 seconds = 1[(proto.meta.field_tag) = "alarm_delay_seconds"];
+  }
+
+  message PerimeterAlarmDelay {
+    int32 seconds = 1[(proto.meta.field_tag) = "perimeter_alarm_delay_seconds"];
+  }
+
+  enum NightModeArm {
+    NIGHT_MODE_ARM_UNSPECIFIED = 0;
+    NIGHT_MODE_ARM_DISABLED = 1[(proto.meta.enum_tag) = "NIGHT_MODE_ARM_DISABLED"];
+    NIGHT_MODE_ARM_ENABLED = 2[(proto.meta.enum_tag) = "NIGHT_MODE_ARM_ENABLED"];
+  }
+
+  enum ApplyDelaysToNightMode {
+    APPLY_DELAYS_TO_NIGHT_MODE_UNSPECIFIED = 0;
+    APPLY_DELAYS_TO_NIGHT_MODE_DISABLED = 1[(proto.meta.enum_tag) = "APPLY_DELAYS_TO_NIGHT_MODE_DISABLED"];
+    APPLY_DELAYS_TO_NIGHT_MODE_ENABLED = 2[(proto.meta.enum_tag) = "APPLY_DELAYS_TO_NIGHT_MODE_ENABLED"];
+  }
+
+  enum VerifiesAlarm {
+    VERIFIES_ALARM_UNSPECIFIED = 0;
+    VERIFIES_ALARM_DISABLED = 1[(proto.meta.enum_tag) = "VERIFICATION_DISABLED"];
+    VERIFIES_ALARM_ENABLED = 2[(proto.meta.enum_tag) = "VERIFICATION_ENABLED"];
+  }
+
+  enum ArmingMode {
+    ARMING_MODE_UNSPECIFIED = 0;
+    ARMING_MODE_NORMAL = 1[(proto.meta.enum_tag) = "ARMING_MODE_NORMAL"];
+    ARMING_MODE_ENTRY_EXIT = 2[(proto.meta.enum_tag) = "ARMING_MODE_ENTRY_EXIT"];
+    ARMING_MODE_FOLLOWER = 3[(proto.meta.enum_tag) = "ARMING_MODE_FOLLOWER"];
+    ARMING_MODE_DISABLED = 4;
+  }
+
+  enum DeviceAlarmLogicType {
+    DEVICE_ALARM_LOGIC_TYPE_UNSPECIFIED = 0;
+    DEVICE_ALARM_LOGIC_TYPE_NONE = 1;
+    DEVICE_ALARM_LOGIC_TYPE_ARMING_COMPLETION_DEVICE = 2;
+    DEVICE_ALARM_LOGIC_TYPE_ENTRY_ROUTE = 3;
+  }
+
+  message IndicatorLightMode {
+    Mode mode = 1;
+    repeated Capability capabilities = 2;
+
+    enum Mode {
+      MODE_UNSPECIFIED = 0;
+      MODE_DONT_BLINK_ON_ALARM = 1;
+      MODE_STANDARD = 2;
+    }
+
+    enum Capability {
+      CAPABILITY_UNSPECIFIED = 0;
+      CAPABILITY_INDICATOR_LIGHT_MODE = 9;
+    }
+  }
+
+  enum ArmingCapability {
+    ARMING_CAPABILITY_UNSPECIFIED = 0;
+    ARMING_CAPABILITY_ZONE_TEST = 1;
+    ARMING_CAPABILITY_DELAYS = 2;
+    ARMING_CAPABILITY_NIGHT_MODE_ARM = 3;
+    ARMING_CAPABILITY_TIMEOUTS_TO_PERIMETER_HUB = 4;
+    ARMING_CAPABILITY_PERIMETER_DELAYS = 5;
+    ARMING_CAPABILITY_ARMING_MODE = 6;
+    ARMING_CAPABILITY_SIA_STANDARD = 7;
+    ARMING_CAPABILITY_ALWAYS_ACTIVE_PER_DEVICE = 8;
+    ARMING_CAPABILITY_ARMING_MODE_DISABLED = 9;
+  }
+}
+

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part;
+
+import "v3/mobilegwsvc/service/get_device_arming_part/request.proto";
+import "v3/mobilegwsvc/service/get_device_arming_part/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_device_arming_part";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetDeviceArmingPartService {
+  rpc execute (GetDeviceArmingPartRequest) returns (GetDeviceArmingPartResponse);
+};

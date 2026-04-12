@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message PassiveHub {
+  string id = 1;
+
+  optional string room_id = 2;
+
+  oneof additional_info {
+    AddHubByQrTransition add_hub_by_qr_transition = 10;
+    TransferHubSettingsTransition transfer_hub_settings_transition = 11;
+  }
+
+  message AddHubByQrTransition {
+    Stage stage = 1;
+
+    message Stage {
+      oneof stage {
+        TransitionInProgress transition_in_progress = 1;
+        TransitionFailed transition_failed = 2;
+      }
+
+      message TransitionInProgress {}
+
+      message TransitionFailed {}
+    }
+  }
+
+  message TransferHubSettingsTransition {
+    Stage stage = 1;
+
+    message Stage {
+      oneof stage {
+        TransitionInProgress transition_in_progress = 1;
+        TransitionFailed transition_failed = 2;
+        TransitionCompleted transition_completed = 3;
+      }
+
+      message TransitionInProgress {}
+
+      message TransitionFailed {}
+
+      message TransitionCompleted {}
+    }
+  }
+};

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message AlarmVerification {
+
+  message AlarmVerificationSettings {
+    optional Verification verification = 1[(proto.meta.field_tag) = "alarm_verification"];
+  }
+
+  Verification verification = 1[(proto.meta.field_tag) = "alarm_verification"];
+
+  enum Verification {
+    VERIFICATION_UNSPECIFIED = 0;
+    VERIFICATION_DISABLED = 1[(proto.meta.enum_tag) = "VERIFICATION_DISABLED"];
+    VERIFICATION_ENABLED = 2[(proto.meta.enum_tag) = "VERIFICATION_ENABLED"];
+  }
+}

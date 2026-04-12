@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security.group;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.security.group";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum TwoStageArmingMode{
+  TWO_STAGE_ARMING_MODE_UNSPECIFIED = 0;
+  TWO_STAGE_ARMING_MODE_ENABLED = 1;
+  TWO_STAGE_ARMING_MODE_DISABLED = 2;
+}

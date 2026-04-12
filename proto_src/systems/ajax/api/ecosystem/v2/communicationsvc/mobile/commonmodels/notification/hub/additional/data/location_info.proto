@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message LocationInfo {
+  string latitude = 1 [(hash_value) = true];
+  string longitude = 2 [(hash_value) = true];
+  double acc = 3;
+  double speed = 4;
+  google.protobuf.Timestamp time = 5;
+}
+

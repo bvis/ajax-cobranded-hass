@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+import "google/protobuf/wrappers.proto";
+
+message PhotoOnDemandCompanyRights {
+  PhotoOnDemandDevices shared_devices = 1;
+
+  oneof availability_type {
+    Never disabled = 21;
+    Always always = 22;
+    WhenArmed when_armed = 23;
+    AfterAlarm after_alarm = 24;
+  }
+
+  message Never{}
+  message Always{}
+  message WhenArmed{}
+
+  message AfterAlarm {
+    google.protobuf.UInt32Value time_to_take_photo_minutes = 1;
+  }
+
+  message PhotoOnDemandDevices{
+    repeated PhotoOnDemandDevice devices = 1;
+  }
+
+  message PhotoOnDemandDevice {
+    string device_id = 1;
+    PhotoDeviceType device_type = 2;
+    enum PhotoDeviceType {
+      NO_DEVICE_TYPE_INFO = 0;
+      MOTION_CAM = 1;
+      MOTION_CAM_OUTDOOR = 2;
+      MOTION_CAM_PHOD = 3;
+      MOTION_CAM_OUTDOOR_PHOD = 4;
+      MOTION_CAM_PHOD_FIBRA = 5;
+      MOTION_CAM_OUTDOOR_TWO_FOUR_PHOD = 6;
+      MOTION_CAM_HD = 7;  // Subtype deleted from HTS
+      MOTION_CAM_S_PHOD = 8;
+      MOTION_CAM_S_PHOD_AM = 9;
+      MOTION_CAM_SUPERIOR_PHOD = 10;
+      MOTION_CAM_G3 = 11;
+    }
+  }
+}

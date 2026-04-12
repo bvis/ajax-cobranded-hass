@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.privacy;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.privacy";
+
+message PrivacyMotionCamAccess {
+  string user_id = 1;
+  string device_id = 2;
+  DeviceType device_type = 3;
+  AccessType access_type = 4;
+
+  enum AccessType {
+    DISABLED = 0;
+    ALWAYS = 1;
+    ARMED = 2;
+  }
+
+  enum DeviceType {
+    MOTION_CAM = 0;
+    MOTION_CAM_OUTDOOR = 1;
+    MOTION_CAM_FIBRA_BASE = 2;
+  }
+}

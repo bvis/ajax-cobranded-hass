@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/field_mask.proto";
+
+import "systems/ajax/protobuf/hub/device/device.proto";
+import "systems/ajax/protobuf/hub/room.proto";
+import "systems/ajax/protobuf/hub/group.proto";
+import "systems/ajax/protobuf/hub/user.proto";
+import "systems/ajax/protobuf/hub/camera.proto";
+import "systems/ajax/protobuf/hub/scenario.proto";
+import "systems/ajax/protobuf/hub/company_binding.proto";
+import "systems/ajax/protobuf/hub/config_migration_state.proto";
+import "systems/ajax/protobuf/hub/hub_access_response.proto";
+import "systems/ajax/protobuf/hub/access_card_reader_state.proto";
+import "systems/ajax/protobuf/hub/access_card_rc.proto";
+import "systems/ajax/protobuf/hub/access_key.proto";
+
+message Update {
+    oneof test_oneof {
+        Room room = 0x24;
+        Group group = 0x23;
+        User user = 0x22;
+        Camera camera = 0x25;
+        Scenario scenario = 0x2A;
+        CompanyBinding company_binding = 0x2B;
+        ConfigMigrationState config_migration_state = 0x2D;
+
+        Device device = 1000;
+        HubAccessResponse hub_access_response = 1010;
+        systems.ajax.protobuf.hub.AccessCardReaderState access_card_reader_state = 1011;
+        systems.ajax.protobuf.hub.AccessCardRc access_card_rc = 1012;
+        systems.ajax.protobuf.hub.AccessKeyUpdate access_key_update = 1013;
+    }
+
+    google.protobuf.FieldMask mask = 1100;
+    Type type = 1200;
+    string settings_id = 2000;
+
+    enum Type {
+        UPDATE = 0;
+        ADD = 1;
+        DELETE = 2;
+        SETTINGS_ID = 3;
+        LOGS_DROPPED = 4;
+        PROFI_HUB_ACCESS_RESPONSE_RESULT = 5;
+        ACCESS_CARD_STATE_CHANGED = 6;
+        ACCESS_CARD_RC = 7;
+        ACCESS_KEY_REGISTERED = 8;
+        ACCESS_KEY_TIMEOUT = 9;
+        DEV_REG_SEARCH_STARTED = 10;
+        UNREG_DEVICE_FOUND = 11;
+    }
+}

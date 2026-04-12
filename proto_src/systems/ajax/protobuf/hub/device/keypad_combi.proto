@@ -1,0 +1,101 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message KeypadCombi {
+  CommonDevicePart common_part = 1000;
+
+  repeated SirenTrigger siren_triggers = 0x2E;
+  repeated AccessProfile access_profiles = 0x3E;
+  StarButtonFunction star_button_function = 0x38;
+
+  string password = 0x31;
+  string force_disarm_password = 0x33;
+  bool block_on_multiple_password_failures = 0x36;
+  int32 time_to_block_on_multiple_password_failures_minutes = 0x34;
+  google.protobuf.BoolValue blocked = 0x37;
+  bool allow_fast_arming = 0x35;
+  int32 brightness_level = 0x3B;
+  int32 volume_level = 0x3C;
+  string associated_group_id = 0x3D;
+  string password_hash = 0x4A;
+  string password_hash_duress = 0x4B;
+
+  bool arm_inversion = 0x40;
+  bool nfc_enabled = 0x41;
+  bool beep_on_delay = 0x42;
+  repeated BeepOnDelay beep_on_delay_v2 = 0x420;
+  int32 siren_events_volume = 0x43;
+  bool act_on_arming = 0x44;
+  repeated BeepOnArmDisarm act_on_arming_v2 = 0x440;
+
+  int32 time_to_act_seconds = 0x46;
+  SirenAlarmVolume siren_alarm_volume = 0x47;
+  bool chimes_enabled = 0x48;
+  int32 count_protect = 0x49;
+  BuzzerState buzzer_state = 0x4C;
+  string siren_associated_group_id = 0x4D;
+
+  Subtype subtype = 0xC3;
+
+  enum SirenTrigger {
+    NO_SIREN_TRIGGER_INFO = 0;
+    SECURITY_BUTTON = 1;
+  }
+
+  enum StarButtonFunction {
+    NO_STAR_BUTTON_FUNCTION_INFO = 0;
+    DISABLED = 1;
+    PANIC = 2;
+    MUTE_FIRE_ALARM = 3;
+  }
+
+  enum AccessProfile {
+    NO_ACCESS_PROFILE_INFO = 0;
+    KEYBOARD_PASSWORD = 1;
+    USER_PASSWORD = 2;
+  }
+
+  enum SirenAlarmVolume {
+    NO_SIREN_ALARM_VOLUME = 0;
+    DISABLED_ALARM_VOLUME = 1;
+    MIN_ALARM_VOLUME = 2;
+    AVG_ALARM_VOLUME = 3;
+    MAX_ALARM_VOLUME = 4;
+  }
+
+  enum BuzzerState {
+    NOT_BUZZER_STATE_INFO = 0;
+    OFF_BUZZER_STATE = 1;
+    ON_BUZZER_STATE = 2;
+    WAIT_STOP_BUZZER_STATE = 3;
+    WAIT_START_BUZZER_STATE = 4;
+  }
+
+  enum BeepOnArmDisarm {
+    NO_BEEP_ON_ARM_DISARM_INFO = 0;
+    BEEP_ON_ARM = 1;
+    BEEP_ON_DISARM = 2;
+    BEEP_ON_NIGHT_ARM = 3;
+    BEEP_ON_NIGHT_DISARM = 4;
+  }
+
+  enum BeepOnDelay {
+    NO_BEEP_ON_DELAY_INFO = 0;
+    BEEP_ON_ARM_DELAY = 1;
+    BEEP_ON_DISARM_DELAY = 2;
+    BEEP_ON_NIGHT_ARM_DELAY = 3;
+    BEEP_ON_NIGHT_DISARM_DELAY = 4;
+  }
+
+  enum Subtype {
+    NO_SUBTYPE = 0;
+  }
+}

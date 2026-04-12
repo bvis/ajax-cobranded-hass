@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.deactivate_service;
+
+import "v3/mobilegwsvc/service/deactivate_service/request.proto";
+import "v3/mobilegwsvc/service/deactivate_service/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.deactivate_service";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeactivateServiceService {
+  rpc execute (DeactivateServiceRequest) returns (DeactivateServiceResponse);
+};

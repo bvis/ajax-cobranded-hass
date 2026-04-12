@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.rtsp;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.rtsp";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RtspSettings {
+  int32 http_port = 1;
+}

@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mcu;
+
+import "systems/ajax/api/mobile/v2/common/hub/device/common/battery_charged_state.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/backupchannel/backup_channel_info.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/chime.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/operating_mode.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/spacesettings/backup_channel_space_settings.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Mcu {
+  // [required]
+  BatteryStatus battery_status = 1 [deprecated = true];
+
+  ExternalPowerState external_power_state = 2;
+
+  McuState mcu_state = 3;
+
+  backupchannel.BackupChannelInfo backup_channel_info = 4 [deprecated = true];
+
+  spacesettings.BackupChannelSpaceSettings backup_channel_space_settings = 5;
+
+  OperatingMode operating_mode = 6;
+
+  BatteryState battery_state = 7;
+
+  common.hub.device.common.BatteryChargedState battery_charged_state = 8;
+
+  Chime chime = 9;
+
+  optional uint32 assigned_extender_device_index = 10 [deprecated = true];
+
+  BatteryTemperatureState battery_temperature_state = 11;
+
+  PirMotionLedIndication pir_motion_led_indication = 12;
+
+  RingButtonBellState ring_button_bell_state = 13;
+
+  Capabilities capabilities = 14;
+
+  message BatteryStatus {
+    option deprecated = true;
+
+    BatteryState battery_state = 1;
+    common.hub.device.common.BatteryChargedState battery_charged_state = 2;
+  }
+
+  message Capabilities {
+    repeated Flag flags = 1;
+
+    enum Flag {
+      FLAG_UNSPECIFIED = 0;
+      FLAG_HAVE_BATTERY = 1;
+      FLAG_SUPPORTS_INTRUSION = 2;
+      FLAG_HAVE_CHIME = 3;
+      FLAG_HAVE_RING_BUTTON = 4;
+      FLAG_HAVE_PIR_MOTION_LED_INDICATION = 5;
+    }
+  }
+
+  enum ExternalPowerState {
+    EXTERNAL_POWER_STATE_UNSPECIFIED = 0;
+    EXTERNAL_POWER_STATE_CONNECTED = 1;
+    EXTERNAL_POWER_STATE_DISCONNECTED = 2;
+  }
+
+  enum BatteryState {
+    BATTERY_STATE_UNSPECIFIED = 0;
+    BATTERY_STATE_BROKEN = 1;
+    BATTERY_STATE_OK = 2;
+  }
+
+  enum McuState {
+    MCU_STATE_UNSPECIFIED = 0;
+    MCU_STATE_FIRMWARE_UPGRADE_IN_PROGRESS = 1;
+    MCU_STATE_OK = 2;
+    MCU_STATE_FAILED = 3;
+  }
+
+  enum BatteryTemperatureState {
+    BATTERY_TEMPERATURE_STATE_UNSPECIFIED = 0;
+    BATTERY_TEMPERATURE_STATE_OK = 1;
+    BATTERY_TEMPERATURE_STATE_OUT_OF_RANGE = 2;
+  }
+
+  enum PirMotionLedIndication {
+    PIR_MOTION_LED_INDICATION_UNSPECIFIED = 0;
+    PIR_MOTION_LED_INDICATION_ENABLED = 1;
+    PIR_MOTION_LED_INDICATION_DISABLED = 2;
+  }
+
+  enum RingButtonBellState {
+    RING_BUTTON_BELL_STATE_UNSPECIFIED = 0;
+    RING_BUTTON_BELL_STATE_ENABLED = 1;
+    RING_BUTTON_BELL_STATE_DISABLED = 2;
+  }
+}

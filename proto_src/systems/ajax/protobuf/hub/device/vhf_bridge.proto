@@ -1,0 +1,94 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message VhfBridge {
+    CommonDevicePart common_part = 1000;
+
+    google.protobuf.BoolValue externally_powered = 0x31;
+
+    Event event_ch1 = 0x32;
+    Event event_ch2 = 0x33;
+    Event event_ch3 = 0x34;
+    Event event_ch4 = 0x35;
+    Event event_ch5 = 0x36;
+    Event event_ch6 = 0x37;
+    Event event_ch7 = 0x38;
+    Event event_ch8 = 0x39;
+
+    repeated ChannelTrip channels_trip = 0x3A;
+    int32 pulse_length = 0x3B;
+    int32 pause_length = 0x3C;
+
+    int32 count_protect = 0x3E;
+    repeated EventState events_state = 0x3F;
+    repeated ChannelStatus channels_status = 0x40;
+    google.protobuf.BoolValue charging = 0x53;
+    google.protobuf.BoolValue battery_broken = 0x54;
+    bool battery_charge_tracking = 0x55;
+
+    message ChannelTrip {
+        int32 channel_id = 1000;
+        ConnectionType connection_type = 1001;
+    }
+
+    message EventState {
+        Event event = 1000;
+        State state = 1001;
+    }
+
+    message ChannelStatus {
+        int32 channel_id = 1000;
+        Status status = 1001;
+    }
+
+    Subtype subtype = 0xC3;
+
+    enum State {
+        NO_STATE_INFO = 0;
+        INACTIVE = 1;
+        ACTIVE = 2;
+    }
+
+    enum ConnectionType {
+        NO_CONNECTION_TYPE_INFO = 0;
+        NEGATIVE = 1;
+        POSITIVE = 2;
+    }
+
+    enum Event {
+        NOT_ASSIGNED_OUTPUT = 0;
+        INTRUSION_ALARM = 1;
+        FIRE_ALARM = 2;
+        MEDICAL_ALARM = 3;
+        PANIC_ALARM = 4;
+        ALARM = 5;
+        MALFUNCTION = 6;
+        BRIDGE_LOST_EXT_POWER = 7;
+        BRIDGE_BATTERY_LOW = 8;
+        HUB_LOST_EXT_POWER = 9;
+        HUB_BATTERY_LOW = 10;
+        TAMPER_ALARM = 11;
+        SECURITY_STATE = 12;
+        CONFIRMED_ALARM = 13;
+        CONFIRMED_HU_ALARM = 14;
+        BRIDGE_JWL_CONN_LOST = 15;
+    }
+
+    enum Status {
+        NO_STATUS_INFO = 0;
+        OFF = 1;
+        ON = 2;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

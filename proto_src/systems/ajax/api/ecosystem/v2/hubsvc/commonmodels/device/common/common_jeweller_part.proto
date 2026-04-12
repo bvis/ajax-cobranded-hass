@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/assigned_extender.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/bypass_part.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/cms_device_index.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_common_capabilities.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_malfunctions.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_migration_status.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_profile.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_telemetry.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/device_transmission_power_mode.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/self_monitoring_part.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonJewellerPart {
+  DeviceProfile device_profile = 1;
+
+  DeviceTelemetry device_telemetry = 2;
+
+  DeviceTransmissionPowerMode device_transmission_power_mode = 0x15;
+
+  DeviceMalfunctions device_malfunctions = 0x17;
+
+  AssignedExtender assigned_extender = 0x23;
+
+  CmsDeviceIndex cms_device_index = 0x27;
+
+  BypassPart bypass_part = 0xB7;
+
+  DeviceMigrationStatus device_migration_status = 0x9F;
+
+  repeated DeviceCommonCapability device_common_capabilities = 0xC6;
+
+  SelfMonitoringPart self_monitoring_part = 3;
+}

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_notification_alert_settings;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/notification_event_type.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_alert_with_siren.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/channel/notification/video_notification_type.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_notification_alert_settings";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoNotificationAlertSettingsRequest {
+  // [required]
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  // [required]
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  // [required]
+  string channel_id = 3;
+
+  // [required]
+  commonmodels.video.videoedge.channel.notification.VideoNotificationType type = 4;
+
+  // [optional]
+  commonmodels.video.videoedge.channel.notification.AlertWithSiren alert_with_siren = 5;
+
+  // [optional]
+  commonmodels.video.videoedge.channel.notification.NotificationEventType notification_event_type = 6;
+}

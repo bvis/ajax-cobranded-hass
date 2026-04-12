@@ -1,0 +1,38 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message RangeExtender2 {
+    CommonDevicePart common_part = 1000;
+
+    google.protobuf.BoolValue externally_powered = 0x31;
+    google.protobuf.BoolValue auto_assign_devices_mode_enabled = 0x38;
+    int32 led_brightness_level = 0x3A;
+    google.protobuf.BoolValue new_firmware_version_available = 0x3B;
+    google.protobuf.Int32Value latest_available_firmware_version = 0x3C;
+    google.protobuf.Int32Value avg_noise_level_value_channel1 = 0x3D;
+    google.protobuf.Int32Value avg_noise_level_value_channel2 = 0x3E;
+    google.protobuf.BoolValue data_channel_ok = 0x49;
+    SignalQuality data_channel_signal_quality = 0x4D;
+
+    Subtype subtype = 0xC3;
+
+    enum SignalQuality {
+        NO_SIGNAL_QUALITY_INFO = 0;
+        VERY_LOW = 1;
+        LOW = 2;
+        MEDIUM = 3;
+        HIGH = 4;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

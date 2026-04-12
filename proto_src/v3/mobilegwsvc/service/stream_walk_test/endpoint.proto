@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_walk_test;
+
+import "v3/mobilegwsvc/service/stream_walk_test/request.proto";
+import "v3/mobilegwsvc/service/stream_walk_test/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_walk_test";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamWalkTestService {
+  rpc execute(StreamWalkTestRequest) returns (stream StreamWalkTestResponse);
+};

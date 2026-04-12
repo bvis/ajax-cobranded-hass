@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.webrtc;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message IceCandidate {
+  string sdp_mid = 1 [(disable_logging) = true];
+
+  uint32 sdp_mline_index = 2;
+
+  string sdp = 3 [(disable_logging) = true];
+};

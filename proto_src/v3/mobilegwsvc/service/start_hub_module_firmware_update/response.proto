@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_hub_module_firmware_update;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_hub_module_firmware_update";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StartHubModuleFirmwareUpdateResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      commonmodels.Error illegal_argument = 1;
+      commonmodels.HubWrongStateError hub_wrong_state = 2;
+      commonmodels.Error hub_offline = 3;
+      commonmodels.Error update_not_found = 4;
+      commonmodels.Error permission_denied = 5;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+// Diagnostics description
+
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.diagnostics;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum LogLevel {
+  LL_NONE = 0;
+  LL_OFF = 1;
+  LL_FATAL = 2;
+  LL_ERROR = 3;
+  LL_WARN = 4;
+  LL_INFO = 5;
+  LL_DEBUG = 6;
+  LL_TRACE = 7;
+  LL_ALL = 8;
+};
+
+message LoggingSettings {
+  uint32 log_max_bytes = 1;
+  LogLevel root_level = 2;
+  repeated ModuleLogLevel module_levels = 3;
+
+  message ModuleLogLevel {
+    string module = 1;
+    LogLevel level = 2;
+  }
+};
+
+message DiagnosticsSettings {
+  LoggingSettings logging_settings = 1;
+};

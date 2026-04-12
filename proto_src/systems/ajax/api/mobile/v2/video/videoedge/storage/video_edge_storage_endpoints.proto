@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.storage;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/storage/format_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeStorageService {
+  rpc formatStorage(FormatStorageRequest) returns (FormatStorageResponse) {}
+};

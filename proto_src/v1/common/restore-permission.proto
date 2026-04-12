@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+enum RestorePermission {
+  NO_RESTORE_PERMISSION_INFO = 0;
+  RESTORE_CONFIRMED_ALARMS = 1;
+  RESTORE_CONFIRMED_HU_ALARMS = 2;
+  RESTORE_UNCONFIRMED_ALARMS = 3;
+  RESTORE_UNCONFIRMED_HU_ALARMS = 4;
+  RESTORE_TAMPER_ACTIVATION = 5;
+  RESTORE_EXTERNAL_POWER_ACTIVATION = 6;
+  RESTORE_ATS_ACTIVATION = 7;
+  RESTORE_OTHER_FAULT_ACTIVATION = 8;
+}

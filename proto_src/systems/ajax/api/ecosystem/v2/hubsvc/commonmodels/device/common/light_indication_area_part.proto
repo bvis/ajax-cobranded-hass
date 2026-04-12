@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message LightIndicationAreaPart {
+
+  LightIndicationArea light_indication_area = 1 [(proto.meta.field_tag) = "light_indication_area"];
+
+  message LightIndicationAreaPartSettings {
+    optional LightIndicationArea light_indication_area = 1 [(proto.meta.field_tag) = "light_indication_area"];
+  }
+
+  enum LightIndicationArea {
+    LIGHT_INDICATION_AREA_UNSPECIFIED = 0;
+    LIGHT_INDICATION_AREA_CORNER_BACKLIGHT = 1 [(proto.meta.enum_tag) = "LIGHT_INDICATION_AREA_CORNER_BACKLIGHT"];
+    LIGHT_INDICATION_AREA_FULL_FRAME_BACKLIGHT = 2 [(proto.meta.enum_tag) = "LIGHT_INDICATION_AREA_FULL_FRAME_BACKLIGHT"];
+  }
+}

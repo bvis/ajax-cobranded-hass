@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+message FacilitySearchRequest {
+  string search_phrase = 1;
+  uint32 limit = 2;
+  uint64 offset = 3;
+}

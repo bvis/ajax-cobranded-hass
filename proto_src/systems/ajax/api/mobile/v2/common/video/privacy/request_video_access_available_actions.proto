@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.privacy;
+
+import "systems/ajax/api/mobile/v2/common/video/privacy/channel_permission.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RequestVideoAccessAvailableActions {
+    bool can_request_video_access = 1;
+
+    repeated ChannelPermission available_channel_permissions = 2;
+}

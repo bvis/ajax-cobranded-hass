@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.backupchannel;
+
+import "systems/ajax/api/mobile/v2/common/hub/device/common/data_channel_connection_state.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/data_channel_signal_quality.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/device_arming_mode.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/device_transmition_power_mode.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/jeweller_connection_state.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/jeweller_signal_quality.proto";
+import "systems/ajax/api/mobile/v2/common/hub/device/common/device_state.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message BackupChannelInfo {
+  common.hub.device.common.JewellerConnectionState jeweller_connection_state = 1;
+  common.hub.device.common.JewellerSignalQuality jeweller_signal_quality = 2;
+  common.hub.device.common.DataChannelConnectionState data_channel_connection_state = 3;
+  common.hub.device.common.DataChannelSignalQuality data_channel_signal_quality = 4;
+  common.hub.device.common.DeviceTransmitionPowerMode device_transmition_power_mode = 5;
+  uint32 arm_delay_seconds = 6;
+  uint32 alarm_delay_seconds = 7;
+  uint32 night_mode_arm_delay_seconds = 8;
+  uint32 night_mode_alarm_delay_seconds = 13;
+  common.hub.device.common.DeviceArmingMode device_arming_mode = 14;
+  repeated SirenTrigger siren_triggers = 15;
+  repeated ChimeTrigger chime_triggers = 16;
+  int32 chime_signal = 17;
+  uint32 assigned_extender_device_index = 18;
+  common.hub.device.common.DeviceState device_state = 19;
+  uint32 device_index = 20;
+
+  enum SirenTrigger {
+    SIREN_TRIGGER_UNSPECIFIED = 0;
+    SIREN_TRIGGER_MOTION = 1;
+  }
+
+  enum ChimeTrigger {
+    CHIME_TRIGGER_UNSPECIFIED = 0;
+    CHIME_TRIGGER_BUTTON = 1;
+  }
+}

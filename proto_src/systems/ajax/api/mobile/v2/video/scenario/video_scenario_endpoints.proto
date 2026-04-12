@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.scenario;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/video/scenario/create_request.proto";
+import "systems/ajax/api/mobile/v2/video/scenario/delete_request.proto";
+import "systems/ajax/api/mobile/v2/video/scenario/get_all_request.proto";
+import "systems/ajax/api/mobile/v2/video/scenario/set_enabled_request.proto";
+import "systems/ajax/api/mobile/v2/video/scenario/update_request.proto";
+
+service VideoScenarioService {
+  rpc create(CreateScenarioRequest) returns (CreateScenarioResponse);
+
+  rpc delete(DeleteScenarioRequest) returns (DeleteScenarioResponse);
+
+  rpc getAll(GetAllScenariosRequest) returns (GetAllScenariosResponse);
+
+  rpc setEnabled(SetEnabledScenarioRequest) returns (SetEnabledScenarioResponse);
+
+  rpc update(UpdateScenarioRequest) returns (UpdateScenarioResponse);
+};

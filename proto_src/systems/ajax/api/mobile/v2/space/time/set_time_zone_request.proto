@@ -1,0 +1,34 @@
+syntax = "proto3";
+package systems.ajax.api.mobile.v2.space.time;
+
+option java_package = "systems.ajax.api.mobile.v2.space.time";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/time/time_zone.proto";
+
+message SetSpaceTimeZoneRequest {
+  string space_id = 1;
+
+  common.time.TimeZone time_zone = 2;
+}
+
+message SetSpaceTimeZoneResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    string message = 100;
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError permission_denied = 3;
+      common.response.DefaultError space_armed = 4;
+      common.response.SpaceLockedError space_locked = 5;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.reset_video_edge_firmware_update_status;
+
+import "v3/mobilegwsvc/service/reset_video_edge_firmware_update_status/request.proto";
+import "v3/mobilegwsvc/service/reset_video_edge_firmware_update_status/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.video.service.reset_video_edge_firmware_update_status";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ResetFirmwareUpdateStatusService {
+  rpc execute(ResetFirmwareUpdateStatusRequest) returns (ResetFirmwareUpdateStatusResponse);
+}

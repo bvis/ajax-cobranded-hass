@@ -1,0 +1,362 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+
+message VideoCapabilities {
+  repeated Flag flags = 1;
+
+  // [optional]
+  Stream main = 2;
+
+  // [optional]
+  Stream sub = 3;
+
+  // [optional]
+  BacklightCompensation blc = 4;
+
+  // [optional]
+  WhiteBalance white_balance = 5;
+
+  // [optional]
+  WideDynamicRange wdr = 6;
+
+  // [optional]
+  Exposure exposure = 7;
+
+  // [optional]
+  IrCutFilterMode ircut_filter_mode = 8;
+
+  // [optional]
+  Ptz ptz = 9;
+
+  // reserved
+  reserved 10;
+
+  // [optional]
+  Transform transform = 11;
+
+  // [optional]
+  PrivacyMaskOptions privacy_mask = 12;
+
+  // [optional]
+  ExposureMeteringArea exposure_metering_area = 13;
+
+  // [optional]
+  AntiFlicker anti_flicker = 14;
+
+  // [optional]
+  Backlight backlight = 15;
+
+  // [optional]
+  ImageProfile image_profile = 16;
+
+  enum Flag {
+    NONE = 0;
+    COMPRESSED_STREAM = 1;
+    HAVE_SUBSTREAM = 2;
+    HAVE_ANALYTICS_STREAM = 16;
+    HAVE_PTZ = 19;
+    CAN_SET_BITRATE = 3;
+    CAN_SET_BITRATE_TYPE = 4;
+    CAN_SET_GOPSIZE = 5;
+    CAN_SET_FPS = 6;
+    CAN_SET_QUALITY = 7;
+    CAN_SET_BRIGHTNESS = 8;
+    CAN_SET_CONTRAST = 9;
+    CAN_SET_SATURATION = 10;
+    CAN_SET_SHARPNESS = 11;
+    CAN_SET_BACKLIGHT_COMPENSATION = 12;
+    CAN_SET_WHITE_BALANCE = 13;
+    CAN_SET_WIDE_DYNAMIC_RANGE = 14;
+    CAN_SET_EXPOSURE = 15;
+    CAN_SET_IRCUT_FILTER = 17;
+    CAN_SET_OSD = 18;
+    CAN_SET_TRANSFORM = 20;
+    CAN_SET_IR_ILLUMINATION = 21;
+    CAN_SET_PRIVACY_MASK = 22;
+    CAN_SET_EXPOSURE_METERING_AREA = 23;
+    CAN_SET_ANTI_FLICKER = 24;
+    CAN_SET_NOISE_REDUCTION = 25;
+    CAN_SET_BACKLIGHT = 26;
+    CAN_SET_IMAGE_PROFILE = 27;
+  }
+
+  message ImageProfile {
+    repeated ImageProfileType types = 1;
+  }
+
+  message Backlight {
+    // [optional]
+    OffIlluminationMode off_illumination_mode = 1;
+
+    // [optional]
+    IrIlluminationMode ir_illumination_mode = 2;
+
+    // [optional]
+    WhiteIlluminationMode white_illumination_mode = 3;
+
+    // [optional]
+    SmartIlluminationMode smart_illumination_mode = 4;
+
+    message OffIlluminationMode {}
+
+    message IrIlluminationMode {}
+
+    message WhiteIlluminationMode {}
+
+    message SmartIlluminationMode {}
+  }
+
+  message Stream {
+    repeated VideoResolution resolutions = 1;
+
+    repeated VideoCodec codecs = 2;
+
+    UInt32Range fps_range = 3;
+
+    UInt32Range gop_size_range = 4;
+
+    UInt32Range bitrate_range = 5;
+
+    UInt32Range quality_range = 6;
+  }
+
+  // Allows the camera to compensate for underexposed video regions.
+  // Depends on exposition auto-mode.
+  message BacklightCompensation {
+    // [optional]
+    // Allowed compensation level (unspecified unit) e.g [0, 100]
+    FloatRange level_range = 1;
+  }
+
+  // Correct colors so that white objects appear white in video acquired.
+  message WhiteBalance {
+    // [optional]
+    AutoMode auto = 1;
+
+    // [optional]
+    ManualMode manual = 2;
+
+    message AutoMode {
+    }
+
+    message ManualMode {
+      // [optional]
+      // Allowed red gain (unitless) e.g. [0, 100]
+      FloatRange red_gain_range = 1;
+      // [optional]
+      // Allowed blue gain (unitless) e.g. [0, 100]
+      FloatRange blue_gain_range = 2;
+    }
+  }
+
+  // Improves image quality under high-contrast lighting conditions where both dimly and brightly lit areas are present in the field of view.
+  // It enables the camera to capture details clearly in both the poorly and strongly illuminated areas of the video.
+  message WideDynamicRange {
+    // [optional]
+    // Allowed WDR adjustment level (unspecified unit) e.g [0, 100].
+    FloatRange level_range = 1;
+  }
+
+  message Exposure {
+    // [optional]
+    ManualMode manual = 1;
+
+    // [optional]
+    AutoMode auto = 2;
+
+    // list of commonly used shutter speed options
+    repeated ShutterSpeed shutter_speed = 3;
+
+    message ManualMode {
+      // [optional]
+      // Allowed exposure time range.
+      DurationRange exposure_time_range = 1;
+
+      // [optional]
+      // Allowed sensor gain range (dB).
+      FloatRange gain_range = 2;
+
+      // [optional]
+      // Allowed iris range (dB).
+      FloatRange iris_range = 3;
+    }
+
+    message AutoMode {
+      repeated ExposurePriority priorities = 1;
+
+      // [optional]
+      // Minimum exposure time range allowed to be used by the algorithm.
+      DurationRange min_exposure_time_range = 2;
+
+      // [optional]
+      // Maximum exposure time range allowed to be used by the algorithm.
+      DurationRange max_exposure_time_range = 3;
+
+      // [optional]
+      // Minimum sensor gain range that is allowed to be used by the algorithm.
+      FloatRange min_gain_range = 4;
+
+      // [optional]
+      // Maximum sensor gain range that is allowed to be used by the algorithm.
+      FloatRange max_gain_range = 5;
+
+      // [optional]
+      // Minimum iris range allowed to be used by the algorithm.
+      FloatRange min_iris_range = 6;
+
+      // [optional]
+      // Maximum iris range allowed to be used by the algorithm.
+      FloatRange max_iris_range = 7;
+
+      // [optional]
+      // additional exposure energy compensation strength
+      Int32Range exposure_compensation_range = 8;
+
+      // Supported presets list.
+      repeated AutoExposurePreset presets = 9;
+    }
+  }
+
+  // Supported options of Ir cut filter mode
+  message IrCutFilterMode {
+    // [optional]
+    OnMode on = 1;
+
+    // [optional]
+    OffMode off = 2;
+
+    // [optional]
+    AutoMode auto = 3;
+
+    message OnMode {}
+
+    message OffMode {}
+
+    message AutoMode {
+      // Supported options of boundary types for adjustment of Ir cut filter auto mode.
+      repeated IrCutFilterAutoBoundaryType boundary_types = 1;
+
+      // Indicates whether or not boundary offset for toggling Ir cut filter is supported.
+      bool boundary_offset = 2;
+
+      // [optional]
+      // Supported range of delay time for toggling Ir cut filter.
+      DurationRange response_time_range = 3;
+    }
+  }
+
+  // Options that PTZ functionality supports
+  message Ptz {
+    repeated Flag flags = 1;
+
+    int32 max_presets = 2;
+
+    enum Flag {
+      UNSPECIFIED = 0;
+      CAN_PANTILT = 1;
+      CAN_ZOOM = 2;
+      CAN_FOCUS = 3;
+      HAVE_HOME_POSITION = 4;
+    }
+  }
+
+  message Transform {
+    repeated Rotation rotations = 1;
+    Performer performer = 2;
+
+    // Reflects whether transformation is done either on the device side or the client side.
+    enum Performer {
+      PERFORMER_UNSPECIFIED = 0;
+      PERFORMER_DEVICE = 1;
+      PERFORMER_CLIENT = 2;
+    }
+  }
+
+  message PrivacyMaskOptions {
+    uint32 max_masks = 1;
+
+    uint32 max_points_per_mask = 2;
+
+    repeated PrivacyMaskType types = 3;
+
+    repeated Color color_options = 4;
+
+    bool rectangle_only = 5;
+
+    bool single_color_only = 6;
+  }
+
+  message ExposureMeteringArea {
+    repeated PredefinedExposureMeteringArea predefined_exposure_metering_areas = 1;
+  }
+
+  message AntiFlicker {
+    repeated AntiFlickerType type = 1;
+  }
+};
+
+message AudioCapabilities {
+  repeated Flag flags = 1;
+
+  repeated Encoding encodings = 2;
+
+  uint32 num_audio_channels = 3;
+
+  enum Flag {
+    NONE = 0;
+    COMPRESSED_STREAM = 1;
+    CAN_SET_BITRATE = 2;
+    CAN_SET_SAMPLE_RATE = 3;
+    CAN_SET_MIC_VOLUME = 4;
+    CAN_SET_MIC_GAIN = 5;
+  }
+
+  message Encoding {
+    AudioCodec codec = 1;
+
+    repeated uint32 bitrates = 2;
+
+    repeated uint32 sample_rates = 3;
+  }
+};
+
+message AudioOutputCapabilities {
+  repeated Flag flags = 1;
+
+  enum Flag {
+    NONE = 0;
+    CAN_SET_VOLUME = 1;
+  }
+};
+
+message ChannelCapabilities {
+  string channel_id = 1;
+
+  VideoCapabilities video = 2;
+
+  // Note that there're devices that have audio only. It's also
+  // guaranteed that at least 'video' or 'audio' is set.
+  AudioCapabilities audio = 3;
+
+  // [optional]
+  AudioOutputCapabilities audio_output = 4;
+};
+
+message MediaDeviceCapabilities {
+  repeated Flag flags = 1;
+
+  repeated ChannelCapabilities channels = 2;
+
+  enum Flag {
+    NONE = 0;
+    HAVE_MOTION_DETECTOR = 1;
+    HAVE_SOUND_DETECTOR = 2;
+    SKIP_INITIAL_SETUP = 3;
+  }
+};

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.device;
+
+option java_package = "systems.ajax.api.mobile.v2.common.space.device";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceConstraints {
+  repeated DeviceConstraint constraints = 1;
+}
+
+enum DeviceConstraint {
+  DEVICE_CONSTRAINT_UNSPECIFIED = 0;
+  DEVICE_CONSTRAINT_DISABLE_INTERACTION = 1;
+  DEVICE_CONSTRAINT_DISABLE_NOTIFICATIONS = 2;
+  DEVICE_CONSTRAINT_SHOW_DEVICE_AS_SUSPENDED = 3;
+  DEVICE_CONSTRAINT_SHOW_DEVICE_AS_LOCKED = 4;
+  DEVICE_CONSTRAINT_DISABLE_HUB_CONNECTIVITY_SETTINGS_INTERACTION = 5;
+  DEVICE_CONSTRAINT_DISABLE_HUB_CONNECTIVITY_SETTINGS_INTERACTION_ON_ACTIVATION = 6;
+  DEVICE_CONSTRAINT_DISABLE_HUB_CONNECTIVITY_SETTINGS_INTERACTION_ON_SUSPENSION = 7;
+}

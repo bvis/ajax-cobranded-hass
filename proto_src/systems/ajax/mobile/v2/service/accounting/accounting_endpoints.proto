@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.accounting;
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.accounting";
+option swift_prefix = "";
+
+import "systems/ajax/mobile/v2/service/accounting/find_reseller_for_sim_cards.proto";
+import "systems/ajax/mobile/v2/service/accounting/activate_feature.proto";
+import "systems/ajax/mobile/v2/service/accounting/get_sim_card_feature_state.proto";
+
+service AccountingService {
+
+  rpc findResellerForSimCards(FindResellerForSimCardsRequest) returns (FindResellerForSimCardsResponse);
+  rpc activateFeature(ActivateFeatureRequest) returns (ActivateFeatureResponse);
+  rpc getSimCardFeatureState(GetSimCardFeatureStateRequest) returns (GetSimCardFeatureStateResponse);
+
+}

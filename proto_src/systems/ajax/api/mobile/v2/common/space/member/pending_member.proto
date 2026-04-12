@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message PendingMember {
+  string email = 1;
+
+  reserved 2; // deprecated sorting key
+
+  string sorting_key = 3;
+}

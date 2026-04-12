@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_audio_file_for_audio_scenarios;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_audio_file_for_audio_scenarios";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateAudioFileForAudioScenariosRequest {
+  string file_id = 1;
+  Update update = 2;
+
+  message Update {
+    optional string file_name = 1;
+  }
+}

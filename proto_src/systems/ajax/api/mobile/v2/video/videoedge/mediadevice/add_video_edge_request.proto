@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.mediadevice;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_capabilities.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AddVideoEdgeRequest {
+  string video_edge_id = 1;
+
+  string family = 2;
+
+  string model = 3;
+
+  string name = 4;
+
+  // ID of the video edge we are adding (media device source)
+  string source_video_edge_id = 6;
+
+  common.space.SpaceLocator space_locator = 20;
+
+  // Flag indicating whether we want to automatically make the new device permanent.
+  // Temporary for backward compatibility with outdated client apps, so that they can use this API without
+  // automatic makeDevicePermanent.
+  // Can be removed when all client apps use the new flow with makePermanent flag always on
+  bool make_permanent = 30;
+}
+
+message AddVideoEdgeResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string media_device_id = 1;
+    repeated AvailableChannel channels = 2;
+  }
+
+  message AvailableChannel {
+    string id_on_media_device = 1;
+  }
+
+  message Failure {
+    // deprecated source_video_edge_is_in_another_space error
+    reserved 5;
+
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError space_not_found = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError permission_denied = 4;
+      common.response.DefaultError video_edge_not_found = 6;
+      common.response.DefaultError source_video_edge_not_found = 7;
+      common.response.DefaultError bad_device_family = 8;
+      common.response.DefaultError bad_device_model = 9;
+      common.response.DefaultError onvif_authorization_failed = 10;
+      common.response.DefaultError connection_failed = 11;
+      common.response.DefaultError channels_number_constraint_violation = 12;
+      common.response.DefaultError video_edge_is_offline = 13;
+    }
+  }
+}

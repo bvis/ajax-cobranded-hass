@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.hubobject;
+
+import "systems/ajax/api/mobile/v2/hubobject/stream_hub_object_request.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.hubobject";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+service HubObjectService {
+
+  rpc streamHubObject(systems.ajax.api.mobile.v2.hubobject.StreamHubObjectRequest)
+    returns (stream systems.ajax.api.mobile.v2.hubobject.StreamHubObject);
+}

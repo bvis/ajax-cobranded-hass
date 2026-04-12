@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub.device.common;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub.device.common";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum JewellerConnectionState {
+  JEWELLER_CONNECTION_STATE_UNSPECIFIED = 0;
+  JEWELLER_CONNECTION_STATE_OFFLINE = 1;
+  JEWELLER_CONNECTION_STATE_ONLINE = 2;
+}

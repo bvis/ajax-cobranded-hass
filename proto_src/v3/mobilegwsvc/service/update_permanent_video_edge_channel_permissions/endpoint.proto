@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_permanent_video_edge_channel_permissions;
+
+import "v3/mobilegwsvc/service/update_permanent_video_edge_channel_permissions/request.proto";
+import "v3/mobilegwsvc/service/update_permanent_video_edge_channel_permissions/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_permanent_video_edge_channel_permissions";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UpdatePermanentVideoEdgeChannelPermissionsService {
+  rpc execute(UpdatePermanentVideoEdgeChannelPermissionsRequest) returns (UpdatePermanentVideoEdgeChannelPermissionsResponse);
+};

@@ -1,0 +1,53 @@
+[project]
+name = "ajax-cobranded-hass"
+version = "0.1.0"
+description = "Home Assistant integration for Ajax Security Systems (co-branded) via gRPC"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = [
+    "grpcio>=1.60.0",
+    "protobuf>=4.25.0",
+    "firebase-messaging>=0.4.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "grpcio-tools>=1.60.0",
+    "homeassistant>=2024.1.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.4.0",
+    "mypy>=1.8.0",
+    "mypy-protobuf>=3.5.0",
+    "vulture>=2.11",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "e2e: end-to-end tests against real Ajax API",
+    "destructive: tests that modify system state (arm/disarm)",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = ["custom_components/ajax_cobranded/proto/"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "ANN", "B", "A", "SIM", "TCH"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+exclude = ["custom_components/ajax_cobranded/proto/"]
+
+[tool.vulture]
+paths = ["custom_components/ajax_cobranded", "vulture_whitelist.py"]
+exclude = ["custom_components/ajax_cobranded/proto/"]
+min_confidence = 80

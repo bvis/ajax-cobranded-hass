@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_scheduled_access;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_scheduled_access";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+message UpdateScheduledAccessResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error permission_denied = 1; // 0635
+      commonmodels.Error bad_request = 2; // 0A
+      commonmodels.HubWrongStateError hub_wrong_state = 3; // 11
+      commonmodels.Error schedule_limit = 4; // 12
+      commonmodels.Error schedule_access_not_found = 5; // 15
+    }
+  }
+}

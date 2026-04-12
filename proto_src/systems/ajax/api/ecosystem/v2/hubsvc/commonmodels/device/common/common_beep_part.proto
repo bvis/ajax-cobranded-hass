@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/progress_annunciation_thresholds.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/patch_type.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message CommonBeepPart {
+  message CommonBeepPartSettings {
+    optional BeepVolumeLevel beep_volume_level = 3[(proto.meta.field_tag) = "beep_volume_level"];
+
+    optional Chimes chimes = 5[(proto.meta.field_tag) = "chimes"];
+
+    repeated BeepOnArmDisarmPatch beep_on_arm_disarm = 1 [(proto.meta.field_tag) = "beep_on_arm_disarm"];
+
+    repeated BeepOnDelayPatch beep_on_delay = 2[(proto.meta.field_tag) = "beep_on_delay"];
+
+    repeated BeepConfigPatch beep_config = 4[(proto.meta.field_tag) = "beep_config"];
+
+    ProgressAnnunciationThreshold.ProgressAnnunciationThresholdSettings progress_annunciation_thresholds = 6[(proto.meta.field_tag) = "progress_annunciation_threshold"];
+
+    message BeepOnArmDisarmPatch {
+      PatchType type = 1;
+      BeepOnArmDisarm beep_on_arm_disarm = 2;
+    }
+
+    message BeepOnDelayPatch{
+      PatchType type = 1;
+      BeepOnDelay beep_on_delay = 2;
+    }
+
+    message BeepConfigPatch{
+      PatchType type = 1;
+      BeepConfig beep_config = 2;
+    }
+  }
+
+  repeated BeepOnArmDisarm beep_on_arm_disarm = 1[(proto.meta.field_tag) = "beep_on_arm_disarm"];
+
+  repeated BeepOnDelay beep_on_delay = 2[(proto.meta.field_tag) = "beep_on_delay"];
+
+  BeepVolumeLevel beep_volume_level = 3[(proto.meta.field_tag) = "beep_volume_level"];
+
+  repeated BeepConfig beep_config = 4[(proto.meta.field_tag) = "beep_config"];
+
+  Chimes chimes = 5[(proto.meta.field_tag) = "chimes"];
+
+  ProgressAnnunciationThreshold progress_annunciation_thresholds = 6[(proto.meta.field_tag) = "progress_annunciation_threshold"];
+
+  repeated BeepVolumeLevel volume_level_capabilities = 7;
+
+  repeated Capability capabilities = 8;
+
+  enum Chimes {
+    CHIMES_UNSPECIFIED = 0;
+    CHIMES_DISABLED = 1[(proto.meta.enum_tag) = "CHIMES_DISABLED"];
+    CHIMES_ENABLED = 2[(proto.meta.enum_tag) = "CHIMES_ENABLED"];
+  }
+
+  enum BeepOnArmDisarm {
+    BEEP_ON_ARM_DISARM_UNSPECIFIED = 0;
+    BEEP_ON_ARM_DISARM_ARM = 1[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_ARM"];
+    BEEP_ON_ARM_DISARM_DISARM = 2[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_DISARM"];
+    BEEP_ON_ARM_DISARM_NIGHT_ARM = 3[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_NIGHT_ARM"];
+    BEEP_ON_ARM_DISARM_NIGHT_DISARM = 4[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_NIGHT_DISARM"];
+    BEEP_ON_ARM_DISARM_ABORT_WINDOW = 5[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_ABORT_WINDOW"];
+    BEEP_ON_ARM_DISARM_CANCEL_WINDOW = 6[(proto.meta.enum_tag) = "BEEP_ON_ARM_DISARM_CANCEL_WINDOW"];
+  }
+
+  enum BeepOnDelay {
+    BEEP_ON_DELAY_UNSPECIFIED = 0;
+    BEEP_ON_DELAY_ARM = 1[(proto.meta.enum_tag) = "BEEP_ON_DELAY_ARM"];
+    BEEP_ON_DELAY_DISARM = 2[(proto.meta.enum_tag) = "BEEP_ON_DELAY_DISARM"];
+    BEEP_ON_DELAY_NIGHT_ARM = 3[(proto.meta.enum_tag) = "BEEP_ON_DELAY_NIGHT_ARM"];
+    BEEP_ON_DELAY_NIGHT_DISARM = 4[(proto.meta.enum_tag) = "BEEP_ON_DELAY_NIGHT_DISARM"];
+  }
+
+  enum BeepVolumeLevel {
+    BEEP_VOLUME_LEVEL_UNSPECIFIED = 0;
+    BEEP_VOLUME_LEVEL_VERY_LOUD = 1[(proto.meta.enum_tag) = "BEEP_VOLUME_LEVEL_VERY_LOUD"];
+    BEEP_VOLUME_LEVEL_LOUD = 18[(proto.meta.enum_tag) = "BEEP_VOLUME_LEVEL_LOUD"];
+    BEEP_VOLUME_LEVEL_QUIET = 29[(proto.meta.enum_tag) = "BEEP_VOLUME_LEVEL_QUIET"];
+    BEEP_VOLUME_LEVEL_VERY_QUIET = 31[(proto.meta.enum_tag) = "BEEP_VOLUME_LEVEL_VERY_QUIET"];
+  }
+
+  enum BeepConfig {
+    BEEP_CONFIG_UNSPECIFIED = 0;
+    BEEP_CONFIG_SILENT_ENTRY_DELAY_ENABLED = 1[(proto.meta.enum_tag) = "BEEP_CONFIG_SILENT_ENTRY_DELAY_ENABLED"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_SEPARATE_BEEP_SETTING = 1;
+    CAPABILITY_DELAY_BEEP = 2;
+    CAPABILITY_FAST_BEEP = 3;
+    CAPABILITY_BEEP_VOLUME = 5;
+    CAPABILITY_BEEP_CHIMES = 6;
+  }
+}

@@ -1,0 +1,50 @@
+syntax = "proto3";
+package systems.ajax.protobuf.hub.device;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message AccessCard {
+  string id = 0x01;
+  Name name = 1000;
+  int32 card_record = 0x03;
+  int64 card_UID = 0x04;
+  int32 card_key_seed = 0x05;
+  int32 app_id = 0x06;
+  repeated GroupPermissions group_permissions = 1010;
+  string associated_user_id = 0x09;
+  int32 device_index = 0x0A;
+  bool perimeter_arm = 0x0B;
+  bool full_arm = 0x0C;
+  bool card_enabled = 0x0D;
+  Attribute attribute = 1020;
+
+  message GroupPermissions {
+    string group_id = 1000;
+    repeated Permission permissions = 1001;
+
+    enum Permission {
+      NO_PERMISSION_INFO = 0;
+      ARM = 1;
+      DISARM = 2;
+    }
+  }
+
+  message Attribute {
+    Color color = 1000;
+    Type type = 1001;
+  }
+
+  enum Color {
+    WHITE = 0x00;
+    BLACK = 0x10;
+  }
+
+  enum Type {
+    CARD = 0x00;
+    TAG = 0x01;
+  }
+}

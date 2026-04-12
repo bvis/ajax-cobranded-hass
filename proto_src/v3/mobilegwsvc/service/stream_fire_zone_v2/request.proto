@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_fire_zone_v2";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StreamFireZoneRequestV2 {
+  string hub_id = 1 [(log_marker) = LOG_MARKER_HUB_ID];
+}

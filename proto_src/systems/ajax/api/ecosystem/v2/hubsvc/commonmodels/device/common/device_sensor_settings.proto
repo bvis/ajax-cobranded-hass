@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/device/common/sensitivity.proto";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+message ReedSensorSettings {
+  optional bool enabled = 1;
+}
+
+message ExtraContactSensorSettings {
+  optional bool enabled = 1;
+}
+
+message MotionSensorSettings {
+  optional Sensitivity sensitivity = 1;
+}
+
+message FastTamperSettings {
+  optional FastTamper fast_tamper = 1;
+
+  enum FastTamper {
+    FAST_TAMPER_UNSPECIFIED = 0;
+    FAST_TAMPER_DISABLED = 1;
+    FAST_TAMPER_ENABLED = 2;
+  }
+}

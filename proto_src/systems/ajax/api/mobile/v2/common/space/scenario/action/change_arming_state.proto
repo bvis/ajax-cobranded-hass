@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario.action;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ChangeArmingStateAction {
+  repeated Target targets = 1;
+  ActionType action_type = 2;
+
+  message Target {
+    oneof kind {
+      Space space = 1;
+      Group group = 2;
+    }
+
+    message Space {}
+
+    message Group {
+      string id = 1;
+    }
+  }
+
+  enum ActionType {
+    ACTION_TYPE_UNSPECIFIED = 0;
+    ACTION_TYPE_DISARM = 1;
+    ACTION_TYPE_ARM = 2;
+  }
+}

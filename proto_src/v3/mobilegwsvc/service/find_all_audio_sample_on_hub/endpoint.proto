@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_audio_sample_on_hub;
+
+import "v3/mobilegwsvc/service/find_all_audio_sample_on_hub/request.proto";
+import "v3/mobilegwsvc/service/find_all_audio_sample_on_hub/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_all_audio_sample_on_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FindAllAudioSampleOnHubService {
+  rpc execute (FindAllAudioSampleOnHubRequest) returns (FindAllAudioSampleOnHubResponse);
+};

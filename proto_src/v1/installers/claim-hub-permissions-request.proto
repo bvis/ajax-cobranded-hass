@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.installers;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.installers";
+option java_multiple_files = true;
+
+import "google/protobuf/duration.proto";
+
+message ClaimHubPermissionsRequest {
+  string hub_hex_id = 1;
+  oneof permissions_type {
+    Permanent permanent = 2;
+    Temporary temporary = 3;
+  }
+
+  message Permanent {}
+
+  message Temporary {
+    google.protobuf.Duration duration = 1;
+  }
+}

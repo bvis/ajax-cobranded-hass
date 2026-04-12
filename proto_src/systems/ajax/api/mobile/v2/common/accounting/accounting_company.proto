@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/accounting/service_type.proto";
+
+message AccountingCompany {
+  string companyHexId = 1;
+  string name = 2;
+  ServiceType service_type = 3;
+  CompanyDetails details = 4;
+}
+
+message CompanyContact {
+  string phone_number = 1;
+  string description = 2;
+}
+
+message CompanyDetails {
+  string web_site_url = 1;
+  repeated CompanyContact contacts = 2;
+  repeated string emails = 3;
+  reserved 4; // systems/ajax/api/mobile/v2/common/image/image.proto
+  string logo_url = 5;
+}

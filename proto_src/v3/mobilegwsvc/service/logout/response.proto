@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.logout;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.logout";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message LogoutResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+    }
+  }
+};

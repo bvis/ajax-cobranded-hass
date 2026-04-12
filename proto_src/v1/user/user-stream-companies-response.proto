@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.user;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.user";
+option java_multiple_files = true;
+
+import "v1/common/company.proto";
+
+message UserStreamCompaniesResponse {
+  repeated common.Company user_companies = 1;
+}

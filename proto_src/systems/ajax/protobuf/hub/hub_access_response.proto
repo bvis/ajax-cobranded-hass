@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+message HubAccessResponse {
+    string profi_mail = 1000;
+    string user_id = 1001;
+    string pro_name = 1002;
+    int32 access_level = 10003;
+    int32 access_time = 1004;
+    bool is_request_declined = 1005;
+}

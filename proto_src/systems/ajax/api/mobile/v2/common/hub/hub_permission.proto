@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum HubPermission {
+  NO_PERMISSION_INFO = 0;
+  DELETE_USERS = 1;
+  INVITE_USERS = 2;
+  CHANGE_USER_ROLE = 3;
+  CHANGE_USER_PERMISSIONS = 4;
+  EDIT_NOTIFICATION_PERMISSION = 5;
+  ARM = 6;
+  PARTIAL_ARM = 7;
+  DISARM = 8;
+  PANIC_BUTTON = 9;
+  ROOMS_EDIT = 10;
+  DEVICE_EDIT = 11;
+  HUB_ADV_PARAMS = 12;
+  HUB_COMMON_PARAMS = 13;
+  SET_STATE_COMMANDS = 14;
+  FW_UPDATES_COMMANDS = 15;
+  CAMERA_EDIT = 16;
+  CAMERA_WATCH = 17;
+  GROUPS_EDIT = 18;
+  EVENT_VISIBILITY = 19;
+  STRUCTURE_VISIBILITY = 20;
+  SCENARIO_EDIT = 21;
+  EDIT_CHIMES = 22;
+  PRIVACY_SETTINGS_ACCESS = 23;
+  MUTE_FIRE_PROTECT = 24;
+  BLE_ACCESS = 25;
+  START_BUKHOOR = 26;
+}
+
+message HubPermissions {
+  repeated HubPermission permissions = 1;
+}

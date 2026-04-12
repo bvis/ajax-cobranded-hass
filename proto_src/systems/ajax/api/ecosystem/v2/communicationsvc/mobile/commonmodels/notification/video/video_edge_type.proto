@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum VideoEdgeType {
+  VIDEO_EDGE_TYPE_UNSPECIFIED = 0;
+  VIDEO_EDGE_TYPE_NVR = 1;
+  VIDEO_EDGE_TYPE_TURRET = 2;
+  VIDEO_EDGE_TYPE_BULLET = 3;
+  VIDEO_EDGE_TYPE_MINIDOME = 4;
+  VIDEO_EDGE_TYPE_DOORBELL = 5;
+  VIDEO_EDGE_TYPE_INDOOR = 6;
+  VIDEO_EDGE_TYPE_NVR_H_AC = 7;
+  VIDEO_EDGE_TYPE_NVR_H_DC = 8;
+  VIDEO_EDGE_TYPE_NVR_H_2D_AC = 9;
+  reserved 10; // Reserved for VIDEO_EDGE_TYPE_NVR_H_2D_DC
+  VIDEO_EDGE_TYPE_NVR_H_2D_8P_AC = 11;
+  VIDEO_EDGE_TYPE_NVR_H_2D_16P_AC = 12;
+  VIDEO_EDGE_TYPE_NVR_H_2D_AI_2G_AC = 13;
+  reserved 14; // Reserved for VIDEO_EDGE_TYPE_NVR_H_2D_2G_AI_DC
+  VIDEO_EDGE_TYPE_NVR_H_2D_AI_8P_AC = 15;
+  VIDEO_EDGE_TYPE_NVR_H_2D_AI_16P_AC = 16;
+  VIDEO_EDGE_TYPE_TURRET_HL = 17;
+  VIDEO_EDGE_TYPE_TURRET_HL_VF = 18;
+  VIDEO_EDGE_TYPE_S_TURRET_HL_VF = 19;
+  VIDEO_EDGE_TYPE_BULLET_HL = 20;
+  VIDEO_EDGE_TYPE_BULLET_HL_VF = 21;
+  VIDEO_EDGE_TYPE_S_BULLET_HL_VF = 22;
+  VIDEO_EDGE_TYPE_MINIDOME_HL = 23;
+  VIDEO_EDGE_TYPE_MINIDOME_HL_VF = 24;
+  VIDEO_EDGE_TYPE_S_MINIDOME_HL_VF = 25;
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum HubStandaloneDevicePermission {
+  HUB_STANDALONE_DEVICE_PERMISSION_UNSPECIFIED = 0;
+  HUB_ADV_PARAMS = 1;
+  SET_STATE_COMMANDS = 2;
+  FW_UPDATES_COMMANDS = 3;
+  CAMERA_EDIT = 4;
+  CAMERA_WATCH = 5;
+  EDIT_CHIMES = 6;
+  MUTE_FIRE_PROTECT = 7;
+  BLE_ACCESS = 8;
+  START_BUKHOOR = 9;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/privacy/video_edge_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/hub_standalone_device_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock_device_permissions.proto";
+
+message StandaloneDevicePermissions {
+  oneof permissions {
+    common.video.privacy.VideoEdgePermissions video_edge_permissions = 1;
+    HubStandaloneDevicePermissions hub_permissions = 2;
+    common.space.smartlock.SmartLockPermissions smart_lock_permissions = 3;
+  }
+}

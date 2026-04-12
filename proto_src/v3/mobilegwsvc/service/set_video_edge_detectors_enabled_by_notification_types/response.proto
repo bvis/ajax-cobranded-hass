@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled_by_notification_types;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_detectors_enabled_by_notification_types";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeDetectorsEnabledByNotificationTypesResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error video_edge_not_found = 2;
+      commonmodels.Error channel_not_found = 3;
+      commonmodels.Error permission_denied = 4;
+      commonmodels.Error space_armed = 5;
+      commonmodels.Error space_not_found = 6;
+      commonmodels.Error some_detectors_failed_to_update = 7;
+      commonmodels.Error video_edge_is_offline = 8;
+    }
+  }
+}

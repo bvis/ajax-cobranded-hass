@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_single_notification;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.find_single_notification";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FindSingleNotificationRequest {
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  string notification_id = 2;
+}

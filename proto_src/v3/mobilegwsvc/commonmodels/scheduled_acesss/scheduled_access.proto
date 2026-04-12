@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.scheduled_access;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.scheduled_access";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+import "google/type/dayofweek.proto";
+
+message ScheduledAccess {
+  int32 id = 1;
+  string name = 2;
+  repeated Target targets = 3;
+  repeated Schedule schedules = 4;
+  bool enabled = 5;
+  bool notification_enabled = 6;
+
+  message Target {
+    string device_id = 1;
+    ecosystem.v2.hubsvc.commonmodels.ObjectType device_type = 2;
+  }
+
+  message Schedule {
+    repeated google.type.DayOfWeek week_days = 1;
+    int32 start_hour = 2;
+    int32 start_minute = 3;
+    int32 end_hour = 4;
+    int32 end_minute = 5;
+    bool is_active = 6;
+  }
+}

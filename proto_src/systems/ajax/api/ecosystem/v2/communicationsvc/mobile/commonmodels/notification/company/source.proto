@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.company";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/source_image_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/source_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message CompanyNotificationSource {
+  CompanyNotificationSourceType type = 1;
+  string id = 2;
+  string name = 3 [(hash_value) = true];
+
+  optional SourceImageInfo image_info = 10;
+}

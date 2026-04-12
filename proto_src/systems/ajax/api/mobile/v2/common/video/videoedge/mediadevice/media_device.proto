@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_capabilities.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mediadevice/media_device_settings.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message MediaDevice {
+  string guid = 1;
+
+  string family = 2 [(disable_logging) = true];
+
+  string model = 3 [(disable_logging) = true];
+
+  bool enabled = 4;
+
+  MediaDeviceInfo info = 5;
+
+  repeated MediaDeviceState state = 6;
+
+  video.videoedge.mediadevice.ConnectionSettings connection_settings = 7;
+
+  reserved 8;
+
+  MediaDeviceCapabilities capabilities = 9;
+
+  MediaDeviceSettings device_settings = 10;
+
+  bool permanent = 11;
+};
+
+enum MediaDeviceState {
+  DS_NONE = 0;
+
+  // Trying to connect to address:port and login.
+  CONNECTING = 1;
+
+  // Connected and initial grabber setting applied.
+  CONNECTED = 2;
+
+  // Can't reach address.
+  CONNECTION_FAILED = 3;
+
+  // Bad login / password.
+  INVALID_LOGIN = 4;
+
+  // Bad family / model.
+  BAD_MODEL = 5;
+
+  // Setup in progress
+  SETTING_UP = 6;
+
+  // Can't resolve UUID.
+  RESOLVE_FAILED = 7;
+
+  // Device's fingerprint != desired_fingerprint.
+  FINGERPRINT_MISMATCH = 8;
+};
+
+message MediaDeviceInfo {
+  string name = 1;
+};
+
+enum MediaDeviceProtocol {
+  P_NONE = 0;
+  P_ONVIF = 1;
+};

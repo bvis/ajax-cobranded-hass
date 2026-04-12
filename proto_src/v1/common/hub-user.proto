@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+import "v1/common/email-address.proto";
+import "v1/common/phone-number.proto";
+import "v1/common/image-urls.proto";
+import "v1/common/permission.proto";
+import "v1/common/restore-permission.proto";
+import "v1/common/group-permissions.proto";
+import "v1/common/notification-settings.proto";
+import "google/protobuf/wrappers.proto";
+
+message HubUser {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  EmailAddress email = 4;
+  PhoneNumber phone = 5;
+  ImageUrls image_urls = 6;
+  Role role = 7;
+  repeated Permission permissions = 8;
+  repeated RestorePermission restore_permissions = 9;
+  repeated GroupPermissions group_permissions = 10;
+  NotificationSettings notification_settings = 11;
+  google.protobuf.Int32Value user_index = 12;
+
+  enum Role {
+    USER = 0;
+    PRO = 1;
+    COMPANY = 2;
+  }
+}

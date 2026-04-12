@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.time;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+message SetTimeZoneRequest {
+  // [required]
+  string video_edge_id = 1;
+
+  // [required]
+  // Time zone id from a well-known list (e.g. https://ajax-cdn-prod.s3-eu-west-1.amazonaws.com/timezones/timezones_v2.json)
+  string timezone_id = 2;
+
+  // [optional] - temporarily for backward compatibility
+  common.space.SpaceLocator space_locator = 20;
+};
+
+message SetTimeZoneResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_armed = 3;
+      common.response.DefaultError video_edge_not_found = 4;
+      common.response.DefaultError bad_timezone_id = 5;
+      common.response.DefaultError video_edge_is_offline = 6;
+    }
+  }
+};

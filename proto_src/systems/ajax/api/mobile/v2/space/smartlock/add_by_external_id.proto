@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.smartlock;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/space/smartlock/smart_lock.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message AddSmartLockByExternalIdRequest {
+  string space_id = 1;
+
+  string room_id = 2;
+
+  string external_smart_lock_id = 3;
+
+  common.space.smartlock.SmartLockType type = 4;
+
+  string name = 5;
+
+  optional string group_id = 6;
+}
+
+message AddSmartLockByExternalIdResponse {
+  oneof response {
+    common.response.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError external_service_access_denied = 1;
+      common.response.DefaultError bad_request = 2;
+      common.response.DefaultError smart_lock_not_found = 3;
+      common.response.DefaultError smart_lock_already_added_by_another_space_member = 4;
+      common.response.DefaultError permission_denied = 5;
+      common.response.DefaultError space_not_found = 6;
+      common.response.DefaultError room_not_found = 7;
+      common.response.DefaultError space_armed = 8;
+      common.response.DefaultError smart_lock_offline = 9;
+      common.response.DefaultError members_limit_exceeded = 10;
+      common.response.DefaultError group_not_found = 11;
+      common.response.DefaultError smart_lock_without_group = 12;
+    }
+  }
+}

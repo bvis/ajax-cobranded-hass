@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.channel.ptz;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/ptz/get_ptz_presets_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/ptz/go_to_ptz_home_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/ptz/go_to_ptz_preset_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/ptz/set_ptz_home_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/channel/ptz/set_ptz_preset_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ChannelPtzService {
+  rpc getPresets(GetChannelPtzPresetsRequest) returns (GetChannelPtzPresetsResponse);
+
+  rpc setPreset(SetChannelPtzPresetRequest) returns (SetChannelPtzPresetResponse);
+
+  rpc goToPreset(GoToChannelPtzPresetRequest) returns (GoToChannelPtzPresetResponse);
+
+  rpc setHome(SetChannelPtzHomeRequest) returns (SetChannelPtzHomeResponse);
+
+  rpc goToHome(GoToChannelPtzHomeRequest) returns (GoToChannelPtzHomeResponse);
+};

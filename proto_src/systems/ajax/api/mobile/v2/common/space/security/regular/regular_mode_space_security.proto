@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.security.regular;
+
+import "google/protobuf/timestamp.proto";
+
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message RegularModeSpaceSecurity {
+  SpaceState space_state = 1;
+
+  Transition transition = 2;
+
+  enum SpaceState {
+    REGULAR_MODE_SPACE_SECURITY_STATE_NONE = 0;
+    REGULAR_MODE_SPACE_SECURITY_STATE_ARMED = 1;
+    REGULAR_MODE_SPACE_SECURITY_STATE_DISARMED = 2;
+    REGULAR_MODE_SPACE_SECURITY_STATE_NIGHT_MODE = 3;
+  }
+
+  message Transition {
+    SpaceState desired_state = 2;
+
+    Stage stage = 3;
+
+    message Stage {
+      oneof stage {
+        TransitionInProgress transition_in_progress = 1;
+        TransitionCompleted transition_completed = 2;
+      }
+
+      message TransitionInProgress {
+        reserved 5, 6; // We already had these numbers early as I see in the prev commits. decided not to use just in case
+        oneof sub_stage {
+          TransitionRequested transition_requested = 1;
+          AwaitingAppExitTimerCompletion awaiting_app_exit_timer_completion = 2;
+          AwaitingSecondStageConfirmation awaiting_second_stage_confirmation = 3;
+          TwoStageArmingIncomplete two_stage_arming_incomplete = 4;
+          AwaitingVdsArmingCompletion awaiting_vds_arming_completion = 7;
+        }
+
+        message TransitionRequested {}
+
+        message TransitioningHub {}
+
+        message AwaitingAppExitTimerCompletion {
+          google.protobuf.Timestamp expired_at = 1;
+          google.protobuf.Timestamp started_at = 2;
+        }
+
+        message AwaitingSecondStageConfirmation {
+          google.protobuf.Timestamp expired_at = 1;
+          google.protobuf.Timestamp started_at = 2;
+        }
+
+        message TwoStageArmingIncomplete {}
+
+        message TransitioningOtherDevices {}
+
+        message AwaitingVdsArmingCompletion {}
+      }
+
+      message TransitionCompleted {}
+    }
+  }
+}

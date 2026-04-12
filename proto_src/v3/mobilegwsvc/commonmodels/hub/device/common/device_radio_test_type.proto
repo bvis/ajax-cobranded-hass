@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.hub.device.common";
+option java_multiple_files = true;
+
+enum DeviceRadioTestType {
+  DEVICE_RADIO_TEST_TYPE_UNSPECIFIED = 0;
+  DEVICE_RADIO_TEST_TYPE_JEWELER_CHANNEL = 1;
+  DEVICE_RADIO_TEST_TYPE_DATA_CHANNEL = 2;
+  DEVICE_RADIO_TEST_TYPE_VORF_CHANNEL = 3;
+}

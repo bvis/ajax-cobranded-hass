@@ -1,0 +1,42 @@
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# ruff
+.ruff_cache/
+
+# Generated proto .pyi stubs (not needed for runtime)
+custom_components/ajax_protegim/proto/**/*_pb2.pyi
+custom_components/ajax_protegim/proto/*_pb2.pyi
+
+# Reverse engineering docs (local only)
+docs/reverse-engineering/
+
+# Environment
+.env
+.env.*

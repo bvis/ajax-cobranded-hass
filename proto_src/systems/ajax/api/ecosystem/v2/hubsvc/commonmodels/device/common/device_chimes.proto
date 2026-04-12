@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v2.hubsvc.commonmodels.device.common";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/meta/meta.proto";
+
+message DeviceChimes {
+
+  ChimesSettings settings = 1;
+
+  repeated Capability capabilities = 2;
+
+  repeated ChimesTrigger chimes_trigger_capabilities = 3;
+
+  enum Sound {
+    SOUND_UNSPECIFIED = 0;
+    SOUND_1 = 1 [(proto.meta.enum_tag) = "SOUND_1"];
+    SOUND_2 = 2 [(proto.meta.enum_tag) = "SOUND_2"];
+    SOUND_3 = 3 [(proto.meta.enum_tag) = "SOUND_3"];
+    SOUND_4 = 4 [(proto.meta.enum_tag) = "SOUND_4"];
+  }
+
+  enum Capability {
+    CAPABILITY_UNSPECIFIED = 0;
+    CAPABILITY_CHIMES = 1;
+  }
+
+  enum ChimesTrigger {
+    CHIMES_TRIGGER_UNSPECIFIED = 0;
+    CHIMES_TRIGGER_REED = 1;
+    CHIMES_TRIGGER_EXTRA_CONTACT = 2;
+  }
+
+  message ChimesSettings {
+    repeated ChimesTrigger enabled_triggers = 1;
+    optional Sound chimes_sound = 2;
+  }
+}

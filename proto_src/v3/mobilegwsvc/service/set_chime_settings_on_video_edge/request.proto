@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_chime_settings_on_video_edge;
+
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+import "v3/mobilegwsvc/commonmodels/hub/device/motion_cam_video_base.proto";
+import "systems/ajax/logging/proto/log_marker.proto";
+import "google/protobuf/duration.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_chime_settings_on_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetVideoEdgeChimeSettingsRequest {
+
+  systems.ajax.api.mobile.v2.common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  Chime chime = 3;
+
+  message Chime {
+    oneof mode_union {
+      OffMode off = 1;
+      MechanicalMode mechanical = 2;
+      DigitalMode digital = 3;
+      SirenMode siren = 4 [deprecated = true]; // use SetSirenChimeSettingsService
+    }
+
+    message OffMode {
+    }
+
+    message MechanicalMode {
+      google.protobuf.Duration duration = 1;
+    }
+
+    message DigitalMode {
+      google.protobuf.Duration duration = 1;
+    }
+
+    message SirenMode {
+      repeated commonmodels.hub.device.MotionCamVideoBase.ChimeTrigger chime_triggers = 1;
+
+      int32 chime_signal = 2;
+    }
+  }
+}

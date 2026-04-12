@@ -1,0 +1,13 @@
+{
+    "domain": "ajax_cobranded",
+    "name": "Ajax Security",
+    "codeowners": ["@bvis"],
+    "config_flow": true,
+    "dependencies": [],
+    "documentation": "https://github.com/bvis/ajax-cobranded-hass",
+    "integration_type": "hub",
+    "iot_class": "cloud_push",
+    "issue_tracker": "https://github.com/bvis/ajax-cobranded-hass/issues",
+    "requirements": ["grpcio>=1.60.0", "protobuf>=4.25.0", "firebase-messaging>=0.4.5"],
+    "version": "0.3.0"
+}

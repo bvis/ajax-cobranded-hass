@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.spacesettings;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/event_settings.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/spacesettings/app_settings.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message VideoEdgeSpaceSettings {
+  string room_id = 1;
+
+  EventSettings event_settings = 2;
+
+  AppSettings app_settings = 3;
+}

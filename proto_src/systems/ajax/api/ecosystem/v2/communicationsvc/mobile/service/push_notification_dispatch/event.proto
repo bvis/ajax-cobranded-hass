@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.service.push_notification_dispatch;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/notification.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/media.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/push/custom/offline_event_count.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/push/custom/new_user_session.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/push/custom/media_enriched_notification.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/push/custom/session_invalidation_notification.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.service.push_notification_dispatch";
+option java_multiple_files = true;
+
+message PushNotificationDispatchEvent {
+  reserved 4;
+  oneof push {
+    commonmodels.notification.Notification notification = 1;
+    commonmodels.push.custom.OfflineEventCount offline_event_count = 2;
+    commonmodels.push.custom.NewUserSession new_user_session = 3;
+    commonmodels.push.custom.MediaEnrichedNotification media_enriched_notification = 5;
+    commonmodels.push.custom.SessionInvalidation session_invalidation = 6;
+  }
+}

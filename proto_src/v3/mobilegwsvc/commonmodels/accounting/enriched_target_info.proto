@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/hub_additional_info.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/video_edge_additional_info.proto";
+
+message EnrichedTargetInfo {
+  string target_id = 1;
+  mobile.v2.common.accounting.FeatureTarget target = 2;
+  string name = 3;
+  string room_name = 4;
+  oneof additional_info {
+    mobilegwsvc.commonmodels.accounting.HubAdditionalInfo hub_additional_info = 10;
+    mobilegwsvc.commonmodels.accounting.VideoEdgeAdditionalInfo video_edge_additional_info = 11;
+  }
+}

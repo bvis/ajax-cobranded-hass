@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/group_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member_role.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/standalone_device_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/video/privacy/request_video_access_available_actions.proto";
+import "systems/ajax/api/mobile/v2/common/video/video_wall.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message CurrentMember {
+  oneof member {
+    UserCurrentMember user_current_member = 21;
+    ProCurrentMember pro_current_member = 22;
+    EmployeeCurrentMember employee_current_member = 23;
+  }
+
+  message UserCurrentMember {
+    string id = 1;
+
+    common.space.member.SpacePermissions space_permissions = 2;
+
+    repeated common.space.member.StandaloneDevicePermissions devices_permissions = 3;
+
+    member.SpaceMemberRole role = 4;
+
+    repeated common.space.member.GroupPermissions group_permissions = 8;
+
+    common.video.VideoWall video_wall = 9;
+
+    string hex_id = 99;
+  }
+
+  message ProCurrentMember {
+    string id = 1;
+
+    common.space.member.SpacePermissions space_permissions = 2;
+
+    repeated common.space.member.StandaloneDevicePermissions devices_permissions = 3;
+
+    AccessRights access_rights = 4;
+
+    repeated common.space.member.GroupPermissions group_permissions = 8;
+
+    common.video.VideoWall video_wall = 9;
+
+    string hex_id = 99;
+  }
+
+  message EmployeeCurrentMember {
+    string id = 1;
+
+    common.space.member.SpacePermissions space_permissions = 2;
+
+    repeated common.space.member.StandaloneDevicePermissions devices_permissions = 3;
+
+    AccessRights access_rights = 4;
+
+    repeated common.space.member.GroupPermissions group_permissions = 8;
+
+    common.video.VideoWall video_wall = 9;
+
+    EmployeeCurrentMemberAvailableActions available_actions = 10;
+
+    string hex_id = 99;
+  }
+
+  message AccessRights {
+    google.protobuf.Timestamp expiration_timestamp = 1;
+    AccessType access_type = 2;
+    bool full_permissions = 3;
+
+    enum AccessType {
+      ACCESS_TYPE_UNSPECIFIED = 0;
+      ACCESS_TYPE_EXPIRED = 1;
+      ACCESS_TYPE_PERMANENT = 2;
+      ACCESS_TYPE_TEMPORARY = 3;
+    }
+  }
+
+  // Actions which can be performed by the current member on the mobile app GUI.
+  // These are usually dynamically calculated from various permissions and access configuration
+  message EmployeeCurrentMemberAvailableActions {
+    video.privacy.RequestVideoAccessAvailableActions request_video_access = 1;
+
+    InviteToSpaceAvailableActions invite_to_space_access = 4;
+    ManageMembersAvailableActions manage_members_access = 5;
+  }
+
+  message InviteToSpaceAvailableActions {
+    bool can_invite_installer = 1;
+    bool can_invite_security_company = 2;
+  }
+
+  message ManageMembersAvailableActions {
+    bool can_change_role = 1;
+    CanChangeMemberPermissions can_change_member_permissions = 2;
+  }
+
+  message CanChangeMemberPermissions {
+    bool system_settings = 1;
+  }
+}

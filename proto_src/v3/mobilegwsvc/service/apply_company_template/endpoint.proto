@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.apply_company_template;
+
+import "v3/mobilegwsvc/service/apply_company_template/request.proto";
+import "v3/mobilegwsvc/service/apply_company_template/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.apply_company_template";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service ApplyCompanyTemplateService {
+  rpc execute(ApplyCompanyTemplateRequest) returns (ApplyCompanyTemplateResponse);
+};

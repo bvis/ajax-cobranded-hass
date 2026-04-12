@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_cross_zone;
+
+import "systems/ajax/api/mobile/v2/common/space/device/hub_device.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_cross_zone";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateCrossZoneRequest {
+  string hub_hex_id = 1;
+  string id = 2;
+  optional string name = 3;
+  optional int32 confirmation_timeout = 4; // [30 - 60]
+  optional int32 confirmation_alarms_count = 5; // [2 - 5]
+  optional UnconfirmedAlarmType unconfirmed_alarm_type = 6;
+  optional bool count_repeated_alarms = 7;
+  optional bool reset_bypass = 8;
+  optional bool include_entry_delay = 9;
+  optional bool tamper_confirmation = 10;
+  optional bool sirens_react_on_confirmation = 11;
+  IncludedDevices included_devices = 12;
+
+  enum UnconfirmedAlarmType {
+    UNCONFIRMED_ALARM_TYPE_UNSPECIFIED = 0;
+    UNCONFIRMED_ALARM_TYPE_DO_NOT_NOTIFY = 1;
+    UNCONFIRMED_ALARM_TYPE_POSTPONED_WARNING = 2;
+    UNCONFIRMED_ALARM_TYPE_INSTANT_WARNING = 3;
+    UNCONFIRMED_ALARM_TYPE_ALARM = 4;
+  }
+
+  message IncludedDevices {
+    repeated systems.ajax.api.mobile.v2.common.space.device.HubDevice included_devices = 1;
+  }
+}

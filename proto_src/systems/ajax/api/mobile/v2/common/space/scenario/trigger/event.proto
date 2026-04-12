@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.scenario.trigger;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/smartlock/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/space/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/video/qualifier.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/event/hub/qualifier.proto";
+import "google/protobuf/duration.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message EventTrigger {
+  repeated EventSource sources = 1;
+  EventCondition condition = 2;
+
+  message EventSource {
+    oneof kind {
+      Space space = 1;
+      HubDevice hub_device = 2;
+      VideoEdge video_edge = 3;
+      SmartLock smart_lock = 4;
+    }
+
+    message Space {
+      repeated ecosystem.v2.communicationsvc.mobile.commonmodels.event.space.SpaceEventQualifier events = 2;
+    }
+
+    message HubDevice {
+      string id = 1;
+      string hub_id = 2;
+      repeated ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub.HubEventQualifier events = 3;
+    }
+
+    message VideoEdge {
+      string id = 1;
+      repeated ecosystem.v2.communicationsvc.mobile.commonmodels.event.video.VideoEventQualifier events = 2;
+      optional string channel_id = 3;
+    }
+
+    message SmartLock {
+      string id = 1;
+      repeated ecosystem.v2.communicationsvc.mobile.commonmodels.event.smartlock.SmartLockEventQualifier events = 2;
+    }
+  }
+
+  message EventCondition {
+    oneof kind {
+      Any any = 1;
+      All all = 2;
+    }
+
+    message Any {}
+
+    message All {
+      google.protobuf.Duration max_actuating_time = 1;
+    }
+  }
+}

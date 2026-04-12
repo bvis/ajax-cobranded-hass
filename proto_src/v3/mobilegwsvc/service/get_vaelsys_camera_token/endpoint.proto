@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_vaelsys_camera_token;
+
+import "v3/mobilegwsvc/service/get_vaelsys_camera_token/request.proto";
+import "v3/mobilegwsvc/service/get_vaelsys_camera_token/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_vaelsys_camera_token";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetVaelsysCameraTokenService {
+  rpc execute(GetVaelsysCameraTokenRequest) returns (GetVaelsysCameraTokenResponse);
+}

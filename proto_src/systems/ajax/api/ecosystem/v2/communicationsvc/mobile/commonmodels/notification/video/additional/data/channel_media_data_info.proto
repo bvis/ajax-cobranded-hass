@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message ChannelMediaDataInfo {
+  string channel_id = 1;
+
+  repeated string allowed_member_ids = 2;
+
+  string channel_name = 3;
+
+  uint32 num_frames = 4;
+}

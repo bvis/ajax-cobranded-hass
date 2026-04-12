@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum HubBoxType {
+  HUB_BOX_TYPE_UNSPECIFIED = 0;
+  HUB_BOX_TYPE_PCB = 1;
+  HUB_BOX_TYPE_CASE_WITH_EXTERNAL_LED = 2;
+  HUB_BOX_TYPE_CASE_C = 3;
+  HUB_BOX_TYPE_CASE_D = 4;
+}

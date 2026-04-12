@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/channel.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/cloudarchive/cloud_archive.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel";
+option swift_prefix = "";
+
+option java_multiple_files = true;
+
+// this model contains solely fields from video-svc w/o enrichment from other services (space-svc/csa)
+message ChannelBase {
+  string id = 1;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.channel.MediaDeviceInfo device_info = 2;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.channel.ChannelInfo info = 3 [(disable_logging) = true];
+
+  repeated systems.ajax.api.mobile.v2.common.video.videoedge.channel.ChannelState state = 4;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.archive.RecordMode record_mode = 5;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.archive.RecordPolicy record_policy = 6;
+
+  bool zombie = 7;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.channel.cloudarchive.CloudArchive cloud_archive = 8;
+
+  mobile.v2.common.video.videoedge.channel.SmartBacklightTriggerSettings smart_backlight_trigger_settings = 9;
+};

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.common.v1;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.common.v1";
+
+message HubIndex {
+  string hub_hex_id = 1;
+  string name = 2;
+}

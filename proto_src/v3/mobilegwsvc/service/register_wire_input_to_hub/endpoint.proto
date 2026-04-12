@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_wire_input_to_hub;
+
+import "v3/mobilegwsvc/service/register_wire_input_to_hub/request.proto";
+import "v3/mobilegwsvc/service/register_wire_input_to_hub/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.register_wire_input_to_hub";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service RegisterWireInputToHubService {
+  rpc execute(RegisterWireInputToHubRequest) returns (stream RegisterWireInputToHubResponse);
+}

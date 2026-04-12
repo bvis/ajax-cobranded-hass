@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_member_sms_preferences;
+
+import "v3/mobilegwsvc/service/update_space_member_sms_preferences/request.proto";
+import "v3/mobilegwsvc/service/update_space_member_sms_preferences/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_space_member_sms_preferences";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UpdateSpaceMemberSmsPreferencesService {
+  rpc execute(UpdateSpaceMemberSmsPreferencesRequest) returns (UpdateSpaceMemberSmsPreferencesResponse);
+};

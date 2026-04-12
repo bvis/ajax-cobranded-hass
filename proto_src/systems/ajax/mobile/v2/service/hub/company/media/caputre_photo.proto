@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package systems.ajax.mobile.v2.service.hub.company.media;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobile.v2.service.hub.company.media";
+
+message CapturePhotoOnDemandRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  DeviceType device_type = 3;
+
+  enum DeviceType {
+    NO_DEVICE_TYPE_INFO = 0;
+    MOTION_CAM = 1;
+    MOTION_CAM_OUTDOOR = 2;
+    MOTION_CAM_FIBRA_BASE = 3;
+  }
+}
+
+message CapturePhotoOnDemandResponse {
+
+  oneof response {
+    systems.ajax.api.mobile.v2.common.response.Success success = 1;
+    Error error = 2;
+  }
+
+  message Error {
+    oneof errors {
+      systems.ajax.api.mobile.v2.common.response.IllegalStateError request_already_sent = 1;
+      systems.ajax.api.mobile.v2.common.response.InternalError internal_error = 2;
+      systems.ajax.api.mobile.v2.common.response.CompanyOnHubNotFoundError company_on_hub_not_found_error = 3;
+      systems.ajax.api.mobile.v2.common.response.PermissionDeniedError permission_denied_error = 4;
+      systems.ajax.api.mobile.v2.common.response.DeadlineExceededError deadline_exceeded_error = 5;
+      systems.ajax.api.mobile.v2.common.response.IllegalStateError wrong_device_state = 6;
+      systems.ajax.api.mobile.v2.common.response.HubBusyError hub_busy_error = 7;
+    }
+  }
+}
+

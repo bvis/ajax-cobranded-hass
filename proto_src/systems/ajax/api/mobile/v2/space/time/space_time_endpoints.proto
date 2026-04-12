@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.time;
+
+import "systems/ajax/api/mobile/v2/space/time/set_time_zone_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceTimeService {
+
+  rpc setTimeZone(SetSpaceTimeZoneRequest) returns (SetSpaceTimeZoneResponse);
+};

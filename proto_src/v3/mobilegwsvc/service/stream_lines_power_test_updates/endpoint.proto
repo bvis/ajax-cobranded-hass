@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_lines_power_test_updates;
+
+import "v3/mobilegwsvc/service/stream_lines_power_test_updates/request.proto";
+import "v3/mobilegwsvc/service/stream_lines_power_test_updates/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.stream_lines_power_test_updates";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service StreamLinesPowerTestUpdatesService {
+  rpc execute (StreamLinesPowerTestRequest) returns (stream StreamLinesPowerTestResponse);
+};

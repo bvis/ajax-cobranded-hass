@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+import "v3/mobilegwsvc/commonmodels/company/monitoring/monitoring_state.proto";
+
+message Reseller {
+  mobile.v2.common.accounting.AccountingCompany accounting_company = 1;
+  company.monitoring.MonitoringState monitoring_state = 2;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+
+message FeatureOnTarget {
+  Feature feature = 1;
+  AccountingCompany reseller = 2;
+  AccountingCompany dealer = 3;
+}

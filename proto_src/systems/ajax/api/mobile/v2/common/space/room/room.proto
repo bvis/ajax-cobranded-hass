@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.room;
+
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message Room {
+  string id = 1;
+
+  string name = 2;
+
+  optional common.image.Images images = 3;
+
+  reserved 4; // legacy sorting_key
+  string sorting_key = 5;
+}

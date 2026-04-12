@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.diagnostics;
+
+import "systems/ajax/api/mobile/v2/video/videoedge/diagnostics/report_problem_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/diagnostics/setup_diagnostics_logging_on_request.proto";
+import "systems/ajax/api/mobile/v2/video/videoedge/diagnostics/setup_diagnostics_logging_off_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service VideoEdgeDiagnosticsService {
+  rpc setLoggingOn(SetDiagnosticsLoggingOnRequest) returns (SetDiagnosticsLoggingOnResponse);
+
+  rpc setLoggingOff(SetDiagnosticsLoggingOffRequest) returns (SetDiagnosticsLoggingOffResponse);
+
+  rpc reportProblem(ReportProblemRequest) returns (ReportProblemResponse);
+};

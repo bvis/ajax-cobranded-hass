@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/source_image_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/source_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/member_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message SpaceNotificationSource {
+  SpaceNotificationSourceType type = 1;
+  string id = 2;
+  string name = 3 [(hash_value) = true];
+
+  optional string room_id = 4;
+  optional string room_name = 5;
+  optional MemberType member_type = 6;
+  optional SourceImageInfo image_info = 10;
+}

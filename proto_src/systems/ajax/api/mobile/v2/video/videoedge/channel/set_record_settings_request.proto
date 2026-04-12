@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.channel;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message SetChannelRecordSettingsRequest {
+
+    // [required]
+    string video_edge_id = 1;
+
+    // [required]
+    string channel_id = 2;
+
+    // [required]
+    common.video.videoedge.archive.RecordMode record_mode = 3;
+
+    // [required]
+    common.video.videoedge.archive.RecordPolicy record_policy = 4;
+
+    // [optional] - temporarily for backward compatibility
+    common.space.SpaceLocator space_locator = 20;
+}
+
+message SetChannelRecordSettingsResponse {
+
+    oneof response {
+        common.response.Success success = 1;
+        Failure failure = 2;
+    }
+
+    message Failure {
+        oneof error {
+            common.response.DefaultError bad_request = 1;
+            common.response.DefaultError permission_denied = 2;
+            common.response.DefaultError video_edge_not_found = 3;
+            common.response.DefaultError channel_not_found = 4;
+            common.response.DefaultError space_armed = 5;
+            common.response.DefaultError video_edge_is_offline = 6;
+        }
+    }
+}

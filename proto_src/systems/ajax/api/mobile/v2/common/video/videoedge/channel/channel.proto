@@ -1,0 +1,148 @@
+// Channel description
+
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.channel;
+
+import "google/protobuf/timestamp.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/about/about.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/archive/calendar.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/cloudarchive/cloud_archive.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/spacesettings/channel_space_settings.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "Video";
+
+message Channel {
+  string guid = 1;
+
+  // [optional]
+  // It's only set when this channel maps some channel of a media device.
+  // If it's not set - it's a zombie channel.
+  MediaDeviceInfo device_info = 2;
+
+  // [optional]
+  ChannelInfo info = 3 [(disable_logging) = true];
+
+  repeated ChannelState state = 4;
+
+  archive.RecordMode record_mode = 5;
+
+  // [optional]
+  ChannelPreview channel_preview = 6 [(disable_logging) = true];
+
+  archive.Calendar calendar = 7 [(disable_logging) = true];
+
+  archive.RecordPolicy record_policy = 8;
+
+  // deprecated recording_requested field
+  reserved 9;
+
+  bool zombie = 10;
+
+  // [optional] set only if this video edge / channel supports cloud archive
+  cloudarchive.CloudArchive cloud_archive = 11;
+
+  SmartBacklightTriggerSettings smart_backlight_trigger_settings = 12;
+
+  string room_id = 101 [deprecated = true];
+
+  string group_id = 102 [deprecated = true];
+
+  // [optional]
+  spacesettings.ChannelSpaceSettings space_settings = 103;
+
+  SourceAliases source_aliases = 104;
+};
+
+enum ChannelState {
+  CS_NONE = 0;
+  ONLINE = 1; // Channel is working.
+  RECORDING = 2; // Channel is recording.
+  HAVE_ARCHIVE = 3; // There's archive for this channel available.
+  HAVE_DETECTION = 4; // At least one detector have triggered a detection.
+  HAVE_MOTION = 5; // Motion detected.
+  HAVE_SOUND = 6; // Sound above threshold.
+  HAVE_ALARM = 7; // Alarm triggered.
+  HAVE_OBJECTS = 8; // Objects detected.
+  FLICKERING = 9; // Channel video is flickering due to e.g. sensor day-night switch.
+  HAVE_PIR_MOTION = 10; // PIR motion detected.
+  HAVE_RING = 11; // RING detected.
+};
+
+message MediaDeviceInfo {
+  string media_device_guid = 1;
+
+  string channel_id = 2;
+};
+
+message ChannelInfo {
+  string name = 1;
+};
+
+message ChannelPreview {
+  string image_url = 1;
+  // [optional]
+  google.protobuf.Timestamp created_at = 2;
+}
+
+message SourceAliases {
+  repeated VideoSource sources = 1;
+}
+
+message VideoSource {
+  oneof kind {
+    PrimarySource primary_source = 1;
+    NvrSource nvr_source = 2;
+    CloudArchiveSource cloud_archive_source = 3;
+  }
+}
+
+// Primary source is a reference to the real channel on the owning device (for example Ajax camera).
+// All other sources are connected to the primary one and serve as its aliases
+message PrimarySource {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+
+  about.About.Type type = 3;
+
+  about.About.Color color = 4;
+}
+
+message NvrSource {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+
+  about.About.Type type = 3;
+}
+
+message CloudArchiveSource {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+}
+
+message SmartBacklightTriggerTypeSettings {
+  bool enabled = 1;
+
+  oneof trigger_union {
+    Motion motion = 100;
+    Object object = 101;
+  }
+
+  message Motion {
+  }
+
+  message Object {
+    ObjectClass object_class = 1;
+  }
+}
+
+message SmartBacklightTriggerSettings {
+  repeated SmartBacklightTriggerTypeSettings smart_backlight_trigger_types = 1;
+}

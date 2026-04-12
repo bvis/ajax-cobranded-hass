@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SubscriptionAction {
+  SUBSCRIPTION_ACTION_UNSPECIFIED = 0;
+  SUBSCRIPTION_ACTION_DEACTIVATE = 1;
+  SUBSCRIPTION_ACTION_SCHEDULE_DEACTIVATION = 2;
+  SUBSCRIPTION_ACTION_CANCEL_SCHEDULED_DEACTIVATION = 3;
+  SUBSCRIPTION_ACTION_CHANGE_PACKAGE = 4;
+  SUBSCRIPTION_ACTION_MODIFY_TARGETS = 5;
+}

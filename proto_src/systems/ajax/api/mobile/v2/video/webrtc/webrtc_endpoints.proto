@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.webrtc;
+
+import "systems/ajax/api/mobile/v2/video/webrtc/initiate_request.proto";
+import "systems/ajax/api/mobile/v2/video/webrtc/ask_streams_request.proto";
+import "systems/ajax/api/mobile/v2/video/webrtc/send_answer_request.proto";
+import "systems/ajax/api/mobile/v2/video/webrtc/send_offer_request.proto";
+import "systems/ajax/api/mobile/v2/video/webrtc/suggest_new_ice_candidate_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service WebrtcService {
+  rpc initiate(InitiateWebRtcRequest) returns (stream InitiateWebRtcResponse);
+
+  rpc askStreams(AskWebRtcStreamsRequest) returns (AskWebRtcStreamsResponse);
+
+  rpc sendAnswer(SendWebRtcAnswerRequest) returns (SendWebRtcAnswerResponse);
+
+  rpc sendOffer(SendWebRtcOfferRequest) returns (SendWebRtcOfferResponse);
+
+  rpc suggestNewIceCandidate(SuggestNewWebRtcIceCandidateRequest) returns (SuggestNewWebRtcIceCandidateResponse);
+};

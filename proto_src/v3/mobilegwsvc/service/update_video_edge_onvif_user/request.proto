@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_onvif_user;
+
+import "systems/ajax/logging/proto/log_marker.proto";
+import "v3/mobilegwsvc/commonmodels/video/videoedge/onvif/onvif_user.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_video_edge_onvif_user";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateVideoEdgeOnvifUserRequest {
+  string space_id = 1 [(log_marker) = LOG_MARKER_SPACE_ID];
+
+  string video_edge_id = 2 [(log_marker) = LOG_MARKER_VIDEO_EDGE_ID];
+
+  string username = 3;
+
+  string new_username = 4;
+
+  commonmodels.video.videoedge.onvif.OnvifUser.OnvifUserRole role = 5;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.space.settings;
+
+import "systems/ajax/api/mobile/v2/space/settings/update_profile_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SpaceSettingsService {
+
+  rpc updateProfile(UpdateSpaceProfileRequest) returns (UpdateSpaceProfileResponse);
+};

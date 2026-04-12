@@ -1,0 +1,132 @@
+// Analytics description
+
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.detector;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message Detector {
+  string guid = 1;
+
+  DetectorType type = 2;
+
+  DetectorKind kind = 3;
+
+  string channel_guid = 4;
+
+  bool enabled = 5;
+
+  repeated DetectorState state = 6;
+
+  DetectorSettings settings = 7;
+};
+
+// If a channel has many detectors of the same type - only
+// one of them can be enabled.
+enum DetectorType {
+  DT_UNKNOWN = 0;
+  DT_FAKE = 1;
+  DT_MOTION = 2;
+  DT_OBJECT = 3;
+  DT_PIR = 4;
+  DT_RING = 5;
+};
+
+enum DetectorKind {
+  DK_UNKNOWN = 0;
+  DK_HARDWARE = 1;
+  DK_SOFTWARE = 2;
+};
+
+enum DetectorState {
+  DS_NONE = 0;
+  DS_ONLINE = 1; // Detector is working.
+};
+
+message DetectorSettings {
+  oneof settings_union {
+    FakeDetectorSettings fake_settings = 1;
+    MotionDetectorSettings motion_settings = 2;
+    ObjectDetectorSettings object_settings = 3;
+    PirDetectorSettings pir_settings = 4;
+  }
+};
+
+message PirDetectorSettings {
+  oneof details_union {
+    PirDetailsSensitivity pir_details_sensitivity = 1;
+  }
+
+  message PirDetailsSensitivity {
+    Sensitivity sensitivity = 1;
+  }
+
+  enum Sensitivity {
+    SENSITIVITY_UNSPECIFIED = 0;
+    SENSITIVITY_LOW = 1;
+    SENSITIVITY_MID = 2;
+    SENSITIVITY_HIGH = 3;
+  }
+}
+
+message FakeDetectorSettings {
+  // Time it takes for rect to make a loop in figure.
+  google.protobuf.Duration loop_duration = 1;
+
+  // Render timestamp text in figure.
+  bool with_ts_text = 2;
+};
+
+// Motion detectors produce vmspb.metadata.Motion
+message MotionDetectorSettings {
+  oneof details_union {
+    Mask mask = 1;
+  }
+
+  // Mask-based detectors need a mask and a threshold.
+  message Mask {
+    // [0, 100]
+    // The lower the value the higher the variations of the luminance
+    // values need to be in order to be identified as motion. Hence, a low sensitivity can
+    // be used to suppress estimated motion due to noise.
+    uint32 sensitivity = 1;
+
+    // Where to detect.
+    uint32 width = 2;
+
+    uint32 height = 3;
+
+    // 0/1
+    bytes data = 4 [(disable_logging) = true];
+
+    // [0, width * height]
+    // Minimum count of adjacent mask cells to trigger motion. This parameter allows
+    // suppressing false alarms.
+    optional uint32 min_count = 5;
+  }
+};
+
+message ObjectDetectorSettings {
+  // [required]
+  common.video.Mask zone_mask = 1;
+
+  repeated ClassSettings class_settings = 2;
+
+  message ClassSettings {
+    common.video.ObjectClass object_class = 1;
+
+    bool enabled = 2;
+
+    // [0, 100]
+    uint32 confidence = 3 [deprecated = true];
+
+    // [0, 10]
+    optional uint32 sensitivity = 4;
+  }
+};

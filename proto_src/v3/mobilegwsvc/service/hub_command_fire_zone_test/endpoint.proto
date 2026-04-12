@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.hub_command_fire_zone_test;
+
+import "v3/mobilegwsvc/service/hub_command_fire_zone_test/request.proto";
+import "v3/mobilegwsvc/service/hub_command_fire_zone_test/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+// in HTS table it`s 0x31 ZONE_TEST
+service HubCommandFireZoneTestService {
+  rpc execute (HubCommandFireZoneTestRequest) returns (HubCommandFireZoneTestResponse);
+};

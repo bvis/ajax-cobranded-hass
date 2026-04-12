@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.push.custom";
+option java_multiple_files = true;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space.proto";
+
+message OfflineEventCount {
+  bool isAlarm = 1;
+  int32 event_count = 2;
+  int64 grouping_key = 3;
+  string hub_hex_id = 4;
+  notification.NotificationSpace space = 5;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.resource.audio;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.resource.audio";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum AudioFormat {
+  AUDIO_FORMAT_UNSPECIFIED = 0;
+  AUDIO_FORMAT_MP3 = 1;
+  AUDIO_FORMAT_OGG = 2;
+  AUDIO_FORMAT_WAV = 3;
+  AUDIO_FORMAT_AAC = 4;
+}

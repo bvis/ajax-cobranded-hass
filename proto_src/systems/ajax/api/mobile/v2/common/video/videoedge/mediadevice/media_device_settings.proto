@@ -1,0 +1,363 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.mediadevice;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "google/protobuf/duration.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message ConnectionSettings {
+  string address = 1; // Can be host name or IP address.
+
+  string port = 2; // Can be port number of net service name (e.g. 127.0.0.1:ftp).
+
+  string username = 3 [(hash_value) = true];
+
+  string password = 4 [(hash_value) = true];
+};
+
+message VideoSettings {
+  uint32 brightness = 1; // 0..100
+
+  uint32 contrast = 2; // 0..100
+
+  uint32 saturation = 3; // 0..100
+
+  optional uint32 sharpness = 6;
+
+  // [optional]
+  BacklightCompensation blc = 7;
+
+  // [optional]
+  WhiteBalance white_balance = 8;
+
+  // [optional]
+  WideDynamicRange wdr = 9;
+
+  // [optional]
+  Exposure exposure = 10;
+
+  // [optional]
+  IrCutFilter ircut_filter = 11;
+
+  // [optional]
+  Transform transform = 13;
+
+  // [optional]
+  oneof backlight_mode_union {
+    OffIllumination off_illumination = 19;
+    IrIllumination ir_illumination = 14;
+    WhiteIllumination white_illumination = 20;
+    SmartIllumination smart_illumination = 21;
+  }
+
+  // [optional]
+  PrivacyMasks privacy_masks = 15;
+
+  // [optional]
+  ExposureMeteringArea exposure_metering_area = 16;
+
+  // [optional]
+  AntiFlicker anti_flicker = 17;
+
+  // [optional]
+  NoiseReduction noise_reduction = 18;
+
+  // [optional]
+  Stream main = 4;
+
+  // [optional]
+  Stream sub = 5;
+
+  // [optional]
+  ImageProfile image_profile = 22;
+
+  message ImageProfile {
+    // [required]
+    ImageProfileType type = 1;
+  }
+
+  message BacklightCompensation {
+    oneof mode_union {
+      OffMode off = 1;
+      OnMode on = 2;
+    }
+
+    message OnMode {
+      float level = 1;
+    }
+
+    message OffMode {
+    }
+  }
+
+  message WhiteBalance {
+    oneof mode_union {
+      ManualMode manual = 1;
+      AutoMode auto = 2;
+    }
+
+    message ManualMode {
+      float red_gain = 1;
+      float blue_gain = 2;
+    }
+
+    message AutoMode {
+    }
+  }
+
+  message WideDynamicRange {
+    oneof mode_union {
+      OffMode off = 1;
+      OnMode on = 2;
+    }
+
+    message OnMode {
+      float level = 1;
+    }
+
+    message OffMode {
+    }
+  }
+
+  message Exposure {
+    // for Ajax cameras we are operating exclusively in auto mode
+    oneof mode_union {
+      ManualMode manual = 1;
+      AutoMode auto = 2;
+    }
+
+    message ManualMode {
+      // [optional]
+      google.protobuf.Duration exposure_time = 1;
+
+      float gain = 2;
+
+      float iris = 3;
+    }
+
+    message AutoMode {
+      ExposurePriority priority = 1;
+
+      // [optional]
+      DurationRange exposure_time_range = 2;
+
+      // [optional]
+      FloatRange gain_range = 3;
+
+      // [optional]
+      FloatRange iris_range = 4;
+
+      // additional exposure energy compensation strength
+      // 0 means no compensation
+      optional int32 exposure_compensation = 5;
+
+      // Selected preset that is currently set up (can be set only for ajax cameras).
+      // This preset is a so-called "preset auto mode" for AJAX Camera.
+      // For now Ajax camera uses only auto mode. However it can be divided into 2 sub-modes:
+      // - plain auto mode (same as for 3rd party cameras, also called manual mode for ajax camera in ui).
+      //   In this mode min_exposure_time_range == max_exposure_time_range, preset == AUTO_EXPOSURE_PRESET_UNSPECIFIED
+      // - preset auto mode (which is controlled by this enum (should be value different from unspecified))
+      AutoExposurePreset preset = 6;
+    }
+  }
+
+  // Toggles the Ir cut filter state between on, off and auto.
+  // The auto state lets the exposure algorithm handle when the Ir cut filter should be turned on or off.
+  // Will not setup anything if none of mode is set.
+  message IrCutFilter {
+    oneof mode_union {
+      OnMode on = 1;
+      OffMode off = 2;
+      AutoMode auto = 3;
+    }
+
+    // Enable Ir cut filter. Typically Day mode.
+    message OnMode {}
+
+    // Disable Ir cut filter. Typically Night mode.
+    message OffMode {}
+
+    // Ir cut filter is automatically activated by the device.
+    message AutoMode {
+      repeated IrCutFilterAutoAdjustment ircut_filter_auto_adjustments = 1;
+
+      message IrCutFilterAutoAdjustment {
+        // Specifies which boundaries to automatically toggle Ir cut filter, following parameters are applied to:
+        // - Common: Applied to both boundaries automatically toggling Ir cut filter on and off
+        // - ToOn/ToOff: Applied individually to one of the boundaries automatically toggling Ir cut filter to on/off
+        IrCutFilterAutoBoundaryType boundary_type = 1;
+
+        // [optional]
+        // Adjusts boundary exposure level for toggling Ir cut filter to on/off specified with unitless normalized value from +1.0 to -1.0.
+        // Zero is default and -1.0 is the darkest adjustment (Unitless).
+        optional float boundary_offset = 2;
+
+        // [optional]
+        // Delay time of toggling Ir cut filter to on/off after crossing of the boundary exposure levels
+        google.protobuf.Duration response_time = 3;
+      }
+    }
+  }
+
+  message Stream {
+    bool enabled = 1;
+
+    VideoCodec codec = 2;
+
+    bytes codec_extradata = 3 [(disable_logging) = true];
+
+    VideoResolution resolution = 4;
+
+    uint32 bitrate = 5; // kbit/s
+
+    VideoBitrateType bitrate_type = 6;
+
+    uint32 gop_size = 7;
+
+    uint32 fps = 8;
+
+    uint32 quality = 9;
+  }
+
+  message Transform {
+    // rotation is applied in the first place and mirroring - in the second
+    Rotation rotation = 1;
+
+    bool mirror = 2;
+  }
+
+  message OffIllumination {}
+
+  message IrIllumination {
+    oneof mode_union {
+      AutoMode auto = 1;
+      ManualMode manual = 2;
+    }
+
+    // Ir illumination power is configured by user.
+    message ManualMode {
+      // [0, 100] (where 0 means disabled, 100 - max power)
+      uint32 power_level = 1;
+    }
+
+    // Ir illumination power is automatically configured by the device.
+    message AutoMode {
+    }
+  }
+
+  message WhiteIllumination {
+    oneof mode_union {
+      AutoMode auto = 1;
+      ManualMode manual = 2;
+    }
+
+    // White illumination power is configured by user.
+    message ManualMode {
+      // [0, 100] (where 0 means disabled, 100 - max power)
+      uint32 power_level = 1;
+    }
+
+    // White illumination power is automatically configured by the device.
+    message AutoMode {
+      // [1, 100]
+      optional uint32 max_power_level = 1;
+    }
+  }
+
+  message SmartIllumination {
+    // [optional]
+    IrIllumination ir_illumination = 1;
+
+    // [optional]
+    WhiteIllumination white_illumination = 2;
+  }
+
+  message PrivacyMasks {
+    repeated PrivacyMask entries = 1;
+  }
+
+  message PrivacyMask {
+    bool enabled = 1;
+
+    // A set of points (x, y) that form a polygon.
+    // The point coordinate range is [-1000, 1000].
+    // Where point (0, 0) is the center, point (-1000, 1000) is the top-left corner.
+    Polygon polygon = 2;
+
+    // [required]
+    PrivacyMaskType type = 3;
+
+    // [optional]
+    Color color = 4;
+
+    message Polygon {
+      repeated Point2i points = 1;
+    }
+  }
+
+  message ExposureMeteringArea {
+    oneof night_mode_union {
+      PredefinedExposureMeteringArea predefined = 1;
+    }
+  }
+
+  message AntiFlicker {
+    AntiFlickerType type = 1;
+  }
+
+  message NoiseReduction {
+    oneof mode_union {
+      OnMode on = 1;
+      OffMode off = 2;
+    }
+
+    message OnMode {
+      uint32 level = 1;
+    }
+
+    message OffMode {}
+  }
+};
+
+message AudioSettings {
+  bool enabled = 1;
+
+  AudioCodec codec = 2;
+
+  bytes codec_extradata = 3 [(disable_logging) = true];
+
+  uint32 bitrate = 4; // kbit/s
+
+  uint32 sample_rate = 5;
+
+  optional uint32 mic_volume = 6; // 0..100
+
+  optional uint32 mic_gain = 7; // 0..100
+};
+
+message AudioOutputSettings {
+  // [0, 100]
+  uint32 volume = 1;
+};
+
+message ChannelSettings {
+  // Comes from device, typically just a number "0", "1", etc.
+  // But some protocols such as ONVIF can provide a GUID that persists
+  // between device boots.
+  string channel_id = 1;
+
+  VideoSettings video = 2;
+
+  AudioSettings audio = 3;
+
+  // [optional]
+  AudioOutputSettings audio_output = 4;
+};
+
+message MediaDeviceSettings {
+  repeated ChannelSettings channels = 1;
+};

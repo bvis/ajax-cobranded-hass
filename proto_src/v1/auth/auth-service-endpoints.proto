@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.auth;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.auth";
+option java_generic_services = true;
+
+import "google/protobuf/empty.proto";
+
+import "v1/auth/login-token-request.proto";
+import "v1/auth/login-request.proto";
+import "v1/auth/login-response.proto";
+
+/*
+ * Service that provides methods for mobile user authentication.
+ * Contains session information that should be used in all subsequent requests in session headers:
+ *      a911-user-id - a911 user ID
+ *      a911-session-token - session token for a911
+ *      client-user-login - user login
+ *      client-session-token - hts/csa session token
+ *      client-user-role - USER/PRO/COMPANY
+ *      client-device-id - hardware ID
+ *      client-device-model - iPhone 3G/Samsung Galaxy S21Ultra G998B
+ *      client-os - iOS/Android
+ *      client-version-major - 1.12
+ *      client-build - 1499
+ *      application-label - Ajax/Elotec/../.
+ *      client-device-type - device type MOBILE, WATCH, TABLET etc.
+ *
+ */
+service AuthService {
+
+  /*
+ * Possible error statuses and corresponding error templates
+ *
+ * TIMEOUT - systems.ajax.mobilegw.error.timeout
+ * UNAUTHENTICATED = "systems.ajax.mobilegw.error.unauthenticated"
+ * INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+ */
+  rpc loginTo911ByCsaToken (LoginTokenRequest) returns (LoginResponse);
+  rpc login (LoginRequest) returns (LoginResponse) {
+    option deprecated = true;
+  };
+
+  /*
+ * Possible error statuses and corresponding error templates
+ *
+ * TIMEOUT - systems.ajax.mobilegw.error.timeout
+ * INTERNAL_SERVICE_ERROR = "systems.ajax.mobilegw.error.internalServiceError"
+ * NOT_FOUND = "systems.ajax.mobilegw.error.notFound.user"
+ */
+  rpc logoutFrom911 (google.protobuf.Empty) returns (google.protobuf.Empty);
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GroupPermissions {
+
+  string group_id = 1;
+
+  GroupPermission group_permission = 2;
+
+  enum GroupPermission {
+    GROUP_PERMISSION_UNSPECIFIED = 0;
+    GROUP_PERMISSION_ENABLED = 1;
+    GROUP_PERMISSION_DISABLED = 2;
+  }
+}

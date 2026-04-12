@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_active_services;
+
+import "v3/mobilegwsvc/commonmodels/accounting/service.proto";
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/accounting/accounting_company.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/service_switch_availability_status.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/enriched_target_info.proto";
+import "v3/mobilegwsvc/commonmodels/accounting/extra_service_state.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_active_services";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetActiveServicesResponse {
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    repeated ActiveService active_services = 1;
+  }
+
+  message ActiveService {
+    commonmodels.accounting.Service service = 1;
+    systems.ajax.api.mobile.v2.common.accounting.AccountingCompany accounting_company = 2;
+    string subscription_id = 3;
+    commonmodels.accounting.ServiceSwitchAvailabilityStatus service_switch_availability_status = 4;
+    repeated commonmodels.accounting.EnrichedTargetInfo enriched_target_info = 5;
+    commonmodels.accounting.ExtraServiceState.Active service_state = 6;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error not_found_active_mandatory_service = 2;
+    }
+  }
+}

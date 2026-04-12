@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+
+import "systems/ajax/protobuf/hub/name.proto";
+
+message Camera {
+    string id = 0x01;
+    string room_id = 0x02;
+    string service_id = 0x03;
+    bool dvr = 0x06;
+    string parent_camera_id = 0x07;
+    bool stream_access_denied = 0x08;
+
+    Name name = 1000;
+    StreamSettings stream_settings = 1010;
+
+    message StreamSettings {
+        ServiceType service_type = 1011;
+        bool result  = 1014;
+        int32 crc = 1013;
+        oneof stream_variables {
+            string stream_data_url = 1012;
+            HikvisionOrSafireSettings hikvision_or_safire_settings = 1015;
+            DahuaOrUniviewSettings dahua_or_uniview_settings = 1016;
+        }
+    }
+
+    enum ServiceType {
+        NO_SERVICE_TYPE_INFO = 0;
+        RTSP_STREAM = 1;
+        XMEYE = 2;
+        HIKVISION = 3;
+        DAHUA = 4;
+        SAFIRE = 5;
+        UNIVIEW = 6;
+        IVIDEON = 7;
+    }
+
+    message HikvisionOrSafireSettings {
+        string area_domain = 1;
+        string auth_domain = 2;
+        string authid = 3;
+        google.protobuf.Timestamp expirydate = 4;
+        int32 no = 5;
+        string refreshtoken = 6;
+        string serial = 7;
+        string token = 8;
+        string verificationcode = 9;
+    }
+
+    message DahuaOrUniviewSettings {
+        string login = 1;
+        string password = 2;
+        string serial = 3;
+    }
+}

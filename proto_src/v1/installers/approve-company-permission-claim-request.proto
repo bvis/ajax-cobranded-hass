@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub.installers;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub.installers";
+option java_multiple_files = true;
+
+message ApproveCompanyPermissionsClaimRequest {
+  string claim_id = 1;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_device_bypass;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandDeviceBypassRequest {
+  string hub_id = 1;
+  string device_id = 2;
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+  Bypass bypass_type = 4;
+
+  enum Bypass {
+    BYPASS_UNSPECIFIED = 0;
+    BYPASS_ENGINEERING_DISABLE = 1;
+    BYPASS_ENGINEERING_SENSOR = 2;
+    BYPASS_ENGINEERING_TAMPER = 3;
+    BYPASS_ONE_TIME_DISABLE = 4;
+    BYPASS_ONE_TIME_SENSOR = 5;
+    BYPASS_ONE_TIME_TAMPER = 6;
+  }
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_space_integration_oauth_authorization_code_url;
+
+import "v3/mobilegwsvc/commonmodels/space/integration/space_integration_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message GetSpaceIntegrationOAuthAuthorizationCodeUrlRequest {
+  commonmodels.space.integration.SpaceIntegrationType integration_type = 1;
+  string space_id = 2;
+}

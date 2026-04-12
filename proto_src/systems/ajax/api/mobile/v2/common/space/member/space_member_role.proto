@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+enum SpaceMemberRole {
+  SPACE_MEMBER_ROLE_UNSPECIFIED = 0;
+  SPACE_MEMBER_ROLE_USER = 1;
+  SPACE_MEMBER_ROLE_ADMIN = 2;
+  SPACE_MEMBER_ROLE_PRO = 3;
+  SPACE_MEMBER_ROLE_COMPANY = 4;
+}
+

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.start_registration;
+
+import "v3/mobilegwsvc/commonmodels/type/user_role.proto";
+import "v3/mobilegwsvc/commonmodels/type/phone_validation_type.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.start_registration";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message StartRegistrationRequest {
+
+  commonmodels.type.UserRole user_role = 1;
+
+  string email = 2 [(hash_value) = true];
+
+  string phone_number = 3 [(hash_value) = true];
+
+  string first_name = 4 [(hash_value) = true];
+
+  optional string last_name = 5 [(hash_value) = true];
+
+  string password = 6 [(disable_logging) = true];
+
+  commonmodels.type.PhoneValidationType phone_validation_type = 7;
+
+  string locale = 8;
+
+  optional bool news_subscription = 9;
+
+  optional string recaptcha_token = 10;
+
+  optional string recaptcha_site_key = 11;
+
+  optional string company_website = 12 [(hash_value) = true];
+
+  optional string company_name = 13 [(hash_value) = true];
+}

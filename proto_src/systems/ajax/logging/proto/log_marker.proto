@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option swift_prefix = "";
+option java_package = "systems.ajax.logging.proto";
+option java_multiple_files = true;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+  LogMarker log_marker = 1102;
+}
+
+extend google.protobuf.EnumValueOptions {
+  LogMarkerKey log_marker_key = 1101;
+}
+
+enum LogMarker {
+  LOG_MARKER_UNSPECIFIED = 0;
+  LOG_MARKER_VIDEO_EDGE_ID = 1 [(log_marker_key).value = "video.videoedge.id"];
+  LOG_MARKER_SPACE_ID = 2 [(log_marker_key).value = "space.id"];
+  LOG_MARKER_COMPANY_ID = 3 [(log_marker_key).value = "company.id"];
+  LOG_MARKER_SPACE_MEMBER_ID = 4 [(log_marker_key).value = "space.member.id"];
+  LOG_MARKER_HUB_ID = 5 [(log_marker_key).value = "hub.id"];
+  LOG_MARKER_USER_ID = 6 [(log_marker_key).value = "user.id"];
+  LOG_MARKER_EMPLOYEE_ID = 7 [(log_marker_key).value = "employee.id"];
+  LOG_MARKER_WEBRTC_SESSION_ID = 8 [(log_marker_key).value = "video.webrtc.session.id"];
+}
+
+message LogMarkerKey {
+  string value = 1;
+}

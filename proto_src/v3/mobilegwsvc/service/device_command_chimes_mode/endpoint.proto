@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_chimes_mode;
+
+import "v3/mobilegwsvc/service/device_command_chimes_mode/request.proto";
+import "v3/mobilegwsvc/service/device_command_chimes_mode/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandChimesModeService {
+  rpc execute (DeviceCommandChimesModeRequest) returns (DeviceCommandChimesModeResponse);
+}

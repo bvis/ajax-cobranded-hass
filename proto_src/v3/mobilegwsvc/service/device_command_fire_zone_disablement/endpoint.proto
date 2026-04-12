@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_fire_zone_disablement;
+
+import "v3/mobilegwsvc/service/device_command_fire_zone_disablement/request.proto";
+import "v3/mobilegwsvc/service/device_command_fire_zone_disablement/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_fire_zone_disablement";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service FireZoneCommandDisablementService {
+  rpc execute(FireZoneCommandDisablementRequest) returns (FireZoneDisablementCommandResponse);
+}

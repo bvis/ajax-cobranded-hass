@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message FirmwareIdInfo {
+  string fw_version = 1;
+  int32 device_type = 2;
+  int32 device_subtype = 3;
+  string device_hw_version = 4;
+  int32 device_band = 5;
+}

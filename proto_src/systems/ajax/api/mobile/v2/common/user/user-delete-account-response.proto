@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.user;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.api.mobile.v2.common.user";
+option java_multiple_files = true;
+import "systems/ajax/api/mobile/v2/common/user/user-can-be-deleted-response.proto";
+import "systems/ajax/api/mobile/v2/common/user/user-is-owner-of-company.proto";
+import "systems/ajax/api/mobile/v2/common/user/user-is-employee-of-company.proto";
+import "systems/ajax/api/mobile/v2/common/company/short-company.proto";
+
+message UserDeleteAccountResponse {
+  CompanyList company_list = 1;
+  CompanyRemovalRequired company_removal_required = 2;
+
+  message CompanyRemovalRequired {
+    oneof response{
+      UserCanBeDeletedResponse user_can_be_deleted_response = 20;
+      UserIsOwnerOfCompany user_is_owner_of_company = 21;
+      UserIsEmployeeOfCompany user_is_employee_of_company = 22;
+    }
+  }
+
+  message CompanyList {
+    repeated systems.ajax.api.mobile.v2.common.company.ShortCompany short_company = 1;
+  }
+}

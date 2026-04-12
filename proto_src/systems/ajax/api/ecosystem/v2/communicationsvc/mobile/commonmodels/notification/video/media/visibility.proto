@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.media;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.media";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message VideoMediaVisibility {
+  oneof visibility {
+    Whitelist whitelist = 1;
+    AllowedForEveryone allowed_for_everyone = 2;
+  }
+
+  message Whitelist {
+    repeated string allowed_member_ids = 4;
+  }
+
+  message AllowedForEveryone { }
+}

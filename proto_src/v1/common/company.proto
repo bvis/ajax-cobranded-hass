@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.mobilegw.grpc.v1.common";
+
+import "v1/common/role.proto";
+import "v1/common/image.proto";
+import "v1/common/email-address.proto";
+import "v1/common/permission.proto";
+import "v1/common/restore-permission.proto";
+
+message Company {
+  string hex_id = 1;
+  string name = 2;
+  Status status = 3;
+  repeated Role roles = 4;
+  Logo logo = 5;
+  repeated EmailAddress emails = 6;
+  repeated Phone phones = 7;
+  string web_page_url = 8;
+  repeated common.Permission permissions = 9;
+  repeated common.RestorePermission restore_permissions = 10;
+  string object_id = 11;
+  PrivacyOverrideManagementAuthorizationStatus privacy_override_management_authorization_status = 35;
+  ServiceType service_type = 36;
+  repeated Feature enabled_features = 37;
+
+  enum ServiceType {
+    SERVICE_TYPE_NO_INFO = 0;
+    SERVICE_TYPE_DEALER = 1;
+    SERVICE_TYPE_RESELLER = 2;
+  }
+
+  enum Status {
+    ACCEPTED = 0;
+    REJECTED = 1;
+    WAITING_FOR_VERIFICATION = 2;
+  }
+
+  message Logo {
+    string image_id = 1;
+    repeated common.Image images = 2;
+  }
+
+  message Phone {
+    string number = 1;
+    string description = 2;
+  }
+
+  enum PrivacyOverrideManagementAuthorizationStatus {
+    PRIVACY_OVERRIDE_MANAGEMENT_AUTHORIZATION_STATUS_UNSPECIFIED = 0;
+    PRIVACY_OVERRIDE_MANAGEMENT_AUTHORIZATION_STATUS_AUTHORIZED = 1;
+    PRIVACY_OVERRIDE_MANAGEMENT_AUTHORIZATION_STATUS_UNAUTHORIZED = 2;
+  }
+
+  enum Feature {
+    FEATURE_UNSPECIFIED = 0;
+    FEATURE_HIDE_FACILITIES_ON_SEARCH = 1;
+  }
+}

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.video.videoedge.directconnect;
+
+import "systems/ajax/api/mobile/v2/common/response/response.proto";
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/api/mobile/v2/common/space/space_locator.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+option deprecated = true;
+
+message AskBluetoothDirectConnectAccessRequest {
+  option deprecated = true;
+
+  common.space.SpaceLocator space_locator = 1;
+
+  string video_edge_certificate = 2;
+
+  string nonce = 3;
+
+  api.mobile.v2.common.video.CryptoCipherAlgorithm crypto_cipher_algorithm = 4;
+
+  api.mobile.v2.common.video.CryptoHashAlgorithm crypto_hash_algorithm = 5;
+}
+
+message AskBluetoothDirectConnectAccessResponse {
+  option deprecated = true;
+
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    bytes raw_key = 1;
+
+    bytes encrypted_key = 2;
+
+    bytes encrypted_key_signature = 3;
+  }
+
+  message Failure {
+    oneof error {
+      common.response.DefaultError bad_request = 1;
+      common.response.DefaultError permission_denied = 2;
+      common.response.DefaultError space_not_found = 3;
+      common.response.DefaultError space_not_disarmed = 4;
+    }
+  }
+}

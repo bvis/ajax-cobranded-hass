@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.archive;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.video.additional.data.archive";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "google/protobuf/timestamp.proto";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/media/visibility.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message ArchiveExportCompletedData {
+  string channel_id = 3;
+
+  string channel_name = 4;
+
+  string export_id = 5;
+
+  string member_id = 6;
+
+  string member_user_name = 7 [(hash_value) = true];
+
+  video.media.VideoMediaVisibility visibility = 9;
+
+  oneof metadata {
+    ExportPreparedMetadata export_prepared_metadata = 10;
+    ExportFailedMetadata export_failed_metadata = 11;
+  }
+
+  message ExportPreparedMetadata {
+    google.protobuf.Timestamp expires_at = 1;
+  }
+
+  message ExportFailedMetadata {
+  }
+}

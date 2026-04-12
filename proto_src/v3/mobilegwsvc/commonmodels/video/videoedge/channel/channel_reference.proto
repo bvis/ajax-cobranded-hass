@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel;
+
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.channel";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ChannelReference {
+  string video_edge_id = 1;
+
+  string channel_id = 2;
+}
+

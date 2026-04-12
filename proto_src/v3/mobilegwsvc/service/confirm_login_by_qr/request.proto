@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.confirm_login_by_qr;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.confirm_login_by_qr";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message ConfirmLoginByQrRequest {
+  bytes qr_session_key = 2;
+}

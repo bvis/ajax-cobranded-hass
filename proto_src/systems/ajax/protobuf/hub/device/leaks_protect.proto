@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message LeaksProtect {
+    CommonDevicePart common_part = 1000;
+
+    repeated SirenTrigger siren_triggers = 0x2E;
+    bool always_active = 0x33;
+    google.protobuf.BoolValue leak_detected = 0x32;
+
+    Subtype subtype = 0xC3;
+
+    enum SirenTrigger {
+        NO_SIREN_TRIGGER_INFO = 0;
+        LEAK = 1;
+    }
+
+    enum Subtype {
+        NO_SUBTYPE = 0;
+    }
+}

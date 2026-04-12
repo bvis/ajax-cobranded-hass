@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.hub;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+
+import "v1/common/phone-number.proto";
+import "v1/common/email-address.proto";
+import "v1/common/logo.proto";
+
+message MonitoringCompanyOnHub {
+  string company_hex_id = 1;
+  string name = 2;
+  common.Logo logo = 3;
+  string web_site_url = 4;
+  repeated v1.common.PhoneNumber phone_numbers = 5;
+  repeated v1.common.EmailAddress customer_inquiries_emails = 6;
+  string country_code = 7;
+  repeated string locations = 8;
+  MonitoringCompanyStatus monitoring_status = 9;
+}
+
+enum MonitoringCompanyStatus {
+  NO_STATE = 0;
+  PENDING_APPROVAL = 1;
+  APPROVED = 2;
+  IN_SLEEP_MODE = 4;
+}

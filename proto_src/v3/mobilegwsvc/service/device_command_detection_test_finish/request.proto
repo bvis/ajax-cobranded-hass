@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_detection_test_finish;
+
+import "systems/ajax/api/ecosystem/v2/hubsvc/commonmodels/object_type.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandDetectionTestFinishRequest {
+  string hub_id = 1 [deprecated = true];
+  string device_id = 2 [deprecated = true];
+  ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3 [deprecated = true];
+
+  oneof target {
+    HubDetectionZoneTestFinish hub_detection_zone_test_finish = 4;
+    DeviceDetectionZoneTestFinish device_detection_zone_test_finish = 5;
+  }
+
+  message HubDetectionZoneTestFinish {
+    string hub_id = 1;
+  }
+
+  message DeviceDetectionZoneTestFinish {
+    string hub_id = 1;
+    string device_id = 2;
+    ecosystem.v2.hubsvc.commonmodels.ObjectType object_type = 3;
+  }
+}

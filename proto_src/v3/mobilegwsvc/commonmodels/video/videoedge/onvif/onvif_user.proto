@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.onvif;
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.onvif";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message OnvifUser {
+  string name = 1;
+
+  OnvifUserRole role = 2;
+
+  enum OnvifUserRole {
+    ONVIF_USER_ROLE_UNSPECIFIED = 0;
+    ONVIF_USER_ROLE_ADMIN = 1;
+    ONVIF_USER_ROLE_OPERATOR = 2;
+    ONVIF_USER_ROLE_USER = 3;
+  }
+}

@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.network;
+
+import "systems/ajax/api/mobile/v2/common/video/types.proto";
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message NetworkInterface {
+  string id = 1;
+
+  MacAddress mac_address = 2;
+
+  bool enabled = 3;
+
+  oneof technology_union {
+    Ethernet ethernet = 4 [(disable_logging) = true];
+    Wifi wifi = 5;
+  }
+
+  string name = 100; // "eth0" or wifi SSID
+
+  NetworkStatus status = 101;
+
+  NetworkConfiguration desired_configuration = 102 [(disable_logging) = true];
+  NetworkConfiguration configuration = 103;
+
+  Stats stats = 104 [(disable_logging) = true];
+
+  message Ethernet {
+  };
+
+  message Wifi {
+    uint32 signal_strength = 1; // 0..100
+
+    WifiSignalQuality wifi_signal_quality = 2;
+
+    repeated NetworkWifiSecurity security = 3;
+  };
+
+  enum NetworkWifiSecurity {
+    NETWORK_WIFI_SECURITY_UNSPECIFIED = 0;
+    NETWORK_WIFI_SECURITY_NONE = 1;
+    NETWORK_WIFI_SECURITY_WEP = 2;
+    NETWORK_WIFI_SECURITY_PSK = 3;
+    NETWORK_WIFI_SECURITY_IEEE8021X = 4;
+    NETWORK_WIFI_SECURITY_WPS = 5;
+  }
+
+  message Stats {
+    uint64 tx_bytes = 1;
+    uint64 rx_bytes = 2;
+
+    uint64 tx_errors = 3;
+    uint64 rx_errors = 4;
+
+    uint64 tx_dropped = 5;
+    uint64 rx_dropped = 6;
+  };
+
+  enum WifiSignalQuality {
+    WIFI_SIGNAL_QUALITY_UNSPECIFIED = 0;
+    WIFI_SIGNAL_QUALITY_NO = 1;
+    WIFI_SIGNAL_QUALITY_WEAK = 2;
+    WIFI_SIGNAL_QUALITY_NORMAL = 3;
+    WIFI_SIGNAL_QUALITY_STRONG = 4;
+  }
+};
+
+message NetworkStatus {
+  NetworkState state = 1;
+
+  NetworkError error = 2;
+};
+
+enum NetworkState {
+  NS_NONE = 0;
+  NS_OFFLINE = 1;
+  NS_CONFIGURING = 2;
+  NS_ONLINE = 3;
+};
+
+enum NetworkError {
+  NE_OTHER = 0;
+  NE_OK = 1;
+  NE_OUT_OF_RANGE = 2;
+  NE_PIN_MISSING = 3;
+  NE_DHCP_FAILED = 4;
+  NE_CONNECT_FAILED = 5;
+  NE_LOGIN_FAILED = 6;
+  NE_AUTH_FAILED = 7;
+  NE_INVALID_KEY = 8;
+  NE_BLOCKED = 9;
+};
+
+message NetworkConfiguration {
+  NetworkConfigurationIPv4 v4 = 1;
+
+  NetworkConfigurationIPv6 v6 = 2;
+
+  repeated IpAddress name_servers = 3;
+};
+
+message NetworkConfigurationIPv4 {
+  Method method = 1;
+  IpAddressV4 address = 2;
+  IpAddressV4 netmask = 3;
+  IpAddressV4 gateway = 4;
+
+  enum Method {
+    NONE = 0;
+    OFF = 1;
+    DHCP = 2;
+    MANUAL = 3;
+  };
+};
+
+message NetworkConfigurationIPv6 {
+  Method method = 1;
+  IpAddressV6 address = 2;
+  uint32 prefix_length = 3;
+  IpAddressV6 gateway = 4;
+
+  enum Method {
+    NONE = 0;
+    OFF = 1;
+    AUTO = 2;
+    MANUAL = 3;
+  };
+};

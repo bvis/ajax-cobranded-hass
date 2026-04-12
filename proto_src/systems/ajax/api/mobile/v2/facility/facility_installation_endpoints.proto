@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.facility;
+
+import "systems/ajax/api/mobile/v2/facility/create_facility_on_installation_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+
+service FacilityInstallationService {
+    rpc createFacility(CreateFacilityOnInstallationRequest) returns (CreateFacilityOnInstallationResponse){
+        option deprecated = true;
+    };
+};

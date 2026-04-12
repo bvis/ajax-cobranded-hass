@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_followed_groups;
+
+import "v3/mobilegwsvc/service/get_available_followed_groups/request.proto";
+import "v3/mobilegwsvc/service/get_available_followed_groups/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.get_available_followed_groups";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service GetAvailableFollowedGroupsService {
+  rpc execute (GetAvailableFollowedGroupsRequest) returns (GetAvailableFollowedGroupsResponse);
+};

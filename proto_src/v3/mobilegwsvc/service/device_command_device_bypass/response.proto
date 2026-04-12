@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_device_bypass;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DeviceCommandDeviceBypassResponse {
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error unknown_command = 1; // 0636
+      commonmodels.Error command_not_performed = 2; // 03
+      commonmodels.Error hub_offline = 3; // 07
+      commonmodels.Error permission_denied = 4; // 0635
+      commonmodels.Error alarm_reset_needed = 5; // 16_21
+      commonmodels.HubWrongStateError hub_wrong_state = 6; // 11
+    }
+  }
+}

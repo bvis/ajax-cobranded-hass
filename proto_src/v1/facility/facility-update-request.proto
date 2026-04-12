@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.facility;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.facility";
+option java_multiple_files = true;
+
+import "v1/facility/facility.proto";
+import "google/protobuf/field_mask.proto";
+
+message FacilityUpdateRequest {
+  FacilityUpdateModel facility = 1;
+  repeated Facility.Note notes = 2;
+
+  message FacilityUpdateModel {
+    string facility_id = 1;
+    Facility.GeneralInfo general_info = 2;
+    uint64 version = 3;
+
+    google.protobuf.FieldMask mask = 1100;
+  }
+}

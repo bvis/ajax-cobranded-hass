@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.accounting.source.info;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.source.info";
+option java_multiple_files = true;
+option swift_prefix = "Accounting";
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/device_color.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/device_label.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/hub_box_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/hub_type.proto";
+
+message HubInfo {
+  notification.hub.DeviceColor color = 1;
+  notification.hub.DeviceLabel device_label = 2;
+  notification.hub.HubBoxType box_type = 3;
+  notification.hub.HubType hub_type = 4;
+}

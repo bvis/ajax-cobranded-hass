@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.hub.device";
+option java_multiple_files = true;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "systems/ajax/protobuf/hub/device/common_device.proto";
+
+message SocketBase {
+	CommonDevicePart common_part = 1000;
+
+	repeated ChannelState channel_status = 0x31;
+	ChannelMode channel_mode = 0x32;
+	ChannelNormalState channel_normal_state = 0x33;
+	int32 impulse_duration = 0x34;
+	bool voltage_protection_off = 0x35;
+	int32 current_protection_threshold = 0x36;
+	ArmingDisarmingActions arming_disarming_actions = 0x38;
+	int32 count_protect = 0x3E;
+
+	Subtype subtype = 0xC3;
+	oneof subtypes {
+		TypeG type_g = 1;
+	}
+
+	enum Subtype {
+		NO_SUBTYPE = 0;
+		TYPE_G = 1;
+	}
+
+	enum ChannelState {
+		VOLTAGE_TOO_LOW = 0;
+		VOLTAGE_TOO_HIGH = 1;
+		CURRENT_PROTECTION_ACTUATION = 2;
+		CONTACTS_STUCK = 4;
+		TEMPERATURE_PROTECTION_ACTUATION = 5;
+		BUTTON_PRESSED = 6;
+		SWITCHED_ON = 7;
+	}
+
+	enum ChannelMode {
+		NO_CHANNEL_MODE = 0;
+		BISTABLE = 1;
+		IMPULSE = 2;
+	}
+
+	enum ChannelNormalState {
+		NO_CHANNEL_NORMAL_STATE = 0;
+		NORMALLY_OPEN = 1;
+		NORMALLY_CLOSED = 2;
+	}
+
+	message ArmingDisarmingActions {
+		ActionOnArming action_on_arming = 1;
+		ActionOnDisarming action_on_disarming = 2;
+
+		enum ActionOnArming {
+			NO_ACTION_ON_ARMING = 0;
+			TURN_ON_ON_ARMING = 1;
+			TURN_OFF_ON_ARMING = 2;
+		}
+
+		enum ActionOnDisarming {
+			NO_ACTION_ON_DISARMING = 0;
+			TURN_ON_ON_DISARMING = 1;
+			TURN_OFF_ON_DISARMING = 2;
+		}
+	}
+
+	message TypeG {
+		google.protobuf.Int32Value power = 0x3F;
+		google.protobuf.Int32Value power_counter = 0x40;
+		google.protobuf.Int32Value current = 0x41;
+		google.protobuf.Int32Value voltage = 0x42;
+		int32 indication_brightness = 0x43;
+		IndicationMode indication_mode = 0x44;
+		EnergyCounterAveraging energy_counter_averaging = 0x45;
+		google.protobuf.Timestamp last_energy_counter_reset = 0x47;
+
+		enum IndicationMode {
+			NO_INDICATION_MODE_INFO = 0;
+			DISABLE = 1;
+			ENABLE = 2;
+			ENABLE_WHEN_ACTIVE = 3;
+		}
+
+		enum EnergyCounterAveraging {
+			NO_ENERGY_COUNTER_AVERAGING_INFO = 0;
+			ON = 1;
+			OFF = 2;
+		}
+	}
+}

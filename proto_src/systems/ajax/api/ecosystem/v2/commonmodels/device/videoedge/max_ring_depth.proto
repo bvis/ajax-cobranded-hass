@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge;
+
+option swift_prefix = "Video";
+option java_package = "systems.ajax.api.ecosystem.v2.commonmodels.device.videoedge";
+option java_multiple_files = true;
+
+enum MaxRingDepth {
+  MAX_RING_DEPTH_UNSPECIFIED = 0;
+  MAX_RING_DEPTH_1_DAY = 1;
+  MAX_RING_DEPTH_2_DAYS = 2;
+  MAX_RING_DEPTH_3_DAYS = 3;
+  MAX_RING_DEPTH_7_DAYS = 4;
+  MAX_RING_DEPTH_14_DAYS = 5;
+  MAX_RING_DEPTH_28_DAYS = 6;
+  MAX_RING_DEPTH_30_DAYS = 7;
+  MAX_RING_DEPTH_60_DAYS = 8;
+  MAX_RING_DEPTH_90_DAYS = 9;
+  MAX_RING_DEPTH_180_DAYS = 10;
+  MAX_RING_DEPTH_360_DAYS = 11;
+  MAX_RING_DEPTH_UNLIMITED = 100;
+}

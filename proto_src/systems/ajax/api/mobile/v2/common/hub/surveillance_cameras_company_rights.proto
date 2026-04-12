@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.hub;
+
+option swift_prefix = "";
+option java_generic_services = true;
+option java_package = "systems.ajax.api.mobile.v2.common.hub";
+
+message SurveillanceCamerasCompanyRights {
+  SurveillanceCamerasDevices shared_cameras = 1;
+  AvailabilityType availability_type = 2;
+
+  enum AvailabilityType {
+    NO_AVAILABILITY_TYPE_INFO = 0;
+    NEVER = 1;
+    ALWAYS = 2;
+  }
+
+  message SurveillanceCamerasDevices{
+    repeated string device_id = 1;
+  }
+}
+

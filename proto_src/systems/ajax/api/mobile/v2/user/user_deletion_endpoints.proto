@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.user;
+
+import "systems/ajax/api/mobile/v2/user/initiate_user_deletion_request.proto";
+import "systems/ajax/api/mobile/v2/user/confirm_user_deletion_request.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service UserDeletionService {
+
+  rpc initiate(InitiateUserDeletionRequest) returns (InitiateUserDeletionResponse);
+
+  rpc confirm(ConfirmUserDeletionRequest) returns (ConfirmUserDeletionResponse);
+};

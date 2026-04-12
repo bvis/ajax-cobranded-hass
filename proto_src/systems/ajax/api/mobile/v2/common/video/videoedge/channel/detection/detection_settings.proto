@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.video.videoedge.channel.detection;
+
+import "systems/ajax/api/mobile/v2/common/video/videoedge/channel/detection/image_analysis_mode.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message DetectionSettings {
+
+  // [optional]
+  PirDetectionSettings pir = 1;
+
+  // [optional]
+  MotionDetectionSettings motion = 2;
+
+  // [optional]
+  ObjectDetectionSettings object = 3;
+
+  // [optional]
+  LineCrossingDetectionSettings line_crossing = 4;
+}
+
+message PirDetectionSettings {
+  bool enabled = 1;
+}
+
+message MotionDetectionSettings {
+  bool enabled = 1;
+
+  ImageAnalysisMode image_analysis_mode = 2;
+
+  repeated ImageAnalysisMode available_image_analysis_modes = 3;
+}
+
+message ObjectDetectionSettings {
+  bool enabled = 1;
+}
+
+message LineCrossingDetectionSettings {
+  uint32 rule_count = 1;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.space.additional.data";
+option java_multiple_files = true;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+message JoinSpaceRequestInfo {
+  string initiator_first_name = 1 [(hash_value) = true];
+  string initiator_last_name = 2 [(hash_value) = true];
+  string initiator_email = 3 [(hash_value) = true];
+  string initiator_phone = 4 [(hash_value) = true];
+  string request_id = 5;
+}

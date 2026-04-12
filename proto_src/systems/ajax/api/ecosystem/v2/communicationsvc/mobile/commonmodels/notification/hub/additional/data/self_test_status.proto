@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message SelfTestStatus {
+  repeated DefectedSensor defected_sensors = 1;
+
+  enum DefectedSensor {
+    DEFECTED_SENSOR_UNSPECIFIED = 0;
+    DEFECTED_SENSOR_ACCELEROMETER = 1;
+    DEFECTED_SENSOR_MAGNETOMETER = 2;
+    DEFECTED_SENSOR_REED = 3;
+    DEFECTED_SENSOR_PIR = 4;
+    DEFECTED_SENSOR_MICROWAVE = 5;
+    DEFECTED_SENSOR_MASKING = 6;
+    DEFECTED_SENSOR_SEISMIC = 7;
+    DEFECTED_SENSOR_BATTERY = 8;
+  }
+}

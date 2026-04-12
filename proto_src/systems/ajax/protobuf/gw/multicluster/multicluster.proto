@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package systems.ajax.protobuf.gw.multicluster;
+
+option swift_prefix = "Systems";
+option java_package = "systems.ajax.protobuf.gw.multicluster";
+option java_multiple_files = true;
+
+message ClusterInfo {
+    string cluster_id = 1; // unique cluster identifier
+    int32 ping_interval_seconds = 2;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.login_by_auth_token;
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.user.service.login_by_auth_token";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message LoginByAuthTokenRequest {
+  bytes session_token = 1 [(disable_logging) = true];
+}

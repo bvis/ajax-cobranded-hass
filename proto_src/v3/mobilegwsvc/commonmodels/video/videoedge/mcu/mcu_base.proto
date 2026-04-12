@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.mcu;
+
+import "systems/ajax/api/mobile/v2/common/hub/device/common/battery_charged_state.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/chime.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/mcu.proto";
+import "systems/ajax/api/mobile/v2/common/video/videoedge/mcu/operating_mode.proto";
+
+option java_multiple_files = true;
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.commonmodels.video.videoedge.mcu";
+option swift_prefix = "";
+
+// this model contains solely fields from video-svc w/o enrichment from other services (space-svc/csa)
+message McuBase {
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.ExternalPowerState external_power_state = 1;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.McuState mcu_state = 2;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.OperatingMode operating_mode = 3;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.BatteryState battery_state = 4;
+
+  api.mobile.v2.common.hub.device.common.BatteryChargedState battery_charged_state = 5;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Chime chime = 6;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.BatteryTemperatureState battery_temperature_state = 7;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.PirMotionLedIndication pir_motion_led_indication = 8;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.RingButtonBellState ring_button_bell_state = 9;
+
+  systems.ajax.api.mobile.v2.common.video.videoedge.mcu.Mcu.Capabilities capabilities = 10;
+}

@@ -1,0 +1,181 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification;
+
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/additional/data/dealer_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/additional/data/paid_service.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/accounting/additional/data/deactivation_date.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/additional/data/company_permissions_claim_request.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/additional/data/company_permissions_claim_response.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/company/additional/data/initiator_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/action_source_object.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/alarm_suppress_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/company_permissions_claim.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/company_permissions_claim_response.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/confirmed_alarm_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/custom_alarm_type.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/display_groups.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/endpoint_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/fire_zone_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/day_alarm_zone_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/en54_disablement_endpoints.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/firmware_id.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/firmware_version.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/hub_alarm_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/hub_connection_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/image_resource.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/initiator_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/initiator_name.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/location_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/malfunction_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/offline_notifications.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/pro_permissions_claim.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/pro_permissions_claim_response.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/self_test_status.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/slave_bus_id.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/timezone_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/troubled_devices.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/video_archive_export_completed_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/video_edge_channel_media_data_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/video_edge_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/video_scenario_resource.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/error_code_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/hub_audio_resource.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/hub/additional/data/device_location_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/smartlock/additional/data/initiator.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/display_groups.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/hub_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/hub_troubled_devices.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/initiator_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/panic_location.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/pro_permissions_claim_request.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/pro_permissions_claim_response.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/standalone_device_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/timezone_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/archive/archive_export_completed_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/archive/direct_export_requested_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/channel/channel_added_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/channel/channel_disconnected_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/channel_media_data_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/firmware/firmware_update_finished_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/firmware/firmware_update_started_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_approved_to_company_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_request_from_company_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/storage/storage_error_detected_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/storage/storage_powered_off_overheated_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/storage/storage_write_error_detected_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/video_detection_timestamp_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/video_scenario_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_request_from_pro_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_denied_for_pro_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_approved_to_pro_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/privacy/temporary_video_access_denied_for_company_data.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/backup_connection_context.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/video/additional/data/initiator_info.proto";
+import "systems/ajax/api/ecosystem/v2/communicationsvc/mobile/commonmodels/notification/space/additional/data/join_space_request_info.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+/**
+!!!Attention!!!
+Only one oneof (hub_additional_data, video_additional_data) should be filled
+!!!Attention!!!
+ */
+message NotificationAdditionalData {
+  // firmwareId = 117 should be here
+  // because firmwareId already done as 117 in the 911 (1.48)
+  reserved 117;
+  oneof hub_additional_data {
+    // Hub additional data
+    hub.additional.data.DisplayGroups hub_display_groups = 101;
+    hub.additional.data.LocationInfo hub_location_info = 102;
+    hub.additional.data.TroubledDevices hub_troubled_devices = 103;
+    hub.additional.data.InitiatorInfo hub_initiator_info = 104;
+    hub.additional.data.EndpointInfo hub_endpoint_info = 105;
+    hub.additional.data.FirmwareVersion hub_firmware_version = 106;
+    hub.additional.data.ImageResource hub_image_resource = 107;
+    hub.additional.data.CompanyPermissionsClaim hub_company_permission_claim = 108 [deprecated = true];
+    hub.additional.data.CompanyPermissionsClaimResponse hub_company_permission_claim_response = 109 [deprecated = true];
+    hub.additional.data.InitiatorName hub_initiator_name = 110;
+    hub.additional.data.ProPermissionsClaim hub_pro_permission_claim = 111;
+    hub.additional.data.MalfunctionInfo hub_malfunction = 112;
+    hub.additional.data.ProPermissionsClaimResponse hub_pro_permission_claim_response = 113;
+    hub.additional.data.SlaveBusId hub_slave_bus_id = 114;
+    hub.additional.data.TimezoneInfo hub_timezone_info = 115;
+    hub.additional.data.HubConnectionInfo hub_connection_info = 116;
+    hub.additional.data.ActionSourceObject hub_action_source_object = 118;
+    hub.additional.data.FirmwareIdInfo hub_firmware_id_info = 119;
+    hub.additional.data.VideoScenarioResource hub_video_scenario_resource = 120 [deprecated = true];
+    hub.additional.data.CustomAlarmTypeInfo hub_custom_alarm_type_info = 121;
+    hub.additional.data.SelfTestStatus hub_self_test_status = 122;
+    hub.additional.data.VideoArchiveExportCompletedData hub_video_archive_export_completed_data = 123 [deprecated = true];
+    hub.additional.data.AlarmSuppressInfo hub_alarm_suppress_info = 124;
+    hub.additional.data.VideoEdgeInfo hub_video_edge_info = 125 [deprecated = true];
+    hub.additional.data.ConfirmedAlarmInfo hub_confirmed_alarm_info = 126;
+    hub.additional.data.HubAlarmInfo hub_alarm_info = 127;
+    hub.additional.data.ErrorCodeInfo hub_error_code_info = 128;
+    hub.additional.data.FireZoneInfo hub_fire_zone_info = 129;
+    hub.additional.data.En54DisablementEndpoints hub_en54_disablement_endpoints_list = 130;
+    hub.additional.data.HubAudioResource hub_audio_resource = 131;
+    hub.additional.data.DeviceLocationInfo hub_device_location_info = 132;
+    hub.additional.data.DayAlarmZoneInfo hub_day_alarm_zone_info = 133;
+    // Server additional data
+    hub.additional.data.OfflineNotifications offline_notifications = 201 [deprecated = true];
+    hub.additional.data.VideoEdgeChannelMediaDataInfo video_edge_channel_media_data = 202;
+  }
+
+  oneof video_additional_data {
+    video.additional.data.VideoScenarioData video_scenario_data = 300;
+    video.additional.data.channel.ChannelDisconnectedData channel_disconnected_data = 301;
+    video.additional.data.storage.StorageErrorDetectedData storage_error_detected_data = 302;
+    video.additional.data.storage.StorageWriteErrorDetectedData storage_write_error_detected_data = 303;
+    video.additional.data.archive.ArchiveExportCompletedData archive_export_completed_data = 304;
+    video.additional.data.firmware.FirmwareUpdateStartedData firmware_update_started_data = 305;
+    video.additional.data.firmware.FirmwareUpdateFinishedData firmware_update_finished_data = 306;
+    video.additional.data.storage.StoragePoweredOffOverheatedData storage_powered_off_overheated_data = 307;
+    video.additional.data.channel.ChannelAddedData channel_added_data = 308;
+    video.additional.data.ChannelMediaDataInfo channel_media_data = 309;
+    video.additional.data.privacy.TemporaryVideoAccessRequestFromProData temporary_video_access_request_from_pro_data = 310;
+    video.additional.data.privacy.TemporaryVideoAccessRequestFromCompanyData temporary_video_access_request_from_company_data = 311;
+    video.additional.data.privacy.TemporaryVideoAccessDeniedForProData temporary_video_access_denied_for_pro_data = 312;
+    video.additional.data.privacy.TemporaryVideoAccessApprovedToCompanyData temporary_video_access_approved_to_company_data = 313;
+    video.additional.data.privacy.TemporaryVideoAccessApprovedToProData temporary_video_access_approved_to_pro_data = 314;
+    video.additional.data.privacy.TemporaryVideoAccessDeniedForCompanyData temporary_video_access_denied_for_company_data = 315;
+    video.additional.data.archive.DirectExportRequestedData direct_export_requested_data = 316;
+    video.additional.data.VideoDetectionTimestampInfo detection_timestamp_info = 317;
+    video.additional.data.BackupConnectionContext backup_connection_context = 318;
+    video.additional.data.InitiatorInfo video_initiator_info = 319;
+  }
+
+  oneof space_additional_data {
+    space.additional.data.DisplayGroups space_display_groups = 400;
+    space.additional.data.ProPermissionsClaimRequest space_pro_permissions_claim_request = 401;
+    space.additional.data.ProPermissionsClaimResponse space_pro_permissions_claim_response = 402;
+    space.additional.data.HubInSpaceTroubledDevices hub_in_space_troubled_devices = 403;
+    space.additional.data.HubInSpaceInfo hub_in_space_info = 404;
+    space.additional.data.SpaceLocationInfo space_location_info = 405;
+    space.additional.data.StandaloneDeviceInfo standalone_device_info = 406;
+    space.additional.data.InitiatorInfo space_initiator_info = 407;
+    space.additional.data.TimezoneInfo timezone_info = 408;
+    space.additional.data.JoinSpaceRequestInfo join_space_request_info = 409;
+  }
+
+  oneof company_additional_data {
+    company.additional.data.CompanyPermissionsClaimRequest company_permission_claim_request = 500;
+    company.additional.data.CompanyPermissionsClaimResponse company_permission_claim_response = 501;
+    company.additional.data.InitiatorInfo initiator_info = 502;
+  }
+
+  oneof smart_lock_additional_data {
+    smartlock.additional.data.Initiator initiator = 600;
+  }
+
+  oneof accounting_additional_data {
+    accounting.additional.data.DealerInfo dealer_info = 700;
+    accounting.additional.data.PaidService paid_service = 701;
+    accounting.additional.data.DeactivationDate deactivation_date = 702;
+  }
+}

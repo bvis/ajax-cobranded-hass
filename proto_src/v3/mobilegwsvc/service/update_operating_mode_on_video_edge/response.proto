@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_operating_mode_on_video_edge;
+
+import "v3/mobilegwsvc/commonmodels/response/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.update_operating_mode_on_video_edge";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message UpdateOperatingModeResponse {
+
+  oneof response {
+    commonmodels.Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Failure {
+    oneof error {
+      commonmodels.Error bad_request = 1;
+      commonmodels.Error permission_denied = 2;
+      commonmodels.Error space_not_found = 3;
+      commonmodels.Error space_armed = 4;
+      commonmodels.Error video_edge_is_offline = 5;
+      commonmodels.Error backup_channel_is_missing = 6;
+      commonmodels.Error mcu_io_error = 7;
+      commonmodels.Error mcu_invalid_state_error = 8;
+      commonmodels.Error channel_not_found = 9;
+      commonmodels.Error hub_synchronization_error = 10;
+      commonmodels.Error command_not_supported = 11;
+    }
+  }
+};

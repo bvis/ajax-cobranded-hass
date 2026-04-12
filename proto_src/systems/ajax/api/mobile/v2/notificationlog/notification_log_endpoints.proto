@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.notification;
+
+option java_package = "systems.ajax.api.mobile.v2.notificationlog";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+import "systems/ajax/api/mobile/v2/notificationlog/stream_notification_log.proto";
+import "systems/ajax/api/mobile/v2/notificationlog/find_notifications.proto";
+import "systems/ajax/api/mobile/v2/notificationlog/stream_media.proto";
+import "systems/ajax/api/mobile/v2/notificationlog/mark_notifications_as_read.proto";
+import "systems/ajax/api/mobile/v2/notificationlog/stream_all_unread_counters.proto";
+
+service NotificationLogService {
+
+  rpc findNotifications(FindNotificationsRequest)
+      returns (FindNotificationsResponse);
+
+  rpc markNotificationsAsRead(MarkNotificationsAsReadRequest)
+      returns (MarkNotificationsAsReadResponse);
+
+  rpc streamNotificationMedia(StreamNotificationMediaRequest)
+      returns (stream StreamNotificationMediaResponse);
+
+  rpc streamUpdates(StreamNotificationLogRequest)
+      returns (stream StreamNotificationLogResponse);
+
+  rpc streamAllUnreadCounters(StreamAllUnreadCountersRequest)
+      returns (stream StreamAllUnreadCountersResponse);
+}

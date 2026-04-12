@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_network_configuration;
+
+import "v3/mobilegwsvc/service/set_video_edge_network_configuration/request.proto";
+import "v3/mobilegwsvc/service/set_video_edge_network_configuration/response.proto";
+
+option java_package = "systems.ajax.api.ecosystem.v3.mobilegwsvc.service.set_video_edge_network_configuration";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service SetVideoEdgeNetworkConfigurationService {
+  rpc execute(SetVideoEdgeNetworkConfigurationRequest) returns (SetVideoEdgeNetworkConfigurationResponse);
+};

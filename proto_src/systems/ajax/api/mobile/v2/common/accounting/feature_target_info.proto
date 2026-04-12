@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.accounting;
+
+import "systems/ajax/api/mobile/v2/common/accounting/feature_target.proto";
+
+option java_package = "systems.ajax.api.mobile.v2.common.accounting";
+option java_multiple_files = true;
+option swift_prefix = "";
+
+message FeatureTargetInfo {
+  string feature_target_id = 1;
+  common.accounting.FeatureTarget feature_target = 2;
+}

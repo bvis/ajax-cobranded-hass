@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+enum AccessCardType {
+  ACCESS_CARD_TYPE_UNSPECIFIED = 0;
+  ACCESS_CARD_TYPE_CARD = 1;
+  ACCESS_CARD_TYPE_TAG = 2;
+}

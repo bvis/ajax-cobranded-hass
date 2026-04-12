@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package systems.ajax.mobilegw.grpc.v1.common.privacy;
+
+option swift_prefix = "";
+option java_package = "systems.ajax.mobilegw.grpc.v1.common.privacy";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "v1/common/privacy/photo-on-demand-devices.proto";
+
+message EmployeePhotoOnDemandAccess {
+  EmployeeEventPhotosAccess employee_event_photos_access = 1;
+
+  oneof current_availability_mode {
+    NotAllowed not_allowed = 20;
+    AllowedAlways allowed_always = 21;
+    WhenArmed when_armed = 22;
+    AfterAlarm after_alarm = 23;
+  }
+
+  message NotAllowed {}
+
+  message AllowedAlways {
+    PhotoOnDemandDevices devices = 1;
+  }
+  message WhenArmed {
+    Allowed allowed = 1;
+    ForbiddenUntilArmed forbidden = 2;
+
+    message Allowed {
+      PhotoOnDemandDevices devices = 1;
+    }
+    message ForbiddenUntilArmed {
+      PhotoOnDemandDevices devices = 1;
+    }
+  }
+
+  message AfterAlarm {
+    PhotoOnDemandDevices devices = 1;
+    google.protobuf.Timestamp capture_photo_available_until = 2;
+    google.protobuf.UInt32Value configured_time_to_capture_photo_minutes = 3;
+  }
+
+  message EmployeeEventPhotosAccess {
+
+    repeated EventPhotosAccess event_photos_accesses = 1;
+
+    enum EventPhotosAccess {
+        EVENT_PHOTOS_ACCESS_UNSPECIFIED = 0;
+        EVENT_PHOTOS_ACCESS_PHOTO_ON_DEMAND = 1;
+        EVENT_PHOTOS_ACCESS_PHOTO_BY_ALARM_SCENARIO = 2;
+    }
+  }
+}

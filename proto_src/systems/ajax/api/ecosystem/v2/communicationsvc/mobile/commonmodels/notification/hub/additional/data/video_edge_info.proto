@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data;
+
+option java_package = "systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.notification.hub.additional.data";
+option java_multiple_files = true;
+option java_generic_services = true;
+option swift_prefix = "";
+
+message VideoEdgeInfo {
+  option deprecated = true;
+
+  Color color = 1;
+
+  Type type = 2;
+
+  enum Color {
+    COLOR_UNKNOWN = 0;
+    WHITE = 1;
+    BLACK = 2;
+    GREY = 3;
+    GRAPHITE = 4;
+  }
+
+  enum Type {
+    TYPE_UNKNOWN = 0;
+    NVR = 1;
+    TURRET = 2;
+    BULLET = 3;
+    MINIDOME = 4;
+    DOORBELL = 5;
+    INDOOR = 6;
+    NVR_H_AC = 7;
+    NVR_H_DC = 8;
+    NVR_H_2D_AC = 9;
+    reserved 10; // Reserved for NVR_H_2D_DC
+    NVR_H_2D_8P_AC = 11;
+    NVR_H_2D_16P_AC = 12;
+    NVR_H_2D_AI_2G_AC = 13;
+    reserved 14; // Reserved for NVR_H_2D_2G_AI_DC
+    NVR_H_2D_AI_8P_AC = 15;
+    NVR_H_2D_AI_16P_AC = 16;
+    TURRET_HL = 17;
+    TURRET_HL_VF = 18;
+    S_TURRET_HL_VF = 19;
+    BULLET_HL = 20;
+    BULLET_HL_VF = 21;
+    S_BULLET_HL_VF = 22;
+    MINIDOME_HL = 23;
+    MINIDOME_HL_VF = 24;
+    S_MINIDOME_HL_VF = 25;
+  }
+}

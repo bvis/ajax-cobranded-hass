@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package systems.ajax.api.mobile.v2.common.space.member;
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+import "systems/ajax/logging/proto/formatting_options.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/group_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/standalone_device_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/space_member_role.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_permissions.proto";
+import "systems/ajax/api/mobile/v2/common/space/member/display_member_notification_preferences.proto";
+import "systems/ajax/api/mobile/v2/common/image/image.proto";
+
+message SpaceMember {
+  string id = 1;
+
+  SpacePermissions space_permissions = 2;
+
+  repeated StandaloneDevicePermissions devices_permissions = 3;
+
+  string name = 4;
+
+  string email = 5 [(hash_value) = true];
+
+  SpaceMemberRole role = 6;
+
+  repeated GroupPermissions group_permissions = 8;
+
+  DisplayMemberPermissions display_member_permissions = 9;
+
+  int32 user_index = 10;
+
+  DisplayMemberNotificationPreferences display_member_notification_preferences = 11;
+
+  optional common.image.Images images = 12;
+
+  reserved 13;// deprecated sorting key
+
+  string sorting_key = 14;
+
+  string hex_id = 999;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package systems.ajax.api.ecosystem.v3.mobilegwsvc.service.device_command_stest_start;
+
+import "v3/mobilegwsvc/service/device_command_stest_start/request.proto";
+import "v3/mobilegwsvc/service/device_command_stest_start/response.proto";
+
+option java_multiple_files = true;
+option swift_prefix = "";
+
+service DeviceCommandSoundTestStartService {
+  rpc execute (DeviceCommandSoundTestStartRequest) returns (DeviceCommandSoundTestStartResponse);
+};
