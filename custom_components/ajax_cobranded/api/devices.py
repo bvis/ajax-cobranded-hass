@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import sys
 from pathlib import Path
@@ -11,6 +12,8 @@ from custom_components.ajax_cobranded.api.models import BatteryInfo, Device, Dev
 from custom_components.ajax_cobranded.const import DeviceState
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from custom_components.ajax_cobranded.api.client import AjaxGrpcClient
 
 _LOGGER = logging.getLogger(__name__)
@@ -184,6 +187,107 @@ class DevicesApi:
                 break
 
         return devices
+
+    async def start_device_stream(
+        self,
+        space_id: str,
+        on_devices_snapshot: Callable[[list[Device]], None],
+        on_status_update: Callable[[str, str, dict[str, Any]], None],
+    ) -> asyncio.Task[None]:
+        """Start persistent gRPC stream for real-time device updates.
+
+        Returns a background asyncio.Task that keeps the stream open indefinitely,
+        reconnecting with exponential backoff on errors.
+
+        on_devices_snapshot(devices) is called with the initial snapshot and on
+        full snapshot_update events.
+
+        on_status_update(device_id, status_name, data) is called for each status
+        change, where data contains {"op": int} (1=ADD, 2=UPDATE, 3=REMOVE).
+        """
+
+        async def _run_stream() -> None:
+            proto_path = str(Path(__file__).parent.parent / "proto")
+            if proto_path not in sys.path:
+                sys.path.append(proto_path)
+
+            from v3.mobilegwsvc.service.stream_light_devices import (  # noqa: PLC0415
+                endpoint_pb2_grpc,
+                request_pb2,
+            )
+
+            backoff = 5.0
+            while True:
+                try:
+                    channel = self._client._get_channel()
+                    metadata = self._client._session.get_call_metadata()
+                    stub = endpoint_pb2_grpc.StreamLightDevicesServiceStub(channel)
+                    request = request_pb2.StreamLightDevicesRequest(space_id=space_id)
+                    # timeout=None keeps the stream open indefinitely
+                    stream = stub.execute(request, metadata=metadata, timeout=None)
+
+                    async for msg in stream:
+                        if msg.HasField("success"):
+                            which = msg.success.WhichOneof("success")
+                            if which == "snapshot":
+                                devices: list[Device] = []
+                                for light_device in msg.success.snapshot.light_devices:
+                                    device = self.parse_device(light_device)
+                                    if device is not None:
+                                        devices.append(device)
+                                on_devices_snapshot(devices)
+                                # Reset backoff after successful snapshot
+                                backoff = 5.0
+                            elif which == "updates":
+                                for update in msg.success.updates.updates:
+                                    update_kind = update.WhichOneof("update")
+                                    if update_kind == "status_update":
+                                        try:
+                                            device_id = (
+                                                update.device_id.hub_light_device_id.device_id
+                                            )
+                                        except AttributeError:
+                                            _LOGGER.debug("Could not extract device_id from update")
+                                            continue
+                                        status = update.status_update.status
+                                        status_name = status.WhichOneof("status")
+                                        if status_name is None:
+                                            continue
+                                        op = int(update.status_update.update_type)
+                                        on_status_update(
+                                            device_id,
+                                            status_name,
+                                            {"op": op},
+                                        )
+                                    elif update_kind == "snapshot_update":
+                                        device = self.parse_device(
+                                            update.snapshot_update.light_device
+                                        )
+                                        if device is not None:
+                                            on_devices_snapshot([device])
+                        elif msg.HasField("failure"):
+                            _LOGGER.error(
+                                "Device stream failure for space %s: %s",
+                                space_id,
+                                msg.failure,
+                            )
+                            break
+
+                except asyncio.CancelledError:
+                    _LOGGER.debug("Device stream task cancelled for space %s", space_id)
+                    return
+                except Exception:
+                    _LOGGER.exception(
+                        "Device stream error for space %s, reconnecting in %.0fs",
+                        space_id,
+                        backoff,
+                    )
+
+                await asyncio.sleep(backoff)
+                backoff = min(backoff * 2, 60.0)
+
+        task: asyncio.Task[None] = asyncio.create_task(_run_stream())
+        return task
 
     async def send_command(self, command: DeviceCommand) -> None:
         if command.action == "on":

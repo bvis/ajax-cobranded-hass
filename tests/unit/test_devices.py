@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import asyncio
+import contextlib
 from typing import TYPE_CHECKING
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -386,3 +388,269 @@ class TestGetDevicesSnapshot:
             devices = await api.get_devices_snapshot("space-1")
 
         assert devices == []
+
+
+def _make_stream_patch_modules(aiter_fn: object) -> dict[str, object]:
+    """Build the sys.modules patch dict for stream_light_devices."""
+    mock_stub_instance = MagicMock()
+    mock_stub_instance.execute.return_value = aiter_fn()
+    mock_stub_class = MagicMock(return_value=mock_stub_instance)
+    mock_request_pb2 = MagicMock()
+    mock_grpc_module = MagicMock(StreamLightDevicesServiceStub=mock_stub_class)
+    return {
+        "v3.mobilegwsvc.service.stream_light_devices.endpoint_pb2_grpc": mock_grpc_module,
+        "v3.mobilegwsvc.service.stream_light_devices.request_pb2": mock_request_pb2,
+        "v3.mobilegwsvc.service.stream_light_devices": MagicMock(
+            endpoint_pb2_grpc=mock_grpc_module,
+            request_pb2=mock_request_pb2,
+        ),
+    }
+
+
+class TestStartDeviceStream:
+    """Tests for DevicesApi.start_device_stream."""
+
+    def _make_api(self) -> DevicesApi:
+        mock_client = MagicMock()
+        mock_client._get_channel.return_value = MagicMock()
+        mock_client._session.get_call_metadata.return_value = []
+        return DevicesApi(mock_client)
+
+    def _make_light_device_mock(self, device_id: str = "dev-1") -> MagicMock:
+        mock_light_device = MagicMock()
+        mock_light_device.WhichOneof.return_value = "hub_device"
+        mock_light_device.hub_device.common_device.profile.id = device_id
+        mock_light_device.hub_device.common_device.profile.name = "Sensor"
+        mock_light_device.hub_device.common_device.profile.room_id = ""
+        mock_light_device.hub_device.common_device.profile.group_id = ""
+        mock_light_device.hub_device.common_device.profile.malfunctions = 0
+        mock_light_device.hub_device.common_device.profile.bypassed = False
+        mock_light_device.hub_device.common_device.profile.states = []
+        mock_light_device.hub_device.common_device.profile.statuses = []
+        mock_light_device.hub_device.common_device.hub_id = "hub-1"
+        mock_light_device.hub_device.common_device.object_type.WhichOneof.return_value = (
+            "door_protect"
+        )
+        return mock_light_device
+
+    @pytest.mark.asyncio
+    async def test_snapshot_calls_on_devices_snapshot(self) -> None:
+        """Initial snapshot triggers on_devices_snapshot callback."""
+        api = self._make_api()
+        mock_light_device = self._make_light_device_mock("dev-1")
+
+        mock_msg = MagicMock()
+        mock_msg.HasField.side_effect = lambda field: field == "success"
+        mock_msg.success.WhichOneof.return_value = "snapshot"
+        mock_msg.success.snapshot.light_devices = [mock_light_device]
+
+        # Stream yields snapshot then stops; sleep raises CancelledError to exit the loop.
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            yield mock_msg
+
+        snapshot_received: list[list[Device]] = []
+        status_received: list[tuple[str, str, dict]] = []
+
+        def on_snap(devices: list) -> None:
+            snapshot_received.append(devices)
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            status_received.append((device_id, status_name, data))
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            mock_sleep.side_effect = asyncio.CancelledError()
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            with contextlib.suppress(asyncio.CancelledError, TimeoutError):
+                await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(snapshot_received) == 1
+        assert len(snapshot_received[0]) == 1
+        assert snapshot_received[0][0].id == "dev-1"
+        assert status_received == []
+
+    @pytest.mark.asyncio
+    async def test_status_update_add_calls_on_status_update(self) -> None:
+        """Status ADD update triggers on_status_update with correct args."""
+        api = self._make_api()
+
+        update_msg = MagicMock()
+        update_msg.HasField.side_effect = lambda field: field == "success"
+        update_msg.success.WhichOneof.return_value = "updates"
+
+        single_update = MagicMock()
+        single_update.WhichOneof.return_value = "status_update"
+        single_update.device_id.hub_light_device_id.device_id = "dev-42"
+        single_update.status_update.status.WhichOneof.return_value = "door_opened"
+        single_update.status_update.update_type = 1  # ADD
+
+        update_msg.success.updates.updates = [single_update]
+
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            yield update_msg
+
+        status_received: list[tuple[str, str, dict]] = []
+
+        def on_snap(devices: list) -> None:
+            pass
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            status_received.append((device_id, status_name, data))
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            mock_sleep.side_effect = asyncio.CancelledError()
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            with contextlib.suppress(asyncio.CancelledError, TimeoutError):
+                await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(status_received) == 1
+        device_id, status_name, data = status_received[0]
+        assert device_id == "dev-42"
+        assert status_name == "door_opened"
+        assert data == {"op": 1}
+
+    @pytest.mark.asyncio
+    async def test_status_update_remove_calls_on_status_update(self) -> None:
+        """Status REMOVE update triggers on_status_update with op=3."""
+        api = self._make_api()
+
+        update_msg = MagicMock()
+        update_msg.HasField.side_effect = lambda field: field == "success"
+        update_msg.success.WhichOneof.return_value = "updates"
+
+        single_update = MagicMock()
+        single_update.WhichOneof.return_value = "status_update"
+        single_update.device_id.hub_light_device_id.device_id = "dev-99"
+        single_update.status_update.status.WhichOneof.return_value = "motion_detected"
+        single_update.status_update.update_type = 3  # REMOVE
+
+        update_msg.success.updates.updates = [single_update]
+
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            yield update_msg
+
+        status_received: list[tuple[str, str, dict]] = []
+
+        def on_snap(devices: list) -> None:
+            pass
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            status_received.append((device_id, status_name, data))
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            mock_sleep.side_effect = asyncio.CancelledError()
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            with contextlib.suppress(asyncio.CancelledError, TimeoutError):
+                await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(status_received) == 1
+        _, _, data = status_received[0]
+        assert data["op"] == 3
+
+    @pytest.mark.asyncio
+    async def test_snapshot_update_calls_on_devices_snapshot(self) -> None:
+        """snapshot_update in Updates triggers on_devices_snapshot."""
+        api = self._make_api()
+        mock_light_device = self._make_light_device_mock("dev-77")
+
+        update_msg = MagicMock()
+        update_msg.HasField.side_effect = lambda field: field == "success"
+        update_msg.success.WhichOneof.return_value = "updates"
+
+        single_update = MagicMock()
+        single_update.WhichOneof.return_value = "snapshot_update"
+        single_update.snapshot_update.light_device = mock_light_device
+
+        update_msg.success.updates.updates = [single_update]
+
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            yield update_msg
+
+        snapshot_received: list[list] = []
+
+        def on_snap(devices: list) -> None:
+            snapshot_received.append(devices)
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            pass
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            mock_sleep.side_effect = asyncio.CancelledError()
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            with contextlib.suppress(asyncio.CancelledError, TimeoutError):
+                await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(snapshot_received) == 1
+        assert snapshot_received[0][0].id == "dev-77"
+
+    @pytest.mark.asyncio
+    async def test_failure_message_reconnects(self) -> None:
+        """A failure message breaks the inner loop and triggers a reconnect sleep."""
+        api = self._make_api()
+
+        failure_msg = MagicMock()
+        failure_msg.HasField.side_effect = lambda field: field == "failure"
+
+        call_count = 0
+
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            nonlocal call_count
+            call_count += 1
+            yield failure_msg
+
+        def on_snap(devices: list) -> None:
+            pass
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            pass
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            # Make the second sleep raise CancelledError to stop the loop
+            mock_sleep.side_effect = [None, asyncio.CancelledError()]
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            with contextlib.suppress(asyncio.CancelledError, TimeoutError):
+                await asyncio.wait_for(task, timeout=5.0)
+
+        # At least one reconnect sleep occurred
+        assert mock_sleep.call_count >= 1
+
+    @pytest.mark.asyncio
+    async def test_returns_asyncio_task(self) -> None:
+        """start_device_stream returns a running asyncio.Task."""
+        api = self._make_api()
+
+        async def _aiter() -> AsyncGenerator[MagicMock, None]:
+            # Yield nothing; infinite loop will sleep
+            return
+            yield  # make this an async generator
+
+        def on_snap(devices: list) -> None:
+            pass
+
+        def on_status(device_id: str, status_name: str, data: dict) -> None:
+            pass
+
+        with (
+            patch.dict("sys.modules", _make_stream_patch_modules(_aiter)),
+            patch("asyncio.sleep", new_callable=AsyncMock) as mock_sleep,
+        ):
+            mock_sleep.side_effect = asyncio.CancelledError()
+            task = await api.start_device_stream("space-1", on_snap, on_status)
+            assert isinstance(task, asyncio.Task)
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task

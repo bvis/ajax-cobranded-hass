@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-04-12
+
+### Added
+- Real-time device updates via persistent gRPC stream (door open/close, motion, smoke, leak, tamper)
+- Firebase Cloud Messaging (FCM) push notifications for instant event delivery
+- FCM token registration with Ajax servers via gRPC UpsertPushTokenService
+- Device registry support — all entities grouped under their physical device
+- Hub device with via_device linking for peripheral devices
+- Entity categories: battery and signal as diagnostic entities
+- Entity translations for signal level and switch channels
+- Signal strength sensor disabled by default (low-value diagnostic)
+- runtime_data pattern for typed config entry data
+
+### Changed
+- Default poll interval increased to 300s (5 min) — stream handles real-time now
+- Entities use translation_key and device_class auto-naming instead of hardcoded names
+- Switched from hass.data dict to entry.runtime_data
+
+### Fixed
+- Config flow space selection now uses SelectSelector (fixes HA UI serialization error)
+- Config flow login timeout (30s) prevents HA from killing the flow
+- asyncio.CancelledError properly caught in config flow
+- gRPC proto version compatibility with HA's grpcio 1.78.0
+
 ## [0.1.0] - 2026-04-11
 
 ### Added
