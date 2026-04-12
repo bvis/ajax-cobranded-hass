@@ -185,7 +185,6 @@ class AjaxSimBaseSensor(CoordinatorEntity[AjaxCobrandedCoordinator], SensorEntit
 
     _attr_has_entity_name = True
     _attr_entity_category = EntityCategory.DIAGNOSTIC
-    _attr_state_class = SensorStateClass.MEASUREMENT
 
     def __init__(self, coordinator: AjaxCobrandedCoordinator, hub_id: str) -> None:
         super().__init__(coordinator)
