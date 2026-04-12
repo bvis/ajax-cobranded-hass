@@ -9,5 +9,5 @@
     "iot_class": "cloud_push",
     "issue_tracker": "https://github.com/bvis/ajax-cobranded-hass/issues",
     "requirements": ["grpcio>=1.60.0", "protobuf>=4.25.0", "firebase-messaging>=0.4.5"],
-    "version": "0.3.0"
+    "version": "0.4.0"
 }
