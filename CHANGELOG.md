@@ -18,8 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Event parsing uses compiled protobuf definitions from the official Ajax app for accurate event identification
 - Push notifications now fire HA events in addition to triggering coordinator refresh
+- Tamper sensor renamed to "Case tamper" and problem sensor to "Device problem" for clarity
+- Photo capture button now only shown on MotionCam PhOD models (not regular MotionCam)
 
 ### Fixed
+- Security API errors (arm/disarm rejected) now show proper error messages instead of HTTP 500
 - CI workflow now uses explicit `permissions: contents: read` (resolved 7 CodeQL alerts)
 - Proto files excluded from coverage calculation to prevent false coverage drops
 
