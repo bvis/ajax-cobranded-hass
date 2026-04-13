@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Armar forcado",
+            "description": "Armar o sistema ignorando sensores abertos e alarmes ativos."
+        },
+        "force_arm_night": {
+            "name": "Modo noturno forcado",
+            "description": "Ativar modo noturno ignorando sensores abertos e alarmes ativos."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Tirar foto" }

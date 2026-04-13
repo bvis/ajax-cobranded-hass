@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Nucene zastrezeni",
+            "description": "Zastrezit system a ignorovat otevrene senzory a aktivni alarmy."
+        },
+        "force_arm_night": {
+            "name": "Nuceny nocni rezim",
+            "description": "Aktivovat nocni rezim a ignorovat otevrene senzory a aktivni alarmy."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Pořídit fotografii" }

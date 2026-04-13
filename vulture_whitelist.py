@@ -2,3 +2,4 @@
 width  # noqa
 height  # noqa
 obj  # noqa — firebase_messaging callback signature
+call  # noqa — ServiceCall parameter in service handlers

@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Wymus uzbrojenie",
+            "description": "Uzbroj system ignorujac otwarte czujniki i aktywne alarmy."
+        },
+        "force_arm_night": {
+            "name": "Wymus tryb nocny",
+            "description": "Wlacz tryb nocny ignorujac otwarte czujniki i aktywne alarmy."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Zrób zdjęcie" }

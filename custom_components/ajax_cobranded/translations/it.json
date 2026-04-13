@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Inserimento forzato",
+            "description": "Inserire il sistema ignorando sensori aperti e allarmi attivi."
+        },
+        "force_arm_night": {
+            "name": "Modo notte forzato",
+            "description": "Attivare il modo notte ignorando sensori aperti e allarmi attivi."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Scatta foto" }

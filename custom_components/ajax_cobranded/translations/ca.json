@@ -44,6 +44,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Forcar armat",
+            "description": "Armar el sistema ignorant sensors oberts i alarmes actives."
+        },
+        "force_arm_night": {
+            "name": "Forcar armat nocturn",
+            "description": "Armar mode nocturn ignorant sensors oberts i alarmes actives."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": {

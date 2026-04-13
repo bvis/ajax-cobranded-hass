@@ -7,9 +7,10 @@ from typing import TYPE_CHECKING
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
+from homeassistant.core import ServiceCall
 
 from custom_components.ajax_cobranded.api.client import AjaxGrpcClient
-from custom_components.ajax_cobranded.const import DEFAULT_POLL_INTERVAL
+from custom_components.ajax_cobranded.const import DEFAULT_POLL_INTERVAL, DOMAIN
 from custom_components.ajax_cobranded.coordinator import AjaxCobrandedCoordinator
 
 if TYPE_CHECKING:
@@ -28,6 +29,26 @@ PLATFORMS = [
 ]
 
 type AjaxCobrandedConfigEntry = ConfigEntry[AjaxCobrandedCoordinator]
+
+
+async def _async_handle_force_arm(hass: HomeAssistant, call: ServiceCall) -> None:
+    """Handle force_arm service call (arm ignoring open sensors)."""
+    entries = hass.config_entries.async_entries(DOMAIN)
+    for entry in entries:
+        coordinator: AjaxCobrandedCoordinator = entry.runtime_data
+        for space_id in coordinator._space_ids:
+            await coordinator.security_api.arm(space_id, ignore_alarms=True)
+        await coordinator.async_request_refresh()
+
+
+async def _async_handle_force_arm_night(hass: HomeAssistant, call: ServiceCall) -> None:
+    """Handle force_arm_night service call (night mode ignoring open sensors)."""
+    entries = hass.config_entries.async_entries(DOMAIN)
+    for entry in entries:
+        coordinator: AjaxCobrandedCoordinator = entry.runtime_data
+        for space_id in coordinator._space_ids:
+            await coordinator.security_api.arm_night_mode(space_id, ignore_alarms=True)
+        await coordinator.async_request_refresh()
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry) -> bool:
@@ -81,10 +102,26 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
     )
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    async def _force_arm_handler(call: ServiceCall) -> None:
+        await _async_handle_force_arm(hass, call)
+
+    async def _force_arm_night_handler(call: ServiceCall) -> None:
+        await _async_handle_force_arm_night(hass, call)
+
+    if not hass.services.has_service(DOMAIN, "force_arm"):
+        hass.services.async_register(DOMAIN, "force_arm", _force_arm_handler)
+        hass.services.async_register(DOMAIN, "force_arm_night", _force_arm_night_handler)
+
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry) -> bool:
+    remaining = hass.config_entries.async_entries(DOMAIN)
+    if not any(e.entry_id != entry.entry_id for e in remaining):
+        hass.services.async_remove(DOMAIN, "force_arm")
+        hass.services.async_remove(DOMAIN, "force_arm_night")
+
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
         coordinator: AjaxCobrandedCoordinator = entry.runtime_data

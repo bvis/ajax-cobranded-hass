@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Erzwungenes Scharfschalten",
+            "description": "System scharfschalten und offene Sensoren sowie aktive Alarme ignorieren."
+        },
+        "force_arm_night": {
+            "name": "Erzwungener Nachtmodus",
+            "description": "Nachtmodus aktivieren und offene Sensoren sowie aktive Alarme ignorieren."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Foto aufnehmen" }

@@ -1,0 +1,7 @@
+force_arm:
+  name: Force arm
+  description: Arm the system ignoring open sensors and active alarms.
+
+force_arm_night:
+  name: Force arm night mode
+  description: Arm night mode ignoring open sensors and active alarms.

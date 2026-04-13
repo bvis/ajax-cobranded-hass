@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Geforceerd inschakelen",
+            "description": "Systeem inschakelen met negeren van open sensoren en actieve alarmen."
+        },
+        "force_arm_night": {
+            "name": "Geforceerde nachtmodus",
+            "description": "Nachtmodus activeren met negeren van open sensoren en actieve alarmen."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Foto maken" }

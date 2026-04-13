@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Zorla kurma",
+            "description": "Acik sensorleri ve aktif alarmlari yok sayarak sistemi kurun."
+        },
+        "force_arm_night": {
+            "name": "Zorla gece modu",
+            "description": "Acik sensorleri ve aktif alarmlari yok sayarak gece modunu etkinlestirin."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Fotoğraf çek" }

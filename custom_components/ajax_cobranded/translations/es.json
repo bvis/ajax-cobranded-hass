@@ -44,6 +44,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Forzar armado",
+            "description": "Armar el sistema ignorando sensores abiertos y alarmas activas."
+        },
+        "force_arm_night": {
+            "name": "Forzar armado nocturno",
+            "description": "Armar modo nocturno ignorando sensores abiertos y alarmas activas."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": {

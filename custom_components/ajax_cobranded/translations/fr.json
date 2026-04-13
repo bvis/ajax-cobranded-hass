@@ -48,6 +48,16 @@
             }
         }
     },
+    "services": {
+        "force_arm": {
+            "name": "Armement force",
+            "description": "Armer le systeme en ignorant les capteurs ouverts et les alarmes actives."
+        },
+        "force_arm_night": {
+            "name": "Mode nuit force",
+            "description": "Activer le mode nuit en ignorant les capteurs ouverts et les alarmes actives."
+        }
+    },
     "entity": {
         "button": {
             "capture_photo": { "name": "Prendre une photo" }
