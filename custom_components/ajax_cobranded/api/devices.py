@@ -409,7 +409,11 @@ class DevicesApi:
             # Check response: 0x0a = field 1 (success), 0x12 = field 2 (error)
             if raw_response and raw_response[0:1] == b"\x0a":
                 _LOGGER.debug("Photo capture triggered for %s", device_id)
-                return device_id  # Return device_id as signal that capture succeeded
+                return device_id
+            elif raw_response and b"ALREADY_PERFORMED" in raw_response:
+                # Hub already took the photo — treat as success
+                _LOGGER.debug("Photo already captured for %s, proceeding", device_id)
+                return device_id
             else:
                 _LOGGER.debug(
                     "Photo capture failed for %s: response=%s",

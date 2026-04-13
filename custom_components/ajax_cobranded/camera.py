@@ -106,16 +106,16 @@ class AjaxCamera(CoordinatorEntity[AjaxCobrandedCoordinator], Camera):
             self._hub_id, self._device_id, self._device_type
         )
         if not result:
-            return self._last_image
+            return await self._get_last_image()
 
         listener = self.coordinator.notification_listener
         if not listener:
-            return self._last_image
+            return await self._get_last_image()
 
         # Wait for notification_id from FCM push
         notification_id = await listener.wait_for_notification_id(self._device_id, timeout=15.0)
         if not notification_id:
-            return self._last_image
+            return await self._get_last_image()
 
         # Get photo URL via streamNotificationMedia
         url = await self.coordinator.media_api.get_photo_url(
@@ -123,6 +123,18 @@ class AjaxCamera(CoordinatorEntity[AjaxCobrandedCoordinator], Camera):
         )
         if url:
             return await self._download_image(url)
+        return await self._get_last_image()
+
+    async def _get_last_image(self) -> bytes | None:
+        """Return cached image, or load persisted photo from disk."""
+        if self._last_image is None:
+            from custom_components.ajax_cobranded.photo_storage import (  # noqa: PLC0415
+                load_last_photo,
+            )
+
+            device = self.coordinator.devices.get(self._device_id)
+            device_name = device.name if device else self._device_id
+            self._last_image = await load_last_photo(self.hass, device_name)
         return self._last_image
 
     async def _download_image(self, url: str) -> bytes | None:

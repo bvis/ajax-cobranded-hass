@@ -47,7 +47,9 @@
                     "fcm_project_id": "ID projektu FCM (pro push notifikace)",
                     "fcm_app_id": "ID aplikace FCM",
                     "fcm_api_key": "API klíč FCM",
-                    "fcm_sender_id": "ID odesílatele FCM"
+                    "fcm_sender_id": "ID odesílatele FCM",
+                    "photo_retention_days": "Uchovávání fotografií (dny)",
+                    "photo_max_per_device": "Max fotografií na zařízení (0 = neomezeno)"
                 }
             }
         }

@@ -101,6 +101,25 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
         fcm_sender_id=entry.options.get("fcm_sender_id", ""),
     )
 
+    # Schedule photo cleanup
+    from datetime import timedelta  # noqa: PLC0415
+
+    from homeassistant.helpers.event import async_track_time_interval  # noqa: PLC0415
+
+    from custom_components.ajax_cobranded.photo_storage import cleanup_old_photos  # noqa: PLC0415
+
+    retention_days = entry.options.get("photo_retention_days", 30)
+    max_photos = entry.options.get("photo_max_per_device", 100)
+
+    async def _photo_cleanup(_now: object = None) -> None:
+        deleted = await cleanup_old_photos(hass, retention_days, max_photos)
+        if deleted:
+            _LOGGER.debug("Cleaned up %d old photos", len(deleted))
+
+    # Run cleanup on startup and every 24h
+    await _photo_cleanup()
+    async_track_time_interval(hass, _photo_cleanup, timedelta(hours=24))
+
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 
     async def _force_arm_handler(call: ServiceCall) -> None:

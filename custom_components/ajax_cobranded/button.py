@@ -89,11 +89,32 @@ class AjaxCapturePhotoButton(CoordinatorEntity[AjaxCobrandedCoordinator], Button
 
         # Get photo URL via media stream
         url = await self.coordinator.media_api.get_photo_url(
-            notification_id, self._hub_id, timeout=30.0
+            notification_id, self._hub_id, timeout=60.0
         )
         if url:
             _LOGGER.debug("Photo URL retrieved for %s: %s", self._device_id, url[:80])
-            # Store URL in coordinator for camera entity to use
-            self.coordinator.last_photo_urls[self._device_id] = url
+            # Download and save the photo
+            import aiohttp  # noqa: PLC0415
+            from homeassistant.helpers.aiohttp_client import (  # noqa: PLC0415
+                async_get_clientsession,
+            )
+
+            from custom_components.ajax_cobranded.photo_storage import (  # noqa: PLC0415
+                save_photo,
+            )
+
+            session = async_get_clientsession(self.hass)
+            try:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as resp:
+                    if resp.status == 200:
+                        image_bytes = await resp.read()
+                        # Save with timestamp overlay
+                        device = self.coordinator.devices.get(self._device_id)
+                        device_name = device.name if device else self._device_id
+                        await save_photo(self.hass, image_bytes, self._device_id, device_name)
+                        # Store for camera entity
+                        self.coordinator.last_photo_urls[self._device_id] = url
+            except Exception:
+                _LOGGER.exception("Failed to download photo for %s", self._device_id)
         else:
             _LOGGER.debug("No photo URL from media stream for %s", self._device_id)

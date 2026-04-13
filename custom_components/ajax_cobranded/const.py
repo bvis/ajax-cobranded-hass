@@ -105,6 +105,11 @@ class DeviceState(StrEnum):
     UNKNOWN = "unknown"
 
 
+CONF_PHOTO_RETENTION_DAYS = "photo_retention_days"
+CONF_PHOTO_MAX_PER_DEVICE = "photo_max_per_device"
+DEFAULT_PHOTO_RETENTION_DAYS = 30
+DEFAULT_PHOTO_MAX_PER_DEVICE = 100
+
 EVENT_DOMAIN = f"{DOMAIN}_event"
 
 # Map HubEventTag oneof field names to simplified HA event types

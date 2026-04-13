@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from typing import TYPE_CHECKING
@@ -73,29 +74,35 @@ class MediaApi:
             response_deserializer=lambda x: x,
         )
 
-        try:
-            _LOGGER.debug(
-                "Opening media stream: notification_id=%s hub=%s",
-                notification_id[:20],
-                hub_hex_id,
-            )
-            stream = method(request_bytes, metadata=metadata, timeout=timeout)
-            async for raw_response in stream:
-                # Search for HTTPS URLs in the response
-                urls = re.findall(rb'https://[^\x00-\x1f\x7f-\x9f"\'\\]+', raw_response)
-                for raw_url in urls:
-                    url: str = raw_url.decode("utf-8", errors="ignore")
-                    # Photo URLs can be on ajax.systems or S3 (hubs-uploaded-resources)
-                    if ".ajax.systems" in url or "hubs-uploaded-resources" in url:
-                        _LOGGER.debug("Photo URL from media stream: %s", url[:80])
-                        return url
-                _LOGGER.debug(
-                    "Media stream frame: %d bytes, hex=%s",
-                    len(raw_response),
-                    raw_response[:200].hex(),
-                )
-        except TimeoutError:
-            _LOGGER.debug("Timeout waiting for photo URL from media stream")
-        except Exception:
-            _LOGGER.debug("Error in notification media stream", exc_info=True)
+        _LOGGER.debug(
+            "Opening media stream: notification_id=%s hub=%s",
+            notification_id[:20],
+            hub_hex_id,
+        )
+
+        # Poll the media stream with retries — the first response may have
+        # IMAGE_STATUS_IN_PROGRESS (no URL). Retry after a delay until READY.
+        poll_interval = 5.0
+        deadline = asyncio.get_event_loop().time() + timeout
+        while asyncio.get_event_loop().time() < deadline:
+            try:
+                stream = method(request_bytes, metadata=metadata, timeout=10)
+                async for raw_response in stream:
+                    urls = re.findall(rb'https://[^\x00-\x1f\x7f-\x9f"\'\\]+', raw_response)
+                    for raw_url in urls:
+                        url: str = raw_url.decode("utf-8", errors="ignore")
+                        if ".ajax.systems" in url or "hubs-uploaded-resources" in url:
+                            _LOGGER.debug("Photo URL from media stream: %s", url[:80])
+                            return url
+                    _LOGGER.debug(
+                        "Media stream: %d bytes, no URL yet, retrying in %.0fs",
+                        len(raw_response),
+                        poll_interval,
+                    )
+                    break  # Got a frame but no URL — break and retry after delay
+            except Exception:
+                _LOGGER.debug("Media stream attempt failed, retrying in %.0fs", poll_interval)
+            await asyncio.sleep(poll_interval)
+
+        _LOGGER.debug("Timeout waiting for photo URL from media stream")
         return None

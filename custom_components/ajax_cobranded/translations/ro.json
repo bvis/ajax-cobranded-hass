@@ -47,7 +47,9 @@
                     "fcm_project_id": "ID proiect FCM (pentru notificări push)",
                     "fcm_app_id": "ID aplicație FCM",
                     "fcm_api_key": "Cheie API FCM",
-                    "fcm_sender_id": "ID expeditor FCM"
+                    "fcm_sender_id": "ID expeditor FCM",
+                    "photo_retention_days": "Reținere fotografii (zile)",
+                    "photo_max_per_device": "Max fotografii per dispozitiv (0 = nelimitat)"
                 }
             }
         }

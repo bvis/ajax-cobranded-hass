@@ -47,7 +47,9 @@
                     "fcm_project_id": "FCM Proje Kimliği (anlık bildirimler için)",
                     "fcm_app_id": "FCM Uygulama Kimliği",
                     "fcm_api_key": "FCM API Anahtarı",
-                    "fcm_sender_id": "FCM Gönderici Kimliği"
+                    "fcm_sender_id": "FCM Gönderici Kimliği",
+                    "photo_retention_days": "Fotoğraf saklama süresi (gün)",
+                    "photo_max_per_device": "Cihaz başına maks. fotoğraf (0 = sınırsız)"
                 }
             }
         }

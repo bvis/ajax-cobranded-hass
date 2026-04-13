@@ -28,6 +28,10 @@ from custom_components.ajax_cobranded.api.session import (
 from custom_components.ajax_cobranded.api.spaces import SpacesApi
 from custom_components.ajax_cobranded.const import (
     APPLICATION_LABEL,
+    CONF_PHOTO_MAX_PER_DEVICE,
+    CONF_PHOTO_RETENTION_DAYS,
+    DEFAULT_PHOTO_MAX_PER_DEVICE,
+    DEFAULT_PHOTO_RETENTION_DAYS,
     DEFAULT_POLL_INTERVAL,
     DOMAIN,
     KNOWN_APP_LABELS,
@@ -207,6 +211,18 @@ class AjaxCobrandedOptionsFlow(OptionsFlow):
                         "fcm_sender_id",
                         default=self._config_entry.options.get("fcm_sender_id", ""),
                     ): str,
+                    vol.Optional(
+                        CONF_PHOTO_RETENTION_DAYS,
+                        default=self._config_entry.options.get(
+                            CONF_PHOTO_RETENTION_DAYS, DEFAULT_PHOTO_RETENTION_DAYS
+                        ),
+                    ): vol.All(vol.Coerce(int), vol.Range(min=1, max=365)),
+                    vol.Optional(
+                        CONF_PHOTO_MAX_PER_DEVICE,
+                        default=self._config_entry.options.get(
+                            CONF_PHOTO_MAX_PER_DEVICE, DEFAULT_PHOTO_MAX_PER_DEVICE
+                        ),
+                    ): vol.All(vol.Coerce(int), vol.Range(min=0, max=10000)),
                 }
             ),
         )

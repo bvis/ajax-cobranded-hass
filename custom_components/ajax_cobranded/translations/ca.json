@@ -47,7 +47,9 @@
                     "fcm_project_id": "ID de projecte FCM (per a notificacions push)",
                     "fcm_app_id": "ID d'app FCM",
                     "fcm_api_key": "Clau d'API FCM",
-                    "fcm_sender_id": "ID de remitent FCM"
+                    "fcm_sender_id": "ID de remitent FCM",
+                    "photo_retention_days": "Retenció de fotos (dies)",
+                    "photo_max_per_device": "Màxim de fotos per dispositiu (0 = il·limitat)"
                 }
             }
         }

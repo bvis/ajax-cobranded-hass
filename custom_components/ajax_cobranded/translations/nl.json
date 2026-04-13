@@ -47,7 +47,9 @@
                     "fcm_project_id": "FCM-project-ID (voor pushmeldingen)",
                     "fcm_app_id": "FCM-app-ID",
                     "fcm_api_key": "FCM-API-sleutel",
-                    "fcm_sender_id": "FCM-afzender-ID"
+                    "fcm_sender_id": "FCM-afzender-ID",
+                    "photo_retention_days": "Foto bewaarperiode (dagen)",
+                    "photo_max_per_device": "Max foto's per apparaat (0 = onbeperkt)"
                 }
             }
         }
