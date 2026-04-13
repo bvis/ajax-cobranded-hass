@@ -50,6 +50,7 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self._notification_listener: AjaxNotificationListener | None = None
         self._stream_tasks: list[asyncio.Task[None]] = []
         self._streams_started: bool = False
+        self._event_entities: dict[str, Any] = {}
 
     @property
     def security_api(self) -> SecurityApi:
@@ -176,6 +177,18 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         )
         self.devices[device.id] = updated
         self.async_set_updated_data({"spaces": self.spaces, "devices": self.devices})
+
+    def register_event_entity(self, space_id: str, entity: Any) -> None:
+        """Register an event entity for a space."""
+        self._event_entities[space_id] = entity
+
+    def fire_push_event(self, space_id: str, event_type: str, data: dict[str, Any]) -> None:
+        """Dispatch a push event to the corresponding event entity."""
+        entity = self._event_entities.get(space_id)
+        if entity is not None:
+            entity.handle_event(event_type, data)
+        else:
+            _LOGGER.debug("No event entity for space %s", space_id)
 
     async def async_start_push_notifications(
         self,

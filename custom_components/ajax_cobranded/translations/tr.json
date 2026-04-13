@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "İki Faktörlü Doğrulama",
                 "description": "Doğrulama uygulamanızdaki 6 haneli kodu girin.",
-                "data": { "totp_code": "TOTP Kodu" }
+                "data": {
+                    "totp_code": "TOTP Kodu"
+                }
             },
             "select_spaces": {
                 "title": "Alan Seçimi",
                 "description": "Eklemek istediğiniz alanları (hub'ları) seçin.",
-                "data": { "spaces": "Alanlar" }
+                "data": {
+                    "spaces": "Alanlar"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Fotoğraf çek" }
+            "capture_photo": {
+                "name": "Fotoğraf çek"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Güvenlik olayı",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarm",
+                            "arm": "Kuruldu",
+                            "arm_night": "Gece modu etkin",
+                            "battery_low": "Düşük pil",
+                            "co_alarm": "CO alarmı",
+                            "connection_lost": "Bağlantı kesildi",
+                            "disarm": "Devre dışı",
+                            "disarm_night": "Gece modu devre dışı",
+                            "door_open": "Kapı açıldı",
+                            "fire": "Yangın",
+                            "flood": "Su baskını",
+                            "glass_break": "Cam kırılması",
+                            "malfunction": "Arıza",
+                            "motion": "Hareket",
+                            "panic": "Panik",
+                            "tamper": "Müdahale"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Güvenlik merkezi bağlantısı" },
-            "gsm": { "name": "Hücresel ağ bağlı" },
-            "lid": { "name": "Kapak açık" },
-            "ext_contact": { "name": "Harici kontak açık" },
-            "ext_alert": { "name": "Harici kontak alarmı" },
-            "drilling": { "name": "Gövde delme algılandı" },
-            "anti_mask": { "name": "Örtme koruması" },
-            "malfunction": { "name": "Arıza" },
-            "interference": { "name": "Parazit" },
-            "relay_stuck": { "name": "Röle takılı" },
-            "always_active": { "name": "Her zaman aktif" },
-            "glass_break": { "name": "Cam k\u0131r\u0131lmas\u0131" },
-            "vibration": { "name": "Titre\u015fim" },
-            "connectivity": { "name": "Bağlantı" },
-            "problem": { "name": "Sorun" }
+            "monitoring": {
+                "name": "Güvenlik merkezi bağlantısı"
+            },
+            "gsm": {
+                "name": "Hücresel ağ bağlı"
+            },
+            "lid": {
+                "name": "Kapak açık"
+            },
+            "ext_contact": {
+                "name": "Harici kontak açık"
+            },
+            "ext_alert": {
+                "name": "Harici kontak alarmı"
+            },
+            "drilling": {
+                "name": "Gövde delme algılandı"
+            },
+            "anti_mask": {
+                "name": "Örtme koruması"
+            },
+            "malfunction": {
+                "name": "Arıza"
+            },
+            "interference": {
+                "name": "Parazit"
+            },
+            "relay_stuck": {
+                "name": "Röle takılı"
+            },
+            "always_active": {
+                "name": "Her zaman aktif"
+            },
+            "glass_break": {
+                "name": "Cam kırılması"
+            },
+            "vibration": {
+                "name": "Titreşim"
+            },
+            "connectivity": {
+                "name": "Bağlantı"
+            },
+            "problem": {
+                "name": "Sorun"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Sinyal seviyesi" },
-            "gsm_type": { "name": "GSM türü" },
-            "wifi_signal_level": { "name": "Wi-Fi sinyal seviyesi" },
-            "sim_status": { "name": "SIM durumu" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Sinyal seviyesi"
+            },
+            "gsm_type": {
+                "name": "GSM türü"
+            },
+            "wifi_signal_level": {
+                "name": "Wi-Fi sinyal seviyesi"
+            },
+            "sim_status": {
+                "name": "SIM durumu"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Kanal 1" },
-            "channel_2": { "name": "Kanal 2" }
+            "channel_1": {
+                "name": "Kanal 1"
+            },
+            "channel_2": {
+                "name": "Kanal 2"
+            }
         }
     }
 }

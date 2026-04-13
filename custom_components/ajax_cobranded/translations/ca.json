@@ -4,17 +4,25 @@
             "user": {
                 "title": "Inici de sessio Ajax Security",
                 "description": "Introdueix les credencials del teu compte Ajax Security.",
-                "data": { "email": "Correu electronic", "password": "Contrasenya", "app_label": "Etiqueta d'app (nom de l'app co-branded)" }
+                "data": {
+                    "email": "Correu electronic",
+                    "password": "Contrasenya",
+                    "app_label": "Etiqueta d'app (nom de l'app co-branded)"
+                }
             },
             "2fa": {
                 "title": "Autenticacio de dos factors",
                 "description": "Introdueix el codi de 6 digits de la teva app d'autenticacio.",
-                "data": { "totp_code": "Codi TOTP" }
+                "data": {
+                    "totp_code": "Codi TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Seleccionar espais",
                 "description": "Tria quins espais (hubs) afegir.",
-                "data": { "spaces": "Espais" }
+                "data": {
+                    "spaces": "Espais"
+                }
             }
         },
         "error": {
@@ -60,6 +68,33 @@
                 "name": "Capturar foto"
             }
         },
+        "event": {
+            "security_event": {
+                "name": "Esdeveniment de seguretat",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarma",
+                            "arm": "Armat",
+                            "arm_night": "Armat nocturn",
+                            "battery_low": "Bateria baixa",
+                            "co_alarm": "Alarma CO",
+                            "connection_lost": "Connexio perduda",
+                            "disarm": "Desarmat",
+                            "disarm_night": "Desarmat nocturn",
+                            "door_open": "Porta oberta",
+                            "fire": "Foc",
+                            "flood": "Inundacio",
+                            "glass_break": "Trencament de vidre",
+                            "malfunction": "Avaria",
+                            "motion": "Moviment",
+                            "panic": "Panic",
+                            "tamper": "Manipulacio"
+                        }
+                    }
+                }
+            }
+        },
         "binary_sensor": {
             "monitoring": {
                 "name": "Connexio CRA"
@@ -98,7 +133,7 @@
                 "name": "Trencament de vidre"
             },
             "vibration": {
-                "name": "Vibraci\u00f3"
+                "name": "Vibració"
             },
             "connectivity": {
                 "name": "Connectivitat"

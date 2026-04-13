@@ -68,6 +68,33 @@
                 "name": "Capture photo"
             }
         },
+        "event": {
+            "security_event": {
+                "name": "Security event",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarm",
+                            "arm": "Armed",
+                            "arm_night": "Armed night",
+                            "battery_low": "Battery low",
+                            "co_alarm": "CO alarm",
+                            "connection_lost": "Connection lost",
+                            "disarm": "Disarmed",
+                            "disarm_night": "Disarmed night",
+                            "door_open": "Door opened",
+                            "fire": "Fire",
+                            "flood": "Flood",
+                            "glass_break": "Glass break",
+                            "malfunction": "Malfunction",
+                            "motion": "Motion",
+                            "panic": "Panic",
+                            "tamper": "Tamper"
+                        }
+                    }
+                }
+            }
+        },
         "binary_sensor": {
             "monitoring": {
                 "name": "CRA connection"

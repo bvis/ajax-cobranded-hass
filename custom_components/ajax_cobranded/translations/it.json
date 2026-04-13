@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "Autenticazione a due fattori",
                 "description": "Inserisci il codice a 6 cifre dalla tua app di autenticazione.",
-                "data": { "totp_code": "Codice TOTP" }
+                "data": {
+                    "totp_code": "Codice TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Seleziona spazi",
                 "description": "Scegli quali spazi (hub) aggiungere.",
-                "data": { "spaces": "Spazi" }
+                "data": {
+                    "spaces": "Spazi"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Scatta foto" }
+            "capture_photo": {
+                "name": "Scatta foto"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Evento di sicurezza",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Allarme",
+                            "arm": "Inserito",
+                            "arm_night": "Modo notte attivato",
+                            "battery_low": "Batteria scarica",
+                            "co_alarm": "Allarme CO",
+                            "connection_lost": "Connessione persa",
+                            "disarm": "Disinserito",
+                            "disarm_night": "Modo notte disattivato",
+                            "door_open": "Porta aperta",
+                            "fire": "Incendio",
+                            "flood": "Allagamento",
+                            "glass_break": "Rottura vetro",
+                            "malfunction": "Malfunzionamento",
+                            "motion": "Movimento",
+                            "panic": "Panico",
+                            "tamper": "Manomissione"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Connessione istituto di vigilanza" },
-            "gsm": { "name": "Rete cellulare connessa" },
-            "lid": { "name": "Coperchio aperto" },
-            "ext_contact": { "name": "Contatto esterno aperto" },
-            "ext_alert": { "name": "Allarme contatto esterno" },
-            "drilling": { "name": "Perforazione del contenitore" },
-            "anti_mask": { "name": "Anti-mascheramento" },
-            "malfunction": { "name": "Malfunzionamento" },
-            "interference": { "name": "Interferenza" },
-            "relay_stuck": { "name": "Relè bloccato" },
-            "always_active": { "name": "Sempre attivo" },
-            "glass_break": { "name": "Rottura vetro" },
-            "vibration": { "name": "Vibrazione" },
-            "connectivity": { "name": "Connettività" },
-            "problem": { "name": "Problema" }
+            "monitoring": {
+                "name": "Connessione istituto di vigilanza"
+            },
+            "gsm": {
+                "name": "Rete cellulare connessa"
+            },
+            "lid": {
+                "name": "Coperchio aperto"
+            },
+            "ext_contact": {
+                "name": "Contatto esterno aperto"
+            },
+            "ext_alert": {
+                "name": "Allarme contatto esterno"
+            },
+            "drilling": {
+                "name": "Perforazione del contenitore"
+            },
+            "anti_mask": {
+                "name": "Anti-mascheramento"
+            },
+            "malfunction": {
+                "name": "Malfunzionamento"
+            },
+            "interference": {
+                "name": "Interferenza"
+            },
+            "relay_stuck": {
+                "name": "Relè bloccato"
+            },
+            "always_active": {
+                "name": "Sempre attivo"
+            },
+            "glass_break": {
+                "name": "Rottura vetro"
+            },
+            "vibration": {
+                "name": "Vibrazione"
+            },
+            "connectivity": {
+                "name": "Connettività"
+            },
+            "problem": {
+                "name": "Problema"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Livello del segnale" },
-            "gsm_type": { "name": "Tipo GSM" },
-            "wifi_signal_level": { "name": "Livello segnale Wi-Fi" },
-            "sim_status": { "name": "Stato SIM" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Livello del segnale"
+            },
+            "gsm_type": {
+                "name": "Tipo GSM"
+            },
+            "wifi_signal_level": {
+                "name": "Livello segnale Wi-Fi"
+            },
+            "sim_status": {
+                "name": "Stato SIM"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Canale 1" },
-            "channel_2": { "name": "Canale 2" }
+            "channel_1": {
+                "name": "Canale 1"
+            },
+            "channel_2": {
+                "name": "Canale 2"
+            }
         }
     }
 }
