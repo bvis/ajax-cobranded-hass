@@ -103,3 +103,56 @@ class DeviceState(StrEnum):
     ADDING = "adding"
     NOT_MIGRATED = "not_migrated"
     UNKNOWN = "unknown"
+
+
+EVENT_DOMAIN = f"{DOMAIN}_event"
+
+# Map HubEventTag oneof field names to simplified HA event types
+HUB_EVENT_TAG_MAP: dict[str, str] = {
+    # Arming
+    "arm": "arm",
+    "arm_attempt": "arm",
+    "arm_with_malfunctions": "arm",
+    "group_arm": "arm",
+    "group_arm_with_malfunctions": "arm",
+    # Disarming
+    "disarm": "disarm",
+    "duress_disarm": "disarm",
+    "group_disarm": "disarm",
+    # Night mode
+    "night_mode_on": "arm_night",
+    "night_mode_off": "disarm_night",
+    "duress_night_mode_off": "disarm_night",
+    # Alarms
+    "intrusion_alarm": "alarm",
+    "intrusion_alarm_confirmed": "alarm",
+    # Tamper
+    "tamper_opened": "tamper",
+    "front_tamper_opened": "tamper",
+    "back_tamper_opened": "tamper",
+    # Panic
+    "panic_button_pressed": "panic",
+    # Battery
+    "battery_low": "battery_low",
+    # Connection
+    "device_communication_loss": "connection_lost",
+    "server_connection_loss": "connection_lost",
+    "gsm_connection_loss": "connection_lost",
+    "ethernet_connection_loss": "connection_lost",
+    # Malfunction
+    "malfunction": "malfunction",
+    # Fire/smoke
+    "smoke_detected": "fire",
+    # CO
+    "high_co_level_detected": "co_alarm",
+    # Water
+    "leak_detected": "flood",
+    # Glass
+    "glass_break_detected": "glass_break",
+    # Motion
+    "motion_detected": "motion",
+    # Door
+    "door_opened": "door_open",
+}
+
+ALL_EVENT_TYPES: list[str] = sorted(set(HUB_EVENT_TAG_MAP.values()))

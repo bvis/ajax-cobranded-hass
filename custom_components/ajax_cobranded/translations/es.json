@@ -4,17 +4,25 @@
             "user": {
                 "title": "Inicio de sesion Ajax Security",
                 "description": "Introduce las credenciales de tu cuenta Ajax Security.",
-                "data": { "email": "Correo electronico", "password": "Contrasena", "app_label": "Etiqueta de app (nombre de la app co-branded)" }
+                "data": {
+                    "email": "Correo electronico",
+                    "password": "Contrasena",
+                    "app_label": "Etiqueta de app (nombre de la app co-branded)"
+                }
             },
             "2fa": {
                 "title": "Autenticacion de dos factores",
                 "description": "Introduce el codigo de 6 digitos de tu app de autenticacion.",
-                "data": { "totp_code": "Codigo TOTP" }
+                "data": {
+                    "totp_code": "Codigo TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Seleccionar espacios",
                 "description": "Elige que espacios (hubs) anadir.",
-                "data": { "spaces": "Espacios" }
+                "data": {
+                    "spaces": "Espacios"
+                }
             }
         },
         "error": {
@@ -60,6 +68,33 @@
                 "name": "Capturar foto"
             }
         },
+        "event": {
+            "security_event": {
+                "name": "Evento de seguridad",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarma",
+                            "arm": "Armado",
+                            "arm_night": "Armado nocturno",
+                            "battery_low": "Bateria baja",
+                            "co_alarm": "Alarma CO",
+                            "connection_lost": "Conexion perdida",
+                            "disarm": "Desarmado",
+                            "disarm_night": "Desarmado nocturno",
+                            "door_open": "Puerta abierta",
+                            "fire": "Fuego",
+                            "flood": "Inundacion",
+                            "glass_break": "Rotura de cristal",
+                            "malfunction": "Averia",
+                            "motion": "Movimiento",
+                            "panic": "Panico",
+                            "tamper": "Manipulacion"
+                        }
+                    }
+                }
+            }
+        },
         "binary_sensor": {
             "monitoring": {
                 "name": "Conexion CRA"
@@ -98,7 +133,7 @@
                 "name": "Rotura de cristal"
             },
             "vibration": {
-                "name": "Vibraci\u00f3n"
+                "name": "Vibración"
             },
             "connectivity": {
                 "name": "Conectividad"

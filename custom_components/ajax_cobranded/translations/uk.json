@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "Двофакторна автентифікація",
                 "description": "Введіть 6-значний код з вашого додатку автентифікації.",
-                "data": { "totp_code": "Код TOTP" }
+                "data": {
+                    "totp_code": "Код TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Вибір просторів",
                 "description": "Виберіть простори (хаби) для додавання.",
-                "data": { "spaces": "Простори" }
+                "data": {
+                    "spaces": "Простори"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Зробити фото" }
+            "capture_photo": {
+                "name": "Зробити фото"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Подія безпеки",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Тривога",
+                            "arm": "Під охороною",
+                            "arm_night": "Нічний режим увімкнено",
+                            "battery_low": "Низький заряд батареї",
+                            "co_alarm": "Тривога CO",
+                            "connection_lost": "З'єднання втрачено",
+                            "disarm": "Знято з охорони",
+                            "disarm_night": "Нічний режим вимкнено",
+                            "door_open": "Двері відчинені",
+                            "fire": "Пожежа",
+                            "flood": "Затоплення",
+                            "glass_break": "Розбиття скла",
+                            "malfunction": "Несправність",
+                            "motion": "Рух",
+                            "panic": "Паніка",
+                            "tamper": "Втручання"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Підключення до ЦМО" },
-            "gsm": { "name": "Стільниковий зв'язок" },
-            "lid": { "name": "Кришка відкрита" },
-            "ext_contact": { "name": "Зовнішній контакт розімкнений" },
-            "ext_alert": { "name": "Тривога зовнішнього контакту" },
-            "drilling": { "name": "Свердління корпусу" },
-            "anti_mask": { "name": "Антизамаскування" },
-            "malfunction": { "name": "Несправність" },
-            "interference": { "name": "Перешкоди" },
-            "relay_stuck": { "name": "Реле застрягло" },
-            "always_active": { "name": "Завжди активний" },
-            "glass_break": { "name": "Розбиття скла" },
-            "vibration": { "name": "Вібрація" },
-            "connectivity": { "name": "Підключення" },
-            "problem": { "name": "Проблема" }
+            "monitoring": {
+                "name": "Підключення до ЦМО"
+            },
+            "gsm": {
+                "name": "Стільниковий зв'язок"
+            },
+            "lid": {
+                "name": "Кришка відкрита"
+            },
+            "ext_contact": {
+                "name": "Зовнішній контакт розімкнений"
+            },
+            "ext_alert": {
+                "name": "Тривога зовнішнього контакту"
+            },
+            "drilling": {
+                "name": "Свердління корпусу"
+            },
+            "anti_mask": {
+                "name": "Антизамаскування"
+            },
+            "malfunction": {
+                "name": "Несправність"
+            },
+            "interference": {
+                "name": "Перешкоди"
+            },
+            "relay_stuck": {
+                "name": "Реле застрягло"
+            },
+            "always_active": {
+                "name": "Завжди активний"
+            },
+            "glass_break": {
+                "name": "Розбиття скла"
+            },
+            "vibration": {
+                "name": "Вібрація"
+            },
+            "connectivity": {
+                "name": "Підключення"
+            },
+            "problem": {
+                "name": "Проблема"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Рівень сигналу" },
-            "gsm_type": { "name": "Тип GSM" },
-            "wifi_signal_level": { "name": "Рівень сигналу Wi-Fi" },
-            "sim_status": { "name": "Стан SIM-карти" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Рівень сигналу"
+            },
+            "gsm_type": {
+                "name": "Тип GSM"
+            },
+            "wifi_signal_level": {
+                "name": "Рівень сигналу Wi-Fi"
+            },
+            "sim_status": {
+                "name": "Стан SIM-карти"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Канал 1" },
-            "channel_2": { "name": "Канал 2" }
+            "channel_1": {
+                "name": "Канал 1"
+            },
+            "channel_2": {
+                "name": "Канал 2"
+            }
         }
     }
 }

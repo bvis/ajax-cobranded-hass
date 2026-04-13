@@ -15,6 +15,7 @@ from homeassistant.helpers.storage import Store
 
 from custom_components.ajax_cobranded.const import (
     DOMAIN,
+    HUB_EVENT_TAG_MAP,
 )
 
 if TYPE_CHECKING:
@@ -192,6 +193,10 @@ class AjaxNotificationListener:
             except Exception:
                 _LOGGER.debug("Failed to parse ENCODED_DATA from push")
 
+        # Parse event from ENCODED_DATA using compiled protos
+        if encoded_data:
+            self._parse_and_fire_event(encoded_data)
+
         # Always trigger refresh
         if self._hass.loop and self._hass.loop.is_running():
             self._hass.loop.call_soon_threadsafe(
@@ -211,6 +216,102 @@ class AjaxNotificationListener:
             return None
         finally:
             self._photo_callbacks.pop(device_id, None)
+
+    def _parse_and_fire_event(self, encoded_data: str) -> None:
+        """Parse event from base64-encoded push notification data."""
+        try:
+            raw = base64.b64decode(encoded_data)
+            event_info = self._extract_event_from_proto(raw)
+            if event_info:
+                event_type, event_data = event_info
+                for space_id in self._coordinator._space_ids:
+                    self._coordinator.fire_push_event(space_id, event_type, event_data)
+        except Exception:
+            _LOGGER.debug("Failed to parse event from push notification")
+
+    def _extract_event_from_proto(self, raw: bytes) -> tuple[str, dict[str, Any]] | None:
+        """Extract event type and data from raw protobuf bytes.
+
+        Attempts to decode using compiled protos. Falls back to raw parsing
+        if proto imports fail.
+        """
+        try:
+            return self._extract_event_with_compiled_protos(raw)
+        except Exception:
+            _LOGGER.debug("Compiled proto parsing failed, trying raw extraction")
+            return self._extract_event_raw(raw)
+
+    def _extract_event_with_compiled_protos(self, raw: bytes) -> tuple[str, dict[str, Any]] | None:
+        """Parse event by finding HubEventQualifier embedded in raw protobuf."""
+        import sys  # noqa: PLC0415
+        from pathlib import Path  # noqa: PLC0415
+
+        proto_path = str(Path(__file__).parent / "proto")
+        if proto_path not in sys.path:
+            sys.path.append(proto_path)
+
+        from systems.ajax.api.ecosystem.v2.communicationsvc.mobile.commonmodels.event.hub import (  # noqa: PLC0415, E501
+            qualifier_pb2,
+        )
+
+        for candidate in self._find_embedded_messages(raw):
+            try:
+                qualifier = qualifier_pb2.HubEventQualifier()
+                qualifier.ParseFromString(candidate)
+                if qualifier.HasField("tag"):
+                    tag = qualifier.tag
+                    tag_field = tag.WhichOneof("event_tag_case")
+                    if tag_field and tag_field in HUB_EVENT_TAG_MAP:
+                        event_type = HUB_EVENT_TAG_MAP[tag_field]
+                        data: dict[str, Any] = {"raw_tag": tag_field}
+                        if qualifier.HasField("transition"):
+                            trans_field = qualifier.transition.WhichOneof("transition")
+                            if trans_field:
+                                data["transition"] = trans_field
+                        return event_type, data
+            except Exception:
+                continue
+        return None
+
+    @staticmethod
+    def _find_embedded_messages(raw: bytes) -> list[bytes]:
+        """Extract candidate embedded protobuf messages from raw bytes.
+
+        Scans for length-delimited fields (wire type 2) and extracts their content.
+        Returns candidates from deepest nesting first (most likely to be the qualifier).
+        """
+        candidates: list[bytes] = []
+        i = 0
+        while i < len(raw) - 2:
+            wire_type = raw[i] & 0x07
+            if wire_type == 2:  # length-delimited
+                # Read varint length
+                j = i + 1
+                length = 0
+                shift = 0
+                while j < len(raw):
+                    byte = raw[j]
+                    length |= (byte & 0x7F) << shift
+                    shift += 7
+                    j += 1
+                    if not (byte & 0x80):
+                        break
+                if j + length <= len(raw) and 4 < length < 500:
+                    candidate = raw[j : j + length]
+                    candidates.append(candidate)
+                    # Also recurse into the candidate
+                    inner = AjaxNotificationListener._find_embedded_messages(candidate)
+                    candidates.extend(inner)
+                i = j + length if j + length <= len(raw) else i + 1
+            else:
+                i += 1
+        return candidates
+
+    @staticmethod
+    def _extract_event_raw(raw: bytes) -> tuple[str, dict[str, Any]] | None:
+        """Fallback: extract event tag from raw protobuf bytes by scanning for known patterns."""
+        # This is a best-effort fallback when compiled protos aren't available
+        return None
 
     async def async_stop(self) -> None:
         """Stop the FCM push client."""

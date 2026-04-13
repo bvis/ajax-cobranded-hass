@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "Autenticação de dois fatores",
                 "description": "Introduza o código de 6 dígitos da sua aplicação de autenticação.",
-                "data": { "totp_code": "Código TOTP" }
+                "data": {
+                    "totp_code": "Código TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Selecionar espaços",
                 "description": "Escolha quais os espaços (hubs) a adicionar.",
-                "data": { "spaces": "Espaços" }
+                "data": {
+                    "spaces": "Espaços"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Tirar foto" }
+            "capture_photo": {
+                "name": "Tirar foto"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Evento de segurança",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarme",
+                            "arm": "Armado",
+                            "arm_night": "Modo noturno ativado",
+                            "battery_low": "Bateria fraca",
+                            "co_alarm": "Alarme CO",
+                            "connection_lost": "Ligação perdida",
+                            "disarm": "Desarmado",
+                            "disarm_night": "Modo noturno desativado",
+                            "door_open": "Porta aberta",
+                            "fire": "Incêndio",
+                            "flood": "Inundação",
+                            "glass_break": "Quebra de vidro",
+                            "malfunction": "Avaria",
+                            "motion": "Movimento",
+                            "panic": "Pânico",
+                            "tamper": "Adulteração"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Ligação à central de monitorização" },
-            "gsm": { "name": "Rede celular ligada" },
-            "lid": { "name": "Tampa aberta" },
-            "ext_contact": { "name": "Contacto externo interrompido" },
-            "ext_alert": { "name": "Alerta de contacto externo" },
-            "drilling": { "name": "Perfuração da caixa" },
-            "anti_mask": { "name": "Anti-mascaramento" },
-            "malfunction": { "name": "Avaria" },
-            "interference": { "name": "Interferência" },
-            "relay_stuck": { "name": "Relé bloqueado" },
-            "always_active": { "name": "Sempre ativo" },
-            "glass_break": { "name": "Quebra de vidro" },
-            "vibration": { "name": "Vibra\u00e7\u00e3o" },
-            "connectivity": { "name": "Conectividade" },
-            "problem": { "name": "Problema" }
+            "monitoring": {
+                "name": "Ligação à central de monitorização"
+            },
+            "gsm": {
+                "name": "Rede celular ligada"
+            },
+            "lid": {
+                "name": "Tampa aberta"
+            },
+            "ext_contact": {
+                "name": "Contacto externo interrompido"
+            },
+            "ext_alert": {
+                "name": "Alerta de contacto externo"
+            },
+            "drilling": {
+                "name": "Perfuração da caixa"
+            },
+            "anti_mask": {
+                "name": "Anti-mascaramento"
+            },
+            "malfunction": {
+                "name": "Avaria"
+            },
+            "interference": {
+                "name": "Interferência"
+            },
+            "relay_stuck": {
+                "name": "Relé bloqueado"
+            },
+            "always_active": {
+                "name": "Sempre ativo"
+            },
+            "glass_break": {
+                "name": "Quebra de vidro"
+            },
+            "vibration": {
+                "name": "Vibração"
+            },
+            "connectivity": {
+                "name": "Conectividade"
+            },
+            "problem": {
+                "name": "Problema"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Nível de sinal" },
-            "gsm_type": { "name": "Tipo GSM" },
-            "wifi_signal_level": { "name": "Nível de sinal Wi-Fi" },
-            "sim_status": { "name": "Estado do SIM" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Nível de sinal"
+            },
+            "gsm_type": {
+                "name": "Tipo GSM"
+            },
+            "wifi_signal_level": {
+                "name": "Nível de sinal Wi-Fi"
+            },
+            "sim_status": {
+                "name": "Estado do SIM"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Canal 1" },
-            "channel_2": { "name": "Canal 2" }
+            "channel_1": {
+                "name": "Canal 1"
+            },
+            "channel_2": {
+                "name": "Canal 2"
+            }
         }
     }
 }

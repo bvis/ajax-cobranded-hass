@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "Twee-factor-authenticatie",
                 "description": "Voer de 6-cijferige code in van uw authenticator-app.",
-                "data": { "totp_code": "TOTP-code" }
+                "data": {
+                    "totp_code": "TOTP-code"
+                }
             },
             "select_spaces": {
                 "title": "Selecteer ruimtes",
                 "description": "Kies welke ruimtes (hubs) u wilt toevoegen.",
-                "data": { "spaces": "Ruimtes" }
+                "data": {
+                    "spaces": "Ruimtes"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Foto maken" }
+            "capture_photo": {
+                "name": "Foto maken"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Beveiligingsgebeurtenis",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarm",
+                            "arm": "Ingeschakeld",
+                            "arm_night": "Nachtmodus ingeschakeld",
+                            "battery_low": "Batterij laag",
+                            "co_alarm": "CO-alarm",
+                            "connection_lost": "Verbinding verloren",
+                            "disarm": "Uitgeschakeld",
+                            "disarm_night": "Nachtmodus uitgeschakeld",
+                            "door_open": "Deur geopend",
+                            "fire": "Brand",
+                            "flood": "Overstroming",
+                            "glass_break": "Glasbreuk",
+                            "malfunction": "Storing",
+                            "motion": "Beweging",
+                            "panic": "Paniek",
+                            "tamper": "Sabotage"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Verbinding meldkamer" },
-            "gsm": { "name": "Mobiel netwerk verbonden" },
-            "lid": { "name": "Deksel geopend" },
-            "ext_contact": { "name": "Extern contact verbroken" },
-            "ext_alert": { "name": "Alarm extern contact" },
-            "drilling": { "name": "Boren in behuizing" },
-            "anti_mask": { "name": "Anti-masking" },
-            "malfunction": { "name": "Storing" },
-            "interference": { "name": "Interferentie" },
-            "relay_stuck": { "name": "Relais geblokkeerd" },
-            "always_active": { "name": "Altijd actief" },
-            "glass_break": { "name": "Glasbreuk" },
-            "vibration": { "name": "Vibratie" },
-            "connectivity": { "name": "Verbinding" },
-            "problem": { "name": "Probleem" }
+            "monitoring": {
+                "name": "Verbinding meldkamer"
+            },
+            "gsm": {
+                "name": "Mobiel netwerk verbonden"
+            },
+            "lid": {
+                "name": "Deksel geopend"
+            },
+            "ext_contact": {
+                "name": "Extern contact verbroken"
+            },
+            "ext_alert": {
+                "name": "Alarm extern contact"
+            },
+            "drilling": {
+                "name": "Boren in behuizing"
+            },
+            "anti_mask": {
+                "name": "Anti-masking"
+            },
+            "malfunction": {
+                "name": "Storing"
+            },
+            "interference": {
+                "name": "Interferentie"
+            },
+            "relay_stuck": {
+                "name": "Relais geblokkeerd"
+            },
+            "always_active": {
+                "name": "Altijd actief"
+            },
+            "glass_break": {
+                "name": "Glasbreuk"
+            },
+            "vibration": {
+                "name": "Vibratie"
+            },
+            "connectivity": {
+                "name": "Verbinding"
+            },
+            "problem": {
+                "name": "Probleem"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Signaalsterkte" },
-            "gsm_type": { "name": "GSM-type" },
-            "wifi_signal_level": { "name": "Wi-Fi-signaalsterkte" },
-            "sim_status": { "name": "SIM-status" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Signaalsterkte"
+            },
+            "gsm_type": {
+                "name": "GSM-type"
+            },
+            "wifi_signal_level": {
+                "name": "Wi-Fi-signaalsterkte"
+            },
+            "sim_status": {
+                "name": "SIM-status"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Kanaal 1" },
-            "channel_2": { "name": "Kanaal 2" }
+            "channel_1": {
+                "name": "Kanaal 1"
+            },
+            "channel_2": {
+                "name": "Kanaal 2"
+            }
         }
     }
 }

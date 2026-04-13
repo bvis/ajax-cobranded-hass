@@ -13,12 +13,16 @@
             "2fa": {
                 "title": "Uwierzytelnianie dwuskładnikowe",
                 "description": "Wprowadź 6-cyfrowy kod z aplikacji uwierzytelniającej.",
-                "data": { "totp_code": "Kod TOTP" }
+                "data": {
+                    "totp_code": "Kod TOTP"
+                }
             },
             "select_spaces": {
                 "title": "Wybierz przestrzenie",
                 "description": "Wybierz przestrzenie (huby) do dodania.",
-                "data": { "spaces": "Przestrzenie" }
+                "data": {
+                    "spaces": "Przestrzenie"
+                }
             }
         },
         "error": {
@@ -60,35 +64,108 @@
     },
     "entity": {
         "button": {
-            "capture_photo": { "name": "Zrób zdjęcie" }
+            "capture_photo": {
+                "name": "Zrób zdjęcie"
+            }
+        },
+        "event": {
+            "security_event": {
+                "name": "Zdarzenie bezpieczeństwa",
+                "state_attributes": {
+                    "event_type": {
+                        "state": {
+                            "alarm": "Alarm",
+                            "arm": "Uzbrojony",
+                            "arm_night": "Tryb nocny włączony",
+                            "battery_low": "Niski poziom baterii",
+                            "co_alarm": "Alarm CO",
+                            "connection_lost": "Połączenie utracone",
+                            "disarm": "Rozbrojony",
+                            "disarm_night": "Tryb nocny wyłączony",
+                            "door_open": "Drzwi otwarte",
+                            "fire": "Pożar",
+                            "flood": "Zalanie",
+                            "glass_break": "Rozbicie szyby",
+                            "malfunction": "Usterka",
+                            "motion": "Ruch",
+                            "panic": "Panika",
+                            "tamper": "Sabotaż"
+                        }
+                    }
+                }
+            }
         },
         "binary_sensor": {
-            "monitoring": { "name": "Połączenie z centrum monitoringu" },
-            "gsm": { "name": "Sieć komórkowa" },
-            "lid": { "name": "Pokrywa otwarta" },
-            "ext_contact": { "name": "Zewnętrzny styk przerwany" },
-            "ext_alert": { "name": "Alarm zewnętrznego styku" },
-            "drilling": { "name": "Wiercenie obudowy" },
-            "anti_mask": { "name": "Antymaskowanie" },
-            "malfunction": { "name": "Usterka" },
-            "interference": { "name": "Zakłócenia" },
-            "relay_stuck": { "name": "Przekaźnik zablokowany" },
-            "always_active": { "name": "Zawsze aktywny" },
-            "glass_break": { "name": "Rozbicie szyby" },
-            "vibration": { "name": "Wibracja" },
-            "connectivity": { "name": "Łączność" },
-            "problem": { "name": "Problem" }
+            "monitoring": {
+                "name": "Połączenie z centrum monitoringu"
+            },
+            "gsm": {
+                "name": "Sieć komórkowa"
+            },
+            "lid": {
+                "name": "Pokrywa otwarta"
+            },
+            "ext_contact": {
+                "name": "Zewnętrzny styk przerwany"
+            },
+            "ext_alert": {
+                "name": "Alarm zewnętrznego styku"
+            },
+            "drilling": {
+                "name": "Wiercenie obudowy"
+            },
+            "anti_mask": {
+                "name": "Antymaskowanie"
+            },
+            "malfunction": {
+                "name": "Usterka"
+            },
+            "interference": {
+                "name": "Zakłócenia"
+            },
+            "relay_stuck": {
+                "name": "Przekaźnik zablokowany"
+            },
+            "always_active": {
+                "name": "Zawsze aktywny"
+            },
+            "glass_break": {
+                "name": "Rozbicie szyby"
+            },
+            "vibration": {
+                "name": "Wibracja"
+            },
+            "connectivity": {
+                "name": "Łączność"
+            },
+            "problem": {
+                "name": "Problem"
+            }
         },
         "sensor": {
-            "signal_level": { "name": "Poziom sygnału" },
-            "gsm_type": { "name": "Typ GSM" },
-            "wifi_signal_level": { "name": "Poziom sygnału Wi-Fi" },
-            "sim_status": { "name": "Status karty SIM" },
-            "sim_imei": { "name": "IMEI" }
+            "signal_level": {
+                "name": "Poziom sygnału"
+            },
+            "gsm_type": {
+                "name": "Typ GSM"
+            },
+            "wifi_signal_level": {
+                "name": "Poziom sygnału Wi-Fi"
+            },
+            "sim_status": {
+                "name": "Status karty SIM"
+            },
+            "sim_imei": {
+                "name": "IMEI"
+            }
         },
         "switch": {
-            "channel_1": { "name": "Kanał 1" },
-            "channel_2": { "name": "Kanał 2" }
+            "channel_1": {
+                "name": "Kanał 1"
+            },
+            "channel_2": {
+                "name": "Kanał 2"
+            }
         }
     }
 }
