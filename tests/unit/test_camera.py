@@ -137,6 +137,7 @@ class TestAjaxCamera:
     async def test_async_camera_image_returns_bytes_via_media_stream(self) -> None:
         """Full success path: capture -> notification_id -> media stream -> download."""
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value="NOTIF123")
@@ -169,16 +170,12 @@ class TestAjaxCamera:
         coordinator.media_api.get_photo_url.assert_called_once_with("NOTIF123", "h1", timeout=15.0)
 
     @pytest.mark.asyncio
-    async def test_async_camera_image_fallback_to_push_url(self) -> None:
-        """When notification_id is None, falls back to old URL extraction."""
+    async def test_async_camera_image_uses_cached_url_from_button(self) -> None:
+        """When button already retrieved a URL, camera uses it directly."""
         coordinator = MagicMock()
-        coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
-        mock_listener = MagicMock()
-        mock_listener.wait_for_notification_id = AsyncMock(return_value=None)
-        mock_listener.wait_for_photo_url = AsyncMock(
-            return_value="https://app.prod.ajax.systems/fallback.jpg"
-        )
-        coordinator.notification_listener = mock_listener
+        coordinator.last_photo_urls = {
+            "d1": "https://hubs-uploaded-resources.s3.amazonaws.com/photo.jpg"
+        }
 
         cam = AjaxCamera(
             coordinator=coordinator, device_id="d1", hub_id="h1", device_type="motion_cam_phod"
@@ -186,7 +183,7 @@ class TestAjaxCamera:
 
         mock_resp = AsyncMock()
         mock_resp.status = 200
-        mock_resp.read = AsyncMock(return_value=b"fallback_data")
+        mock_resp.read = AsyncMock(return_value=b"cached_url_data")
         mock_resp.__aenter__ = AsyncMock(return_value=mock_resp)
         mock_resp.__aexit__ = AsyncMock(return_value=None)
 
@@ -199,13 +196,15 @@ class TestAjaxCamera:
         ):
             result = await cam.async_camera_image()
 
-        assert result == b"fallback_data"
-        mock_listener.wait_for_photo_url.assert_called_once_with("d1", timeout=5.0)
+        assert result == b"cached_url_data"
+        # URL should be consumed (popped)
+        assert "d1" not in coordinator.last_photo_urls
 
     @pytest.mark.asyncio
     async def test_async_camera_image_returns_none_when_capture_fails(self) -> None:
         """When capture_photo returns None, no URL wait happens and cached image returned."""
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value=None)
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value=None)
@@ -224,6 +223,7 @@ class TestAjaxCamera:
     async def test_async_camera_image_returns_cached_when_no_url(self) -> None:
         """When both notification_id and push URL fail, cached image is returned."""
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value=None)
@@ -242,6 +242,7 @@ class TestAjaxCamera:
     async def test_async_camera_image_media_stream_no_url(self) -> None:
         """When notification_id arrives but media stream returns no URL."""
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value="NOTIF456")
@@ -259,6 +260,7 @@ class TestAjaxCamera:
     @pytest.mark.asyncio
     async def test_async_camera_image_handles_http_error(self) -> None:
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value="NOTIF789")
@@ -293,6 +295,7 @@ class TestAjaxCamera:
     @pytest.mark.asyncio
     async def test_async_camera_image_handles_download_exception(self) -> None:
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         mock_listener = MagicMock()
         mock_listener.wait_for_notification_id = AsyncMock(return_value="NOTIF_EXC")
@@ -322,6 +325,7 @@ class TestAjaxCamera:
     async def test_async_camera_image_no_notification_listener(self) -> None:
         """When notification_listener is None, capture returns but no URL wait."""
         coordinator = MagicMock()
+        coordinator.last_photo_urls = {}
         coordinator.devices_api.capture_photo = AsyncMock(return_value="d1")
         coordinator.notification_listener = None
 

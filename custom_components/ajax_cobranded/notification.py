@@ -202,7 +202,9 @@ class AjaxNotificationListener:
                 for raw_url in urls:
                     photo_url = raw_url.decode("utf-8", errors="ignore")
                     parsed = urlparse(photo_url)
-                    if not parsed.hostname or not parsed.hostname.endswith(".ajax.systems"):
+                    is_ajax = parsed.hostname and parsed.hostname.endswith(".ajax.systems")
+                    is_s3 = parsed.hostname and "hubs-uploaded-resources" in parsed.hostname
+                    if not is_ajax and not is_s3:
                         _LOGGER.debug("Rejected photo URL from unexpected domain")
                         continue
                     _LOGGER.debug("Extracted photo URL from push: %s", photo_url[:60])

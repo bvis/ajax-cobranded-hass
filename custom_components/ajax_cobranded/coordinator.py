@@ -53,6 +53,7 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self._stream_tasks: list[asyncio.Task[None]] = []
         self._streams_started: bool = False
         self._event_entities: dict[str, Any] = {}
+        self.last_photo_urls: dict[str, str] = {}
 
     @property
     def security_api(self) -> SecurityApi:

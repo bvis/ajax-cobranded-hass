@@ -74,18 +74,25 @@ class MediaApi:
         )
 
         try:
+            _LOGGER.debug(
+                "Opening media stream: notification_id=%s hub=%s",
+                notification_id[:20],
+                hub_hex_id,
+            )
             stream = method(request_bytes, metadata=metadata, timeout=timeout)
             async for raw_response in stream:
                 # Search for HTTPS URLs in the response
                 urls = re.findall(rb'https://[^\x00-\x1f\x7f-\x9f"\'\\]+', raw_response)
                 for raw_url in urls:
                     url: str = raw_url.decode("utf-8", errors="ignore")
-                    if ".ajax.systems" in url:
+                    # Photo URLs can be on ajax.systems or S3 (hubs-uploaded-resources)
+                    if ".ajax.systems" in url or "hubs-uploaded-resources" in url:
                         _LOGGER.debug("Photo URL from media stream: %s", url[:80])
                         return url
                 _LOGGER.debug(
-                    "Media stream frame: %d bytes, no URL yet",
+                    "Media stream frame: %d bytes, hex=%s",
                     len(raw_response),
+                    raw_response[:200].hex(),
                 )
         except TimeoutError:
             _LOGGER.debug("Timeout waiting for photo URL from media stream")
