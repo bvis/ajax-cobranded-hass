@@ -256,6 +256,78 @@ class TestArmNightMode:
             await api.arm_night_mode("space-1")
 
 
+class TestDisarmFromNightMode:
+    @pytest.mark.asyncio
+    async def test_disarm_from_night_mode_calls_stub(self) -> None:
+        api, mock_channel, _ = _make_security_api()
+
+        mock_stub_instance = MagicMock()
+        mock_response = MagicMock()
+        mock_response.HasField.return_value = False
+        mock_stub_instance.disarmFromNightMode = AsyncMock(return_value=mock_response)
+
+        mock_stub_class = MagicMock(return_value=mock_stub_instance)
+        mock_request_pb2 = MagicMock()
+        mock_grpc_module = MagicMock(SpaceSecurityServiceStub=mock_stub_class)
+        mock_locator_pb2 = MagicMock()
+
+        with patch.dict(
+            "sys.modules",
+            {
+                "systems.ajax.api.mobile.v2.space.security.disarm_from_night_mode_request_pb2": (
+                    mock_request_pb2
+                ),
+                _GRPC_MOD: mock_grpc_module,
+                "systems.ajax.api.mobile.v2.common.space.space_locator_pb2": mock_locator_pb2,
+                "systems.ajax.api.mobile.v2.space.security": MagicMock(
+                    disarm_from_night_mode_request_pb2=mock_request_pb2,
+                    space_security_endpoints_pb2_grpc=mock_grpc_module,
+                ),
+                "systems.ajax.api.mobile.v2.common.space": MagicMock(
+                    space_locator_pb2=mock_locator_pb2,
+                ),
+            },
+        ):
+            await api.disarm_from_night_mode("space-1")
+
+        mock_stub_instance.disarmFromNightMode.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_disarm_from_night_mode_raises_on_failure(self) -> None:
+        api, mock_channel, _ = _make_security_api()
+
+        mock_stub_instance = MagicMock()
+        mock_response = MagicMock()
+        mock_response.HasField.return_value = True
+        mock_stub_instance.disarmFromNightMode = AsyncMock(return_value=mock_response)
+
+        mock_stub_class = MagicMock(return_value=mock_stub_instance)
+        mock_request_pb2 = MagicMock()
+        mock_grpc_module = MagicMock(SpaceSecurityServiceStub=mock_stub_class)
+        mock_locator_pb2 = MagicMock()
+
+        with (
+            patch.dict(
+                "sys.modules",
+                {
+                    "systems.ajax.api.mobile.v2.space.security"
+                    ".disarm_from_night_mode_request_pb2": mock_request_pb2,
+                    _GRPC_MOD: mock_grpc_module,
+                    "systems.ajax.api.mobile.v2.common.space.space_locator_pb2": mock_locator_pb2,
+                    "systems.ajax.api.mobile.v2.space.security": MagicMock(
+                        disarm_from_night_mode_request_pb2=mock_request_pb2,
+                        space_security_endpoints_pb2_grpc=mock_grpc_module,
+                    ),
+                    "systems.ajax.api.mobile.v2.common.space": MagicMock(
+                        space_locator_pb2=mock_locator_pb2,
+                    ),
+                },
+            ),
+            pytest.raises(SecurityError, match="Disarm from night mode command rejected"),
+        ):
+            await api.disarm_from_night_mode("space-1")
+
+
 class TestArmGroup:
     @pytest.mark.asyncio
     async def test_arm_group_calls_stub(self) -> None:

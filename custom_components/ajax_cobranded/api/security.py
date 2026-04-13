@@ -99,6 +99,26 @@ class SecurityApi:
             raise SecurityError("Arm to night mode command rejected by server")
         _LOGGER.debug("Armed space %s in night mode", space_id)
 
+    async def disarm_from_night_mode(self, space_id: str) -> None:
+        self._get_proto_path()
+        from systems.ajax.api.mobile.v2.common.space import space_locator_pb2  # noqa: PLC0415
+        from systems.ajax.api.mobile.v2.space.security import (  # noqa: PLC0415
+            disarm_from_night_mode_request_pb2,
+            space_security_endpoints_pb2_grpc,
+        )
+
+        channel = self._client._get_channel()
+        metadata = self._client._session.get_call_metadata()
+        stub = space_security_endpoints_pb2_grpc.SpaceSecurityServiceStub(channel)
+
+        request = disarm_from_night_mode_request_pb2.DisarmSpaceFromNightModeRequest(
+            space_locator=space_locator_pb2.SpaceLocator(space_id=space_id),
+        )
+        response = await stub.disarmFromNightMode(request, metadata=metadata, timeout=15)
+        if response.HasField("failure"):
+            raise SecurityError("Disarm from night mode command rejected by server")
+        _LOGGER.debug("Disarmed space %s from night mode", space_id)
+
     async def arm_group(self, space_id: str, group_id: str, ignore_alarms: bool = False) -> None:
         self._get_proto_path()
         from systems.ajax.api.mobile.v2.common.space import space_locator_pb2  # noqa: PLC0415

@@ -132,5 +132,9 @@ class AjaxAlarmControlPanel(CoordinatorEntity[AjaxCobrandedCoordinator], AlarmCo
 
     async def async_alarm_disarm(self, code: str | None = None) -> None:
         self._validate_code(code)
-        await self.coordinator.security_api.disarm(self._space_id)
+        space = self._space
+        if space is not None and space.security_state == SecurityState.NIGHT_MODE:
+            await self.coordinator.security_api.disarm_from_night_mode(self._space_id)
+        else:
+            await self.coordinator.security_api.disarm(self._space_id)
         await self.coordinator.async_request_refresh()
