@@ -74,6 +74,8 @@
             "interference": { "name": "Zakłócenia" },
             "relay_stuck": { "name": "Przekaźnik zablokowany" },
             "always_active": { "name": "Zawsze aktywny" },
+            "glass_break": { "name": "Rozbicie szyby" },
+            "vibration": { "name": "Wibracja" },
             "connectivity": { "name": "Łączność" },
             "problem": { "name": "Problem" }
         },

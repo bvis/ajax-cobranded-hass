@@ -94,6 +94,12 @@
             "always_active": {
                 "name": "Sempre actiu"
             },
+            "glass_break": {
+                "name": "Trencament de vidre"
+            },
+            "vibration": {
+                "name": "Vibraci\u00f3"
+            },
             "connectivity": {
                 "name": "Connectivitat"
             },

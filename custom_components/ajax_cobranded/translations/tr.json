@@ -74,6 +74,8 @@
             "interference": { "name": "Parazit" },
             "relay_stuck": { "name": "Röle takılı" },
             "always_active": { "name": "Her zaman aktif" },
+            "glass_break": { "name": "Cam k\u0131r\u0131lmas\u0131" },
+            "vibration": { "name": "Titre\u015fim" },
             "connectivity": { "name": "Bağlantı" },
             "problem": { "name": "Sorun" }
         },

@@ -74,6 +74,8 @@
             "interference": { "name": "Rušení" },
             "relay_stuck": { "name": "Relé zaseknuté" },
             "always_active": { "name": "Vždy aktivní" },
+            "glass_break": { "name": "Rozbití skla" },
+            "vibration": { "name": "Vibrace" },
             "connectivity": { "name": "Připojení" },
             "problem": { "name": "Problém" }
         },

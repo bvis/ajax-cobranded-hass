@@ -94,6 +94,12 @@
             "always_active": {
                 "name": "Siempre activo"
             },
+            "glass_break": {
+                "name": "Rotura de cristal"
+            },
+            "vibration": {
+                "name": "Vibraci\u00f3n"
+            },
             "connectivity": {
                 "name": "Conectividad"
             },

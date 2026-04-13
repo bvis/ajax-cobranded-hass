@@ -67,6 +67,12 @@ class TestBinarySensorTypes:
     def test_always_active_type_exists(self) -> None:
         assert "always_active" in BINARY_SENSOR_TYPES
 
+    def test_glass_break_sensor_type_exists(self) -> None:
+        assert "glass_break" in BINARY_SENSOR_TYPES
+
+    def test_vibration_sensor_type_exists(self) -> None:
+        assert "vibration" in BINARY_SENSOR_TYPES
+
 
 class TestAjaxBinarySensor:
     def _make_device(self, statuses: dict) -> Device:
@@ -295,6 +301,33 @@ class TestDeviceTypeSensors:
 
     def test_motion_cam_fibra_in_device_types(self) -> None:
         assert "motion_cam_fibra" in _DEVICE_TYPE_SENSORS
+
+    def test_glass_protect_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["glass_protect"]
+
+    def test_glass_protect_s_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["glass_protect_s"]
+
+    def test_glass_protect_fibra_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["glass_protect_fibra"]
+
+    def test_combi_protect_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["combi_protect"]
+
+    def test_combi_protect_s_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["combi_protect_s"]
+
+    def test_combi_protect_fibra_has_glass_break(self) -> None:
+        assert "glass_break" in _DEVICE_TYPE_SENSORS["combi_protect_fibra"]
+
+    def test_door_protect_plus_has_vibration(self) -> None:
+        assert "vibration" in _DEVICE_TYPE_SENSORS["door_protect_plus"]
+
+    def test_door_protect_plus_fibra_has_vibration(self) -> None:
+        assert "vibration" in _DEVICE_TYPE_SENSORS["door_protect_plus_fibra"]
+
+    def test_door_protect_s_plus_has_vibration(self) -> None:
+        assert "vibration" in _DEVICE_TYPE_SENSORS["door_protect_s_plus"]
 
 
 class TestAjaxConnectivitySensor:

@@ -129,6 +129,10 @@ class DevicesApi:
                 result["high_temperature"] = True
             elif which == "leak_detected":
                 result["leak_detected"] = True
+            elif which == "glass_break_detected":
+                result["glass_break"] = True
+            elif which == "vibration_detected":
+                result["vibration"] = True
             elif which == "tamper":
                 result["tamper"] = True
             elif which == "temperature":
