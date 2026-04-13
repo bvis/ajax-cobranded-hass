@@ -133,8 +133,6 @@ class TestServiceRegistration:
         result = await async_unload_entry(hass, entry)
 
         assert result is True
-        remove_calls = {
-            call_args[0][1] for call_args in hass.services.async_remove.call_args_list
-        }
+        remove_calls = {call_args[0][1] for call_args in hass.services.async_remove.call_args_list}
         assert "force_arm" in remove_calls
         assert "force_arm_night" in remove_calls
