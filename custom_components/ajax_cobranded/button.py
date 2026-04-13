@@ -68,8 +68,32 @@ class AjaxCapturePhotoButton(CoordinatorEntity[AjaxCobrandedCoordinator], Button
             )
 
     async def async_press(self) -> None:
-        """Trigger photo capture."""
+        """Trigger photo capture and retrieve the photo URL."""
         _LOGGER.debug("Capture photo button pressed for %s", self._device_id)
-        await self.coordinator.devices_api.capture_photo(
+        result = await self.coordinator.devices_api.capture_photo(
             self._hub_id, self._device_id, self._device_type
         )
+        if not result:
+            _LOGGER.debug("Photo capture failed for %s", self._device_id)
+            return
+
+        listener = self.coordinator.notification_listener
+        if not listener:
+            return
+
+        # Wait for notification_id from FCM push
+        notification_id = await listener.wait_for_notification_id(self._device_id, timeout=15.0)
+        if not notification_id:
+            _LOGGER.debug("No notification_id received for %s", self._device_id)
+            return
+
+        # Get photo URL via media stream
+        url = await self.coordinator.media_api.get_photo_url(
+            notification_id, self._hub_id, timeout=30.0
+        )
+        if url:
+            _LOGGER.debug("Photo URL retrieved for %s: %s", self._device_id, url[:80])
+            # Store URL in coordinator for camera entity to use
+            self.coordinator.last_photo_urls[self._device_id] = url
+        else:
+            _LOGGER.debug("No photo URL from media stream for %s", self._device_id)

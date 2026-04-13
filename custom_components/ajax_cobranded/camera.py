@@ -95,8 +95,13 @@ class AjaxCamera(CoordinatorEntity[AjaxCobrandedCoordinator], Camera):
         width: int | None = None,
         height: int | None = None,  # noqa: ARG002
     ) -> bytes | None:
-        """Capture a new photo and return image bytes."""
-        # Step 1: Trigger capture via v2
+        """Return the last captured photo, or trigger a new capture."""
+        # Check if button.py already retrieved a URL for this device
+        url = self.coordinator.last_photo_urls.pop(self._device_id, None)
+        if url:
+            return await self._download_image(url)
+
+        # Otherwise trigger full capture flow
         result = await self.coordinator.devices_api.capture_photo(
             self._hub_id, self._device_id, self._device_type
         )
@@ -107,29 +112,18 @@ class AjaxCamera(CoordinatorEntity[AjaxCobrandedCoordinator], Camera):
         if not listener:
             return self._last_image
 
-        # Step 2: Wait for notification_id from FCM push
+        # Wait for notification_id from FCM push
         notification_id = await listener.wait_for_notification_id(self._device_id, timeout=15.0)
         if not notification_id:
-            _LOGGER.debug("No notification_id received, trying URL from push")
-            # Fallback: try the old URL extraction method
-            url = await listener.wait_for_photo_url(self._device_id, timeout=5.0)
-            if url:
-                return await self._download_image(url)
             return self._last_image
 
-        # Step 3: Get photo URL via streamNotificationMedia
+        # Get photo URL via streamNotificationMedia
         url = await self.coordinator.media_api.get_photo_url(
             notification_id, self._hub_id, timeout=15.0
         )
-        if not url:
-            _LOGGER.debug(
-                "No photo URL from media stream for notification %s",
-                notification_id[:20],
-            )
-            return self._last_image
-
-        # Step 4: Download the photo
-        return await self._download_image(url)
+        if url:
+            return await self._download_image(url)
+        return self._last_image
 
     async def _download_image(self, url: str) -> bytes | None:
         """Download image from URL and cache it."""
