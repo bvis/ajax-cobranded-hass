@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-04-13
+
+### Added
+- Force arm services (`ajax_cobranded.force_arm`, `ajax_cobranded.force_arm_night`) to arm ignoring open sensors
+- Event platform for FCM push notification events (alarm, arm/disarm, tamper, panic, fire, flood, motion, and more)
+- Logbook integration with human-readable security event descriptions and icons
+- Glass break binary sensor for GlassProtect and CombiProtect devices
+- Vibration binary sensor for DoorProtect Plus devices
+- MDI icons for all entity types (`icons.json`)
+
+### Changed
+- Event parsing uses compiled protobuf definitions from the official Ajax app for accurate event identification
+- Push notifications now fire HA events in addition to triggering coordinator refresh
+
+### Fixed
+- CI workflow now uses explicit `permissions: contents: read` (resolved 7 CodeQL alerts)
+- Proto files excluded from coverage calculation to prevent false coverage drops
+
 ## [0.4.0] - 2026-04-13
 
 ### Added
