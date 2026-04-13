@@ -74,6 +74,8 @@
             "interference": { "name": "Interférence" },
             "relay_stuck": { "name": "Relais bloqué" },
             "always_active": { "name": "Toujours actif" },
+            "glass_break": { "name": "Bris de verre" },
+            "vibration": { "name": "Vibration" },
             "connectivity": { "name": "Connectivité" },
             "problem": { "name": "Problème" }
         },

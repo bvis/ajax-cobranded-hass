@@ -102,6 +102,12 @@
             "always_active": {
                 "name": "Always active"
             },
+            "glass_break": {
+                "name": "Glass break"
+            },
+            "vibration": {
+                "name": "Vibration"
+            },
             "connectivity": {
                 "name": "Connectivity"
             },

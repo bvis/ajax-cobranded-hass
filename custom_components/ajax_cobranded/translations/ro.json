@@ -74,6 +74,8 @@
             "interference": { "name": "Interferență" },
             "relay_stuck": { "name": "Releu blocat" },
             "always_active": { "name": "Întotdeauna activ" },
+            "glass_break": { "name": "Spargere geam" },
+            "vibration": { "name": "Vibra\u021bie" },
             "connectivity": { "name": "Conectivitate" },
             "problem": { "name": "Problemă" }
         },

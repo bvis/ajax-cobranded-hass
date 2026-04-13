@@ -74,6 +74,8 @@
             "interference": { "name": "Перешкоди" },
             "relay_stuck": { "name": "Реле застрягло" },
             "always_active": { "name": "Завжди активний" },
+            "glass_break": { "name": "Розбиття скла" },
+            "vibration": { "name": "Вібрація" },
             "connectivity": { "name": "Підключення" },
             "problem": { "name": "Проблема" }
         },

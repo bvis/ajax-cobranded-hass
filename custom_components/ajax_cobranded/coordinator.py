@@ -144,6 +144,8 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             "case_drilling_detected": "case_drilling",
             "anti_masking_alert": "anti_masking",
             "interference_detected": "interference",
+            "glass_break_detected": "glass_break",
+            "vibration_detected": "vibration",
         }
         key = _status_key_map.get(status_name, status_name)
         _LOGGER.debug(
