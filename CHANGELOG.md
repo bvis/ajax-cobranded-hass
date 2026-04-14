@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2026-04-14
+
+### Fixed
+- Disarm retries automatically on `hub_busy` and `another_transition_is_in_progress` (3 attempts with 2s backoff)
+- Removed "disarm from triggered state" from roadmap — no separate triggered state exists; disarm works from armed state with retry
+
 ## [0.6.2] - 2026-04-14
 
 ### Fixed

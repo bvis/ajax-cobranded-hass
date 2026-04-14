@@ -200,7 +200,6 @@ Each hub has a **Security event** entity that fires events from FCM push notific
 
 ## Roadmap
 
-- [ ] Disarm from triggered/alarm state (investigate server endpoint)
 - [ ] Video stream support (VideoEdge, RTSP)
 - [ ] Smart lock support (LockBridge)
 - [ ] Valve platform (WaterStop)
