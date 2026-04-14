@@ -28,12 +28,12 @@ def _overlay_timestamp(image_bytes: bytes) -> bytes:
     try:
         from PIL import Image, ImageDraw, ImageFont  # noqa: PLC0415
 
-        img = Image.open(io.BytesIO(image_bytes))
-        draw = ImageDraw.Draw(img)
+        img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
+        overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         font = ImageFont.load_default(size=11)
 
-        # Tight background behind text
         text_bbox = draw.textbbox((0, 0), now, font=font)
         text_w = text_bbox[2] - text_bbox[0]
         text_h = text_bbox[3] - text_bbox[1]
@@ -44,7 +44,8 @@ def _overlay_timestamp(image_bytes: bytes) -> bytes:
             [(x, y), (x + text_w + padding * 2, y + text_h + padding * 2)],
             fill=(0, 0, 0, 160),
         )
-        draw.text((x + padding, y + padding), now, fill=(255, 255, 255), font=font)
+        draw.text((x + padding, y + padding), now, fill=(255, 255, 255, 255), font=font)
+        img = Image.alpha_composite(img, overlay).convert("RGB")
 
         output = io.BytesIO()
         img.save(output, format="JPEG", quality=90)
