@@ -14,15 +14,21 @@ Ajax Systems provides co-branded versions of their mobile app to security compan
 
 ## Features
 
-- **Alarm Control Panel**: Arm, disarm, night mode, group arming
-- **Binary Sensors**: Door open/close, motion detection, smoke, leak, tamper, CO, heat, CRA monitoring, cellular connection, lid tamper, external contacts, anti-masking, interference detection
-- **Sensors**: Battery level, temperature, humidity, CO2, signal strength, GSM type (2G/3G/4G), Wi-Fi signal level
+- **Alarm Control Panel**: Arm away, disarm, night mode, group arming with PIN code support
+- **Force Arm Services**: `ajax_cobranded.force_arm` and `ajax_cobranded.force_arm_night` to arm ignoring open sensors
+- **Binary Sensors**: Door open/close, motion detection, smoke, leak, tamper, CO, heat, glass break, vibration, CRA monitoring, cellular connection, lid tamper, external contacts, anti-masking, interference detection
+- **Sensors**: Battery level, temperature, humidity, CO2, signal strength, GSM type (2G/3G/4G), Wi-Fi signal level, IMEI
 - **Switches**: Relays, wall switches, sockets (multi-channel support)
 - **Lights**: Dimmers with brightness control
-- **Cameras**: MotionCam photo on-demand capture button
-- **Real-time updates**: Persistent gRPC stream for instant sensor state changes
+- **Cameras**: MotionCam Photo on Demand — capture photos and view them in HA (PhOD models only)
+- **Photo Storage**: Captured photos saved to `/media/ajax_photos/` with timestamp overlay, configurable retention
+- **Media Browser**: Browse captured photos per device via HA Media Browser
+- **Event Platform**: Security events from FCM push notifications (alarm, arm/disarm, tamper, panic, fire, flood, motion, and more)
+- **Logbook**: Human-readable security event descriptions with icons
+- **Real-time updates**: Persistent gRPC stream for instant sensor state changes (< 1 second latency)
 - **Push notifications**: FCM integration for immediate event delivery
 - **2FA support** (TOTP)
+- **MDI icons** for all entity types
 
 ## Requirements
 
@@ -57,6 +63,18 @@ Ajax Systems provides co-branded versions of their mobile app to security compan
 4. Select which spaces (hubs) to add
 5. Done
 
+### Options
+
+After setup, configure these in **Settings > Devices & Services > Ajax Security > Configure**:
+
+| Option | Default | Description |
+|---|---|---|
+| Poll interval | 300s | Fallback polling interval (real-time stream handles most updates) |
+| PIN code | disabled | Require PIN for arm/disarm from HA UI |
+| FCM credentials | — | Firebase credentials for push notifications (optional) |
+| Photo retention (days) | 30 | How many days to keep captured photos (1-365) |
+| Max photos per device | 100 | Maximum photos stored per camera (0 = unlimited) |
+
 ### Known App Labels
 
 Each co-branded Ajax app uses an internal **label name** to identify itself to the Ajax cloud. This label is not always the same as the app's display name. The integration includes all known labels in a dropdown during setup.
@@ -89,6 +107,7 @@ Each co-branded Ajax app uses an internal **label name** to identify itself to t
 | `Yavir` | Yavir | Ukraine |
 | `Oryggi` | Oryggi | Iceland |
 | `acacio` | acacio | — |
+| `esahome` | esahome | — |
 
 ### How to find your app label
 
@@ -104,16 +123,38 @@ You can type any custom label during setup if yours is not listed.
 
 | Type | Devices | Entities |
 |---|---|---|
-| Hub | Hub, Hub Plus, Hub 2, Hub 2 Plus, Hub 2 4G | Alarm panel, battery, GSM type/connected, CRA monitoring, lid tamper |
-| Door Sensors | DoorProtect, DoorProtectPlus, DoorProtectFibra | Door open/close, tamper, battery, temperature, signal, external contacts |
-| Motion Sensors | MotionProtect, MotionCam, CombiProtect | Motion detected (real-time), tamper, battery, temperature, signal |
-| Fire/Smoke | FireProtect, FireProtect2, FireProtectPlus | Smoke, CO, high temperature, tamper, battery |
+| Hub | Hub, Hub Plus, Hub 2, Hub 2 Plus, Hub 2 4G | Alarm panel, battery, GSM type/connected, CRA monitoring, lid tamper, IMEI |
+| Door Sensors | DoorProtect, DoorProtect Plus, DoorProtect Fibra, DoorProtect S/G3 | Door open/close, tamper, vibration (Plus), battery, temperature, signal, external contacts |
+| Motion Sensors | MotionProtect, MotionProtect Plus/Outdoor/Curtain | Motion detected (real-time), tamper, battery, temperature, signal |
+| Cameras | MotionCam PhOD, MotionCam Outdoor PhOD | Photo on-demand capture + storage, motion detected, tamper, battery |
+| Glass Break | GlassProtect, GlassProtect S/Fibra | Glass break detection, tamper, battery |
+| Combi | CombiProtect, CombiProtect S/Fibra | Motion, glass break, tamper, battery |
+| Fire/Smoke | FireProtect, FireProtect 2, FireProtect Plus | Smoke, CO, high temperature, tamper, battery |
 | Water Leak | LeaksProtect | Leak detected, tamper, battery |
 | Relays/Switches | Relay, WallSwitch, Socket, LightSwitch | On/off per channel |
-| Lights | LightSwitchDimmer | Brightness control |
-| Cameras | MotionCam (photo on-demand) | Capture photo button |
+| Lights | LightSwitch Dimmer | Brightness control |
 | Keypads | Keypad, KeypadPlus, KeypadCombi, KeypadTouchscreen | Battery, tamper, temperature, signal, NFC status |
 | Sirens | HomeSiren, StreetSiren | Battery, tamper, signal |
+
+## Photo on Demand
+
+MotionCam **PhOD** (Photo on Demand) models support capturing photos remotely:
+
+1. Press the **"Capture photo"** button entity in HA
+2. The hub triggers the camera, and the photo URL is retrieved via the Ajax notification system
+3. The photo is downloaded, a **timestamp overlay** is burned into the image, and it's saved to `/media/ajax_photos/{device_name}/`
+4. View photos in the camera entity or browse all captures via **Media Browser → Ajax Security Photos**
+
+> **Note**: Regular MotionCam models (without PhOD) do not support on-demand photo capture. The button entity is only created for PhOD models.
+
+Photos are automatically cleaned up based on your retention settings (configurable in integration options).
+
+## Custom Services
+
+| Service | Description |
+|---|---|
+| `ajax_cobranded.force_arm` | Arm the system ignoring open sensors and active alarms |
+| `ajax_cobranded.force_arm_night` | Arm night mode ignoring open sensors and active alarms |
 
 ## Entity Details
 
@@ -123,17 +164,25 @@ You can type any custom label during setup if yours is not listed.
 - **GSM type** — sensor showing connection type (2G/3G/4G)
 - **Lid opened** — tamper detection for the hub enclosure
 - **Battery** — hub battery level
+- **IMEI** — hub cellular modem identifier
 
 ### Real-time event sensors
 Door open/close and motion detection are **transient events** — they appear when the event occurs and clear automatically. The integration uses a persistent gRPC stream for instant delivery (typically < 1 second latency).
 
-> **Note on motion detection**: Ajax motion sensors (MotionProtect, MotionCam) only report motion events when the system is **armed**. This is a firmware-level behavior — when the system is disarmed, motion detectors are inactive and do not send events. This is by design for battery conservation and to avoid false alarms during normal use.
+> **Note on motion detection**: Ajax motion sensors only report motion events when the system is **armed**. This is a firmware-level behavior — when disarmed, motion detectors are inactive for battery conservation.
+
+### Security event entity
+Each hub has a **Security event** entity that fires events from FCM push notifications: alarm, arm/disarm, tamper, panic, fire, flood, motion, glass break, CO, and more. Use these in automations to trigger actions on security events.
 
 ### Security sensors
+- **Case tamper** — physical manipulation of device enclosure
+- **Device problem** — device malfunction or communication issue
 - **Anti-masking** — detector obstruction attempt
 - **Case drilling** — enclosure drilling attempt
 - **Interference** — RF jamming detection
-- **External contact** — wired zone status (DoorProtectPlus)
+- **Glass break** — glass break detection (GlassProtect, CombiProtect)
+- **Vibration** — vibration/shock detection (DoorProtect Plus)
+- **External contact** — wired zone status (DoorProtect Plus)
 
 ## Troubleshooting
 
@@ -145,17 +194,20 @@ Door open/close and motion detection are **transient events** — they appear wh
 | 2FA code rejected | Ensure your device clock is synchronized |
 | Unexpected errors | Verify your app label matches your co-branded app exactly |
 | Motion/door not updating | Check that the gRPC stream is connected (look for "Device stream started" in logs) |
+| Sensors unavailable after reload | Use full HA restart instead of integration reload (gRPC streams require restart) |
+| Photo capture button missing | Only MotionCam PhOD models support on-demand capture |
+| Disarm not working | Check HA logs for specific error; ensure the system is armed before disarming |
 
 ## Roadmap
 
+- [ ] Disarm from triggered/alarm state (investigate server endpoint)
 - [ ] Video stream support (VideoEdge, RTSP)
 - [ ] Smart lock support (LockBridge)
-- [ ] Photo on-demand image retrieval (capture works, URL retrieval pending)
-- [ ] Automation scenarios
-- [ ] LifeQuality sensor full support
-- [ ] Expand known co-branded app labels
-- [ ] SpaceControl (keyfob) support
-- [ ] Photo on-demand image retrieval
+- [ ] Valve platform (WaterStop)
+- [ ] Firmware update platform
+- [ ] DHCP discovery for hub auto-detection
+- [ ] Number/Select platforms for device settings (sensitivity, brightness)
+- [ ] SpaceControl (keyfob) event support
 
 ## Push Notifications (Optional)
 
@@ -174,7 +226,11 @@ The required fields (configured in the integration's Options):
 3. Look in `res/values/strings.xml` for `google_app_id`, `gcm_defaultSenderId`, `project_id`
 4. The API key may be in `strings.xml` as `google_api_key`, or in a native library (`lib/*/libnative-lib.so` — search for strings starting with `AIza`)
 
-If FCM credentials are not configured, the integration will still work using the persistent gRPC stream for real-time updates. FCM adds an additional push notification channel for faster event delivery.
+If FCM credentials are not configured, the integration will still work using the persistent gRPC stream for real-time updates. FCM adds an additional push notification channel for faster event delivery and enables Photo on Demand URL retrieval.
+
+## Translations
+
+The integration is available in 14 languages: English, Spanish, Catalan, German, French, Italian, Dutch, Polish, Portuguese, Brazilian Portuguese, Romanian, Turkish, Ukrainian, and Czech.
 
 ## Legal Notice
 
