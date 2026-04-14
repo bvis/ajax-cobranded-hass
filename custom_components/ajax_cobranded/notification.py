@@ -163,22 +163,7 @@ class AjaxNotificationListener:
         obj: object = None,  # noqa: ARG002
     ) -> None:
         """Handle incoming FCM push notification."""
-        _LOGGER.debug(
-            "Push notification received: persistent_id=%s keys=%s",
-            persistent_id,
-            list(notification.keys()),
-        )
-        # Dump raw notification data for debugging photo on-demand
-        for key, value in notification.items():
-            if key == "ENCODED_DATA" or (isinstance(value, str) and len(value) > 50):
-                _LOGGER.debug(
-                    "Push field %s: [%d chars] %s...",
-                    key,
-                    len(str(value)),
-                    str(value)[:120],
-                )
-            else:
-                _LOGGER.debug("Push field %s: %s", key, value)
+        _LOGGER.debug("Push notification received: persistent_id=%s", persistent_id)
 
         # Try to extract photo URL from push data
         # The key might be "ENCODED_DATA" (top-level) or nested inside "data"
@@ -192,11 +177,6 @@ class AjaxNotificationListener:
         if encoded_data:
             try:
                 raw = base64.b64decode(encoded_data)
-                _LOGGER.debug(
-                    "ENCODED_DATA decoded: %d bytes, hex=%s",
-                    len(raw),
-                    raw[:200].hex(),
-                )
                 # Search for HTTPS URLs in the decoded protobuf
                 urls = re.findall(rb'https://[^\x00-\x1f\x7f-\x9f"\'\\]+', raw)
                 for raw_url in urls:
