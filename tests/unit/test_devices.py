@@ -183,7 +183,7 @@ class TestStatusParser:
         status.WhichOneof.return_value = "signal_strength"
         status.signal_strength.device_signal_level = 3
         result = DevicesApi._parse_statuses([status])
-        assert result.get("signal_strength") == 3
+        assert result.get("signal_strength") == "Normal"
 
     def test_life_quality_status(self) -> None:
         status = MagicMock()
@@ -226,7 +226,7 @@ class TestStatusParser:
         status.gsm_status.type = 3  # 4G
         status.gsm_status.status = 2  # connected
         result = DevicesApi._parse_statuses([status])
-        assert result.get("gsm_type") == "4G"
+        assert result.get("mobile_network_type") == "4G"
         assert result.get("gsm_connected") is True
 
     def test_gsm_status_not_connected(self) -> None:
@@ -256,7 +256,7 @@ class TestStatusParser:
         status.WhichOneof.return_value = "sim_status"
         status.sim_status.sim_card_status = 1
         result = DevicesApi._parse_statuses([status])
-        assert result.get("sim_status") == 1
+        assert result.get("sim_status") == "OK"
 
     def test_always_active(self) -> None:
         status = MagicMock()

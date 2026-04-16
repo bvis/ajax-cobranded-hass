@@ -30,8 +30,8 @@
             "vibration": { "default": "mdi:vibrate-off", "state": { "on": "mdi:vibrate", "off": "mdi:vibrate-off" } }
         },
         "sensor": {
-            "signal_level": { "default": "mdi:signal" },
-            "gsm_type": { "default": "mdi:signal-cellular-3" },
+            "signal_strength": { "default": "mdi:signal" },
+            "mobile_network_type": { "default": "mdi:signal-cellular-3" },
             "wifi_signal_level": { "default": "mdi:wifi" },
             "sim_status": { "default": "mdi:sim" },
             "sim_imei": { "default": "mdi:sim" }

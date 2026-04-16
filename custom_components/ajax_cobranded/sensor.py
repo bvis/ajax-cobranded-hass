@@ -67,20 +67,20 @@ SENSOR_TYPES: dict[str, SensorTypeInfo] = {
     ),
     "signal_strength": SensorTypeInfo(
         None,
-        SensorStateClass.MEASUREMENT,
+        None,
         None,
         "status",
         EntityCategory.DIAGNOSTIC,
-        translation_key="signal_level",
+        translation_key="signal_strength",
         entity_registry_enabled_default=False,
     ),
-    "gsm_type": SensorTypeInfo(
+    "mobile_network_type": SensorTypeInfo(
         None,
         None,
         None,
         "status",
         EntityCategory.DIAGNOSTIC,
-        translation_key="gsm_type",
+        translation_key="mobile_network_type",
         entity_registry_enabled_default=True,
     ),
     "wifi_signal_level": SensorTypeInfo(
@@ -110,7 +110,7 @@ async def async_setup_entry(
             "humidity",
             "co2",
             "signal_strength",
-            "gsm_type",
+            "mobile_network_type",
             "wifi_signal_level",
         )
         for key in _status_sensor_keys:
