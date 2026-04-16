@@ -148,11 +148,11 @@
             }
         },
         "sensor": {
-            "signal_level": {
-                "name": "Nivel semnal"
+            "signal_strength": {
+                "name": "Puterea semnalului"
             },
-            "gsm_type": {
-                "name": "Tip GSM"
+            "mobile_network_type": {
+                "name": "Tip rețea mobilă"
             },
             "wifi_signal_level": {
                 "name": "Nivel semnal Wi-Fi"

@@ -148,11 +148,11 @@
             }
         },
         "sensor": {
-            "signal_level": {
-                "name": "Úroveň signálu"
+            "signal_strength": {
+                "name": "Síla signálu"
             },
-            "gsm_type": {
-                "name": "Typ GSM"
+            "mobile_network_type": {
+                "name": "Typ mobilní sítě"
             },
             "wifi_signal_level": {
                 "name": "Úroveň Wi-Fi signálu"

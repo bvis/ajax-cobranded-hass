@@ -148,11 +148,11 @@
             }
         },
         "sensor": {
-            "signal_level": {
+            "signal_strength": {
                 "name": "Signalstärke"
             },
-            "gsm_type": {
-                "name": "GSM-Typ"
+            "mobile_network_type": {
+                "name": "Mobilfunknetztyp"
             },
             "wifi_signal_level": {
                 "name": "WLAN-Signalstärke"

@@ -148,11 +148,11 @@
             }
         },
         "sensor": {
-            "signal_level": {
+            "signal_strength": {
                 "name": "Signaalsterkte"
             },
-            "gsm_type": {
-                "name": "GSM-type"
+            "mobile_network_type": {
+                "name": "Mobiel netwerktype"
             },
             "wifi_signal_level": {
                 "name": "Wi-Fi-signaalsterkte"

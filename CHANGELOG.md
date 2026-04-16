@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-04-16
+
+### Changed (BREAKING)
+- Renamed `gsm_type` sensor to `mobile_network_type` — entity IDs will change (e.g., `sensor.*_gsm_type` → `sensor.*_mobile_network_type`)
+- Renamed `signal_level` sensor to `signal_strength` — entity IDs will change
+- Signal strength sensor now shows text (Strong/Normal/Weak/No signal) instead of numeric values
+- SIM status sensor now shows text (OK/Missing/Malfunction/Locked) instead of numeric values
+
+### Fixed
+- Issues #4, #5, #6: sensor names are now clear and descriptive
+
 ## [0.6.6] - 2026-04-16
 
 ### Fixed

@@ -51,6 +51,24 @@ def _encode_varint_field(field_number: int, value: int) -> bytes:
 
 _GSM_TYPE_MAP: dict[int, str] = {0: "Unknown", 1: "2G", 2: "3G", 3: "4G"}
 
+_SIGNAL_LEVEL_MAP: dict[int, str] = {
+    0: "Unknown",
+    1: "No signal",
+    2: "Weak",
+    3: "Normal",
+    4: "Strong",
+    5: "Disconnected",
+}
+
+_SIM_STATUS_MAP: dict[int, str] = {
+    0: "Unknown",
+    1: "OK",
+    2: "Missing",
+    3: "Malfunction",
+    4: "Locked",
+    5: "Unknown",
+}
+
 _STATE_MAP: dict[int, DeviceState] = {
     0: DeviceState.ONLINE,
     1: DeviceState.LOCKED,
@@ -146,11 +164,14 @@ class DevicesApi:
                 if hasattr(lq, "actual_co2"):
                     result["co2"] = lq.actual_co2
             elif which == "signal_strength":
-                result["signal_strength"] = int(status.signal_strength.device_signal_level)
+                signal_int = int(status.signal_strength.device_signal_level)
+                result["signal_strength"] = _SIGNAL_LEVEL_MAP.get(
+                    signal_int, f"Unknown ({signal_int})"
+                )
             elif which == "gsm_status":
                 gsm = status.gsm_status
                 gsm_int = int(gsm.type) if hasattr(gsm, "type") else 0
-                result["gsm_type"] = _GSM_TYPE_MAP.get(gsm_int, "Unknown")
+                result["mobile_network_type"] = _GSM_TYPE_MAP.get(gsm_int, "Unknown")
                 result["gsm_connected"] = int(gsm.status) == 2 if hasattr(gsm, "status") else False
             elif which == "monitoring":
                 result["monitoring_active"] = (
@@ -159,11 +180,12 @@ class DevicesApi:
                     else False
                 )
             elif which == "sim_status":
-                result["sim_status"] = (
+                sim_int = (
                     int(status.sim_status.sim_card_status)
                     if hasattr(status.sim_status, "sim_card_status")
                     else 0
                 )
+                result["sim_status"] = _SIM_STATUS_MAP.get(sim_int, f"Unknown ({sim_int})")
             elif which == "always_active":
                 result["always_active"] = True
             elif which == "armed_in_night_mode":

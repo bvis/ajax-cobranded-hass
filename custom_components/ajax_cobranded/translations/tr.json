@@ -148,11 +148,11 @@
             }
         },
         "sensor": {
-            "signal_level": {
-                "name": "Sinyal seviyesi"
+            "signal_strength": {
+                "name": "Sinyal gücü"
             },
-            "gsm_type": {
-                "name": "GSM türü"
+            "mobile_network_type": {
+                "name": "Mobil ağ türü"
             },
             "wifi_signal_level": {
                 "name": "Wi-Fi sinyal seviyesi"

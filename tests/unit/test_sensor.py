@@ -30,8 +30,8 @@ class TestSensorTypes:
     def test_signal_strength_type_exists(self) -> None:
         assert "signal_strength" in SENSOR_TYPES
 
-    def test_gsm_type_exists(self) -> None:
-        assert "gsm_type" in SENSOR_TYPES
+    def test_mobile_network_type_exists(self) -> None:
+        assert "mobile_network_type" in SENSOR_TYPES
 
     def test_wifi_signal_level_exists(self) -> None:
         assert "wifi_signal_level" in SENSOR_TYPES
@@ -82,13 +82,13 @@ class TestAjaxSensor:
         assert sensor.native_value == 800
 
     def test_signal_strength(self) -> None:
-        device = self._make_device({"signal_strength": 3})
+        device = self._make_device({"signal_strength": "Normal"})
         coordinator = MagicMock()
         coordinator.devices = {"dev-1": device}
         sensor = AjaxSensor(
             coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
         )
-        assert sensor.native_value == 3
+        assert sensor.native_value == "Normal"
 
     def test_native_value_returns_none_when_no_device(self) -> None:
         coordinator = MagicMock()
@@ -167,7 +167,7 @@ class TestAjaxSensor:
         sensor = AjaxSensor(
             coordinator=coordinator, device_id="dev-1", sensor_key="signal_strength"
         )
-        assert sensor._attr_translation_key == "signal_level"
+        assert sensor._attr_translation_key == "signal_strength"
 
     def test_available_when_online(self) -> None:
         device = self._make_device({})
@@ -182,20 +182,24 @@ class TestAjaxSensor:
         sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="temperature")
         assert sensor.available is False
 
-    def test_gsm_type_sensor(self) -> None:
-        device = self._make_device({"gsm_type": "4G"})
+    def test_mobile_network_type_sensor(self) -> None:
+        device = self._make_device({"mobile_network_type": "4G"})
         coordinator = MagicMock()
         coordinator.devices = {"dev-1": device}
-        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="gsm_type")
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="mobile_network_type"
+        )
         assert sensor.native_value == "4G"
-        assert sensor._attr_translation_key == "gsm_type"
+        assert sensor._attr_translation_key == "mobile_network_type"
 
-    def test_gsm_type_sensor_is_diagnostic(self) -> None:
+    def test_mobile_network_type_sensor_is_diagnostic(self) -> None:
         from homeassistant.const import EntityCategory
 
         coordinator = MagicMock()
         coordinator.devices = {}
-        sensor = AjaxSensor(coordinator=coordinator, device_id="dev-1", sensor_key="gsm_type")
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="dev-1", sensor_key="mobile_network_type"
+        )
         assert sensor._attr_entity_category == EntityCategory.DIAGNOSTIC
 
     def test_hub_sensor_has_no_via_device(self) -> None:
@@ -212,12 +216,14 @@ class TestAjaxSensor:
             state=DeviceState.ONLINE,
             malfunctions=0,
             bypassed=False,
-            statuses={"gsm_type": "4G"},
+            statuses={"mobile_network_type": "4G"},
             battery=None,
         )
         coordinator = MagicMock()
         coordinator.devices = {"hub-1": hub_device}
-        sensor = AjaxSensor(coordinator=coordinator, device_id="hub-1", sensor_key="gsm_type")
+        sensor = AjaxSensor(
+            coordinator=coordinator, device_id="hub-1", sensor_key="mobile_network_type"
+        )
         assert sensor._attr_device_info is not None
         assert "via_device" not in sensor._attr_device_info
 
