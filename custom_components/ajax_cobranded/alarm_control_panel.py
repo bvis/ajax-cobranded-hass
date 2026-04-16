@@ -157,8 +157,10 @@ class AjaxAlarmControlPanel(CoordinatorEntity[AjaxCobrandedCoordinator], AlarmCo
         """Update the space state optimistically so the UI reflects the change immediately.
 
         This avoids flicker when the server or stream returns stale state briefly
-        after a successful arm/disarm command.
+        after a successful arm/disarm command. The optimistic state is preserved
+        for 10 seconds to survive async_refresh calls that may return stale data.
         """
+        import asyncio  # noqa: PLC0415
         from dataclasses import replace  # noqa: PLC0415
 
         space = self._space
@@ -168,6 +170,9 @@ class AjaxAlarmControlPanel(CoordinatorEntity[AjaxCobrandedCoordinator], AlarmCo
             self.coordinator.spaces[self._space_id] = replace(space, security_state=new_state)
         except TypeError:
             return  # space is not a real dataclass (e.g., during tests)
+        # Protect the optimistic state from being overwritten by stale server data
+        expiry = asyncio.get_event_loop().time() + 10
+        self.coordinator._optimistic_space_states[self._space_id] = (expiry, new_state)
         # Notify HA of the state change (may not have hass during tests)
         if self.hass is not None:
             self.async_write_ha_state()

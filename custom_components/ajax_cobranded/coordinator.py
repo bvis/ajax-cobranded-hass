@@ -54,6 +54,8 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self._streams_started: bool = False
         self._event_entities: dict[str, Any] = {}
         self.last_photo_urls: dict[str, str] = {}
+        # space_id -> (expiry_time, security_state)
+        self._optimistic_space_states: dict[str, tuple[float, Any]] = {}
 
     @property
     def security_api(self) -> SecurityApi:
@@ -83,7 +85,21 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
             # Refresh spaces
             all_spaces = await self._spaces_api.list_spaces()
-            self.spaces = {s.id: s for s in all_spaces if s.id in self._space_ids}
+            now = asyncio.get_event_loop().time()
+            new_spaces: dict[str, Space] = {}
+            for s in all_spaces:
+                if s.id not in self._space_ids:
+                    continue
+                # Preserve optimistic security_state if it hasn't expired
+                opt = self._optimistic_space_states.get(s.id)
+                if opt and opt[0] > now and s.security_state != opt[1]:
+                    from dataclasses import replace as dc_replace  # noqa: PLC0415
+
+                    s = dc_replace(s, security_state=opt[1])
+                elif opt and opt[0] <= now:
+                    self._optimistic_space_states.pop(s.id, None)
+                new_spaces[s.id] = s
+            self.spaces = new_spaces
 
             # Fetch SIM info for each hub
             for space in self.spaces.values():
