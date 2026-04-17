@@ -179,6 +179,10 @@ class AjaxCobrandedConfigFlow(ConfigFlow, domain=DOMAIN):
                 await client.connect()
                 await asyncio.wait_for(client.login(), timeout=30)
                 await client.close()
+                # Update unique_id if email changed
+                if email != entry.unique_id:
+                    await self.async_set_unique_id(email)
+                    self._abort_if_unique_id_configured(updates={"email": email})
                 return self.async_update_reload_and_abort(
                     entry,
                     data={
