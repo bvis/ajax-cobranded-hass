@@ -75,7 +75,7 @@ class AjaxLight(CoordinatorEntity[AjaxCobrandedCoordinator], LightEntity):
                 name=device.name,
                 manufacturer=MANUFACTURER,
                 model=device.device_type.replace("_", " ").title(),
-                via_device=(DOMAIN, f"hub_{device.hub_id}"),
+                via_device=(DOMAIN, device.hub_id),
             )
 
     @property
