@@ -149,17 +149,51 @@ class TestAsyncStep2FA:
     @pytest.mark.asyncio
     async def test_step_2fa_invalid_totp(self) -> None:
         flow = AjaxCobrandedConfigFlow()
+        flow._email = "test@example.com"
+        flow._request_id = "req-123"
         flow.async_show_form = MagicMock(return_value={"type": "form"})
-        flow.async_step_select_spaces = AsyncMock(side_effect=AuthenticationError("bad totp"))
+
+        mock_client = MagicMock()
+        mock_client.login_totp = AsyncMock(side_effect=AuthenticationError("Invalid TOTP code"))
+        flow._client = mock_client
 
         await flow.async_step_2fa({"totp_code": "000000"})
         assert flow.async_show_form.call_args[1]["errors"]["base"] == "invalid_totp"
+        mock_client.login_totp.assert_called_once_with(
+            email="test@example.com",
+            request_id="req-123",
+            totp_code="000000",
+        )
+
+    @pytest.mark.asyncio
+    async def test_step_2fa_success(self) -> None:
+        flow = AjaxCobrandedConfigFlow()
+        flow._email = "test@example.com"
+        flow._request_id = "req-456"
+
+        mock_client = MagicMock()
+        mock_client.login_totp = AsyncMock()
+        flow._client = mock_client
+        flow.async_step_select_spaces = AsyncMock(return_value={"type": "form"})
+
+        await flow.async_step_2fa({"totp_code": "123456"})
+        mock_client.login_totp.assert_called_once_with(
+            email="test@example.com",
+            request_id="req-456",
+            totp_code="123456",
+        )
+        flow.async_step_select_spaces.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_step_2fa_unknown_error(self) -> None:
         flow = AjaxCobrandedConfigFlow()
+        flow._email = "test@example.com"
+        flow._request_id = "req-789"
         flow.async_show_form = MagicMock(return_value={"type": "form"})
-        flow.async_step_select_spaces = AsyncMock(side_effect=RuntimeError("unknown"))
+
+        mock_client = MagicMock()
+        mock_client.login_totp = AsyncMock(side_effect=RuntimeError("unknown"))
+        flow._client = mock_client
 
         await flow.async_step_2fa({"totp_code": "000000"})
         assert flow.async_show_form.call_args[1]["errors"]["base"] == "unknown"

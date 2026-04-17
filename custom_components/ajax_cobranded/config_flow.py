@@ -116,11 +116,22 @@ class AjaxCobrandedConfigFlow(ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
         if user_input is not None:
             try:
+                assert self._client is not None
+                await asyncio.wait_for(
+                    self._client.login_totp(
+                        email=self._email,
+                        request_id=self._request_id,
+                        totp_code=user_input["totp_code"],
+                    ),
+                    timeout=30,
+                )
                 return await self.async_step_select_spaces()
             except AuthenticationError:
                 errors["base"] = "invalid_totp"
+            except TimeoutError:
+                errors["base"] = "cannot_connect"
             except Exception:
-                _LOGGER.error("Unexpected error during 2FA")
+                _LOGGER.exception("Unexpected error during 2FA")
                 errors["base"] = "unknown"
         return self.async_show_form(step_id="2fa", data_schema=TOTP_SCHEMA, errors=errors)
 

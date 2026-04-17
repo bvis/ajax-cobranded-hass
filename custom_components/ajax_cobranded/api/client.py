@@ -196,6 +196,45 @@ class AjaxGrpcClient:
             else:
                 raise AuthenticationError(f"Login failed: {error_type}")
 
+    async def login_totp(self, email: str, request_id: str, totp_code: str) -> None:
+        """Complete 2FA authentication by submitting the TOTP code."""
+        proto_path = str(Path(__file__).parent.parent / "proto")
+        if proto_path not in sys.path:
+            sys.path.append(proto_path)
+
+        from v3.mobilegwsvc.commonmodels.type import user_role_pb2  # noqa: PLC0415
+        from v3.mobilegwsvc.service.login_by_totp import (  # noqa: PLC0415
+            endpoint_pb2_grpc,
+            request_pb2,
+        )
+
+        channel = self._get_channel()
+        stub = endpoint_pb2_grpc.LoginByTotpServiceStub(channel)
+
+        request = request_pb2.LoginByTotpRequest(
+            email=email,
+            user_role=user_role_pb2.USER_ROLE_USER,
+            totp=totp_code,
+            request_id=request_id,
+        )
+
+        metadata = self._session.get_device_info_metadata()
+        response = await stub.execute(request, metadata=metadata, timeout=GRPC_TIMEOUT)
+
+        if response.HasField("success"):
+            token_hex = response.success.session_token.hex()
+            user_hex_id = response.success.lite_account.user_hex_id
+            self._session.set_session(token_hex, user_hex_id)
+            _LOGGER.debug("2FA login successful as %s", user_hex_id)
+        elif response.HasField("failure"):
+            error_type = response.failure.WhichOneof("error")
+            if error_type == "invalid_totp":
+                raise AuthenticationError("Invalid TOTP code")
+            elif error_type == "account_locked":
+                raise AuthenticationError("Account is locked")
+            else:
+                raise AuthenticationError(f"2FA login failed: {error_type}")
+
     async def call_server_stream(
         self,
         method_path: str,
