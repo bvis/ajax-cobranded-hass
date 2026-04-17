@@ -17,12 +17,12 @@ from custom_components.ajax_cobranded.api.client import AjaxGrpcClient
 from custom_components.ajax_cobranded.api.devices import DevicesApi
 from custom_components.ajax_cobranded.api.media import MediaApi
 
-EMAIL = "AJAX_EMAIL_REDACTED"
-PASSWORD_HASH = "AJAX_HASH_REDACTED"
-DEVICE_ID = "DEVICE_ID_REDACTED"
-APP_LABEL = "Protegim_alarma"
-SPACE_ID = "SPACE_ID_REDACTED"
-HUB_ID = "002B1A51"
+EMAIL = os.environ.get("AJAX_EMAIL", "")
+PASSWORD_HASH = os.environ.get("AJAX_PASSWORD_HASH", "")
+DEVICE_ID = os.environ.get("AJAX_DEVICE_ID", "")
+APP_LABEL = os.environ.get("AJAX_APP_LABEL", "Ajax")
+SPACE_ID = os.environ.get("AJAX_SPACE_ID", "")
+HUB_ID = os.environ.get("AJAX_HUB_ID", "")
 CAMERA_DEVICE_ID = "309F61FA"
 CAMERA_DEVICE_TYPE = "motion_cam"
 
