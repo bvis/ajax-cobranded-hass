@@ -1,0 +1,325 @@
+"""Per-device-family capability handlers for Ajax Security."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Protocol
+
+if TYPE_CHECKING:
+    from custom_components.aegis_ajax.api.models import Device
+
+
+@dataclass(frozen=True)
+class DeviceCapabilities:
+    """Capabilities provided by a device family."""
+
+    binary_sensor_keys: tuple[str, ...] = ()
+
+
+class DeviceHandler(Protocol):
+    """Protocol for per-device-type capability handlers."""
+
+    device_types: frozenset[str]
+
+    def capabilities(self, device: Device) -> DeviceCapabilities:
+        """Return capabilities for the given device."""
+        ...
+
+
+class StaticDeviceHandler:
+    """Handler returning static capabilities for a set of device types."""
+
+    def __init__(self, device_types: tuple[str, ...], binary_sensor_keys: tuple[str, ...]) -> None:
+        self.device_types = frozenset(device_types)
+        self._capabilities = DeviceCapabilities(binary_sensor_keys=binary_sensor_keys)
+
+    def capabilities(self, device: Device) -> DeviceCapabilities:
+        """Return static capabilities for this device family."""
+        return self._capabilities
+
+
+_DEFAULT_CAPABILITIES = DeviceCapabilities(binary_sensor_keys=("tamper",))
+
+
+class DefaultDeviceHandler:
+    """Fallback handler for unmapped device types (#434)."""
+
+    device_types: frozenset[str] = frozenset()
+
+    def capabilities(self, device: Device) -> DeviceCapabilities:
+        """Return fallback capabilities (tamper only)."""
+        return _DEFAULT_CAPABILITIES
+
+
+_HANDLERS: tuple[DeviceHandler, ...] = (
+    # DoorProtect
+    StaticDeviceHandler(
+        ("door_protect", "door_protect_fibra", "door_protect_s", "door_protect_g3"),
+        (
+            "door_opened",
+            "tamper",
+            "external_contact_broken",
+            "external_contact_alert",
+            "delay_when_leaving",
+        ),
+    ),
+    # DoorProtect Plus
+    StaticDeviceHandler(
+        (
+            "door_protect_plus",
+            "door_protect_s_plus",
+            "door_protect_plus_fibra",
+            "door_protect_plus_g3_fibra",
+        ),
+        (
+            "door_opened",
+            "tamper",
+            "vibration",
+            "tilt",
+            "external_contact_broken",
+            "external_contact_alert",
+            "delay_when_leaving",
+        ),
+    ),
+    # MotionProtect
+    StaticDeviceHandler(
+        (
+            "motion_protect",
+            "motion_protect_plus",
+            "motion_protect_fibra",
+            "motion_protect_plus_fibra",
+            "motion_protect_outdoor",
+            "motion_protect_curtain",
+            "motion_protect_curtain_base",
+            "motion_protect_curtain_outdoor_base",
+            "motion_protect_curtain_outdoor_mini",
+            "motion_protect_curtain_outdoor_plus",
+            "dual_curtain_outdoor",
+            "motion_protect_g3",
+            "motion_protect_g3_fibra",
+            "motion_protect_g3_fibra_new",
+            "motion_protect_plus_g3",
+            "motion_protect_s",
+            "motion_protect_s_plus",
+        ),
+        ("motion_detected", "tamper", "delay_when_leaving"),
+    ),
+    # MotionCam
+    StaticDeviceHandler(
+        (
+            "motion_cam",
+            "motion_cam_outdoor",
+            "motion_cam_fibra",
+            "motion_cam_fibra_base",
+            "motion_cam_g3",
+            "motion_cam_hd",
+            "motion_cam_phod",
+            "motion_cam_phod_fibra",
+            "motion_cam_outdoor_phod",
+            "motion_cam_outdoor_two_four_phod",
+            "motion_cam_s_phod",
+            "motion_cam_s_phod_am",
+            "motion_cam_superior_phod",
+            "motion_cam_video_base",
+            "motion_cam_video_doorbell",
+            "motion_cam_video_indoor",
+        ),
+        ("motion_detected", "tamper", "delay_when_leaving"),
+    ),
+    # VideoEdge
+    StaticDeviceHandler(
+        (
+            "video_edge_bullet",
+            "video_edge_doorbell",
+            "video_edge_indoor",
+            "video_edge_minidome",
+            "video_edge_turret",
+            "video_edge_unknown",
+        ),
+        ("motion_detected", "tamper"),
+    ),
+    # CombiProtect
+    StaticDeviceHandler(
+        ("combi_protect", "combi_protect_s", "combi_protect_fibra"),
+        ("motion_detected", "glass_break", "tamper", "delay_when_leaving"),
+    ),
+    # GlassProtect
+    StaticDeviceHandler(
+        ("glass_protect", "glass_protect_s", "glass_protect_fibra"),
+        ("glass_break", "tamper"),
+    ),
+    # FireProtect legacy
+    StaticDeviceHandler(
+        ("fire_protect",),
+        ("smoke_detected", "high_temperature", "tamper"),
+    ),
+    StaticDeviceHandler(
+        ("fire_protect_plus",),
+        ("smoke_detected", "co_detected", "high_temperature", "tamper"),
+    ),
+    # FireProtect 2
+    StaticDeviceHandler(
+        (
+            "fire_protect_2",
+            "fire_protect_two",
+            "fire_protect_two_hs_ac",
+            "fire_protect_two_hs_ac_ul",
+            "fire_protect_two_hs_rb_ul",
+            "fire_protect_two_hs_sb_ul",
+        ),
+        ("smoke_detected", "steam", "high_temperature", "tamper"),
+    ),
+    StaticDeviceHandler(
+        (
+            "fire_protect_two_base",
+            "fire_protect_two_plus",
+            "fire_protect_two_plus_sb",
+            "fire_protect_two_sb",
+            "fire_protect_two_hcrb",
+            "fire_protect_two_hcsb",
+            "fire_protect_two_hsc_ac",
+            "fire_protect_two_hsc_ac_ul",
+            "fire_protect_two_hsc_rb_ul",
+            "fire_protect_two_hsc_sb_ul",
+        ),
+        ("smoke_detected", "steam", "co_detected", "high_temperature", "tamper"),
+    ),
+    StaticDeviceHandler(
+        (
+            "fire_protect_two_hrb",
+            "fire_protect_two_hsb",
+            "fire_protect_two_h_ac",
+            "fire_protect_two_h_rb_ul",
+        ),
+        ("high_temperature", "tamper"),
+    ),
+    StaticDeviceHandler(
+        (
+            "fire_protect_two_crb",
+            "fire_protect_two_csb",
+            "fire_protect_two_c_ac",
+            "fire_protect_two_c_rb_ul",
+        ),
+        ("co_detected", "tamper"),
+    ),
+    StaticDeviceHandler(
+        ("fire_protect_two_hc_ac",),
+        ("co_detected", "high_temperature", "tamper"),
+    ),
+    # LeakProtect
+    StaticDeviceHandler(
+        ("leak_protect",),
+        ("leak_detected", "tamper"),
+    ),
+    # Sirens
+    StaticDeviceHandler(
+        (
+            "home_siren",
+            "home_siren_s",
+            "home_siren_fibra",
+            "home_siren_g3",
+            "street_siren",
+            "street_siren_plus",
+            "street_siren_fibra",
+            "street_siren_plus_fibra",
+            "street_siren_plus_g3",
+            "street_siren_s",
+            "street_siren_double_deck",
+            "street_siren_s_double_deck",
+            "street_siren_double_deck_fibra",
+        ),
+        ("tamper",),
+    ),
+    # ReX / ReX 2 / LifeQuality / WaterStop — explicit no-capability handlers (#332)
+    StaticDeviceHandler(
+        (
+            "rex",
+            "rex_2",
+            "range_extender",
+            "range_extender_2",
+            "life_quality",
+            "life_quality_plus",
+            "water_stop",
+            "water_stop_base",
+        ),
+        (),
+    ),
+    StaticDeviceHandler(
+        ("range_extender_2_fire",),
+        ("smoke_detected", "high_temperature", "tamper"),
+    ),
+    # Wired inputs
+    StaticDeviceHandler(
+        ("transmitter", "wire_input", "wire_input_rs"),
+        ("tamper", "wire_input_alert"),
+    ),
+    StaticDeviceHandler(
+        ("multi_transmitter", "multi_transmitter_fibra"),
+        ("tamper",),
+    ),
+    StaticDeviceHandler(
+        ("wire_input_mt",),
+        ("tamper", "wire_input_alert", "external_contact_open"),
+    ),
+    # Keypads
+    StaticDeviceHandler(
+        (
+            "keypad_combi",
+            "keypad_plus",
+            "keypad_plus_g3",
+            "keypad_s_plus",
+            "keypad_outdoor",
+            "keypad_outdoor_fibra",
+            "keypad_touchscreen",
+            "keypad_touchscreen_fibra",
+            "keypad_touchscreen_g3",
+        ),
+        ("tamper",),
+    ),
+    # Hubs
+    StaticDeviceHandler(
+        (
+            "hub",
+            "hub_plus",
+            "hub_4g",
+            "hub_lite",
+            "hub_two",
+            "hub_two_plus",
+            "hub_two_4g",
+            "hub_two_lte_rtk",
+            "hub_three",
+            "hub_fibra",
+            "hub_hybrid_2",
+            "hub_hybrid_4g",
+            "hub_mega",
+            "hub_void_4g",
+            "hub_yavir",
+            "hub_yavir_plus",
+            "hub_fire",
+            "hub_superior",
+        ),
+        ("gsm_connected", "lid_opened"),
+    ),
+)
+
+
+def _build_handler_map() -> dict[str, DeviceHandler]:
+    handler_map: dict[str, DeviceHandler] = {}
+    for handler in _HANDLERS:
+        for device_type in handler.device_types:
+            handler_map[device_type] = handler
+    return handler_map
+
+
+_DEVICE_HANDLERS: dict[str, DeviceHandler] = _build_handler_map()
+_DEFAULT_HANDLER: DeviceHandler = DefaultDeviceHandler()
+
+
+def get_device_handler(device_type: str) -> DeviceHandler:
+    """Return the handler registered for device_type, falling back to DefaultDeviceHandler."""
+    return _DEVICE_HANDLERS.get(device_type, _DEFAULT_HANDLER)
+
+
+def capabilities_for(device: Device) -> DeviceCapabilities:
+    """Return device capabilities for the given device."""
+    return get_device_handler(device.device_type).capabilities(device)

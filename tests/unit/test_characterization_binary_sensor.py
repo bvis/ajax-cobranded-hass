@@ -16,7 +16,8 @@ from unittest.mock import MagicMock
 import pytest
 
 from custom_components.aegis_ajax.api.models import Device, DeviceState
-from custom_components.aegis_ajax.binary_sensor import _DEVICE_TYPE_SENSORS, async_setup_entry
+from custom_components.aegis_ajax.binary_sensor import async_setup_entry
+from custom_components.aegis_ajax.device_handlers import _DEVICE_HANDLERS
 
 FIXTURE_PATH = Path(__file__).parent.parent / "fixtures" / "binary_sensor_characterization.json"
 
@@ -29,9 +30,9 @@ class TestBinarySensorCharacterization:
     """Characterization test suite for binary sensor setup."""
 
     def test_fixture_covers_all_known_device_types(self) -> None:
-        """Verify the fixture covers every key in _DEVICE_TYPE_SENSORS plus unmapped."""
+        """Verify the fixture covers every key in _DEVICE_HANDLERS plus unmapped."""
         fixture_data = _load_fixture()
-        expected_keys = set(_DEVICE_TYPE_SENSORS.keys()) | {"unmapped_unknown_device"}
+        expected_keys = set(_DEVICE_HANDLERS.keys()) | {"unmapped_unknown_device"}
         assert set(fixture_data.keys()) == expected_keys
 
     @pytest.mark.asyncio

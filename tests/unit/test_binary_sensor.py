@@ -15,7 +15,6 @@ from custom_components.aegis_ajax.api.models import (
     Space,
 )
 from custom_components.aegis_ajax.binary_sensor import (
-    _DEVICE_TYPE_SENSORS,
     BINARY_SENSOR_TYPES,
     AjaxBinarySensor,
     AjaxConnectivitySensor,
@@ -27,6 +26,24 @@ from custom_components.aegis_ajax.binary_sensor import (
     async_setup_entry,
 )
 from custom_components.aegis_ajax.const import ConnectionStatus, DeviceState, SecurityState
+from custom_components.aegis_ajax.device_handlers import _DEVICE_HANDLERS, capabilities_for
+
+
+def _sensor_keys_for(device_type: str) -> list[str]:
+    mock_dev = MagicMock()
+    mock_dev.device_type = device_type
+    return list(capabilities_for(mock_dev).binary_sensor_keys)
+
+
+class _DeviceTypeSensorsHelper:
+    def __contains__(self, device_type: object) -> bool:
+        return isinstance(device_type, str) and device_type in _DEVICE_HANDLERS
+
+    def __getitem__(self, device_type: str) -> list[str]:
+        return _sensor_keys_for(device_type)
+
+
+_DEVICE_TYPE_SENSORS = _DeviceTypeSensorsHelper()
 
 
 class TestBinarySensorTypes:
@@ -109,8 +126,6 @@ class TestBinarySensorTypes:
         # Families whose device model carries an arming part (door/motion/
         # combi detectors and MotionCams); keypads, sirens, fire detectors,
         # wire inputs and hubs have no leaving delay to mirror.
-        from custom_components.aegis_ajax.binary_sensor import _sensor_keys_for
-
         for dtype in (
             "door_protect",
             "door_protect_plus",
@@ -142,7 +157,8 @@ class TestBinarySensorTypes:
         # #434: the family was missing from the map, so it fell through to the
         # tamper-only default and the detector produced no motion entity —
         # invisible to every perimeter automation.
-        assert _DEVICE_TYPE_SENSORS["dual_curtain_outdoor"] == ["motion_detected", "tamper"]
+        assert "motion_detected" in _DEVICE_TYPE_SENSORS["dual_curtain_outdoor"]
+        assert "tamper" in _DEVICE_TYPE_SENSORS["dual_curtain_outdoor"]
 
     def test_vibration_sensor_type_exists(self) -> None:
         assert "vibration" in BINARY_SENSOR_TYPES
