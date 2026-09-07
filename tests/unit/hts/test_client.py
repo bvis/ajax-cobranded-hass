@@ -1835,6 +1835,37 @@ class TestChimeEvent:
             )
             assert HtsClient._is_space_event(params) is True, family.hex()
 
+    def test_is_space_event_true_for_fob_0x0b_family(self) -> None:
+        # #460 / #359: @wip3out3r's SpaceControl fob emits params[1]=0x0b on
+        # v1.18.0 — [0x02, 0x0b, <fob id>, 0x20 disarm / 0x21 arm] — matching
+        # two earlier captures in #359 (@aavdberg 2026-07-29, his own
+        # 2026-08-04). Structurally identical to 0x22/0x30/0x43/0x2e; only the
+        # family whitelist rejected it, so the fob action produced no
+        # authoritative re-read. Both observed state bytes must pass: the
+        # coordinator treats any non-0x22 family as a candidate-less nudge.
+        from custom_components.aegis_ajax.api.hts.messages import tlv_decode
+
+        for state_byte in (b"\x20", b"\x21"):
+            params = tlv_decode(tlv_encode([b"\x02", b"\x0b", b"\x30\x9f\x84\xe5", state_byte]))
+            assert HtsClient._is_space_event(params) is True, state_byte.hex()
+
+    def test_fob_0x0b_family_is_not_read_as_a_hub_event(self) -> None:
+        # #460: 0x0b means two different things by POSITION. As params[0]
+        # followed by 0x21 it is the hub-sourced family (#454, exit-delay
+        # complete); as params[1] behind an 0x02 prefix it is a space event.
+        # Widening the space-event set must not let a real hub event fall
+        # through to the space path, nor the reverse.
+        from custom_components.aegis_ajax.api.hts.hub_events import is_hub_event
+        from custom_components.aegis_ajax.api.hts.messages import tlv_decode
+
+        fob = tlv_decode(tlv_encode([b"\x02", b"\x0b", b"\x30\x9f\x84\xe5", b"\x21"]))
+        assert is_hub_event(fob) is False
+        assert HtsClient._is_space_event(fob) is True
+
+        hub = tlv_decode(tlv_encode([b"\x0b", b"\x21", b"\x30\x9f\x84\xe5", b"\x01"]))
+        assert is_hub_event(hub) is True
+        assert HtsClient._is_space_event(hub) is False
+
     def test_is_space_event_false_for_other_event(self) -> None:
         from custom_components.aegis_ajax.api.hts.messages import tlv_decode
 
