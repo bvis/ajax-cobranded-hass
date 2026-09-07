@@ -159,7 +159,14 @@ _SPACE_EVENT_PREFIX: bytes = b"\x02"
 # SpaceControl-keyfob-originated (same day: a keyfob disarm) — neither was in
 # the set, so those arms produced no authoritative re-read while the app's
 # 0x22 did. Third time the matcher was too narrow (#454).
-_SPACE_EVENT_FAMILIES: frozenset[int] = frozenset({0x22, 0x2E, 0x30, 0x43})
+# 0x0b = a SECOND SpaceControl-keyfob family (#460, @wip3out3r on #359):
+# [0x02, 0x0b, <fob id>, 0x20 disarm / 0x21 arm], matching two earlier captures
+# in #359. His 65 h census saw 0x0b on exactly the two fob actions while 0x2e,
+# 0x30 and 0x43 never appeared once on that hub — so fob family is per-hub
+# (firmware / model / region, unknown), and the set is additive by design.
+# Note 0x0b at params[0] followed by 0x21 is the unrelated HUB-sourced family
+# (`hub_events.py`), which is matched first: same byte, two roles by position.
+_SPACE_EVENT_FAMILIES: frozenset[int] = frozenset({0x0B, 0x22, 0x2E, 0x30, 0x43})
 
 
 def _redact_payload_hex(data: bytes) -> str:
