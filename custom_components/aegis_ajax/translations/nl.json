@@ -191,7 +191,9 @@
             "name": "Accountsessies weergeven",
             "description": "Geeft actieve Ajax-accountsessies op verzoek terug voor handmatige inspectie. Deze service roept een intern Ajax-endpoint aan dat frequente verzoeken kan limiteren; gebruik deze niet voor periodieke opvraging in automatiseringen. De momenteel actieve Aegis-sessie wordt gemarkeerd als is_current wanneer deze kan worden geïdentificeerd.",
             "fields": {"entry_id": {"name": "Configuratie-entry-ID", "description": "Vereist wanneer meer dan één Aegis-account is geconfigureerd."}}
-        }
+        },
+        "terminate_client_session": {"name": "Accountsessie beëindigen", "description": "Meld het geselecteerde andere apparaat direct af bij het Ajax-account. Verkrijg het sessie-ID via list_client_sessions. De integratie beëindigt nooit haar eigen sessie.", "fields": {"session_id": {"name": "Sessie-ID"}, "confirm": {"name": "Bevestig beëindiging"}, "entry_id": {"name": "Configuratie-entry-ID"}}},
+        "terminate_other_client_sessions": {"name": "Alle andere accountsessies beëindigen", "description": "Meld alle andere apparaten direct af bij het Ajax-account. Dit meldt andere actieve mobiele en desktop-apps van Ajax af. De integratie beëindigt nooit haar eigen sessie.", "fields": {"confirm": {"name": "Bevestig beëindiging"}, "entry_id": {"name": "Configuratie-entry-ID"}}}
     },
     "issues": {
         "hub_offline_24h": {

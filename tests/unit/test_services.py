@@ -99,6 +99,16 @@ class TestDisarmNightModeService:
 
 
 class TestClientSessionServices:
+    @staticmethod
+    def _session(
+        session_id: int, *, is_current: bool = False, is_self_identity: bool = False
+    ) -> MagicMock:
+        return MagicMock(
+            session_id=session_id,
+            is_current=is_current,
+            is_self_identity=is_self_identity,
+        )
+
     @pytest.mark.asyncio
     async def test_list_sessions_surfaces_hts_errors_as_service_validation_errors(self) -> None:
         from homeassistant.exceptions import ServiceValidationError
@@ -119,6 +129,62 @@ class TestClientSessionServices:
 
         with pytest.raises(ServiceValidationError, match="Could not list Ajax account sessions"):
             await _async_handle_list_client_sessions(hass, call)
+
+    @pytest.mark.asyncio
+    async def test_current_session_cannot_be_terminated(self) -> None:
+        from custom_components.aegis_ajax.coordinator import AjaxCobrandedCoordinator
+
+        coordinator = object.__new__(AjaxCobrandedCoordinator)
+        coordinator._hts_client = MagicMock(is_connected=True)
+        coordinator._hts_client.get_client_sessions = AsyncMock(
+            return_value=[self._session(1, is_current=True)]
+        )
+
+        with pytest.raises(ValueError, match="Aegis integration sessions"):
+            await coordinator.async_terminate_client_session(1)
+        coordinator._hts_client.kill_client_sessions.assert_not_called()
+
+    @pytest.mark.asyncio
+    async def test_self_identity_session_cannot_be_terminated(self) -> None:
+        from custom_components.aegis_ajax.coordinator import AjaxCobrandedCoordinator
+
+        coordinator = object.__new__(AjaxCobrandedCoordinator)
+        coordinator._hts_client = MagicMock(is_connected=True)
+        coordinator._hts_client.get_client_sessions = AsyncMock(
+            return_value=[self._session(1, is_current=False, is_self_identity=True)]
+        )
+
+        with pytest.raises(ValueError, match="Aegis integration sessions"):
+            await coordinator.async_terminate_client_session(1)
+        coordinator._hts_client.kill_client_sessions.assert_not_called()
+
+    @pytest.mark.asyncio
+    async def test_terminate_other_sessions_excludes_current_session(self) -> None:
+        from custom_components.aegis_ajax.coordinator import AjaxCobrandedCoordinator
+
+        coordinator = object.__new__(AjaxCobrandedCoordinator)
+        coordinator._hts_client = MagicMock(is_connected=True)
+        coordinator._hts_client.get_client_sessions = AsyncMock(
+            return_value=[
+                self._session(1, is_current=True),
+                self._session(2),
+                self._session(3),
+                self._session(4, is_current=False, is_self_identity=True),
+            ]
+        )
+        coordinator._hts_client.kill_client_sessions = AsyncMock(side_effect=lambda ids: ids)
+
+        assert await coordinator.async_terminate_other_client_sessions() == 2
+        coordinator._hts_client.kill_client_sessions.assert_awaited_once_with([2, 3])
+
+    @pytest.mark.asyncio
+    async def test_termination_requires_confirmation(self) -> None:
+        from homeassistant.exceptions import ServiceValidationError
+
+        from custom_components.aegis_ajax import _async_handle_terminate_client_session
+
+        with pytest.raises(ServiceValidationError, match="confirm: true"):
+            await _async_handle_terminate_client_session(MagicMock(), MagicMock(data={}))
 
 
 class TestServiceRegistration:
@@ -160,13 +226,17 @@ class TestServiceRegistration:
                 "custom_components.aegis_ajax.AjaxCobrandedCoordinator",
                 return_value=mock_coordinator,
             ),
+            patch("custom_components.aegis_ajax.dr.async_get"),
         ):
             result = await async_setup_entry(hass, entry)
 
         assert result is True
+        from homeassistant.core import SupportsResponse
+
         # Verify all custom services were registered
         register_calls = {
-            call_args[0][1] for call_args in hass.services.async_register.call_args_list
+            call_args[0][1]: call_args[1].get("supports_response")
+            for call_args in hass.services.async_register.call_args_list
         }
         assert "force_arm" in register_calls
         assert "force_arm_night" in register_calls
@@ -174,6 +244,10 @@ class TestServiceRegistration:
         assert "press_panic_button" in register_calls
         assert "set_photo_on_demand_mode" in register_calls
         assert "list_client_sessions" in register_calls
+        assert register_calls["list_client_sessions"] == SupportsResponse.ONLY
+        assert "terminate_client_session" in register_calls
+        assert "terminate_other_client_sessions" in register_calls
+        assert register_calls["terminate_other_client_sessions"] == SupportsResponse.OPTIONAL
 
     @pytest.mark.asyncio
     async def test_services_removed_on_unload(self) -> None:
@@ -202,3 +276,5 @@ class TestServiceRegistration:
         assert "press_panic_button" in remove_calls
         assert "set_photo_on_demand_mode" in remove_calls
         assert "list_client_sessions" in remove_calls
+        assert "terminate_client_session" in remove_calls
+        assert "terminate_other_client_sessions" in remove_calls

@@ -196,7 +196,9 @@
                     "description": "Required when more than one Aegis account is configured."
                 }
             }
-        }
+        },
+        "terminate_client_session": {"name": "Terminate account session", "description": "Immediately log the selected other device out of the Ajax account. Obtain its session ID through list_client_sessions. The integration never terminates its own session.", "fields": {"session_id": {"name": "Session ID"}, "confirm": {"name": "Confirm termination"}, "entry_id": {"name": "Config entry ID"}}},
+        "terminate_other_client_sessions": {"name": "Terminate all other account sessions", "description": "Immediately log all other devices out of the Ajax account. This signs out other active Ajax mobile and desktop apps. The integration never terminates its own session.", "fields": {"confirm": {"name": "Confirm termination"}, "entry_id": {"name": "Config entry ID"}}}
     },
     "issues": {
         "hub_offline_24h": {

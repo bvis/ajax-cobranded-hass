@@ -120,6 +120,8 @@ _CUSTOM_SERVICE_NAMES = (
     "press_panic_button",
     "set_photo_on_demand_mode",
     "list_client_sessions",
+    "terminate_client_session",
+    "terminate_other_client_sessions",
 )
 
 
@@ -197,6 +199,43 @@ async def _async_handle_list_client_sessions(
     except (RuntimeError, HtsConnectionError) as exc:
         raise ServiceValidationError(f"Could not list Ajax account sessions: {exc}") from exc
     return {"sessions": sessions}
+
+
+async def _async_handle_terminate_client_session(hass: HomeAssistant, call: ServiceCall) -> None:
+    """Terminate one selected non-current Ajax account session."""
+    from homeassistant.exceptions import ServiceValidationError  # noqa: PLC0415
+
+    if not call.data.get("confirm"):
+        raise ServiceValidationError(
+            "terminate_client_session requires `confirm: true` to terminate a session."
+        )
+    session_id = call.data.get("session_id")
+    if isinstance(session_id, bool) or not isinstance(session_id, int) or session_id <= 0:
+        raise ServiceValidationError("session_id must be a positive integer.")
+    try:
+        await _resolve_session_coordinator(hass, call).async_terminate_client_session(session_id)
+    except (RuntimeError, ValueError, HtsConnectionError) as exc:
+        raise ServiceValidationError(f"Could not terminate Ajax account session: {exc}") from exc
+
+
+async def _async_handle_terminate_other_client_sessions(
+    hass: HomeAssistant, call: ServiceCall
+) -> ServiceResponse:
+    """Terminate all sessions except the current Aegis account session."""
+    from homeassistant.exceptions import ServiceValidationError  # noqa: PLC0415
+
+    if not call.data.get("confirm"):
+        raise ServiceValidationError(
+            "terminate_other_client_sessions requires `confirm: true` to terminate all "
+            "other sessions."
+        )
+    try:
+        terminated = await _resolve_session_coordinator(
+            hass, call
+        ).async_terminate_other_client_sessions()
+    except (RuntimeError, ValueError, HtsConnectionError) as exc:
+        raise ServiceValidationError(f"Could not terminate Ajax account sessions: {exc}") from exc
+    return {"terminated_sessions": terminated}
 
 
 async def _async_handle_force_arm(hass: HomeAssistant, call: ServiceCall) -> None:
@@ -559,6 +598,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
     async def _list_client_sessions_handler(call: ServiceCall) -> ServiceResponse:
         return await _async_handle_list_client_sessions(hass, call)
 
+    async def _terminate_client_session_handler(call: ServiceCall) -> None:
+        await _async_handle_terminate_client_session(hass, call)
+
+    async def _terminate_other_client_sessions_handler(call: ServiceCall) -> ServiceResponse:
+        return await _async_handle_terminate_other_client_sessions(hass, call)
+
     service_handlers = {
         "force_arm": _force_arm_handler,
         "force_arm_night": _force_arm_night_handler,
@@ -566,6 +611,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
         "press_panic_button": _press_panic_button_handler,
         "set_photo_on_demand_mode": _set_photo_on_demand_mode_handler,
         "list_client_sessions": _list_client_sessions_handler,
+        "terminate_client_session": _terminate_client_session_handler,
+        "terminate_other_client_sessions": _terminate_other_client_sessions_handler,
     }
     # KeyError here means a name was added to _CUSTOM_SERVICE_NAMES without a
     # handler — fail loudly at setup rather than silently skipping it.
@@ -578,6 +625,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
                 name,
                 service_handlers[name],
                 supports_response=SupportsResponse.ONLY,
+            )
+        elif name == "terminate_other_client_sessions":
+            hass.services.async_register(
+                DOMAIN,
+                name,
+                service_handlers[name],
+                supports_response=SupportsResponse.OPTIONAL,
             )
         else:
             hass.services.async_register(DOMAIN, name, service_handlers[name])
