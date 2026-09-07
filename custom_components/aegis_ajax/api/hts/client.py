@@ -246,6 +246,17 @@ class HtsConnectionError(Exception):
     """Raised when the TCP/TLS connection fails."""
 
 
+class HtsTerminationOutcomeUnknownError(HtsConnectionError):
+    """A sent session-termination request lost its confirmation."""
+
+    def __init__(self, session_id: int, succeeded_session_ids: list[int] | None = None) -> None:
+        super().__init__(
+            f"Termination request for session {session_id} was sent, but its result is unknown"
+        )
+        self.session_id = session_id
+        self.succeeded_session_ids = succeeded_session_ids or []
+
+
 class HtsAuthError(Exception):
     """Raised when the authentication handshake fails."""
 
@@ -699,7 +710,10 @@ class HtsClient:
                     request_key=_USER_REGISTRATION_KEY_KILL_SESSIONS,
                     response_key=_USER_REGISTRATION_KEY_CLIENT_SESSIONS,
                     params=[session_id.to_bytes(8, "big", signed=True)],
+                    termination_session_id=session_id,
                 )
+            except HtsTerminationOutcomeUnknownError as exc:
+                raise HtsTerminationOutcomeUnknownError(session_id, succeeded) from exc
             except Exception as exc:
                 if succeeded:
                     _LOGGER.info(
@@ -788,6 +802,7 @@ class HtsClient:
         request_key: int,
         response_key: int,
         params: list[bytes] | None = None,
+        termination_session_id: int | None = None,
     ) -> list[bytes]:
         """Send a USER_REGISTRATION request and await its listener-delivered reply."""
         if not self._connected:
@@ -795,19 +810,27 @@ class HtsClient:
         async with self._user_registration_request_lock:
             future: asyncio.Future[list[bytes]] = asyncio.get_running_loop().create_future()
             self._pending_user_registration_response = (response_key, future)
+            request_sent = False
             try:
                 await self._send_message(
                     MsgType.USER_REGISTRATION,
                     tlv_encode([bytes([request_key]), *(params or [])]),
                 )
+                request_sent = True
                 return await asyncio.wait_for(
                     asyncio.shield(future), timeout=SESSION_REQUEST_TIMEOUT
                 )
             except TimeoutError as exc:
+                if request_sent and termination_session_id is not None:
+                    raise HtsTerminationOutcomeUnknownError(termination_session_id) from exc
                 raise HtsConnectionError(
                     f"Timed out waiting for USER_REGISTRATION key 0x{response_key:02X} "
                     "(the Ajax server may be rate limiting requests)"
                 ) from exc
+            except HtsConnectionError as exc:
+                if request_sent and termination_session_id is not None:
+                    raise HtsTerminationOutcomeUnknownError(termination_session_id) from exc
+                raise
             finally:
                 if self._pending_user_registration_response == (response_key, future):
                     self._pending_user_registration_response = None

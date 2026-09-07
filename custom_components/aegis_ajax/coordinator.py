@@ -20,7 +20,11 @@ from homeassistant.util import dt as dt_util
 
 from custom_components.aegis_ajax.api import devices_parser
 from custom_components.aegis_ajax.api.devices import DevicesApi
-from custom_components.aegis_ajax.api.hts.client import HtsClient
+from custom_components.aegis_ajax.api.hts.client import (
+    HtsClient,
+    HtsConnectionError,
+    HtsTerminationOutcomeUnknownError,
+)
 from custom_components.aegis_ajax.api.hts.hub_events import (
     HUB_EVENT_ENTRY_DELAY_STARTED,
     HUB_EVENT_EXIT_DELAY_COMPLETE,
@@ -717,7 +721,13 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             raise ValueError("The selected Ajax session is no longer active.")
         if target.is_current or target.is_self_identity:
             raise ValueError("Refusing to terminate Aegis integration sessions.")
-        await hts_client.kill_client_sessions([session_id])
+        try:
+            await hts_client.kill_client_sessions([session_id])
+        except HtsTerminationOutcomeUnknownError:
+            if not await self._async_verify_termination_after_uncertain_outcome(session_id):
+                raise HtsConnectionError(
+                    "Ajax confirmed the session remains active after the termination request."
+                ) from None
         _LOGGER.info("Terminated one other Ajax account session")
 
     async def async_terminate_other_client_sessions(self) -> int:
@@ -738,10 +748,39 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             and session.session_id is not None
         ]
         if session_ids:
-            terminated = await hts_client.kill_client_sessions(session_ids)
+            try:
+                terminated = await hts_client.kill_client_sessions(session_ids)
+            except HtsTerminationOutcomeUnknownError as exc:
+                if not await self._async_verify_termination_after_uncertain_outcome(exc.session_id):
+                    raise HtsConnectionError(
+                        f"Terminated {len(exc.succeeded_session_ids)} of "
+                        f"{len(session_ids)} session(s); the uncertain session remains active."
+                    ) from None
+                terminated = [*exc.succeeded_session_ids, exc.session_id]
             _LOGGER.info("Terminated %d other Ajax account session(s)", len(terminated))
             return len(terminated)
         return 0
+
+    async def _async_verify_termination_after_uncertain_outcome(self, session_id: int) -> bool:
+        """Confirm a sent termination after HTS recovers; never resend it."""
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline:
+            await self._maybe_restart_hts()
+            hts_client = self._hts_client
+            if hts_client is not None and hts_client.is_connected:
+                try:
+                    sessions = await hts_client.get_client_sessions()
+                except HtsConnectionError as exc:
+                    raise HtsConnectionError(
+                        "Termination outcome is unknown because its read-only verification failed; "
+                        "do not retry automatically."
+                    ) from exc
+                return all(session.session_id != session_id for session in sessions)
+            await asyncio.sleep(0.1)
+        raise HtsConnectionError(
+            "Termination outcome is unknown because HTS did not reconnect for verification; "
+            "do not retry automatically."
+        )
 
     def _require_hts_client(self) -> HtsClient:
         """Return the active HTS client or explain why session management cannot run."""
