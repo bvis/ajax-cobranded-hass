@@ -124,7 +124,31 @@ class TestClientSessions:
         client._handle_user_registration_response(
             _msg(MsgType.USER_REGISTRATION, tlv_encode([b"\x41"]))
         )
-        await task
+        assert await task == [target]
+
+    @pytest.mark.asyncio
+    async def test_kill_client_sessions_mid_loop_failure_reports_partial_count(self) -> None:
+        client = _make_client()
+        client._connected = True
+
+        targets = [1_000, 2_000]
+
+        async def mock_request_user_registration(
+            request_key: int, response_key: int, params: list[bytes] | None = None
+        ) -> list[bytes]:
+            assert params is not None
+            req_id = int.from_bytes(params[0], "big", signed=True)
+            if req_id == 1_000:
+                return [b"\x41"]
+            raise TimeoutError("Simulated rate limit timeout")
+
+        client._request_user_registration = AsyncMock(side_effect=mock_request_user_registration)
+
+        with pytest.raises(HtsConnectionError) as exc_info:
+            await client.kill_client_sessions(targets)
+
+        assert "Terminated 1 of 2 session(s)" in str(exc_info.value)
+        assert client._request_user_registration.call_count == 2
 
 
 # ---------------------------------------------------------------------------

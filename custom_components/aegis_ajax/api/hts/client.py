@@ -672,20 +672,42 @@ class HtsClient:
         )
         return self._parse_client_sessions(params)
 
-    async def kill_client_sessions(self, session_ids: list[int]) -> None:
+    async def kill_client_sessions(self, session_ids: list[int]) -> list[int]:
         """Terminate account sessions identified by their 0x01 creation timestamp.
 
         The official Ajax Android app sends each selected record's 0x01 value
         as a signed eight-byte target under USER_REGISTRATION key 0x42 (one
         frame per session ID). Ajax answers by returning the refreshed
         CLIENT_SESSIONS (0x41) list.
+
+        Returns the list of session_ids successfully terminated. If a mid-loop
+        request fails, raises HtsConnectionError detailing the partial count.
         """
+        succeeded: list[int] = []
         for session_id in session_ids:
-            await self._request_user_registration(
-                request_key=_USER_REGISTRATION_KEY_KILL_SESSIONS,
-                response_key=_USER_REGISTRATION_KEY_CLIENT_SESSIONS,
-                params=[session_id.to_bytes(8, "big", signed=True)],
-            )
+            try:
+                params = await self._request_user_registration(
+                    request_key=_USER_REGISTRATION_KEY_KILL_SESSIONS,
+                    response_key=_USER_REGISTRATION_KEY_CLIENT_SESSIONS,
+                    params=[session_id.to_bytes(8, "big", signed=True)],
+                )
+            except Exception as exc:
+                if succeeded:
+                    _LOGGER.info(
+                        "Terminated %d of %d requested Ajax account session(s) before failure",
+                        len(succeeded),
+                        len(session_ids),
+                    )
+                    raise HtsConnectionError(
+                        f"Terminated {len(succeeded)} of {len(session_ids)} session(s) "
+                        f"before request for session {session_id} failed: {exc}"
+                    ) from exc
+                raise
+            else:
+                if params:
+                    self._parse_client_sessions(params)
+                succeeded.append(session_id)
+        return succeeded
 
     @staticmethod
     def _parse_client_sessions(params: list[bytes]) -> list[ClientSession]:

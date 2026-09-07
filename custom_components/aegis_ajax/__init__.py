@@ -619,12 +619,19 @@ async def async_setup_entry(hass: HomeAssistant, entry: AjaxCobrandedConfigEntry
     for name in _CUSTOM_SERVICE_NAMES:
         if hass.services.has_service(DOMAIN, name):
             continue
-        if name in {"list_client_sessions", "terminate_other_client_sessions"}:
+        if name == "list_client_sessions":
             hass.services.async_register(
                 DOMAIN,
                 name,
                 service_handlers[name],
                 supports_response=SupportsResponse.ONLY,
+            )
+        elif name == "terminate_other_client_sessions":
+            hass.services.async_register(
+                DOMAIN,
+                name,
+                service_handlers[name],
+                supports_response=SupportsResponse.OPTIONAL,
             )
         else:
             hass.services.async_register(DOMAIN, name, service_handlers[name])

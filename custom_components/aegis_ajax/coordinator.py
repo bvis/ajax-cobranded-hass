@@ -738,9 +738,10 @@ class AjaxCobrandedCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             and session.session_id is not None
         ]
         if session_ids:
-            await hts_client.kill_client_sessions(session_ids)
-            _LOGGER.info("Terminated %d other Ajax account session(s)", len(session_ids))
-        return len(session_ids)
+            terminated = await hts_client.kill_client_sessions(session_ids)
+            _LOGGER.info("Terminated %d other Ajax account session(s)", len(terminated))
+            return len(terminated)
+        return 0
 
     def _require_hts_client(self) -> HtsClient:
         """Return the active HTS client or explain why session management cannot run."""

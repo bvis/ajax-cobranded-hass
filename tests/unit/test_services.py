@@ -172,7 +172,7 @@ class TestClientSessionServices:
                 self._session(4, is_current=False, is_self_identity=True),
             ]
         )
-        coordinator._hts_client.kill_client_sessions = AsyncMock()
+        coordinator._hts_client.kill_client_sessions = AsyncMock(side_effect=lambda ids: ids)
 
         assert await coordinator.async_terminate_other_client_sessions() == 2
         coordinator._hts_client.kill_client_sessions.assert_awaited_once_with([2, 3])
@@ -231,9 +231,12 @@ class TestServiceRegistration:
             result = await async_setup_entry(hass, entry)
 
         assert result is True
+        from homeassistant.core import SupportsResponse
+
         # Verify all custom services were registered
         register_calls = {
-            call_args[0][1] for call_args in hass.services.async_register.call_args_list
+            call_args[0][1]: call_args[1].get("supports_response")
+            for call_args in hass.services.async_register.call_args_list
         }
         assert "force_arm" in register_calls
         assert "force_arm_night" in register_calls
@@ -241,8 +244,10 @@ class TestServiceRegistration:
         assert "press_panic_button" in register_calls
         assert "set_photo_on_demand_mode" in register_calls
         assert "list_client_sessions" in register_calls
+        assert register_calls["list_client_sessions"] == SupportsResponse.ONLY
         assert "terminate_client_session" in register_calls
         assert "terminate_other_client_sessions" in register_calls
+        assert register_calls["terminate_other_client_sessions"] == SupportsResponse.OPTIONAL
 
     @pytest.mark.asyncio
     async def test_services_removed_on_unload(self) -> None:
