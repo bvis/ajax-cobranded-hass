@@ -101,8 +101,6 @@ _WIRE_INPUT_ALERT_SOURCES: tuple[str, ...] = (
     "external_contact_alert",
 )
 
-_DEVICE_TYPE_SENSORS: dict[str, list[str]] = {}
-
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback

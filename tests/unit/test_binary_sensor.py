@@ -30,9 +30,20 @@ from custom_components.aegis_ajax.device_handlers import _DEVICE_HANDLERS, capab
 
 
 def _sensor_keys_for(device_type: str) -> list[str]:
-    mock_dev = MagicMock()
-    mock_dev.device_type = device_type
-    return list(capabilities_for(mock_dev).binary_sensor_keys)
+    device = Device(
+        id="test",
+        hub_id="hub",
+        name="Test device",
+        device_type=device_type,
+        room_id=None,
+        group_id=None,
+        state=DeviceState.ONLINE,
+        malfunctions=0,
+        bypassed=False,
+        statuses={},
+        battery=None,
+    )
+    return list(capabilities_for(device).binary_sensor_keys)
 
 
 class _DeviceTypeSensorsHelper:

@@ -307,6 +307,9 @@ def _build_handler_map() -> dict[str, DeviceHandler]:
     handler_map: dict[str, DeviceHandler] = {}
     for handler in _HANDLERS:
         for device_type in handler.device_types:
+            if device_type in handler_map:
+                msg = f"Duplicate device handler registration for {device_type!r}"
+                raise ValueError(msg)
             handler_map[device_type] = handler
     return handler_map
 
