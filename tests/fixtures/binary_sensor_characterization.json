@@ -1,0 +1,4032 @@
+{
+  "door_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_vibration",
+      "device_class": "vibration",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tilt",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_s_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_vibration",
+      "device_class": "vibration",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tilt",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_plus_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_vibration",
+      "device_class": "vibration",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tilt",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "door_protect_plus_g3_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_door_opened",
+      "device_class": "door",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_vibration",
+      "device_class": "vibration",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tilt",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_broken",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_plus_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_outdoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_curtain": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_curtain_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_curtain_outdoor_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_curtain_outdoor_mini": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_curtain_outdoor_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "dual_curtain_outdoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_g3_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_g3_fibra_new": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_plus_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_protect_s_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_outdoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_fibra_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_hd": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_phod": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_phod_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_outdoor_phod": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_outdoor_two_four_phod": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_s_phod": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_s_phod_am": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_superior_phod": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_video_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_video_doorbell": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "motion_cam_video_indoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_bullet": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_doorbell": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_indoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_minidome": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_turret": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "video_edge_unknown": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "combi_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "combi_protect_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "combi_protect_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_motion_detected",
+      "device_class": "motion",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_delay_when_leaving",
+      "device_class": null,
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "glass_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "glass_protect_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "glass_protect_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_glass_break",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_2": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_plus_sb": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_sb": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hcrb": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hcsb": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hrb": [
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hsb": [
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_crb": [
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_csb": [
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_h_ac": [
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_c_ac": [
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hc_ac": [
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hs_ac": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hsc_ac": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_c_rb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_h_rb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hs_ac_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hs_rb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hs_sb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hsc_ac_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hsc_rb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "fire_protect_two_hsc_sb_ul": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_steam",
+      "device_class": "problem",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_co_detected",
+      "device_class": "carbon_monoxide",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "leak_protect": [
+    {
+      "unique_id": "aegis_ajax_test_device_leak_detected",
+      "device_class": "moisture",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "home_siren": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "home_siren_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "home_siren_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "home_siren_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_plus_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_plus_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_s": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_double_deck": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_s_double_deck": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "street_siren_double_deck_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "rex": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "rex_2": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "range_extender": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "range_extender_2": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "range_extender_2_fire": [
+    {
+      "unique_id": "aegis_ajax_test_device_smoke_detected",
+      "device_class": "smoke",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_high_temperature",
+      "device_class": "heat",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "transmitter": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_wire_input_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "multi_transmitter": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "multi_transmitter_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "wire_input": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_wire_input_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "wire_input_mt": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_wire_input_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_external_contact_open",
+      "device_class": "opening",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "wire_input_rs": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_wire_input_alert",
+      "device_class": "safety",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "life_quality": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "life_quality_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "water_stop": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "water_stop_base": [
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_combi": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_plus_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_s_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_outdoor": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_outdoor_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_touchscreen": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_touchscreen_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "keypad_touchscreen_g3": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_4g": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_lite": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_two": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_two_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_two_4g": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_two_lte_rtk": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_three": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_fibra": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_hybrid_2": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_hybrid_4g": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_mega": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_void_4g": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_yavir": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_yavir_plus": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_fire": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "hub_superior": [
+    {
+      "unique_id": "aegis_ajax_test_device_gsm_connected",
+      "device_class": "connectivity",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_lid_opened",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ],
+  "unmapped_unknown_device": [
+    {
+      "unique_id": "aegis_ajax_test_device_tamper",
+      "device_class": "tamper",
+      "entity_category": null,
+      "enabled_by_default": true
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_connectivity",
+      "device_class": "connectivity",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    },
+    {
+      "unique_id": "aegis_ajax_test_device_problem",
+      "device_class": "problem",
+      "entity_category": "diagnostic",
+      "enabled_by_default": false
+    }
+  ]
+}
