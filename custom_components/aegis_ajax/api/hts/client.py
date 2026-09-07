@@ -681,7 +681,9 @@ class HtsClient:
         CLIENT_SESSIONS (0x41) list.
 
         Returns the list of session_ids successfully terminated. If a mid-loop
-        request fails, raises HtsConnectionError detailing the partial count.
+        request fails, raises HtsConnectionError detailing the partial count —
+        the frames already sent have terminated real sessions, so a bulk call
+        that stops half way must never look like a call that did nothing.
         """
         succeeded: list[int] = []
         for session_id in session_ids:
@@ -704,8 +706,12 @@ class HtsClient:
                     ) from exc
                 raise
             else:
-                if params:
-                    self._parse_client_sessions(params)
+                # The 0x41 the server answers with is the refreshed session
+                # list. Nothing here consumes it — the caller re-lists before
+                # its next decision — so it is deliberately not decoded: a
+                # parse whose result is discarded is work that can only add a
+                # failure mode between the kill and recording it as done.
+                del params
                 succeeded.append(session_id)
         return succeeded
 
