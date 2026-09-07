@@ -241,9 +241,13 @@ class TestClientSessionServices:
         from custom_components.aegis_ajax.coordinator import AjaxCobrandedCoordinator
 
         coordinator = object.__new__(AjaxCobrandedCoordinator)
-        coordinator._hts_client = MagicMock(is_connected=True)
+        coordinator._hts_client = MagicMock(is_connected=False)
         coordinator._hts_client.get_client_sessions = AsyncMock(return_value=[self._session(1)])
-        coordinator._maybe_restart_hts = AsyncMock()
+
+        async def reconnect() -> None:
+            coordinator._hts_client.is_connected = True
+
+        coordinator._maybe_restart_hts = AsyncMock(side_effect=reconnect)
 
         assert await coordinator._async_verify_termination_after_uncertain_outcome(2) is True
         coordinator._maybe_restart_hts.assert_awaited_once()
