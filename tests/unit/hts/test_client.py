@@ -17,6 +17,7 @@ from custom_components.aegis_ajax.api.hts.client import (
     HtsAuthError,
     HtsClient,
     HtsConnectionError,
+    HtsTerminationOutcomeUnknownError,
 )
 from custom_components.aegis_ajax.api.hts.hub_state import HubNetworkState
 from custom_components.aegis_ajax.api.hts.messages import (
@@ -134,7 +135,10 @@ class TestClientSessions:
         targets = [1_000, 2_000]
 
         async def mock_request_user_registration(
-            request_key: int, response_key: int, params: list[bytes] | None = None
+            request_key: int,
+            response_key: int,
+            params: list[bytes] | None = None,
+            termination_session_id: int | None = None,
         ) -> list[bytes]:
             assert params is not None
             req_id = int.from_bytes(params[0], "big", signed=True)
@@ -149,6 +153,51 @@ class TestClientSessions:
 
         assert "Terminated 1 of 2 session(s)" in str(exc_info.value)
         assert client._request_user_registration.call_count == 2
+
+    @pytest.mark.asyncio
+    async def test_kill_client_sessions_timeout_after_send_is_uncertain(self) -> None:
+        client = _make_client()
+        client._connected = True
+        client._send_message = AsyncMock()  # type: ignore[method-assign]
+
+        with (
+            patch("custom_components.aegis_ajax.api.hts.client.SESSION_REQUEST_TIMEOUT", 0),
+            pytest.raises(HtsTerminationOutcomeUnknownError) as exc_info,
+        ):
+            await client.kill_client_sessions([1_000])
+
+        assert exc_info.value.session_id == 1_000
+        assert exc_info.value.succeeded_session_ids == []
+        client._send_message.assert_awaited_once()
+
+    @pytest.mark.asyncio
+    async def test_kill_client_sessions_connection_close_after_send_is_uncertain(self) -> None:
+        client = _make_client()
+        client._connected = True
+        client._send_message = AsyncMock()  # type: ignore[method-assign]
+
+        task = asyncio.create_task(client.kill_client_sessions([1_000]))
+        await asyncio.sleep(0)
+        assert client._pending_user_registration_response is not None
+        client._pending_user_registration_response[1].set_exception(
+            HtsConnectionError("HTS connection closed")
+        )
+
+        with pytest.raises(HtsTerminationOutcomeUnknownError) as exc_info:
+            await task
+
+        assert exc_info.value.session_id == 1_000
+
+    @pytest.mark.asyncio
+    async def test_kill_client_sessions_send_failure_is_not_uncertain(self) -> None:
+        client = _make_client()
+        client._connected = True
+        client._send_message = AsyncMock(side_effect=HtsConnectionError("write failed"))  # type: ignore[method-assign]
+
+        with pytest.raises(HtsConnectionError) as exc_info:
+            await client.kill_client_sessions([1_000])
+
+        assert not isinstance(exc_info.value, HtsTerminationOutcomeUnknownError)
 
 
 # ---------------------------------------------------------------------------
